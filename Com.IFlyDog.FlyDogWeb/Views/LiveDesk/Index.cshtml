@@ -1,0 +1,126 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper;
+@*@model List<Com.JinYiWei.JHOMS.Model.SmartUser>
+    @{
+        ViewBag.Title = "Index";
+
+        string page = Request.QueryString["Page"];
+        int currentPage = String.IsNullOrEmpty(page) ? 1 : Convert.ToInt32(page);
+        var index = 1 + (currentPage - 1) * Convert.ToInt32(ViewBag.PagerInfo.PageSize);
+    }*@
+<style>
+.note.note-info {
+    background-color: #eef7fb;
+    border-color: #a6e1ec;
+    color: #31708f;
+}
+.note {      
+    padding: 15px 30px 15px 15px;
+    border-left: 5px solid #eee;
+    -webkit-border-radius: 0 4px 4px 0;
+    -moz-border-radius: 0 4px 4px 0;
+    -ms-border-radius: 0 4px 4px 0;
+    -o-border-radius: 0 4px 4px 0;
+    border-radius: 0 4px 4px 0;
+}
+</style>
+<div class="widget-container-span ui-sortable">
+    <div class="widget-box">
+        <div class="widget-header">
+            <h5>接诊工作台</h5>           
+        </div>
+        <div class="col-xs-12  widget-body">
+            <div class="widget-main">
+                <div class="note note-info">
+                    <p>到诊共 <span class="font-red bold">2</span> 人 </p>
+                    <p>新客：<span class="font-red bold">2</span> 人； 初诊 <span class="font-red bold">1</span> 人； 复诊 <span class="font-red bold">1</span> 人；</p>
+                    <p>老客：<span class="font-red bold">0</span> 人； 复查 <span class="font-red bold">0</span> 人； 再消费 <span class="font-red bold">0</span> 人；</p>
+                    <p>成交：<span class="font-red bold">0</span> 人； 未成交：<span class="font-red bold">2</span> 人； 成交总金额：<span class="font-red bold">￥7000.00</span></p>
+                </div>
+                <div id="tab0" class="tab-pane">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="header smaller lighter blue"></div>
+                            <div class="row">
+                                <div class="col-xs-12">
+
+                                    <div class="table-responsive">
+                                        <div id="sample-table-2_wrapper" class="dataTables_wrapper" role="grid">
+                                            <div class="row">
+                                                <fieldset></fieldset>
+
+                                            </div>
+                                            <table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2_info">
+                                                <thead>
+                                                    <tr role="row">
+                                                        <th role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" style="">客户编号</th>
+                                                        <th role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" style="">客户姓名</th>
+                                                        <th role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" style="">归属咨询师</th>
+                                                        <th role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" style="">接诊人员</th>
+                                                        <th role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" style="">类型</th>
+                                                        <th role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" style="">新顾客</th>
+                                                         <th role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" style=""><i class="icon-time bigger-110 hidden-480"></i>上门时间</th>
+                                                        <th role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" style="">咨询项目</th>
+                                                        <th role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" style="">成交状态</th>
+                                                        <th role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" style="">成交金额</th>
+                                                        <th role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" style="">成交项目</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody role="alert" aria-live="polite" aria-relevant="all">
+                                                    <tr class="">
+
+                                                        <td>1</td>
+                                                        <td><a href="#">张三</a></td>
+                                                        <td>系统管理员</td>
+                                                        <td>系统管理员</td>
+                                                        <td><span class="label label-sm label-success arrowed arrowed-right">初诊</span></td>
+                                                        <td><a href="#">张三</a></td>
+                                                        <td>2016-11-29 15:13:37</td>
+                                                        <td>皮肤</td>
+                                                        <td><span class="label label-sm label-success arrowed arrowed-right">成功</span></td>
+                                                        <td>13.00</td>
+                                                        <td>自体脂肪丰胸+SAF加收(￥ 3500.00)</td>
+                                                    </tr>
+                                                    <tr class="">
+                                                        <td>1</td>
+                                                        <td><a href="#">张三</a></td>
+                                                        <td>系统管理员</td>
+                                                        <td>系统管理员</td>
+                                                        <td><span class="label label-sm label-danger arrowed arrowed-right">复诊</span></td>
+                                                        <td><a href="#">张三</a></td>
+                                                        <td>2016-11-29 15:13:37</td>
+                                                        <td>皮肤</td>
+                                                        <td><span class="label label-sm label-danger arrowed arrowed-right">失败</span></td>
+                                                        <td>13.00</td>
+                                                        <td>自体脂肪丰胸+SAF加收(￥ 3500.00)</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="row">
+                                                @Html.Raw(PagerHelper.GetNormalPage(@ViewBag.PagerInfo))
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/dog/js/jquery.hDialog.min.js"></script>
+<script>
+    //添加新顾客JS
+
+    $(function () {
+        //带标题的
+        $('#nomobile_cu').hDialog({ 'box': '#HBox', title: '添加新顾客', height: 500, width:500 });
+        //正确文字提示
+        $('.submitBtn').click(function () {
+            $.tooltip('OK, 操作成功！', 2500, true);
+        });
+    });
+</script>

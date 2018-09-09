@@ -1,0 +1,129 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper;
+@*@model List<Com.JinYiWei.JHOMS.Model.SmartUser>
+    @{
+        ViewBag.Title = "Index";
+
+        string page = Request.QueryString["Page"];
+        int currentPage = String.IsNullOrEmpty(page) ? 1 : Convert.ToInt32(page);
+        var index = 1 + (currentPage - 1) * Convert.ToInt32(ViewBag.PagerInfo.PageSize);
+    }*@
+<div class="widget-container-span ui-sortable">
+    <div class="widget-box">
+        <div class="widget-header">
+            <h5>短信工作台</h5>
+        </div>
+        <div class="col-xs-12  widget-body">
+            <div class="widget-main">     
+                <form id="queryForm" class="form-inline margin-top-10" action="/SMSDesk/Index">
+                    <input name="Page" type="hidden" value="1">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="control-label">提交日期：</label>
+                                                  
+                        </div>
+                        <div class="form-group">
+                            <input placeholder="开始日期" size="14" type="text" value="" class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                            @*<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>*@
+                        </div>
+                        -
+                        <div class="form-group">
+                            <input placeholder="结束日期" size="16" type="text" value="" class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                            @*<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>*@
+                        </div>
+                        @*<div class="form-group">
+                            <div class="controls input-append date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <label class="control-label">至：</label>
+                                <input size="16" type="text" placeholder="结束日期" value="" readonly>
+                                <span class="add-on"><i class="icon-remove"></i></span>
+                                <span class="add-on"><i class="icon-th"></i></span>
+                            </div>
+                        </div>*@
+                        <button id="submitBtn"  class="btn btn-xs btn-warning butborderra "><i class="icon-search "></i>查询</button>
+                        <button  id="resetBtn"class="btn btn-xs btn-danger  butborderra"><i class="icon-remove"></i>重置</button>
+                                    
+                    </div>
+                </form>         
+                <div id="tab0" class="tab-pane">               
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="header smaller lighter blue"></div>
+                            <div class="row">
+                                <div class="col-xs-12">                                    
+                                    <div class="table-responsive">
+                                        <div id="sample-table-2_wrapper" class="dataTables_wrapper" role="grid">
+                                            <div class="row">
+                                                <fieldset>
+                                                </fieldset>
+                                            </div>
+                                            <table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2_info">
+                                                <thead>
+                                                    <tr role="row">
+                                                        <th role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" style="">客户编号</th>
+                                                        <th role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" style="">客户姓名</th>
+                                                        <th role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" style=""><i class="icon-time bigger-110 hidden-480"></i>提交时间</th>
+                                                        <th role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" style="">提交用户</th>
+                                                        <th role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" style="">说明</th>
+                                                        <th role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" style="">操作</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody role="alert" aria-live="polite" aria-relevant="all">
+                                                    <tr class="">
+                                                        <td>1</td>
+                                                        <td><a href="#">张三</a></td>                                    
+                                                        <td>2016-11-29 15:13:37</td>
+                                                        <td>系统管理员</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr class="">
+                                                        <td>1</td>
+                                                        <td><a href="#">张三</a></td>
+                                                        <td>2016-11-29 15:13:37</td>
+                                                        <td>系统管理员</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="row">
+                                                @Html.Raw(PagerHelper.GetNormalPage(@ViewBag.PagerInfo))
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/dog/js/jquery.hDialog.min.js"></script>
+<script>
+    //添加新顾客JS
+
+    $(function () {
+        //带标题的
+        $('#nomobile_cu').hDialog({ 'box': '#HBox', title: '添加新顾客', height: 500, width:500 });
+        //正确文字提示
+        $('.submitBtn').click(function () {
+            $.tooltip('OK, 操作成功！', 2500, true);
+        });
+    });
+
+	$('.form_date').datetimepicker({
+	    language: 'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0
+    });
+</script>

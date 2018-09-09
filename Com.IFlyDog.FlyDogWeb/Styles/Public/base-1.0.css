@@ -1,0 +1,158 @@
+﻿/**{-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}*/
+
+/* 将具有默认margin和padding的标记置零 */
+body,div,p,ul,li,dt,dl,dd,h1,h2,h3,h4,h5,h6,table,thead,tbody,tr,th,td{margin:0;padding:0;}
+body{color:#000;background:#fff;font:12px/22px Regular 微软雅黑 Microsoft YaHei;}
+/* 清除浮动 */
+.clearfix:after{display:block;clear:both;content:'';}
+.clearfix{zoom:1;}
+/* h1,h2,h3,h4,h5,h6,i,em,b,strong{line-height:100%;font-weight:normal;font-style:normal;} */
+/* textarea,input  强制输入时内容超出时换行 */
+textarea,input{	word-wrap:break-word;word-break:break-all;padding:0;}
+/* 清除ul列表标记的样式 */
+li{list-style-type:none;}
+/* 当图片作为链接内容被填充时，会有默认边框出现，重定义掉 */
+img{vertical-align:top;/*解决IMG留白的bug，而且保留原来的行内块属性*/border:none;}
+/* 定义默认的链接样式 */
+a{text-decoration:none;color:inherit;font-size:inherit;}
+input:focus{outline:none;}
+/* @group 通用属性定义 */
+/*  鼠标样式 */
+.pointer{cursor:pointer;}
+/* 取消边框 */
+.NoBorder{border:0 none;}
+/*  文本对齐方式  */
+.text-l{text-align:left;}
+.text-c{text-align:center;}
+.text-r{text-align:right;}
+
+/* 文本样式 */
+.text-n{text-decoration:none;}
+.text-u{text-decoration:underline;}
+.text-o{text-decoration:overline;}
+.text-t{text-decoration:line-through;}
+.text-b{text-decoration:blink;}
+.text-i{text-decoration:inherit;}
+
+/*
+ * 字母和单词换行设置
+ * @class Break 强制内容换行
+ * @class Nobreak 强制内容不换行
+ */
+.break{word-break:break-all;word-wrap:break-word;}
+.no-break{word-break:keep-all;word-wrap:normal;}
+
+/* 浮动定义 */
+.fl{float:left;}
+.fr{float:right;}
+
+/* 定义文本下划线 */
+.unline{text-decoration:underline;}
+.dis-unline{text-decoration:none;}
+
+/* 定位关系 */
+.absolute{position:absolute;}
+.relative{position:relative;}
+
+/* 隐藏元素 当元素内容内容超出元素height 或 width 时，隐藏之 */
+.o-hidden{overflow:hidden;}
+/* 隐藏元素 visibility可以隐藏元素，但是还是会在布局中占位 */
+.invisible{visibility:hidden;}
+
+/* 从页面布局上隐藏元素 */
+.hide{display: none;}
+/* 从页面布局上显示元素 */
+.show-inline{display:inline;} 
+.show-block{display:block;}
+.show-in-bl{display:inline-block;}
+
+/* 外边距 */
+.m-bt-10{margin:10px 0;}
+.m-r-10{margin-right:10px;}
+.m-lr-10{margin:0 10px;}
+.m-10{margin:10px;}
+.m-bt-10{margin:10px 0;}
+.m-20{margin:20px;}
+.m-lr-20{margin:0 20px;}
+.m-r-20{margin-right:20px;}
+.m-30{margin:30px;}
+
+/* 边框 */
+.b-1{border:1px solid #e5e5e5;}
+.b-2{border:2px solid #e5e5e5;}
+.b-t-1{border-top:1px solid #e5e5e5;}
+.b-t-2{border-top:2px solid #e5e5e5;}
+.b-b-1{border-bottom:1px solid #e5e5e5;}
+.b-b-2{border-bottom:2px solid #e5e5e5;}
+.b-c-3e5{border-color:#e5e5e5;}
+.b-c-33a{border-color:#3a3a3a;}
+.b-c-3eb{border-color:#ebebeb;}
+
+/* 形状 */
+.br-3{border-radius:3px;}
+.br-5{border-radius:5px;}
+.br-1_2{border-radius:50%;}
+.br-t-3{border-top-left-radius:3px;border-top-right-radius:3px;}
+.br-t-5{border-top-left-radius:5px;border-top-right-radius:5px;}
+.br-t-1_2{border-top-left-radius:50%;border-top-right-radius:50%;}
+.br-b-3{border-bottom-left-radius:3px;border-bottom-right-radius:3px;}
+.br-b-5{border-radius:5px;border-bottom-right-radius:5px;}
+.br-b-1_2{border-bottom-left-radius:50%;border-bottom-right-radius:50%;}
+.br-l-3{border-top-left-radius:3px;border-bottom-left-radius:3px;}
+.br-l-5{border-top-left-radius:5px;border-bottom-left-radius:5px;}
+.br-l-1_2{border-top-left-radius:50%;border-bottom-left-radius:50%;}
+.br-r-3{border-top-right-radius:3px;border-bottom-right-radius:3px;}
+.br-r-5{border-top-right-radius:5px;border-bottom-right-radius:5px;}
+.br-r-1_2{border-top-right-radius:50%;border-bottom-right-radius:50%;}
+
+
+/* 颜色 */
+.c-fff{color:#FFF;}
+.c-ccc{color:#CCC;}
+.c-aaa{color:#AAA;}
+.c-888{color:#888;}
+.c-666{color:#666;}
+.c-33a{color:#3a3a3a;}
+.c-d92{color:#d92121;}
+.c-c0a{color:#cc0a0a;}
+.c-red{color:red;}
+
+/* 背景颜色 */
+.bg-3f5{background:#f5f5f5;}
+.bg-fff{background:#FFF;}
+
+/* 字号 */
+.fs-12{font-size:12px;}
+.fs-14{font-size:14px;}
+.fs-16{font-size:16px;}
+.fs-18{font-size:18px;}
+.fs-22{font-size:22px;}
+
+/* 字体加粗 */
+.fs-w-b{font-weight:bold;}
+.fs-w-n{font-weight:100;}
+
+/* 按钮 */
+.btn{cursor:pointer;text-align:center;}
+.btn-1{display:inline-block;border-radius:5px;border:none;color:#FFF;background:#cc0a0a;cursor:pointer;}
+.btn-2{display:inline-block;border-radius:5px;border:1px solid #cc0a0a;color:#cc0a0a;background:#FFF;cursor:pointer;}
+.btn-3{display:inline-block;border-radius:5px;border:1px solid #AAA;color:#AAA;background:#f5f5f5;cursor:pointer;}
+.btn-4{display:inline-block;border-radius:5px;border:1px solid #888;color:#666;background:#FFF;cursor:pointer;}
+
+.trans-5{filter:alpha(opacity=50);-moz-opacity:0.5;opacity:0.5;background:#000;z-index:105;}
+.mask{display:none;position:fixed;top:0;left:0;height:100%;width:100%;filter:alpha(opacity=50);/*IE滤镜，透明度50%*/-moz-opacity:0.5;/*Firefox私有，透明度50%*/opacity:0.5;/*其他，透明度50%*/background:#000;z-index:16;}
+
+.center {margin:0 auto;position:static;float:none;overflow:hidden;}
+/*使用状态*/
+.statuscolorgreen{color: green;}
+/*未使用状态*/
+.statuscolorred{color: red;}
+/*字体颜色*/
+.layui-fontColor-1{ color: #009688!important;}
+.layui-fontColor-2{ color: #5FB878!important;}
+.layui-fontColor-3{ color: #393D49!important;}
+.layui-fontColor-4{ color: #1E9FFF!important;}
+.layui-fontColor-5{ color: #F7B824!important;}
+.layui-fontColor-6{ color: #FF5722!important;}
+.layui-fontColor-7{ color: #01AAED!important;}
+.layui-fontColor-8{ color: #2F4056!important;}

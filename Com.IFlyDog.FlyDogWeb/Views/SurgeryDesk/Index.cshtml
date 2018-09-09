@@ -1,0 +1,120 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>手术工作台</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+    <style>
+        .layui-form-item{margin-bottom:auto;}
+        span { margin-left: 10px; }
+    </style>
+</head>
+<body>
+<div class="admin-main">
+<fieldset class="layui-elem-field">
+    <legend>手术列表</legend>
+    <div class="layui-form m-20">
+        <div class="layui-input-inline">
+            <label class="layui-form-label">选择时间:</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" placeholder="选择日期" name="selsugeryTime" id="selsugeryTime" onclick="layui.laydate({ elem: this, festival: true, choose: surgeryGet })">
+            </div>
+        </div>
+    </div>
+    <div class="layui-field-box">
+        <table class="site-table table-hover">
+            <thead>
+                <tr>
+                    <th>顾客编号</th>
+                    <th>顾客名称</th>
+                    <th>提交人</th>
+                    <th>预约时间</th>
+                    <th>预约医生</th>
+                    <th>麻醉方式</th>
+                    <th>项目</th>
+                    <th>状态</th>
+                    <th>开始时间</th>
+                    <th>结束时间</th>
+                    <th>内容描述</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody class="bed-tbody tb-surgeryDesk-info"></tbody>
+        </table>
+        <div class="tb-surgeryDesk-null">
+
+        </div>
+    </div>
+</fieldset>
+ 
+
+  
+<div class="dot-tmp">
+    <script type="text/x-dot-template" class="surgeryDesk-temp">
+        {{for(var item in it){ }}
+        <tr>
+            <td>{{= it[item].CustomerID == null ? "暂无":  it[item].CustomerID}}</td>
+            <td>{{= it[item].CustomerName == null ? "暂无":  it[item].CustomerName}}</td>
+            <td>{{= it[item].CreateUserName == null ? "暂无":  it[item].CreateUserName}}</td>
+            <td>{{= it[item].AppointmentStartTime == null ? "暂无":  it[item].AppointmentStartTime}}-{{= it[item].AppointmentEndTime == null ? "暂无":  it[item].AppointmentEndTime}}</td>
+            <td>{{= it[item].UserName == null ? "暂无":  it[item].UserName}}</td>
+            <td>{{if(it[item].AnesthesiaType ==1){}}
+                全麻
+                {{ } else {}}
+                局麻
+                {{ } }}
+            </td>
+            <td >
+                {{= it[item].Charges[0].ChargeName == null ? "暂无":  it[item].Charges[0].ChargeName}}
+            </td>
+            <td>
+                {{if(it[item].Status ==0){}}
+                    未完成
+                {{ } }}
+                {{if(it[item].Status ==1){}}
+                    正在手术中
+                {{ } }}
+                {{if(it[item].Status ==2){}}
+                    已完成
+                {{ } }}
+            </td>
+            <td>{{= it[item].StartTime == null ? "暂无":  it[item].StartTime}}</td>
+            <td>{{= it[item].EndTime == null ? "暂无":  it[item].EndTime}}</td>
+            <td>{{= it[item].Remark == null ? "暂无":  it[item].Remark}}</td>
+            <td >
+                {{if(it[item].Status ==0){}}
+                <span surgerystatus="1" surgeryId="{{=it[item].ID}}" class="layui-btn layui-btn-mini layui-btn-normal start-Surgery-btn">开始做手术</span>
+                {{ } }}
+                {{if(it[item].Status ==1){}}
+                <span   class="layui-btn layui-btn-mini  layui-btn-disabled surgerying-btn layui-fontColor-6">正在手术中</span>
+                {{ } }}
+                {{if(it[item].Status ==2){}}
+                <span  class="layui-btn layui-btn-mini  layui-btn-disabled complete-btn layui-fontColor-4">手术已完成</span>
+                {{ } }}
+               
+                {{if(it[item].Status ==2){}}
+                {{}else{}}
+                <span surgerystatus="2" surgeryId="{{=it[item].ID}}" class="layui-btn layui-btn-mini layui-btn-danger end-Surgery-btn">结束手术</span>
+                {{ } }}
+            
+            </td>
+        </tr>
+        {{ } }} 
+    </script>
+</div>
+</div>
+<script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+<script src="~/lay_component/js/hcommon.js"></script>
+<script src="~/Scripts/FlyDog.Common.js"></script>
+<script src="~/doT-master/doT-master/doT.min.js"></script>
+<script src="~/lay_component/plugins/layui/layui.js"></script>
+<script src="~/lay_component/sampleJs/SurgeryDesk.js"></script>
+</body>
+</html>

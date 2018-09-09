@@ -1,0 +1,287 @@
+﻿@using Com.IFlyDog.CommonDTO
+@using Com.IFlyDog.FlyDogWeb.Helper
+<style>
+    .layui-input-block{margin-left:auto;}
+    .layui-form-label{padding:9px 0;}
+    .layui-input, .layui-textarea{padding-left:5px;}
+    .layui-form-select .layui-input{padding-right:0;}
+    .layui-form-label{width: 50px;}
+    .layui-input-block.fl{padding:0 0 10px 0;}
+</style>
+<blockquote class="layui-elem-quote" id="priceInfo">
+    <p>原价：<span name="amount">0</span> </p> 
+    <p>成交价：<span name="finalPrice">0</span> </p> 
+    <p>整体折扣：<span name="discount">100</span> </p> 
+   
+</blockquote>
+<fieldset class="layui-elem-field  fl" style="width:40%;">
+    <legend>添加订单</legend>
+    <div class="layui-field-box">
+        <div class="site-title">
+            <fieldset><legend>套餐</legend></fieldset>
+            <input type="hidden" id="OrderID" name="OrderID" />
+        </div>
+        <div class="layui-form-item layui-form-text" name="chargeSetTable">
+            <table class="site-table table-hover">
+                <thead>
+                <tr>
+                    <th>套餐</th>
+                    <th>金额</th>
+                    <th>数量</th>
+                    <th>项目名称</th>
+                    <th>项目数量</th>
+                    <th>项目金额</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody class="tb-chargeSet">
+                <!--<tr>
+                    <td>套餐</td>
+                    <td>单价</td>
+                    <td>1</td>
+                    <td>项目(包含)</td>
+                    <td>项目单价</td>
+                    <td>项目数量</td>
+                    <td><span class="layui-btn layui-btn-mini  layui-btn-danger">删除</span></td>
+                </tr>-->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="site-title">
+            <fieldset><legend>常规项目</legend></fieldset>
+        </div>
+        <div class="layui-form-item layui-form-text" name="chargeTable">
+            <table class="site-table table-hover">
+                <thead>
+                    <tr>
+                        <th>名称</th>
+                        <th>金额</th>
+                        <th>数量</th>
+                        <th>成交金额</th>
+                        <th>折扣(%)</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody class="tb-Charge">
+                </tbody>
+            </table>
+        </div>
+
+        <div class="layui-form-item layui-form-text">
+
+            <div class="layui-input-block">
+                <textarea id="Remark" name="Remark" placeholder="请输入描述内容" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-input-block fl">
+            <span class="layui-btn" id="saveOrder">立即提交</span>
+        </div>
+
+    </div>
+</fieldset>
+<fieldset class="layui-elem-field  fr"  style="width:55%;">
+    <legend>添加项目/套餐</legend>
+    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">添加项目</li>
+            <li>添加套餐</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <div class="layui-form  clearfix">
+                    <div class="fl">
+                        <label class="layui-form-label">拼音码:</label>
+                        <div class="layui-input-inline">
+                            <input class="layui-input" name="smartProductPinYin" placeholder="请输入拼音码">
+                        </div>
+                    </div>
+                    <div class="fl">
+                        <label class="layui-form-label">名称:</label>
+                        <div class="layui-input-inline">
+                            <input class="layui-input" name="smartProductNmae" placeholder="请输入名称">
+                        </div>
+                    </div>
+                    <div class="fl">
+                        <label class="layui-form-label">类型:</label>
+                        <div class="layui-input-inline">
+                            @Html.SelectCategoryByHospital(SelectType.ChargeCategory, "smartChargeCategory", "smartChargeCategory")
+                        </div>
+                    </div>
+                    <span class="layui-btn search-btn fr">查询</span>
+                </div>
+                <div class="layui-field-box">
+               
+                    <div class="layui-form-item layui-form-text" name="add-charge-div">
+                        <table class="site-table table-hover">
+                            <thead>
+                            <tr>
+                                <th>项目名称</th>
+                                <th>拼音码</th>
+                                <th>单位</th>
+                                <th>价格</th>
+                                <th>类型</th>
+                                <th>规格</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody class="addorder-charge-table">
+                            
+                            </tbody>
+                        </table>
+                    </div>
+          
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="layui-form  clearfix">
+                    <div class="fl">
+                        <label class="layui-form-label">拼音码:</label>
+                        <div class="layui-input-inline">
+                            <input class="layui-input" name="addTcPinYinMa" placeholder="请输入拼音码">
+                        </div>
+                    </div>
+                    <div class="fl">
+                        <label class="layui-form-label">名称:</label>
+                        <div class="layui-input-inline">
+                            <input class="layui-input" name="addTcProductNmae" placeholder="请输入名称">
+                        </div>
+                    </div>
+               
+                    <span class="layui-btn tc-search-btn fr">查询</span>
+                </div>
+                <div class="layui-field-box" name="add-chargeSet-div">
+                    <table class="site-table table-hover">
+                        <thead>
+                        <tr>
+                            <th>套餐名称</th>
+                            <th>价格</th>
+                            <th>项目名称</th>
+                            <th>数量</th>
+                            <th>金额</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody class="addorder-chargeSet"></tbody>
+                    </table>
+                    <div id="pageDiv"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<div class="dot-tmp">
+    <script class="addorder-charge-tmp" type="text/x-dot-template">
+        {{ for(var item in it){ }}
+        <tr data-id="{{= it[item].ID }}">
+            <td>{{= it[item].Name }}</td>
+            <td>{{= it[item].PinYin }}</td>
+            <td>{{= it[item].UnitName }}</td>
+            <td>{{= it[item].Price }}</td>
+            <td>{{= it[item].CategoryName }}</td>
+            <td>{{= it[item].Size }}</td>
+            <td>{{if(it[item].Status ==1){}}
+                使用中
+                {{ } }}
+            </td>
+            <td><span class="layui-btn layui-btn-primary layui-btn-mini" name="add-charge">选择此项</span></td>
+        </tr>
+        {{ } }}
+    </script>
+    <script class="addorder-chargeSet-tmp" type="text/x-dot-template">
+        {{ for(var item in it){ }}
+            <tr data-id="{{= it[item].SetID }}">
+                <td rowspan="{{=it[item].Details.length}}">{{= it[item].SetName }}</td>
+                <td rowspan="{{=it[item].Details.length}}">{{= it[item].Price }}</td>
+                {{~it[item].Details :value:index }}
+                    <td chargeId="{{= value.ChargeID }}">{{= value.ChargeName }}</td>
+                    <td>{{= value.Num }}</td>
+                    <td>{{= value.Amount }}</td>
+                    {{? index == 0 }}
+                        <td rowspan="{{=it[item].Details.length}}"><span class="layui-btn layui-btn-primary layui-btn-mini" name="add-chargeSet">选择此项</span></td>
+                    {{?}}
+                    {{? index < it[item].Details.length-1}}
+                        </tr><tr>
+                    {{??}}
+                        </tr>
+                    {{?}}
+                {{~}}
+        {{ } }}
+    </script>
+
+    <!--查看订单模板-->
+    <script class="seeorder-charge-tmp" type="text/x-dot-template">
+        {{ for(var item in it){ }}
+        <tr data-id="{{= it[item].ChargeID }}">
+            <td>{{= it[item].ChargeName }}</td>
+            <td>{{= it[item].Num*it[item].Price }}</td>
+            <td>{{= it[item].Num }}</td>
+            <td>{{= it[item].FinalPrice }}</td>
+            <td>{{= (it[item].FinalPrice*100)/(it[item].Num*it[item].Price) }}</td>
+            <td><span class="layui-btn layui-btn-mini layui-btn-danger layui-btn-disabled">删除</span></td>
+        </tr>
+        {{ } }}
+    </script>
+    <script class="seeorder-chargeSet-tmp" type="text/x-dot-template">
+        {{ for(var item in it){ }}
+        <tr data-id="{{= it[item].SetID }}">
+            <td rowspan="{{=it[item].ChargeDetails.length}}">{{= it[item].SetName }}</td>
+            <td rowspan="{{=it[item].ChargeDetails.length}}">{{= it[item].SetNum*it[item].Price }}</td>
+            <td rowspan="{{=it[item].ChargeDetails.length}}">{{= it[item].SetNum }}</td>
+            {{~it[item].ChargeDetails :value:index }}
+                <td chargeid="{{= value.ChargeID }}">{{= value.ChargeName }}</td>
+                <td>{{= value.Num }}</td>
+                <td>{{= value.FinalPrice }}</td>
+                {{? index == 0 }}
+                <td rowspan="{{=it[item].ChargeDetails.length}}"><span class="layui-btn layui-btn-mini layui-btn-danger layui-btn-disabled">删除</span></td>
+                {{?}}
+                {{? index < it[item].ChargeDetails.length-1}}
+                </tr>
+                <tr>
+                {{??}}
+                </tr>
+                {{?}}
+            {{~}}
+        {{ } }}
+    </script>
+    <!--修改订单模板-->
+    <script class="modifyorder-charge-tmp" type="text/x-dot-template">
+        {{ for(var item in it){ }}
+        <tr data-id="{{= it[item].ChargeID }}">
+            <td>{{= it[item].ChargeName }}</td>
+            <td>{{= it[item].Num*it[item].Price }}</td>
+            <td><input name="Num" type="number" class="layui-input" min="1" value="{{= it[item].Num }}" style="width: 47px;" /></td>
+            <td><input name="FinalPrice" type="number" class="layui-input" min="0" value="{{= it[item].FinalPrice }}" style="width: 75px;" /></td>
+            <td>{{= (it[item].FinalPrice*100)/(it[item].Num*it[item].Price) }}</td>
+            <td><span class="layui-btn layui-btn-mini layui-btn-danger" name="delCharge">删除</span></td>
+        </tr>
+        {{ } }}
+    </script>
+    <script class="modifyorder-chargeSet-tmp" type="text/x-dot-template">
+        {{ for(var item in it){ }}
+        <tr data-id="{{= it[item].SetID }}">
+            <td rowspan="{{=it[item].ChargeDetails.length}}">{{= it[item].SetName }}</td>
+            <td rowspan="{{=it[item].ChargeDetails.length}}">{{= it[item].SetNum*it[item].Price }}</td>
+            <td rowspan="{{=it[item].ChargeDetails.length}}"><input name="Num" type="number" class="layui-input" min="1" value="{{= it[item].SetNum }}" style="width: 49px;" /></td>
+            {{~it[item].ChargeDetails :value:index }}
+            <td chargeid="{{= value.ChargeID }}">{{= value.ChargeName }}</td>
+            <td>{{= value.Num }}</td>
+            <td>{{= value.FinalPrice }}</td>
+            {{? index == 0 }}
+            <td rowspan="{{=it[item].ChargeDetails.length}}"><span class="layui-btn layui-btn-mini layui-btn-danger" name="delChargeSet">删除</span></td>
+            {{?}}
+            {{? index < it[item].ChargeDetails.length-1}}
+        </tr>
+        <tr>
+            {{??}}
+        </tr>
+        {{?}}
+        {{~}}
+        {{ } }}
+    </script>
+
+</div>
+<script src="~/lay_component/sampleJs/customer_operation/AddOrder.js"></script>
+ 

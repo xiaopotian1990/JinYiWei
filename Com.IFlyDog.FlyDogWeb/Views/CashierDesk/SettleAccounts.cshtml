@@ -1,0 +1,91 @@
+﻿@using Com.IFlyDog.CommonDTO
+@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>结算记录</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+    <style>
+        .layui-elem-quote label{margin-left:20px;}
+          .layui-elem-quote label span{margin-left:10px;}
+    </style>
+</head>
+<body>
+    <div class="admin-main">
+        <!--tab导航-->
+        <fieldset class="layui-elem-field "> 
+            <legend>结算收银</legend>
+            <div class="layui-field-box">
+                <blockquote class="layui-elem-quote layui-quote-nm casUserInfo"> </blockquote>
+                <table class="site-table table-hover">
+                    <thead>
+                    <tr>
+                        <th>客户编号</th>
+                        <th>客户姓名</th>
+                        <th>收银时间</th>
+                        <th>收银用户</th>
+                        <th>收取现金</th>
+                        <th>刷卡金额</th>
+                    </tr>
+                    </thead>
+                    <tbody class="tb-cashierOfUser">
+
+                    </tbody>
+                </table>
+                <!--分页容器-->
+                <div id="pageDiv" class="fr"></div>
+            </div>
+            <div class="layui-field-box">
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <span class="layui-btn settle-btn fr" >保存收银</span>   
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+<div class="doT-data-template">
+<!--结算时查询出的统计信息-->
+    <script type="text/x-dot-template" class="casUserInfo-temp">
+    <label>结算时间:</label><span  class="layui-fontColor-1">{{=it.StartTime == null ? "暂无":it.StartTime}}&nbsp;至&nbsp;{{=it.EndTime == null ? "暂无":it.EndTime}}</span> 
+    <label>总共:</label><span class="layui-fontColor-4">{{=it.Count}}条收银记录</span>
+    <label>现金:</label><span class="layui-fontColor-7">{{=it.Cash}}</span>
+    <label>刷卡:</label><span  class="layui-fontColor-5">{{=it.Card}}</span><br />
+    <label></label>       
+    {{~it.CardCategoryList:value:index}}
+    <span  class="layui-fontColor-2"> {{= value}}</span> 
+    {{~}}
+       
+</script>
+<!--结算时查询出的收银列表信息-->
+<script type="text/x-dot-template" class="cashierOfUser-temp">
+    {{~it.CashierOfUserList:value:index}}
+        <tr>
+            <td>{{= value.CustomerID}}</td>
+            <td>{{= value.CustomerName}}</td>
+            <td>{{= value.CreateTime == null ? "暂无":  value.CreateTime.slice(0,10)}}</td>
+            <td>{{= value.CreateUserName}}</td>
+            <td>{{= value.Cash}}</td>
+            <td>{{= value.Card}}</td>
+     
+        </tr>
+    {{~}}
+</script>
+</div>
+<script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+<script src="~/lay_component/js/hcommon.js"></script>
+<script src="~/Scripts/FlyDog.Common.js"></script>
+<script src="~/doT-master/doT-master/doT.min.js"></script>
+<script src="~/lay_component/plugins/layui/layui.js"></script>
+<script src="~/lay_component/sampleJs/CashinerDesk/SettleAccounts.js"></script>
+<script src="~/lay_component/signalr/jquery.signalR-2.0.3.min.js"></script>
+<script src="http://192.168.11.220:8066/chat/hubs"></script>
+<script src="~/lay_component/js/chat.js"></script>  
+</body>
+</html>

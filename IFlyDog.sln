@@ -1,0 +1,210 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.IFlyDog.WebDTO", "Com.IFlyDog.WebDTO\Com.IFlyDog.WebDTO.csproj", "{BB98A440-E983-4FE4-AC9D-84E4DF2DDD82}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DTO", "DTO", "{AFB749A3-7D8E-4448-A4E0-420F028C4AAC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{B78785B1-C040-41BA-A69E-B055725D20A6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{59DDC6E1-54B8-47D4-B05B-64879276D6A6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AutoService", "AutoService", "{486DC655-514E-44E9-BB09-371027347A54}"
+	ProjectSection(SolutionItems) = preProject
+		Com.IFlyDog.FlyDogWebAPI\Web.config = Com.IFlyDog.FlyDogWebAPI\Web.config
+		Com.IFlyDog.FlyDogWebAPI\Web.Debug.config = Com.IFlyDog.FlyDogWebAPI\Web.Debug.config
+		Com.IFlyDog.FlyDogWebAPI\Web.Release.config = Com.IFlyDog.FlyDogWebAPI\Web.Release.config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IBLL", "IBLL", "{7E5E3725-F5B1-48CC-8898-99203F80854C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BLL", "BLL", "{97C46DF1-48A4-4387-8019-295C770C25E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.IFlyDog.CommonDTO", "Com.IFlyDog.CommonDTO\Com.IFlyDog.CommonDTO.csproj", "{83090A4D-EA80-4E89-9023-272CE55D2C14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.IFlyDog.APIDTO", "Com.IFlyDog.APIDTO\Com.IFlyDog.APIDTO.csproj", "{F707F110-1D34-4414-931B-1C0F72A61B6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.IFlyDog.FlyDogWeb", "Com.IFlyDog.FlyDogWeb\Com.IFlyDog.FlyDogWeb.csproj", "{C4D11054-9203-47B3-8E54-41820BE42819}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.IFlyDog.FlyDogWebBLL", "Com.IFlyDog.FlyDogWebDLL\Com.IFlyDog.FlyDogWebBLL.csproj", "{D099DCAF-A71A-44BE-BA14-510424351D0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.IFlyDog.IFlyDogWebBLL", "Com.IFlyDog.IFlyDogWebDLL\Com.IFlyDog.IFlyDogWebBLL.csproj", "{AB0C866D-9E65-46C1-893D-186226B76335}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.IFlyDog.FlyDogWebAPI", "Com.IFlyDog.FlyDogWebAPI\Com.IFlyDog.FlyDogWebAPI.csproj", "{1058B9CF-774B-4230-8ACF-A0E9781C7D2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.FlyDog.FlyDogAPIBLL", "Com.FlyDog.FlyDogAPIBLL\Com.FlyDog.FlyDogAPIBLL.csproj", "{98D7D5AA-D91A-4C1E-8D9E-0A7FF1E32E4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.FlyDog.IFlyDogAPIBLL", "Com.FlyDog.IFlyDogAPIBLL\Com.FlyDog.IFlyDogAPIBLL.csproj", "{939B16B1-F767-4823-9031-1FAD07D7B6D2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{DC4218D4-233A-47F4-8D0A-B9E276588A63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.IFlyDog.APITest", "Com.IFlyDog.APITest\Com.IFlyDog.APITest.csproj", "{FBC147FA-DF73-40D6-88D1-880703C9BB43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.IFlyDog.FlyDogTokenAPI", "Com.IFlyDog.FlyDogTokenAPI\Com.IFlyDog.FlyDogTokenAPI.csproj", "{726B3D15-D9DD-4EBD-9A4A-6CDCED2F3F60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.FlyDog.FlyDogTokenBLL", "Com.FlyDog.FlyDogTokenBLL\Com.FlyDog.FlyDogTokenBLL.csproj", "{67739C74-87C5-4AD6-B1A4-E46A302CB97D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.IFlyDog.FlyDogPictureAPI", "Com.IFlyDog.FlyDogPictureAPI\Com.IFlyDog.FlyDogPictureAPI.csproj", "{78B49592-BDB1-456F-A7E5-A20FF7C0F07B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.IFlyDog.ServerTest", "Com.IFlyDog.ServerTest\Com.IFlyDog.ServerTest.csproj", "{44965C66-4B2C-4C15-BB47-891D182AA97A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{EBFD7912-0002-471E-BCDA-548F893855AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.IFlyDog.Common", "Com.IFlyDog.Common\Com.IFlyDog.Common.csproj", "{1CAA2CDB-136F-41B6-BA12-6EAFF8D7AA06}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BB98A440-E983-4FE4-AC9D-84E4DF2DDD82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB98A440-E983-4FE4-AC9D-84E4DF2DDD82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB98A440-E983-4FE4-AC9D-84E4DF2DDD82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB98A440-E983-4FE4-AC9D-84E4DF2DDD82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83090A4D-EA80-4E89-9023-272CE55D2C14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83090A4D-EA80-4E89-9023-272CE55D2C14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83090A4D-EA80-4E89-9023-272CE55D2C14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83090A4D-EA80-4E89-9023-272CE55D2C14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F707F110-1D34-4414-931B-1C0F72A61B6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F707F110-1D34-4414-931B-1C0F72A61B6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F707F110-1D34-4414-931B-1C0F72A61B6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F707F110-1D34-4414-931B-1C0F72A61B6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4D11054-9203-47B3-8E54-41820BE42819}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4D11054-9203-47B3-8E54-41820BE42819}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4D11054-9203-47B3-8E54-41820BE42819}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4D11054-9203-47B3-8E54-41820BE42819}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D099DCAF-A71A-44BE-BA14-510424351D0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D099DCAF-A71A-44BE-BA14-510424351D0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D099DCAF-A71A-44BE-BA14-510424351D0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D099DCAF-A71A-44BE-BA14-510424351D0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB0C866D-9E65-46C1-893D-186226B76335}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB0C866D-9E65-46C1-893D-186226B76335}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB0C866D-9E65-46C1-893D-186226B76335}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB0C866D-9E65-46C1-893D-186226B76335}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1058B9CF-774B-4230-8ACF-A0E9781C7D2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1058B9CF-774B-4230-8ACF-A0E9781C7D2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1058B9CF-774B-4230-8ACF-A0E9781C7D2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1058B9CF-774B-4230-8ACF-A0E9781C7D2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98D7D5AA-D91A-4C1E-8D9E-0A7FF1E32E4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98D7D5AA-D91A-4C1E-8D9E-0A7FF1E32E4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98D7D5AA-D91A-4C1E-8D9E-0A7FF1E32E4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98D7D5AA-D91A-4C1E-8D9E-0A7FF1E32E4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{939B16B1-F767-4823-9031-1FAD07D7B6D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{939B16B1-F767-4823-9031-1FAD07D7B6D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{939B16B1-F767-4823-9031-1FAD07D7B6D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{939B16B1-F767-4823-9031-1FAD07D7B6D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBC147FA-DF73-40D6-88D1-880703C9BB43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBC147FA-DF73-40D6-88D1-880703C9BB43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBC147FA-DF73-40D6-88D1-880703C9BB43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBC147FA-DF73-40D6-88D1-880703C9BB43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{726B3D15-D9DD-4EBD-9A4A-6CDCED2F3F60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{726B3D15-D9DD-4EBD-9A4A-6CDCED2F3F60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{726B3D15-D9DD-4EBD-9A4A-6CDCED2F3F60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{726B3D15-D9DD-4EBD-9A4A-6CDCED2F3F60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67739C74-87C5-4AD6-B1A4-E46A302CB97D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67739C74-87C5-4AD6-B1A4-E46A302CB97D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67739C74-87C5-4AD6-B1A4-E46A302CB97D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67739C74-87C5-4AD6-B1A4-E46A302CB97D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78B49592-BDB1-456F-A7E5-A20FF7C0F07B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78B49592-BDB1-456F-A7E5-A20FF7C0F07B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78B49592-BDB1-456F-A7E5-A20FF7C0F07B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78B49592-BDB1-456F-A7E5-A20FF7C0F07B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44965C66-4B2C-4C15-BB47-891D182AA97A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44965C66-4B2C-4C15-BB47-891D182AA97A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44965C66-4B2C-4C15-BB47-891D182AA97A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44965C66-4B2C-4C15-BB47-891D182AA97A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CAA2CDB-136F-41B6-BA12-6EAFF8D7AA06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CAA2CDB-136F-41B6-BA12-6EAFF8D7AA06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CAA2CDB-136F-41B6-BA12-6EAFF8D7AA06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CAA2CDB-136F-41B6-BA12-6EAFF8D7AA06}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BB98A440-E983-4FE4-AC9D-84E4DF2DDD82} = {AFB749A3-7D8E-4448-A4E0-420F028C4AAC}
+		{83090A4D-EA80-4E89-9023-272CE55D2C14} = {AFB749A3-7D8E-4448-A4E0-420F028C4AAC}
+		{F707F110-1D34-4414-931B-1C0F72A61B6E} = {AFB749A3-7D8E-4448-A4E0-420F028C4AAC}
+		{C4D11054-9203-47B3-8E54-41820BE42819} = {B78785B1-C040-41BA-A69E-B055725D20A6}
+		{D099DCAF-A71A-44BE-BA14-510424351D0C} = {97C46DF1-48A4-4387-8019-295C770C25E3}
+		{AB0C866D-9E65-46C1-893D-186226B76335} = {7E5E3725-F5B1-48CC-8898-99203F80854C}
+		{1058B9CF-774B-4230-8ACF-A0E9781C7D2B} = {59DDC6E1-54B8-47D4-B05B-64879276D6A6}
+		{98D7D5AA-D91A-4C1E-8D9E-0A7FF1E32E4D} = {97C46DF1-48A4-4387-8019-295C770C25E3}
+		{939B16B1-F767-4823-9031-1FAD07D7B6D2} = {7E5E3725-F5B1-48CC-8898-99203F80854C}
+		{FBC147FA-DF73-40D6-88D1-880703C9BB43} = {DC4218D4-233A-47F4-8D0A-B9E276588A63}
+		{726B3D15-D9DD-4EBD-9A4A-6CDCED2F3F60} = {59DDC6E1-54B8-47D4-B05B-64879276D6A6}
+		{67739C74-87C5-4AD6-B1A4-E46A302CB97D} = {97C46DF1-48A4-4387-8019-295C770C25E3}
+		{78B49592-BDB1-456F-A7E5-A20FF7C0F07B} = {59DDC6E1-54B8-47D4-B05B-64879276D6A6}
+		{44965C66-4B2C-4C15-BB47-891D182AA97A} = {DC4218D4-233A-47F4-8D0A-B9E276588A63}
+		{1CAA2CDB-136F-41B6-BA12-6EAFF8D7AA06} = {EBFD7912-0002-471E-BCDA-548F893855AF}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 16
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://192.168.11.220:8055/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Com.IFlyDog.APIDTO\\Com.IFlyDog.APIDTO.csproj
+		SccProjectTopLevelParentUniqueName1 = IFlyDog.sln
+		SccProjectName1 = Com.IFlyDog.APIDTO
+		SccLocalPath1 = Com.IFlyDog.APIDTO
+		SccProjectUniqueName2 = Com.IFlyDog.CommonDTO\\Com.IFlyDog.CommonDTO.csproj
+		SccProjectTopLevelParentUniqueName2 = IFlyDog.sln
+		SccProjectName2 = Com.IFlyDog.CommonDTO
+		SccLocalPath2 = Com.IFlyDog.CommonDTO
+		SccProjectUniqueName3 = Com.IFlyDog.FlyDogWeb\\Com.IFlyDog.FlyDogWeb.csproj
+		SccProjectTopLevelParentUniqueName3 = IFlyDog.sln
+		SccProjectName3 = Com.IFlyDog.FlyDogWeb
+		SccLocalPath3 = Com.IFlyDog.FlyDogWeb
+		SccProjectUniqueName4 = Com.IFlyDog.WebDTO\\Com.IFlyDog.WebDTO.csproj
+		SccProjectTopLevelParentUniqueName4 = IFlyDog.sln
+		SccProjectName4 = Com.IFlyDog.WebDTO
+		SccLocalPath4 = Com.IFlyDog.WebDTO
+		SccProjectUniqueName5 = Com.IFlyDog.FlyDogWebDLL\\Com.IFlyDog.FlyDogWebBLL.csproj
+		SccProjectTopLevelParentUniqueName5 = IFlyDog.sln
+		SccProjectName5 = Com.IFlyDog.FlyDogWebDLL
+		SccLocalPath5 = Com.IFlyDog.FlyDogWebDLL
+		SccProjectUniqueName6 = Com.IFlyDog.IFlyDogWebDLL\\Com.IFlyDog.IFlyDogWebBLL.csproj
+		SccProjectTopLevelParentUniqueName6 = IFlyDog.sln
+		SccProjectName6 = Com.IFlyDog.IFlyDogWebDLL
+		SccLocalPath6 = Com.IFlyDog.IFlyDogWebDLL
+		SccProjectUniqueName7 = Com.IFlyDog.FlyDogWebAPI\\Com.IFlyDog.FlyDogWebAPI.csproj
+		SccProjectTopLevelParentUniqueName7 = IFlyDog.sln
+		SccProjectName7 = Com.IFlyDog.FlyDogWebAPI
+		SccLocalPath7 = Com.IFlyDog.FlyDogWebAPI
+		SccProjectUniqueName8 = Com.FlyDog.FlyDogAPIBLL\\Com.FlyDog.FlyDogAPIBLL.csproj
+		SccProjectTopLevelParentUniqueName8 = IFlyDog.sln
+		SccProjectName8 = Com.FlyDog.FlyDogAPIBLL
+		SccLocalPath8 = Com.FlyDog.FlyDogAPIBLL
+		SccProjectUniqueName9 = Com.FlyDog.IFlyDogAPIBLL\\Com.FlyDog.IFlyDogAPIBLL.csproj
+		SccProjectTopLevelParentUniqueName9 = IFlyDog.sln
+		SccProjectName9 = Com.FlyDog.IFlyDogAPIBLL
+		SccLocalPath9 = Com.FlyDog.IFlyDogAPIBLL
+		SccProjectUniqueName10 = Com.IFlyDog.APITest\\Com.IFlyDog.APITest.csproj
+		SccProjectTopLevelParentUniqueName10 = IFlyDog.sln
+		SccProjectName10 = Com.IFlyDog.APITest
+		SccLocalPath10 = Com.IFlyDog.APITest
+		SccProjectUniqueName11 = Com.IFlyDog.FlyDogTokenAPI\\Com.IFlyDog.FlyDogTokenAPI.csproj
+		SccProjectTopLevelParentUniqueName11 = IFlyDog.sln
+		SccProjectName11 = Com.IFlyDog.FlyDogTokenAPI
+		SccLocalPath11 = Com.IFlyDog.FlyDogTokenAPI
+		SccProjectUniqueName12 = Com.FlyDog.FlyDogTokenBLL\\Com.FlyDog.FlyDogTokenBLL.csproj
+		SccProjectTopLevelParentUniqueName12 = IFlyDog.sln
+		SccProjectName12 = Com.FlyDog.FlyDogTokenBLL
+		SccLocalPath12 = Com.FlyDog.FlyDogTokenBLL
+		SccProjectUniqueName13 = Com.IFlyDog.FlyDogPictureAPI\\Com.IFlyDog.FlyDogPictureAPI.csproj
+		SccProjectTopLevelParentUniqueName13 = IFlyDog.sln
+		SccProjectName13 = Com.IFlyDog.FlyDogPictureAPI
+		SccLocalPath13 = Com.IFlyDog.FlyDogPictureAPI
+		SccProjectUniqueName14 = Com.IFlyDog.ServerTest\\Com.IFlyDog.ServerTest.csproj
+		SccProjectTopLevelParentUniqueName14 = IFlyDog.sln
+		SccProjectName14 = Com.IFlyDog.ServerTest
+		SccLocalPath14 = Com.IFlyDog.ServerTest
+		SccProjectUniqueName15 = Com.IFlyDog.Common\\Com.IFlyDog.Common.csproj
+		SccProjectTopLevelParentUniqueName15 = IFlyDog.sln
+		SccProjectName15 = Com.IFlyDog.Common
+		SccLocalPath15 = Com.IFlyDog.Common
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,51 @@
+﻿@using Com.IFlyDog.CommonDTO
+@using Com.IFlyDog.FlyDogWeb.Helper
+
+<div class="callBackPlan hide">
+    <div class="layui-field-box ">
+        <style>
+            .pad-9 {
+                float: left;
+                display: inline-block;
+                padding: 9px;
+            }
+            .layui-form-label {width:100px;}
+            .layui-input-block{margin-left:130px;}
+        </style>
+        <div class="site-text site-block">
+            <form class="layui-form callBackPlan-form">
+                <input type="hidden" name="ID" />
+                <div class="layui-form-item">
+                    <label class="layui-form-label">变更类型</label>
+                    <div class="layui-input-block">
+                        <span class="pad-9 ownerType"></span>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">当前<span class="ownerType"></span></label>
+                    <div class="layui-input-block">
+                        <input type="hidden" name="OldUserID" />
+                        <span class="pad-9 OldUserInfo"></span>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">新<span class="ownerType"></span></label>
+                    <div class="layui-input-block">
+                        <input type="hidden" name="NewUserID" />
+                        <input type="text" class="layui-input" name="NewUserName" placeholder="请选择用户" />
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">变更原因</label>
+                    <div class="layui-input-block">
+                        <textarea name="Content" class="layui-textarea" placeholder="请输入变更原因" ></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="clearfix m-20">
+            <span class="layui-btn OwnerShipOrder fr add-submit">立即提交</span>
+            <span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+        </div>
+    </div>
+</div>

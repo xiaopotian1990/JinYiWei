@@ -1,0 +1,2623 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Com.IFlyDog.CommonDTO</name>
+    </assembly>
+    <members>
+        <member name="T:Com.IFlyDog.CommonDTO.AnesthesiaType">
+            <summary>
+            麻醉类型
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.AnesthesiaType.ALL">
+            <summary>
+            全麻
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.AnesthesiaType.Part">
+            <summary>
+            局麻
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.AppointmentStatus">
+            <summary>
+            预约状态0：未上门，1：已完成预约,99：所有
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.AppointmentStatus.No">
+            <summary>
+            未上门
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.AppointmentStatus.Yes">
+            <summary>
+            已完成预约
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.AppointmentStatus.All">
+            <summary>
+            所有
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.AuditRuleTypeStatus">
+            <summary>
+            审核规则枚举
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.AuditRuleTypeStatus.OrderDiscount">
+            <summary>
+            订单折扣
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.AuditRuleTypeStatus.BackOrder">
+            <summary>
+            退项目单
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.AuditRuleTypeStatus.DepositRebate">
+            <summary>
+            退预收款
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.AuditRuleTypeStatus.ConsultantUser">
+            <summary>
+            咨询人员变更
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.AuditRuleTypeStatus.DeveloperUser">
+            <summary>
+            开发人员变更
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.AuditType">
+            <summary>
+            审核类型
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.AuditType.Pending">
+            <summary>
+            待审核
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.AuditType.NoApprove">
+            <summary>
+            无需审核
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.AuditType.UnApprove">
+            <summary>
+            审核不通过
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.AuditType.Approve">
+            <summary>
+            审核通过
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.AuditType.Uncommitted">
+            <summary>
+            未提交
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.BedStatus">
+            <summary>
+            床位使用状态
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.BedStatus.Free">
+            <summary>
+            空闲
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.BedStatus.Use">
+            <summary>
+            占用
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.CallbackGroupStatusType">
+            <summary>
+            状态 1：使用；0：停用；2：删除
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CallbackGroupStatusType.Stop">
+            <summary>
+            停用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CallbackGroupStatusType.Normal">
+            <summary>
+            正常或者使用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CallbackGroupStatusType.Delete">
+            <summary>
+            删除
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.CallbackStatus">
+            <summary>
+            回访状态0：回访提醒1：已经完成的回访
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CallbackStatus.Remind">
+            <summary>
+            回访提醒
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CallbackStatus.Done">
+            <summary>
+            已完成
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CallbackStatus.All">
+            <summary>
+            全部
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.CashierStatus">
+            <summary>
+            订单结算状态
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CashierStatus.Yes">
+            <summary>
+            已经结算
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CashierStatus.No">
+            <summary>
+            未结算
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.Client">
+            <summary>
+            用户信息
+            </summary>
+        </member>
+        <member name="P:Com.IFlyDog.CommonDTO.Client.AppID">
+            <summary>
+            App ID
+            </summary>
+        </member>
+        <member name="P:Com.IFlyDog.CommonDTO.Client.AppSecret">
+            <summary>
+            AppSecret
+            </summary>
+        </member>
+        <member name="P:Com.IFlyDog.CommonDTO.Client.Name">
+            <summary>
+            用户名称
+            </summary>
+        </member>
+        <member name="P:Com.IFlyDog.CommonDTO.Client.SignKey">
+            <summary>
+            密钥
+            </summary>
+        </member>
+        <member name="P:Com.IFlyDog.CommonDTO.Client.Roles">
+            <summary>
+            角色
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.ComeType">
+            <summary>
+            上门状态
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.ComeType.Yes">
+            <summary>
+            已上门
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.ComeType.No">
+            <summary>
+            未上门
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.ComeType.All">
+            <summary>
+            全部
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.CommissionRecordType">
+            <summary>
+            佣金获得类别
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CommissionRecordType.Consume">
+            <summary>
+            消费提成
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CommissionRecordType.Commission">
+            <summary>
+            佣金提成
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.CommissionType">
+            <summary>
+            佣金使用类型
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CommissionType.Consume">
+            <summary>
+            消费
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CommissionType.Out">
+            <summary>
+            提现
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CommissionType.Send">
+            <summary>
+            转让
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.CommonDelete">
+            <summary>
+            通用删除
+            </summary>
+        </member>
+        <member name="P:Com.IFlyDog.CommonDTO.CommonDelete.CreateUserID">
+            <summary>
+            操作人ID
+            </summary>
+        </member>
+        <member name="P:Com.IFlyDog.CommonDTO.CommonDelete.ID">
+            <summary>
+            记录ID
+            </summary>
+        </member>
+        <member name="P:Com.IFlyDog.CommonDTO.CommonDelete.CustomerID">
+            <summary>
+            顾客ID
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.CouponActiveStatus">
+            <summary>
+            券活动状态
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CouponActiveStatus.NoReception">
+            <summary>
+            不可重复使用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CouponActiveStatus.CanReception">
+            <summary>
+            可重复使用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CouponActiveStatus.Effective">
+            <summary>
+            有效
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CouponActiveStatus.NoEffective">
+            <summary>
+            失效
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.CouponStatus">
+            <summary>
+            代金券状态
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CouponStatus.Effective">
+            <summary>
+            有效
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CouponStatus.OverDue">
+            <summary>
+            失效
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.DealType">
+            <summary>
+            成交状态
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.DealType.Yes">
+            <summary>
+            已成交
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.DealType.No">
+            <summary>
+            未成交
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.DealType.All">
+            <summary>
+            全部
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.HospitalPrintStatus">
+            <summary>
+            打印设置枚举
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.HospitalPrintStatus.menu">
+            <summary>
+            项目单
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.HospitalPrintStatus.refund">
+            <summary>
+            还款
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.HospitalPrintStatus.advancesReceived">
+            <summary>
+            预收款
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.HospitalPrintStatus.depositRefund">
+            <summary>
+            退预收款
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.HospitalPrintStatus.returnAProject">
+            <summary>
+            退项目
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.HospitalPrintStatus.clearing">
+            <summary>
+            结算
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.HospitalPrintStatus.draw">
+            <summary>
+            划扣
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.HospitalPrintStatus.operationNotice">
+            <summary>
+            手术通知
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.HospitalPrintStatus.purchase">
+            <summary>
+            进货入库
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.HospitalPrintStatus.smartReturn">
+            <summary>
+            厂家退货
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.HospitalPrintStatus.allocate">
+            <summary>
+            调拨
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.HospitalPrintStatus.check">
+            <summary>
+            盘点
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.HospitalPrintStatus.use">
+            <summary>
+            领用
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.InpatientStatus">
+            <summary>
+            住院状态1：住院中；0：已出院
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.InpatientStatus.In">
+            <summary>
+            住院
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.InpatientStatus.Out">
+            <summary>
+            出院
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.OperationProductStatus">
+            <summary>
+            手术药物品状态）：未发货1：已发货
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.OperationProductStatus.No">
+            <summary>
+            未发货
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.OperationProductStatus.Yes">
+            <summary>
+            已发货
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.RuleType">
+            <summary>
+            审核类型
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.RuleType.Order">
+            <summary>
+            项目单
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.RuleType.BackOrder">
+            <summary>
+            退项目单
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.RuleType.DepositRebate">
+            <summary>
+            退预收款
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.SurgeryStatus">
+            <summary>
+            手术预约状态0：未完成；1：正在进行中；2：已完成
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SurgeryStatus.NoDone">
+            <summary>
+            0：未完成
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SurgeryStatus.Doing">
+            <summary>
+            1：正在进行中
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SurgeryStatus.Done">
+            <summary>
+            2：已完成
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.VisitType">
+            <summary>
+            上门状态
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.VisitType.First">
+            <summary>
+            初诊
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.VisitType.Twice">
+            <summary>
+            复诊
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.VisitType.Check">
+            <summary>
+            成交未分诊 复查
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.VisitType.Again">
+            <summary>
+            成交后再分诊 再消费
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.CustomerType">
+            <summary>
+            顾客状态
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CustomerType.New">
+            <summary>
+            新客
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CustomerType.Old">
+            <summary>
+            老客
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.CommonStatus">
+            <summary>
+            通用状态类 0：停用；1：使用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CommonStatus.Stop">
+            <summary>
+            停用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CommonStatus.Use">
+            <summary>
+            使用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CommonStatus.All">
+            <summary>
+            全部，查询时使用
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.CouponType">
+            <summary>
+            券获得途径
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CouponType.DepositSend">
+            <summary>
+            预收款赠送
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CouponType.ManualSend">
+            <summary>
+            手工赠送
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CouponType.PointChange">
+            <summary>
+            积分兑换
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CouponType.BackSed">
+            <summary>
+            退款退得
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CouponType.CodeActive">
+            <summary>
+            激活码兑换
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CouponType.OrderUse">
+            <summary>
+            消费扣减
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CouponType.ManualDelete">
+            <summary>
+            手工扣减
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CouponType.DepositRebateDelete">
+            <summary>
+            退款扣减
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CouponType.PromoteSend">
+            <summary>
+            推荐赠送
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.CouponUsageType">
+            <summary>
+            券使用类型
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CouponUsageType.OrderUse">
+            <summary>
+            消费扣减
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CouponUsageType.ManualDelete">
+            <summary>
+            手工扣减
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CouponUsageType.DepositRebateDelete">
+            <summary>
+            退款扣减
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.CustomerEventType">
+            <summary>
+            客户事件类型
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.CustomerRegisterType">
+            <summary>
+            顾客登记方式
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CustomerRegisterType.Exploit">
+            <summary>
+            网电登记
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CustomerRegisterType.ForeGround">
+            <summary>
+            前台接待
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CustomerRegisterType.Market">
+            <summary>
+            市场登记
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CustomerRegisterType.WechatRegedit">
+            <summary>
+            微信注册
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CustomerRegisterType.ManualPromote">
+            <summary>
+            手动推荐
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.CustomerRegisterType.Share">
+            <summary>
+            分享注册
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.DepositType">
+            <summary>
+            预收款类型
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.DepositType.Deposit">
+            <summary>
+            订单购买
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.DepositType.Back">
+            <summary>
+            退项目获得
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.DepositType.Refund">
+            <summary>
+            退款获得
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.DepositType.Transfer">
+            <summary>
+            转让
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.DepositType.Consume">
+            <summary>
+            消费使用
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.EquityType">
+            <summary>
+            会员权益类型
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.EquityType.Discount">
+            <summary>
+            折扣类权益
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.EquityType.Custom">
+            <summary>
+            自定义权益
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.EquityType.TakeATaxi">
+            <summary>
+            打车权益
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.GenderEnum">
+            <summary>
+            性别枚举1男2女
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.GenderEnum.Boy">
+            <summary>
+            男
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.GenderEnum.Girl">
+            <summary>
+            女
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.GenderEnum.All">
+            <summary>
+            全部
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.GlobalConstants">
+            <summary>
+            系统常量
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.GlobalFunction">
+            <summary>
+            公共方法
+            </summary>
+        </member>
+        <member name="M:Com.IFlyDog.CommonDTO.GlobalFunction.GetSystemAccount">
+            <summary>
+            系统内置账号
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.IFlyDogResult`1">
+            <summary>
+            返回结果
+            </summary>
+            <typeparam name="TResultType">状态类型</typeparam>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.IFlyDogResult`2">
+            <summary>
+            返回结果
+            </summary>
+            <typeparam name="TResultType">状态类型</typeparam>
+            <typeparam name="TData">具体的返回信息</typeparam>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.IFlyDogResultType">
+            <summary>
+            返回类型 0：成功；1：失败；2：系统异常；3：无权限
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.IFlyDogResultType.Success">
+            <summary>
+            成功结果类型
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.IFlyDogResultType.Failed">
+            <summary>
+            消息结果类型
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.IFlyDogResultType.Error">
+            <summary>
+            异常结果类型
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.IFlyDogResultType.NoAuth">
+            <summary>
+            权限结果类型
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.Key">
+            <summary>
+            各种KEY
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Key.FlyDogToken">
+            <summary>
+            redis保存的爱飞狗Token开头信息
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Key.CS">
+            <summary>
+            Web API是否使用测试
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Key.WorkID">
+            <summary>
+            WorkID
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Key.DataCenterID">
+            <summary>
+            DataCenterID
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Key.MongoDBToken">
+            <summary>
+            token
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Key.MongoDBTokenConnection">
+            <summary>
+            token
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Key.HospitalCount">
+            <summary>
+            医院数量
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Key.SSMApiUri">
+            <summary>
+            SSM
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Key.SSMApiUriToken">
+            <summary>
+            SSM
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Key.SSMAppid">
+            <summary>
+            SSM
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Key.SSMAppsecred">
+            <summary>
+            SSM
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Key.SSMSignKey">
+            <summary>
+            SSM
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Key.SSMRedis">
+            <summary>
+            SSM
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.KnowledgeStatusType">
+            <summary>
+            知识管理 1：使用；0：停用；2：删除
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.KnowledgeStatusType.Stop">
+            <summary>
+            停用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.KnowledgeStatusType.Normal">
+            <summary>
+            正常或者使用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.KnowledgeStatusType.Delete">
+            <summary>
+            删除
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.LogType">
+            <summary>
+                日志类型
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.Login">
+            <summary>
+                登录
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.DeptAdd">
+            <summary>
+                部门添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.DeptUpdate">
+            <summary>
+                部门修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.DeptStopOrUse">
+            <summary>
+                部门停用或者启用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ChannelAdd">
+            <summary>
+                渠道添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ChannelUpdate">
+            <summary>
+                渠道修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ChannelStopOrUse">
+            <summary>
+                渠道停用或者启用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SymptomAdd">
+            <summary>
+                症状添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SymptomUpdate">
+            <summary>
+                症状修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SymptomStopOrUse">
+            <summary>
+                症状停用或者启用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.FailtureCategoryAdd">
+            <summary>
+                未成交类型添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.FailtureCategoryUpdate">
+            <summary>
+                症状修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.FailtureCategoryStopOrUse">
+            <summary>
+                症状停用或者启用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ComplainCategoryAdd">
+            <summary>
+                未成交类型添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ComplainCategoryUpdate">
+            <summary>
+                症状修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ComplainCategoryStopOrUse">
+            <summary>
+                症状停用或者启用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.KnowledgeCategoryAdd">
+            <summary>
+                知识分类添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.KnowledgeCategoryUpdate">
+            <summary>
+                知识分类修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.KnowledgeCategoryStopOrUse">
+            <summary>
+                知识分类停用或者启用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.KnowledgeAdd">
+            <summary>
+                知识管理添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.KnowledgeUpdate">
+            <summary>
+                知识管理修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.KnowledgeStopOrUse">
+            <summary>
+                知识管理停用或者启用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CallbackCategoryAdd">
+            <summary>
+                知识管理添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CallbackCategoryUpdate">
+            <summary>
+                知识管理修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CallbackCategoryStopOrUse">
+            <summary>
+                知识管理停用或者启用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CallbackGroupAdd">
+            <summary>
+                知识管理添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CallbackGroupUpdate">
+            <summary>
+                知识管理修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CallbackGroupStopOrUse">
+            <summary>
+                知识管理停用或者启用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartShiftCategoryAdd">
+            <summary>
+                班次添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartShiftCategoryUpdate">
+            <summary>
+                班次修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartShiftCategoryDispose">
+            <summary>
+                班次停用或者启用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartUnitAdd">
+            <summary>
+                单位管理添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartUnitUpdate">
+            <summary>
+                单位管理修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartUnitDelete">
+            <summary>
+                单位管理删除
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartProductCategoryAdd">
+            <summary>
+                药物品管理添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartProductCategoryUpdate">
+            <summary>
+                药物品管理修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartProductCategoryDelete">
+            <summary>
+                药物品管理删除
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartSupplierAdd">
+            <summary>
+                供应商管理添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartSupplierUpdate">
+            <summary>
+                供应商管理修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartSupplierDelete">
+            <summary>
+                供应商管理删除
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartWarehouseAdd">
+            <summary>
+            仓库管理添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartWarehouseUpdate">
+            <summary>
+                仓库管理修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartWarehouseDelete">
+            <summary>
+                仓库管理删除
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartProductAdd">
+            <summary>
+            药物品管理添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartProductUpdate">
+            <summary>
+                药物品管理修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartProductDispose">
+            <summary>
+                药物品管理删除
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.RoleAdd">
+            <summary>
+                角色添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.RoleUpdate">
+            <summary>
+                部门修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.RoleDelete">
+            <summary>
+                角色删除
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CardCategoryAdd">
+            <summary>
+                银行卡添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CardCategoryUpdate">
+            <summary>
+                银行卡修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CardCategoryStopOrUse">
+            <summary>
+                银行卡停用或者启用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartToolAdd">
+            <summary>
+                银行卡添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartToolUpdate">
+            <summary>
+                银行卡修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartToolStopOrUse">
+            <summary>
+                银行卡停用或者启用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.TagAdd">
+            <summary>
+            顾客标签添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.TagUpdate">
+            <summary>
+            顾客标签修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.TagStopOrUse">
+            <summary>
+            顾客标签停用或者启用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.MemberCategoryAdd">
+            <summary>
+            会员卡添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.MemberCategoryUpdate">
+            <summary>
+            会员卡修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.MemberCategoryDelete">
+            <summary>
+            会员卡删除
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.MemberCategoryEquitySet">
+            <summary>
+            设置会员权益
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.EquityAdd">
+            <summary>
+            权益添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.EquityUpdate">
+            <summary>
+            权益修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.EquityStopOrUse">
+            <summary>
+            权益使用停用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartPurchaseAdd">
+            <summary>
+            进货信息添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartPurchaseUpdate">
+            <summary>
+            进货信息修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartPurchaseDelte">
+            <summary>
+            进货信息删除
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartReturnAdd">
+            <summary>
+            退货信息添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartReturnUpdate">
+            <summary>
+            退货信息修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartReturnDelte">
+            <summary>
+            退货信息删除
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartStockAdd">
+            <summary>
+            添加库存s
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartStockUpdate">
+            <summary>
+            修改库存
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.UseAdd">
+            <summary>
+            添加科室领用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.UseUpdate">
+            <summary>
+            修改科室领用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CheckAdd">
+            <summary>
+            添加科室领用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CheckUpdate">
+            <summary>
+            修改科室领用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.InvoiceAdd">
+            <summary>
+            添加采购发票
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.InvoiceDelete">
+            <summary>
+            删除采购发票
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ChargeCategoryAdd">
+            <summary>
+            添加项目分类
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ChargeCategoryDelete">
+            <summary>
+            删除项目分类
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ChargeCategoryUpdate">
+            <summary>
+            修改项目分类
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ChargeAdd">
+            <summary>
+            收费项目添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ChargeUpdate">
+            <summary>
+            收费项目修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.UserAdd">
+            <summary>
+            用户添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.UserUpdate">
+            <summary>
+            用户修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.UserStopOrUse">
+            <summary>
+            用户使用停用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.UserPasswordReset">
+            <summary>
+            用户密码重置
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.UserCustomerPermissionUpdate">
+            <summary>
+            客户权限修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.UserCustomerCallBackPermissionUpdate">
+            <summary>
+            客户回访权限修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CouponCategoryAdd">
+            <summary>
+            代金卷类型添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CouponCategoryUpdate">
+            <summary>
+            代金卷类型修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CouponCategoryDelete">
+            <summary>
+            代金卷类型删除
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.DepositChargeAdd">
+            <summary>
+            预收款类型添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.DepositChargeUpdate">
+            <summary>
+            预收款类型修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.DepositChargeDelete">
+            <summary>
+            预收款类型删除
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.RelationAdd">
+            <summary>
+            关系添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.RelationUpdate">
+            <summary>
+            关系修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.RelationDelete">
+            <summary>
+            关系删除
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.PositionAdd">
+            <summary>
+            岗位分工添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.PositionUpdate">
+            <summary>
+            岗位分工修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.TagGroupAdd">
+            <summary>
+            标签组添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.TagGroupUpdate">
+            <summary>
+            标签组修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.TagGroupDelete">
+            <summary>
+            标签组删除
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CaseTemplateAdd">
+             <summary>
+            病例模板添加
+             </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CaseTemplateUpdate">
+            <summary>
+            病例模板修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ChargeSetAdd">
+             <summary>
+            添加套餐
+             </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ChargeSetUpdate">
+            <summary>
+            修改套餐
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ClubAdd">
+             <summary>
+            单项目管理添加
+             </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ClubDelete">
+            <summary>
+            单项目管理删除
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ChargeDiscountAdd">
+             <summary>
+            项目折扣添加
+             </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ChargeDiscountUpdate">
+            <summary>
+            项目折扣修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.UserDiscountAdd">
+             <summary>
+            用户折扣添加
+             </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.UserDiscountUpdate">
+            <summary>
+            用户折扣修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.OptionAdd">
+             <summary>
+            系统设置添加
+             </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.OptionUpdate">
+            <summary>
+            系统设置修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CustomerAdd">
+            <summary>
+            顾客添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CustomerUpdate">
+            <summary>
+            顾客修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ShareCategoryAdd">
+            <summary>
+            分享家添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ShareCategoryUpdate">
+            <summary>
+            分享家修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ShareCategoryDelete">
+            <summary>
+            分享家删除
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.HospitalPrintUpdate">
+            <summary>
+            打印设置修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ShiftAdd">
+            <summary>
+            添加排班
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ShiftUpdate">
+            <summary>
+            修改排班
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ShiftDelete">
+            <summary>
+            删除排班
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.UpdateAdvanceSettings">
+            <summary>
+            修改预收款成交设置
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.UpdateAllowArrears">
+            <summary>
+            修改是否允许欠款
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.UpdateContentTemplate">
+            <summary>
+            修改咨询模板
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.UpdateCustomer">
+            <summary>
+            修改客户自定义字段
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.UpdateIntegralNum">
+            <summary>
+            修改积分比例
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.UpdateMakeTime">
+            <summary>
+            修改预约设置
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.UpdatePrivacyProtection">
+            <summary>
+            修改隐私保护
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.UpdateRegistration">
+            <summary>
+            修改挂号
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.UpdateWaitingDiagnosis">
+            <summary>
+            修改等候是否开启
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.StoreAdd">
+            <summary>
+            添加店铺
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.StoreUpdate">
+            <summary>
+            修改店铺
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.StoreDelete">
+            <summary>
+            删除店铺
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.StoreManagerAdd">
+            <summary>
+            添加店铺负责人
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.StoreManagerDelete">
+            <summary>
+            删除店铺负责人
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.BedAdd">
+            <summary>
+            床位添加
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.BedUpdate">
+            <summary>
+            床位修改
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.BedStopOrUse">
+            <summary>
+            床位停用或者启用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SaleBackAdd">
+            <summary>
+            添加回款记录
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SaleBackUpdate">
+            <summary>
+            修改回款记录
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SaleBackDelete">
+            <summary>
+            删除回款记录
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CouponActivityAdd">
+            <summary>
+            添加卷活动
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CouponActivityUpdate">
+            <summary>
+            修改卷活动
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CouponActivityDelete">
+            <summary>
+            删除卷活动
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CouponActivityDetailAdd">
+            <summary>
+            添加卷活动详情
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CouponActivityDetailUpdate">
+            <summary>
+            修改卷活动详情
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CouponActivityDetailDelete">
+            <summary>
+            删除卷活动详情
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ChannelGroupAdd">
+            <summary>
+            添加渠道组
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ChannelGroupUpdate">
+            <summary>
+            修改渠道组
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ChannelGroupDelete">
+            <summary>
+            删除渠道组
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ItemGroupAdd">
+            <summary>
+            添加报表项目组
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ItemGroupUpdate">
+            <summary>
+            修改报表项目组
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ItemGroupDelete">
+            <summary>
+            删除报表项目组
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartItemAdd">
+            <summary>
+            添加报表项目
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartItemUpdate">
+            <summary>
+            修改报表项目
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SmartItemDelete">
+            <summary>
+            删除报表项目组
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.AuditRuleAdd">
+            <summary>
+            添加审核规则
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.AuditRuleState">
+            <summary>
+            启用停用审核规则
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.AuditRuleUpdate">
+            <summary>
+            编辑审核规则
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.UserTriggerAdd">
+            <summary>
+            添加用户通知
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.UserTriggerUpdate">
+            <summary>
+            编辑用户通知
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.UserTriggerDelete">
+            <summary>
+            删除用户通知
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CustomerGroupAdd">
+            <summary>
+            添加客户分组
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CustomerGroupUpdate">
+            <summary>
+            编辑客户分组
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CustomerGroupDelete">
+            <summary>
+            删除客户分组
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CustomerGroupDetailAdd">
+            <summary>
+            添加客户组用户
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CustomerGroupDetailDelete">
+            <summary>
+            删除全部客户组所属客户
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CustomerFilterAdd">
+            <summary>
+            添加客户结果集
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CustomerFilterDetailAdd">
+            <summary>
+            添加客户结果集详情
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.MergeCustomer">
+            <summary>
+            合并客户组
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CustomerFilterFiltrateAdd">
+            <summary>
+            筛选完成结果集后保存筛选结果
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SingleConsultantUserUpdateAdd">
+            <summary>
+            单个添加咨询人员客户归属权
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.SingleDeveLoperUserUpdateAdd">
+            <summary>
+            单个添加开发人员客户归属权
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.BatchConsultantUserAdd">
+            <summary>
+            批量设置咨询人员
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.BatchDeveloperUserAdd">
+            <summary>
+            批量设置开发人员
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CouponManualAdd">
+            <summary>
+            手工添加券
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CouponManualDelete">
+            <summary>
+            手工扣减券
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.WXOptionUpdatePromoteLevelAdd">
+            <summary>
+            新增级别提点
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.WXOptionOpenCommission">
+            <summary>
+            修改微信系统设置佣金提成
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.WXOptionUpdateNoDiscount">
+            <summary>
+            微信系统设置修改不提点折扣小于
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.WXOptionUpdateRecommenDay">
+            <summary>
+            微信系统设置修改推荐时限
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.WXOptionUpdateUserSendVolume">
+            <summary>
+            更新被推荐用户送券
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.WXOptionDefaultChannel">
+            <summary>
+            微信系统设置默认渠道
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.WXOptionSpecialChannel">
+            <summary>
+            微信系统设置特殊渠道
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CustomerConsultanAdd">
+            <summary>
+            添加/编辑咨询人员
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CustomerDeveloperAdd">
+            <summary>
+            添加/ 编辑开发人员
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CustomerMedicalRecordAdd">
+            <summary>
+            客户病例模板
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CustomerMedicalRecordDelete">
+            <summary>
+            删除客户病历模板
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.CustomerMedicalRecordUpdate">
+            <summary>
+            修改客户病历模板
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.AuditOperationAdd">
+            <summary>
+            审核订单
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.AuditApplyDelete">
+            <summary>
+            删除我的审核申请
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.LogType.ComplainUpdate">
+            <summary>
+            处理投诉
+            </summary>
+        </member>
+        <member name="P:Com.IFlyDog.CommonDTO.MenuModuleDTO.ID">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="P:Com.IFlyDog.CommonDTO.MenuModuleDTO.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.Option">
+            <summary>
+            系统设置枚举
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Option.Customer1">
+            <summary>
+            客户自定义字段1
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Option.Customer2">
+            <summary>
+            客户自定义字段2
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Option.Customer3">
+            <summary>
+            客户自定义字段3
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Option.Customer4">
+            <summary>
+            客户自定义字段4
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Option.Customer5">
+            <summary>
+            客户自定义字段5
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Option.Customer6">
+            <summary>
+            客户自定义字段6
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Option.Customer7">
+            <summary>
+            客户自定义字段7
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Option.Customer8">
+            <summary>
+            客户自定义字段8
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Option.Customer9">
+            <summary>
+            客户自定义字段9
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Option.Customer10">
+            <summary>
+            客户自定义字段10
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Option.ContentTemplate">
+            <summary>
+            用户咨询模板
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Option.MakeBeginTime">
+            <summary>
+            预约开始时间
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Option.MakeEndTime">
+            <summary>
+            预约结束时间
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Option.MakeTimeInterval">
+            <summary>
+            预约时间间隔
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Option.IntegralNum">
+            <summary>
+            积分数量
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Option.AdvanceSettingsCode">
+            <summary>
+            预收款成交设置code
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Option.AllowArrearsCode">
+            <summary>
+            是否允许欠款code
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Option.PrivacyProtectionCode">
+            <summary>
+            隐私保护值code
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Option.RegistrationCode">
+            <summary>
+            挂号是否开启code
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Option.RegistrationChargeCode">
+            <summary>
+            挂号收费项目code
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Option.WaitingDiagnosisCode">
+            <summary>
+            等候诊断code
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Option.yxqyj">
+            <summary>
+            有效期预警
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.AdvanceSettings">
+            <summary>
+            预收款成交设置
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.AdvanceSettings.Buy">
+            <summary>
+            购买时
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.AdvanceSettings.Use">
+            <summary>
+            使用时
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.AllowArrears">
+            <summary>
+            是否允许欠款
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.AllowArrears.Yes">
+            <summary>
+            是
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.AllowArrears.No">
+            <summary>
+            否
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.PrivacyProtection">
+            <summary>
+            隐私保护
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.PrivacyProtection.AllHide">
+            <summary>
+            全部隐藏
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.PrivacyProtection.PartHide">
+            <summary>
+            部分隐藏
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.Registration">
+            <summary>
+            挂号
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Registration.Open">
+            <summary>
+            开启
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.Registration.Close">
+            <summary>
+            关闭
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.WaitingDiagnosis">
+            <summary>
+            等候诊断
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.WaitingDiagnosis.Open">
+            <summary>
+            开启
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.WaitingDiagnosis.Close">
+            <summary>
+            关闭
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.OrderType">
+            <summary>
+            订单类型
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.OrderType.Order">
+            <summary>
+            项目订单
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.OrderType.InPatient">
+            <summary>
+            住院单
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.OrderType.Deposit">
+            <summary>
+            预收款订单
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.OrderType.Back">
+            <summary>
+            退单
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.OrderType.Refund">
+            <summary>
+            退款
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.OrderType.Debt">
+            <summary>
+            欠款
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.OwnerShipType">
+            <summary>
+            顾客归属关系类型
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.OwnerShipType.Exploit">
+            <summary>
+            网电咨询师
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.OwnerShipType.Manager">
+            <summary>
+            现场咨询师
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.Pages`1">
+            <summary>
+            分页数据格式
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Com.IFlyDog.CommonDTO.Pages`1.PageSize">
+            <summary>
+            每页多少数据
+            </summary>
+        </member>
+        <member name="P:Com.IFlyDog.CommonDTO.Pages`1.PageNum">
+            <summary>
+            第几页
+            </summary>
+        </member>
+        <member name="P:Com.IFlyDog.CommonDTO.Pages`1.PageTotals">
+            <summary>
+            总页数
+            </summary>
+        </member>
+        <member name="P:Com.IFlyDog.CommonDTO.Pages`1.PageDatas">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.PaidStatus">
+            <summary>
+            订单付款类型
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.PaidStatus.NotPaid">
+            <summary>
+            未付款
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.PaidStatus.Paid">
+            <summary>
+            已付款
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.PaidStatus.Debt">
+            <summary>
+            欠款
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.PaidStatus.Cancel">
+            <summary>
+            取消
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.PayType">
+            <summary>
+            支付方式
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.PayType.Coupon">
+            <summary>
+            券支付
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.PayType.Balance">
+            <summary>
+            余额支付
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.PayType.Cash">
+            <summary>
+            现金支付
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.PayType.Card">
+            <summary>
+            银行卡支付
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.PhotoType">
+            <summary>
+            照片类型
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.PhotoType.Consult">
+            <summary>
+            咨询
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.PhotoType.Before">
+            <summary>
+            治疗前
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.PhotoType.Under">
+            <summary>
+            治疗中
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.PhotoType.After">
+            <summary>
+            治疗后
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.PhotoType.Other">
+            <summary>
+            其他
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.PointType">
+            <summary>
+            积分消费方式
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.PointType.ManualGive">
+            <summary>
+            手工赠送
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.PointType.ConsumeGive">
+            <summary>
+            消费赠送
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.PointType.ManualRebate">
+            <summary>
+            手工扣减
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.PointType.CouponExchange">
+            <summary>
+            兑换券
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.PointType.ChargeExchange">
+            <summary>
+            兑换产品
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.PointType.BackRebate">
+            <summary>
+            退项目扣减
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.PointType.RebateRebate">
+            <summary>
+            退款扣减
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.ProductType.Goods">
+            <summary>
+            物品
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.ProductType.Drug">
+            <summary>
+            药品
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.Select">
+            <summary>
+            通用下拉菜单
+            </summary>
+        </member>
+        <member name="P:Com.IFlyDog.CommonDTO.Select.ID">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="P:Com.IFlyDog.CommonDTO.Select.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.SelectType">
+            <summary>
+            下拉菜单枚举
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.Channel">
+            <summary>
+            渠道
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.Symptom">
+            <summary>
+            症状
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.CallbackCategory">
+            <summary>
+            回访类型
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.FailtureCategory">
+            <summary>
+            未成交类型
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.ComplainCategory">
+            <summary>
+            投诉类型
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.Unit">
+            <summary>
+            单位
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.CardCategory">
+            <summary>
+            银行卡
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.Tool">
+            <summary>
+            工具
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.Relation">
+            <summary>
+            关系
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.Position">
+            <summary>
+            岗位分工
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.CaseTemplate">
+            <summary>
+            病例模板
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.Hospital">
+            <summary>
+            医院
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.ChargeCategory">
+            <summary>
+            项目分类
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.KnowledgeCategory">
+            <summary>
+            知识分类
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.Dept">
+            <summary>
+            部门
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.Warehouse">
+            <summary>
+            医院所有仓库
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.WarehouseOfUser">
+            <summary>
+            用户所管辖的仓库
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.Supplier">
+            <summary>
+            供应商
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.ProductCategory">
+            <summary>
+            药物品分类
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.Province">
+            <summary>
+            省
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.TreatDept">
+            <summary>
+            治疗部门
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.ShiftCategory">
+            <summary>
+            班次管理
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.StoreCategory">
+            <summary>
+            店铺
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.MemberCategory">
+            <summary>
+            会员等级
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.ShareCategory">
+            <summary>
+            分享家等级
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.TagCategory">
+            <summary>
+            标签
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.ALLHospital">
+            <summary>
+            所有医院
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.ItemGroup">
+            <summary>
+            报表项目组
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.Item">
+            <summary>
+            报表项目
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.CouponCategory">
+            <summary>
+            券类型
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SelectType.DepositCharge">
+            <summary>
+            预收款项目
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.SmartShiftCategoryStartUsingType">
+            <summary>
+            班次管理启用停用状态
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SmartShiftCategoryStartUsingType.StartUsing">
+            <summary>
+            启用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SmartShiftCategoryStartUsingType.BlockUp">
+            <summary>
+            停用
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.SmartShiftCategoryStatusType">
+            <summary>
+            班次管理类型枚举
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SmartShiftCategoryStatusType.YesStatusType">
+            <summary>
+            工作
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SmartShiftCategoryStatusType.NoStatusType">
+            <summary>
+            非工作
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.RoleStatus">
+            <summary>
+            角色状态
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.RoleStatus.Stop">
+            <summary>
+            角色停用
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.RoleStatus.Use">
+            <summary>
+            角色使用
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.StockInType">
+            <summary>
+            入库类型
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.StockOutType">
+            <summary>
+            出库类型
+            </summary>
+        </member>
+        <member name="P:Com.IFlyDog.CommonDTO.SubMenuDTO.ID">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="P:Com.IFlyDog.CommonDTO.SubMenuDTO.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Com.IFlyDog.CommonDTO.SubMenuDTO.Url">
+            <summary>
+            地址
+            </summary>
+        </member>
+        <member name="P:Com.IFlyDog.CommonDTO.SubMenuDTO.Moudle">
+            <summary>
+            模块
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.TitleType">
+            <summary>
+            题目类型
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.TitleType.SingleChoice">
+            <summary>
+            单选题
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.TitleType.MultipleChoice">
+            <summary>
+            多选题
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.TitleType.Completion">
+            <summary>
+            填空题
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.WechatStatus">
+            <summary>
+            微信状态
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.WechatStatus.Binding">
+            <summary>
+            绑定
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.WechatStatus.UnBinding">
+            <summary>
+            未绑定
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.WechatStatus.All">
+            <summary>
+            全部
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.WXOption">
+            <summary>
+            系统设置枚举
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.WXOption.UserSendVolumeCode">
+            <summary>
+            被推荐用户送券Code
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.WXOption.UserCouponCategoryCode">
+            <summary>
+            被推荐用户送券，卷类型Code
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.WXOption.CouponCategoryMoneyCode">
+            <summary>
+            被推荐用户送券金额Code
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.WXOption.RecommendNumberDayCode">
+            <summary>
+            推荐时限 天数Code
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.WXOption.NoDiscountCode">
+            <summary>
+            不提点折扣小于Code
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.WXOption.OpenCommissionCode">
+            <summary>
+            是否开启佣金提成Code
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.WXOption.CommissionLevelCode">
+            <summary>
+            佣金提成等级Code
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.WXOption.CommissionRemindedCode">
+            <summary>
+            佣金提成提点Code
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.WXOption.ChannelCode">
+            <summary>
+            默认渠道Code
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.SendVolume">
+            <summary>
+            是否送卷
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SendVolume.Open">
+            <summary>
+            开启
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.SendVolume.Close">
+            <summary>
+            关闭
+            </summary>
+        </member>
+        <member name="T:Com.IFlyDog.CommonDTO.OpenCommission">
+            <summary>
+            是否开启佣金提成
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.OpenCommission.Open">
+            <summary>
+            开启
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.CommonDTO.OpenCommission.Close">
+            <summary>
+            关闭
+            </summary>
+        </member>
+    </members>
+</doc>

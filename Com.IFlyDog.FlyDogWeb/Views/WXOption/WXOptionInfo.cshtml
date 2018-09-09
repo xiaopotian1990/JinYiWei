@@ -1,0 +1,242 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>系统设置</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+    <link href="~/Styles/Public/CustomerPlugin.css" rel="stylesheet" />
+    <style>
+        .layui-form-label {
+            width: auto;
+            padding-left: 0;
+        }
+
+        .submit-btn.hide {
+            display: none;
+        }
+
+        .layui-input-block.m-none {
+            margin-left: 0;
+            margin-bottom: 5px;
+        }
+        .layui-btn.hide {
+            display:none;
+        }
+        .sub-row.layui-btn{
+            margin:10px 10px 0 0 ;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-main">
+        <fieldset class="layui-elem-field">
+            <legend>系统设置</legend>            
+            <div class="layui-field-box layui-form">
+                <table class="site-table table-hover">
+                    <tbody class="option-table"></tbody>
+                </table>
+            </div>
+        </fieldset>
+        <!-- 劵类型弹窗 -->
+        <div class="category-pop hide">
+            <fieldset class="layui-elem-field layui-field-title">
+                <legend>选择劵类型</legend>
+            </fieldset>
+            <div class="m-20">
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <th>选择</th>
+                            <th>名称</th>
+                            <th>备注</th>
+                        </tr>
+                    </thead>
+                    <tbody class="category-table"></tbody>
+                </table>
+            </div>
+            <div class="m-20 clearfix">
+                <span class="layui-btn category submit-btn fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+            </div>
+        </div>
+        <!-- 项目类型弹窗 End -->
+        <div class="dot-tmp">
+            <!-- 套餐表格 -->
+            <script class="option-tmp" type="text/x-dot-template">
+                <tr>
+                    <td>被推荐用户送券</td>
+                    <td>
+                        <div class="layui-input-block m-none">
+                            <label class="layui-form-label">推荐用户送券</label>
+                            <div class="layui-input-inline">
+                                <input type="radio" value="1" name="UserSendVolume" data-index="{{= it.SendVolumeCode }}" class="layui-input" title="开启" {{= it.SendVolumeValue == 1 ? "checked" : "" }} disabled />
+                                <input type="radio" value="0" name="UserSendVolume" data-index="{{= it.SendVolumeCode }}" class="layui-input" title="关闭" {{= it.SendVolumeValue == 0 ? "checked" : "" }} disabled />
+                            </div>
+                        </div>
+                        <div class="layui-input-block m-none">
+                            <label class="layui-form-label">券类型</label>
+                            <div class="layui-input-inline">
+                                <input type="hidden" value="{{= it.UserCouponCategoryValue }}" name="UserCouponCategory" data-index="{{= it.UserCouponCategoryCode }}" class="layui-input" disabled />
+                                <input type="text" value="{{= it.UserCouponCategoryName }}" name="UserCouponCategoryName" data-index="{{= it.UserCouponCategoryCode }}" class="layui-input" disabled />
+                            </div>
+                        </div>
+                        <div class="layui-input-block m-none">
+                            <label class="layui-form-label">券金额</label>
+                            <div class="layui-input-inline">
+                                <input type="text" value="{{= it.CouponCategoryMoneyValue }}" name="CouponCategoryMoney" data-index="{{= it.CouponCategoryMoneyCode }}" class="layui-input" disabled />
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+
+                        <span class="layui-btn layui-btn-mini btn-edit">修改</span>
+                        <span class="layui-btn layui-btn-mini submit-btn hide" lay-submit data-url="WXOptionUpdateUserSendVolume">保存</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>推荐时限</td>
+                    <td>
+                        <div class="layui-input-inline">
+                            <input type="text" value="{{= it.RecommendNumberDayValue }}" name="RecommendNumberDay" data-index="{{= it.RecommendNumberDayCode }}" class="layui-input" disabled />
+                        </div>
+                    </td>
+                    <td>
+                        <span class="layui-btn layui-btn-mini btn-edit">修改</span>
+                        <span class="layui-btn layui-btn-mini submit-btn hide" lay-submit data-url="WXOptionUpdateRecommenDay">保存</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>不提点折扣小于</td>
+                    <td>
+                        <div class="layui-input-inline">
+                            <input type="text" value="{{= it.NoDiscountValue }}" name="NoDiscount" data-index="{{= it.NoDiscountCode }}" class="layui-input" disabled />
+                        </div>
+                    </td>
+                    <td>
+                        <span class="layui-btn layui-btn-mini btn-edit appointment">修改</span>
+                        <span class="layui-btn layui-btn-mini submit-btn hide" lay-submit data-url="WXOptionUpdateNoDiscount">保存</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>佣金提成</td>
+                    <td>
+                        <div class="layui-input-block m-none">
+                            <label class="layui-form-label">开启/关闭</label>
+                            <div class="layui-input-inline">
+                                <input type="radio" value="1" name="OpenCommission" data-index="{{= it.OpenCommissionCode }}" class="layui-input" title="开启" {{= it.OpenCommissionValue == 1 ? "checked" : "" }} disabled />
+                                <input type="radio" value="0" name="OpenCommission" data-index="{{= it.OpenCommissionCode }}" class="layui-input" title="关闭" {{= it.OpenCommissionValue == 0 ? "checked" : "" }} disabled />
+                            </div>
+                        </div>
+                        <div class="layui-input-block m-none">
+                            <label class="layui-form-label">佣金提成等级</label>
+                            <div class="layui-input-inline">
+                                <input type="text" value="{{= it.CommissionLevelValue }}" name="CommissionLevel" data-index="{{= it.CommissionLevelCode }}" class="layui-input" disabled />
+                            </div>级
+                        </div>
+                        <div class="layui-input-block m-none">
+                            <label class="layui-form-label">佣金提成提点</label>
+                            <div class="layui-input-inline">
+                                <input type="text" value="{{= it.CommissionRemindedValue }}" name="CommissionReminded" data-index="{{= it.CommissionRemindedCode }}" class="layui-input" disabled />
+                            </div>%
+                        </div>
+                    </td>
+                    <td>
+
+                        <span class="layui-btn layui-btn-mini btn-edit">修改</span>
+                        <span class="layui-btn layui-btn-mini submit-btn hide" lay-submit data-url="WXOptionOpenCommission">保存</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>级别提点</td>
+                    <td>
+                        <div class="layui-input-inline">
+                            <table class="site-table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>级别</th>
+                                        <th>提点(%)</th>
+                                        <th hidden>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="sub-list" name="PromoteLevelAddInfo">
+                                    {{~ it.PromoteLevelList:item }}
+                                    <tr class="sub-row" data-id="{{= item.ID }}">
+                                        <td class="sub-col" name="Level" data-val="{{= item.Level }}">{{= item.Level }}</td>
+                                        <td class="sub-col" name="Rate" data-val="{{= item.Rate }}">{{= item.Rate }}</td>
+                                        <td hidden><span class="layui-btn layui-btn-mini btn-rmv">删除</span></td>
+                                    </tr>
+                                    {{~  }}
+                                </tbody>
+                            </table>
+                            <span class="layui-btn layui-btn-small add-pro hide">添加</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="layui-btn layui-btn-mini btn-edit edit-pro">修改</span>
+                        <span class="layui-btn layui-btn-mini submit-btn hide" lay-submit data-url="WXOptionInsertPromoteLevel">保存</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>默认渠道</td>
+                    <td>
+                        <div class="layui-inline">
+                            {{= doT.template($(".Channel-tmp").text())({selected:it.ChannelValue,index:it.ChannelCode,name:"Channel",filter:"Channel"}) }}
+                        </div>
+                    </td>
+                    <td>
+                        <span class="layui-btn layui-btn-mini btn-edit edit-pro">修改</span>
+                        <span class="layui-btn layui-btn-mini submit-btn hide" lay-submit data-url="WXOptionDefaultChannel">保存</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>特殊渠道</td>
+                    <td>
+                        <div class="layui-inline">
+                            {{= doT.template($(".Channel-tmp").text())({selected:-1,index:-1,name:"ChannelSpecial",filter:"ChannelSpecial"}) }}
+                        </div>
+                        <div class="sub-list" name="SpecialChannelAddInfoList">
+
+                            {{~ it.ChannelInfoList:item }}
+                            <div class="sub-row layui-btn layui-btn-small">
+                                <span class="sub-col" name="ID" data-val="{{= item.ID }}">{{= item.Name }}<i class="layui-icon">&#xe640;</i></span>
+                            </div>
+                            {{~  }}
+                        </div>
+                    </td>
+                    <td>
+                        <span class="layui-btn layui-btn-mini btn-edit edit-pro">修改</span>
+                        <span class="layui-btn layui-btn-mini submit-btn hide" lay-submit data-url="WXOptionSpecialChannel">保存</span>
+                    </td>
+                </tr>
+            </script>
+            <!-- 劵类型表格 -->
+            <script class="category-tmp" type="text/x-dot-template">
+                {{~ it:item }}
+                <tr>
+                    <td><input type="checkbox" value="{{= item.ID }}" data-name="{{= item.Name }}" /></td>
+                    <td>{{= item.Name }}</td>
+                    <td>{{= item.Remark }}</td>
+                </tr>
+                {{~ }}
+            </script>
+            <script class="Channel-tmp" type="text/x-dot-template">
+                {{ var selected = 'selected="selected"',defaultSelected = '<option value="-1" >请选择</option>'; }}
+                {{= $('@Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.Channel, "", "", "ChannelName")')[0].outerHTML.replaceAll(selected,"").replace(defaultSelected,"").replace(it.selected + "\"",it.selected + "\" selected").replace("name=\"ChannelName\"","disabled lay-filter=\"" + it.filter + "\" data-index=\"" + it.index + "\" name=\"" + it.name + "\"") }}
+            </script>
+        </div>
+    </div>
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/lay_component/js/hcommon.js"></script>
+    <script src="~/Scripts/FlyDog.Common.js"></script>
+    <script src="~/doT-master/doT-master/doT.min.js"></script>
+    <script src="~/lay_component/plugins/layui/layui.js"></script>
+    <script src="~/Scripts/CustomerPlugin.js"></script>
+    <script src="~/lay_component/sampleJs/WXOption.js"></script>
+</body>
+</html>

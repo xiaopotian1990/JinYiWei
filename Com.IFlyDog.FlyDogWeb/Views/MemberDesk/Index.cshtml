@@ -1,0 +1,276 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>会员工作台</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+    <style>
+        .store-a {
+            color: indianred;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-main">
+        <div class="layui-tab layui-tab-card" lay-filter="MemberDest">
+            <ul class="layui-tab-title">
+                <li class="layui-this" lay-id="customer">客户管理</li>
+                <li lay-id="birthday">最近七日生日顾客</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <div class="layui-form m-10 clearfix">
+                        <div class="fl">
+                            <label class="layui-form-label">顾客编号</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="sCustomerID" placeholder="请输入顾客编号" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="fl">
+                            <label class="layui-form-label">客户名称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="sCustomerName" placeholder="请输入客户名称" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="fl">
+                            <label class="layui-form-label">联系方式</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="sMobile" placeholder="请输入联系方式" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="fl">
+                            <label class="layui-form-label">性别</label>
+                            <div class="layui-input-inline" style="width:115px;">
+                                <select name="sGender">
+                                    <option value="999">全部</option>
+                                    <option value="1">男</option>
+                                    <option value="2">女</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="clearfix m-20"></div>
+                        <div class="fl">
+                            <label class="layui-form-label">会员等级</label>
+                            <div class="layui-input-inline" style="width:163px;">
+                                @Html.SelectCategory(Com.IFlyDog.CommonDTO.SelectType.MemberCategory, "sMemberCategoryID", "sMemberCategoryID", "sMemberCategoryID")
+                            </div>
+                        </div>
+                        <div class="fl">
+                            <label class="layui-form-label">分享家</label>
+                            <div class="layui-input-inline" style="width:163px;">
+                                @Html.SelectCategory(Com.IFlyDog.CommonDTO.SelectType.ShareCategory, "sShareCategoryID", "sShareCategoryID", "sShareCategoryID")
+                            </div>
+                        </div>
+                        <div class="fl">
+                            <label class="layui-form-label">生日</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="sBirthdayStart" lay-verify="date" placeholder="开始日期" autocomplete="off" class="layui-input" onclick="laydate({ elem: this })">
+                            </div>
+                            <span class="m-lr-20">至</span>
+                            <div class="layui-input-inline">
+                                <input type="text" name="sBirthdayEnd" lay-verify="date" placeholder="结束日期" autocomplete="off" class="layui-input" onclick="laydate({ elem: this })">
+                            </div>
+                        </div>
+                        <span class="layui-btn search-btn fr memberDesk m-r-10">查询</span>
+                    </div>
+                    <div class="layui-field-box">
+                        <table class="site-table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>顾客编号</th>
+                                    <th>姓名</th>
+                                    <th>性别</th>
+                                    <th>年龄</th>
+                                    <th>会员等级</th>
+                                    <th>分享家等级</th>
+                                    <th>咨询人员</th>
+                                    <th>生日</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="customer-table"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    <div class="layui-field-box">
+                        <table class="site-table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>顾客编号</th>
+                                    <th>姓名</th>
+                                    <th>性别</th>
+                                    <th>年龄</th>
+                                    <th>会员等级</th>
+                                    <th>分享家等级</th>
+                                    <th>咨询人员</th>
+                                    <th>生日</th>
+                                    <th>手机</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="birthday-table"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-pop layui-form">
+            <div class="memberDesk-pop hide">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>回款信息</legend>
+                </fieldset>
+                <div class="memberDesk-info"></div>
+                <form class="memberDesk-form clearfix">
+                    <!-- 积分兑换券 -->
+                    <div class="PointToCoupon-group hide">
+                        <div class="layui-input-block m-bt-10">
+                            <label class="layui-form-label">兑换积分</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" name="PointAmount" placeholder="请输入积分" />
+                            </div>
+                        </div>
+                        <div class="layui-input-block m-bt-10">
+                            <label class="layui-form-label">兑换卷</label>
+                            <div class="layui-input-inline">
+                                <input type="hidden" name="couponCategoryId"/>
+                                <input type="text" class="layui-input" name="couponCategory" placeholder="添加劵类型" />
+                            </div>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" name="CouponAmount" placeholder="请输入金额" />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 手动增加扣减积分 -->
+                    <div class="DeductPoint-group hide">
+                        <div class="layui-input-block m-bt-10">
+                            <label class="layui-form-label">扣减积分</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" name="Point" />
+                            </div>
+                        </div>
+                        <div class="layui-input-block m-bt-10">
+                            <label class="layui-form-label">扣减说明</label>
+                            <div class="layui-input-inline">
+                                <textarea class="layui-textarea" name="Remark"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="m-20 clearfix">
+                    <span class="layui-btn memberDesk btn-submit fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+                </div>
+            </div>
+            <!-- 劵类型弹窗 -->
+            <div class="coupon-pop hide">
+                <form>
+                    <div class="m-20">
+                        <table class="site-table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>选择</th>
+                                    <th>名称</th>
+                                    <th>状态</th>
+                                    <th>备注</th>
+                                </tr>
+                            </thead>
+                            <tbody class="coupon-table"></tbody>
+                        </table>
+                    </div>
+                    <div class="m-20 clearfix">
+                        <span class="layui-btn coupon submit-btn fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="dot-tmp">
+            <!-- 表格 -->
+            <script class="customer-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                <tr>
+                    <td>{{= it[item].CustomerID }}</td>
+                    <td>{{= it[item].CustomerName }}</td>
+                    <td>{{= it[item].Gender == 1 ? "男" : "女" }}</td>
+                    <td>{{= it[item].Age }}</td>
+                    <td><img src="{{= it[item].MemberCategoryImage }}" /></td>
+                    <td><img src="{{= it[item].ShareCategoryImage }}" /></td>
+                    <td>{{= it[item].ManagerUserName }}</td>
+                    <td>{{= it[item].Birthday }}</td>
+                    <td>
+                        <span class="layui-btn layui-btn-small PointToCoupon" data-id="{{= it[item].CustomerID }}">积分兑换券</span>
+                        <span class="layui-btn layui-btn-small DeductPoint" data-id="{{= it[item].CustomerID }}">手工扣减积分</span>
+                    </td>
+                </tr>
+                {{ } }}
+            </script>
+            <!-- 近七天生日表格 -->
+            <script class="birthday-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                <tr>
+                    <td>{{= it[item].CustomerID }}</td>
+                    <td>{{= it[item].CustomerName }}</td>
+                    <td>{{= it[item].Gender == 1 ? "男" : "女" }}</td>
+                    <td>{{= it[item].Age }}</td>
+                    <td><img src="{{= it[item].MemberCategoryImage }}" /></td>
+                    <td><img src="{{= it[item].ShareCategoryImage }}" /></td>
+                    <td>{{= it[item].ManagerUserName }}</td>
+                    <td>{{= it[item].Birthday }}</td>
+                    <td>{{= it[item].Mobile }}</td>
+                    <td>
+                        <span class="layui-btn layui-btn-small PointToCoupon" data-id="{{= it[item].CustomerID }}">积分兑换券</span>
+                        <span class="layui-btn layui-btn-small DeductPoint" data-id="{{= it[item].CustomerID }}">手工扣减积分</span>
+                    </td>
+                </tr>
+                {{ } }}
+            </script>
+            <!-- 弹窗模版 -->
+            <script class="memberDesk-info-tmp" type="text/x-dot-template">
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">客户编号</label>
+                    <div class="layui-input-inline CustomerID">
+                        {{= it.CustomerID }}
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">客户姓名</label>
+                    <div class="layui-input-inline">
+                        {{= it.CustomerName }}
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">现有积分</label>
+                    <div class="layui-input-inline">
+                        {{= it.Point }}
+                    </div>
+                </div>
+            </script>
+            <!-- 劵类型表格 -->
+            <script class="coupon-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                <tr couponId="{{= it[item].ID }}">
+                    <td><input type="checkbox" value="{{= it[item].ID }}" title="选择" data-name="{{= it[item].Name }}" /></td>
+                    <td>{{= it[item].Name }}</td>
+                    <td>{{= it[item].Status == 1?"使用":"停用" }}</td>
+                    <td>{{= it[item].Remark }}</td>
+                </tr>
+                {{ } }}
+            </script>
+        </div>
+    </div>
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/lay_component/js/hcommon.js"></script>
+    <script src="~/Scripts/FlyDog.Common.js"></script>
+    <script src="~/doT-master/doT-master/doT.min.js"></script>
+    <script src="~/lay_component/plugins/layui/layui.js"></script>
+    <script src="~/lay_component/sampleJs/MemberDesk.js"></script>
+</body>
+</html>

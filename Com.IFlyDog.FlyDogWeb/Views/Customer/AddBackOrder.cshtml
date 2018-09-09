@@ -1,0 +1,63 @@
+﻿<div class="site-text site-block backorder hide">
+    <form class="layui-form" action="">
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-block">
+                <blockquote class="layui-elem-quote">
+                    <p>共退项目数量:<span name="allNum">0</span></p>
+                    <p>总金额:<span name="allAmount">0</span><span>元</span></p>
+                </blockquote>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-block backorder-table">
+                
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">扣减积分:</label>
+            <div class="layui-input-block">
+                <input name="Point" type="number" placeholder="请输入扣减积分" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">备注描述:</label>
+            <div class="layui-input-block">
+                <textarea name="Remark" placeholder="请输入备注描述" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="clearfix m-20">
+            <span class="layui-btn fr add-submit">立即提交</span>
+            <span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+        </div>
+    </form>
+    <script class="backorder-tmp" type="text/x-dot-template">
+        <table class="site-table table-hover">
+            <thead>
+                <tr>
+                    <th>项目</th>
+                    <th>数量</th>
+                    <th>金额</th>
+                    <th>剩余数量</th>
+                    <th>退数量</th>
+                    <th>退金额</th>
+                </tr>
+            </thead>
+            <tbody calss="backorder-tbody">
+                {{ for(var item in it){ }}
+                <tr data-id="{{= it[item].ChargeID }}" data-detailid="{{= it[item].DetailID }}">
+                    <td>{{= it[item].ChargeName }}</td>
+                    <td>{{= it[item].Num }}</td>
+                    <td>{{= it[item].FinalPrice }}</td>
+                    <td>{{= it[item].RestNum }}</td>
+                    <td><input name="tNum" type="number" class="layui-input" min="0" value="0" style="width: 47px;" /></td>
+                    <td><input name="tAmount" type="number" class="layui-input" min="0" value="0"  /></td>
+                </tr>
+                {{ } }}
+            </tbody>
+        </table>
+    </script>
+</div>
+

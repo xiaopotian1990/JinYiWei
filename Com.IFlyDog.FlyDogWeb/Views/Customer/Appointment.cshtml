@@ -1,0 +1,60 @@
+﻿@using Com.IFlyDog.CommonDTO
+@using Com.IFlyDog.FlyDogWeb.Helper
+
+<div class="appointment hide">
+    <div class="layui-field-box ">
+        <style>
+            .timePluginBegin, .timePluginEnd {position: relative;float: left;width: 133px;height: 40px;}
+            .timer {width: 131px;}
+            .timer .hour, .timer .minute {width: 54px;}
+            .timer .colon {margin-left: 54px;}
+            .pad-9 {float: left;display: inline-block;padding: 9px;}
+        </style>
+        <div class="site-text site-block">
+            <form class="layui-form appointment-form"></form>
+        </div>
+        <div class="clearfix m-20">
+            <span class="layui-btn Appointment add-submit fr">立即提交</span>
+            <span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+        </div>
+    </div>
+    <div class="dot-tmp hide">
+
+        <script class="appointment-tmp" type="text/x-dot-template">
+            <div class="layui-form-item">
+                <label class="layui-form-label">预约医院</label>
+                <div class="layui-input-block">
+                    {{ if(!it.HospitalName){ }}
+                    @Html.SelectCategoryByHospital(SelectType.Hospital, "appointmentHospital", "appointmentHospital")
+                    {{ }else{ }}
+                    <input type="hidden" name="appointmentHospital" class="appointmentHospital" value="{{= it.HospitalID }}" />
+                    <span class="pad-9">{{= it.HospitalName }}</span>
+                    {{ } }}
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">预约日期</label>
+                <div class="layui-input-block">
+                    <input class="layui-input" name="AppointmentDate" placeholder="请输入预约日期" value="{{= it.AppointmentDate }}" onclick="layui.laydate({elem: this, festival: true})">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">预约时间</label>
+                <div class="timePluginBegin">
+                    <input type="hidden" value="{{= it.AppointmentStartTime || "08:30" }}" name="AppointmentStartTime" />
+                </div>
+                <label class="pad-9">至</label>
+                <div class="timePluginEnd">
+                    <input type="hidden" value="{{= it.AppointmentEndTime || "08:30" }}" name="AppointmentEndTime" />
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">描述</label>
+                <div class="layui-input-block">
+                    <textarea name="Content" placeholder="请输入描述备注" class="layui-textarea">{{= it.Content }}</textarea>
+                </div>
+            </div>
+        </script>
+
+    </div>
+</div>

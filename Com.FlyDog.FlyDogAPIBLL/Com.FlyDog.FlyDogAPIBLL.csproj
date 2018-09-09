@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{98D7D5AA-D91A-4C1E-8D9E-0A7FF1E32E4D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Com.FlyDog.FlyDogAPIBLL</RootNamespace>
+    <AssemblyName>Com.FlyDog.FlyDogAPIBLL</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Com.JinYiWei.Cache">
+      <HintPath>..\PackagesDlls\Com.JinYiWei.Common\Com.JinYiWei.Cache.dll</HintPath>
+    </Reference>
+    <Reference Include="Com.JinYiWei.Common">
+      <HintPath>..\PackagesDlls\Com.JinYiWei.Common\Com.JinYiWei.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Com.JinYiWei.Log4Net">
+      <HintPath>..\PackagesDlls\Com.JinYiWei.Common\Com.JinYiWei.Log4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Com.JinYiWei.MongoDB">
+      <HintPath>..\PackagesDlls\Com.JinYiWei.Common\Com.JinYiWei.MongoDB.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper">
+      <HintPath>..\PackagesDlls\Dapper\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Senparc.Weixin">
+      <HintPath>..\PackagesDlls\WeChat\Senparc.Weixin.dll</HintPath>
+    </Reference>
+    <Reference Include="Senparc.Weixin.MP">
+      <HintPath>..\PackagesDlls\WeChat\Senparc.Weixin.MP.dll</HintPath>
+    </Reference>
+    <Reference Include="StackExchange.Redis, Version=1.1.608.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PackagesDlls\Redis\StackExchange.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AllocateService.cs" />
+    <Compile Include="AppointmentService.cs" />
+    <Compile Include="AuditApplyService.cs" />
+    <Compile Include="AuditRuleService.cs" />
+    <Compile Include="AuditWorkbenchService.cs" />
+    <Compile Include="BackOrderService.cs" />
+    <Compile Include="BaseService.cs" />
+    <Compile Include="BedService.cs" />
+    <Compile Include="BillService.cs" />
+    <Compile Include="CallbackCategoryService.cs" />
+    <Compile Include="CallbackGroupService.cs" />
+    <Compile Include="CallbackService.cs" />
+    <Compile Include="CaseTemplateService.cs" />
+    <Compile Include="ComplainService.cs" />
+    <Compile Include="DeptDeskService.cs" />
+    <Compile Include="DeptSendService.cs" />
+    <Compile Include="NewCashierService.cs" />
+    <Compile Include="CashierService废弃.cs" />
+    <Compile Include="ChannelGroupService.cs" />
+    <Compile Include="ChargeCategoryService.cs" />
+    <Compile Include="ChargeDiscountService.cs" />
+    <Compile Include="ChargeService.cs" />
+    <Compile Include="ChargeSetService.cs" />
+    <Compile Include="CheckService.cs" />
+    <Compile Include="ClubService.cs" />
+    <Compile Include="ConsultService.cs" />
+    <Compile Include="CouponActivityDetailService.cs" />
+    <Compile Include="CouponActivityService.cs" />
+    <Compile Include="CouponCategoryService.cs" />
+    <Compile Include="CouponService.cs" />
+    <Compile Include="CustomerGroupService.cs" />
+    <Compile Include="CustomerMedicalRecordService.cs" />
+    <Compile Include="CustomerProfileService.cs" />
+    <Compile Include="CustomerService.cs" />
+    <Compile Include="DepositChargeService.cs" />
+    <Compile Include="DepositRebateOrderService.cs" />
+    <Compile Include="DepositService.cs" />
+    <Compile Include="FailtureService.cs" />
+    <Compile Include="FrontDeskService.cs" />
+    <Compile Include="HospitalPrintService.cs" />
+    <Compile Include="InpatientService.cs" />
+    <Compile Include="ItemGroupService.cs" />
+    <Compile Include="KCAutoNumber.cs" />
+    <Compile Include="MemberDeskService.cs" />
+    <Compile Include="OperationLogService.cs" />
+    <Compile Include="OptionService.cs" />
+    <Compile Include="OrderService.cs" />
+    <Compile Include="OwnerShipOrderService.cs" />
+    <Compile Include="OwnerShipService.cs" />
+    <Compile Include="PhotoService.cs" />
+    <Compile Include="PointService.cs" />
+    <Compile Include="PositionService.cs" />
+    <Compile Include="PromoterCommissionService.cs" />
+    <Compile Include="ProvinceService.cs" />
+    <Compile Include="ReceptionService.cs" />
+    <Compile Include="RelationService.cs" />
+    <Compile Include="ReportService.cs" />
+    <Compile Include="RoleService.cs" />
+    <Compile Include="HospitalService.cs" />
+    <Compile Include="InvoiceService.cs" />
+    <Compile Include="MemberCategoryService.cs" />
+    <Compile Include="EquityService.cs" />
+    <Compile Include="SaleBackService.cs" />
+    <Compile Include="SettlementService.cs" />
+    <Compile Include="ShareCategoryService.cs" />
+    <Compile Include="ShiftService.cs" />
+    <Compile Include="SmartItemService.cs" />
+    <Compile Include="SmartProductService.cs" />
+    <Compile Include="SmartPurchaseService.cs" />
+    <Compile Include="SmartReturnService.cs" />
+    <Compile Include="SmartStockService.cs" />
+    <Compile Include="SmartUserService.cs" />
+    <Compile Include="SmartWarehouseService.cs" />
+    <Compile Include="SSMLogService.cs" />
+    <Compile Include="StoreManagerService.cs" />
+    <Compile Include="StoreService.cs" />
+    <Compile Include="TagGroupService.cs" />
+    <Compile Include="TagService.cs" />
+    <Compile Include="CardCategoryService.cs" />
+    <Compile Include="ComplainCategoryService.cs" />
+    <Compile Include="DeptService.cs" />
+    <Compile Include="FailtureCategoryService.cs" />
+    <Compile Include="KnowledgeService.cs" />
+    <Compile Include="KnowledgeCategoryService.cs" />
+    <Compile Include="SmartProductCategoryService.cs" />
+    <Compile Include="SmartShiftCategoryService.cs" />
+    <Compile Include="SmartSupplierService.cs" />
+    <Compile Include="SmartToolService.cs" />
+    <Compile Include="SmartUnitService.cs" />
+    <Compile Include="SymptomService.cs" />
+    <Compile Include="LoginService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ChannelService.cs" />
+    <Compile Include="SurgeryService.cs" />
+    <Compile Include="TreatService.cs" />
+    <Compile Include="UserDiscountService.cs" />
+    <Compile Include="UserTriggerService.cs" />
+    <Compile Include="UseService.cs" />
+    <Compile Include="WXOptionService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Com.FlyDog.IFlyDogAPIBLL\Com.FlyDog.IFlyDogAPIBLL.csproj">
+      <Project>{939b16b1-f767-4823-9031-1fad07d7b6d2}</Project>
+      <Name>Com.FlyDog.IFlyDogAPIBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.IFlyDog.APIDTO\Com.IFlyDog.APIDTO.csproj">
+      <Project>{f707f110-1d34-4414-931b-1c0f72a61b6e}</Project>
+      <Name>Com.IFlyDog.APIDTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.IFlyDog.CommonDTO\Com.IFlyDog.CommonDTO.csproj">
+      <Project>{83090a4d-ea80-4e89-9023-272ce55d2c14}</Project>
+      <Name>Com.IFlyDog.CommonDTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.IFlyDog.Common\Com.IFlyDog.Common.csproj">
+      <Project>{1caa2cdb-136f-41b6-ba12-6eaff8d7aa06}</Project>
+      <Name>Com.IFlyDog.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

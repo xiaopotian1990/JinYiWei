@@ -1,0 +1,707 @@
+﻿@using Com.IFlyDog.CommonDTO
+@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>账户管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+    <style>
+        span {
+            margin-left: 10px;
+        }
+
+        .pay-way {
+            margin-left: auto;
+            width: 40%;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-main">
+        <!--tab导航-->
+        <fieldset class="layui-elem-field ">
+            <legend>账户管理</legend>
+            <div class="layui-field-box">
+                <div class="layui-form clearfix">
+                    <div class="fl">
+                        <label class="layui-form-label">客户编号:</label>
+                        <div class="layui-input-inline">
+                            <input class="layui-input" name="accCustId" placeholder="请输入客户编号">
+                        </div>
+                    </div>
+                    <span class="layui-btn search-btn">查询</span>
+                    <span class="layui-btn layui-btn-primary reset-btn">重置</span>
+                </div>
+                <table class="site-table table-hover ">
+                    <thead>
+                        <tr>
+                            <th>总券额</th>
+                            <th>佣金</th>
+                            <th>总积分</th>
+                            <th>总余额</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tb-money"></tbody>
+                </table>
+                <div class="acc-info">
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">预收款</h2>
+                            <div class="layui-colla-content">
+                                <table class="site-table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>购买日期</th>
+                                            <th>预收款类型</th>
+                                            <th>购买医院</th>
+                                            <th>获得方式</th>
+                                            <th>总金额</th>
+                                            <th>剩余金额</th>
+                                            <th>提交人</th>
+                                            <th>备注</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tb-money-deposit"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">券变动</h2>
+                            <div class="layui-colla-content">
+                                <table class="site-table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>购买日期</th>
+                                            <th>券类型</th>
+                                            <th>获得方式</th>
+                                            <th>金额</th>
+                                            <th>提交人</th>
+                                            <th>备注</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tb-money-coupchan"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">有效代金券</h2>
+                            <div class="layui-colla-content">
+                                <table class="site-table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>购买日期</th>
+                                            <th>券类型</th>
+                                            <th>购买医院</th>
+                                            <th>获得方式</th>
+                                            <th>总金额</th>
+                                            <th>剩余金额</th>
+                                            <th>提交人</th>
+                                            <th>备注</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tb-money-coupon"></tbody>
+                                </table>
+                                <div class="tb-money-couponnull"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">失效代金券</h2>
+                            <div class="layui-colla-content">
+                                <table class="site-table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>购买日期</th>
+                                            <th>预收款类型</th>
+                                            <th>购买医院</th>
+                                            <th>获得方式</th>
+                                            <th>总金额</th>
+                                            <th>剩余金额</th>
+                                            <th>提交人</th>
+                                            <th>券状态</th>
+                                            <th>失效日期</th>
+                                            <th>备注</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tb-money-overcoupon"></tbody>
+                                </table>
+                                <div class="tb-money-overconull"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">积分变动</h2>
+                            <div class="layui-colla-content">
+                                <table class="site-table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>日期</th>
+                                            <th>类型</th>
+                                            <th>操作医院</th>
+                                            <th>数量</th>
+                                            <th>提交人</th>
+                                            <th>备注</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tb-money-poichan"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">预收款变动</h2>
+                            <div class="layui-colla-content">
+                                <table class="site-table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>购买日期</th>
+                                            <th>预收款类型</th>
+                                            <th>获得方式</th>
+                                            <th>金额</th>
+                                            <th>提交人</th>
+                                            <th>备注</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tb-money-depochan"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">佣金记录</h2>
+                            <div class="layui-colla-content">
+                                <table class="site-table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>创建时间</th>
+                                            <th>获得方式</th>
+                                            <th>金额</th>
+                                            <th>提交人</th>
+                                            <th>备注</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tb-money-commichange"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="page-pop layui-form">
+        <div class="commissionOut-pop hide" >
+            <fieldset class="layui-elem-field layui-field-title">
+                <legend>佣金提现</legend>
+            </fieldset>
+            <div class="memberDesk-info"></div>
+            <form class="commissionOut-form clearfix">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">提现金额:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="Amount" placeholder="请输入提现金额" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">提现描述:</label>
+                    <div class="layui-input-block">
+                        <textarea name="Remark" placeholder="请输入描内容" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+            </form>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <span class="layui-btn commissionOut submit-btn">立即提交</span><span class="layui-btn close-layer layui-btn-danger">取消关闭</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="site-text site-block memberDesk-pop hide ">
+            <fieldset class="layui-elem-field layui-field-title">
+                <legend>积分操作</legend>
+            </fieldset>
+            <div class="memberDesk-info"></div>
+            <form class="memberDesk-form clearfix">
+                <!-- 积分兑换券 -->
+                <div class="PointToCoupon-group hide">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">兑换积分:</label>
+                        <div class="layui-input-block">
+                            <input type="number" min="1" name="ToPoint" placeholder="请输入兑换积分数额" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">兑券类型:</label>
+                        <div class="layui-input-block pay-way fl">
+                            <input type="hidden" name="TocouponCategoryId" />
+                            <input type="text" name="ToCouponCategoryName" readonly="readonly" placeholder="选择券类型" class="layui-input pointer">
+                        </div>
+                        <div class="layui-input-block pay-way fl">
+                            <input type="number" min="1" name="ToCoupon" placeholder="券额" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <!-- 手动扣减积分 -->
+                <div class="DeductPoint-group hide">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">扣减积分:</label>
+                        <div class="layui-input-block">
+                            <input type="number" min="1" name="DeductionCoupon" placeholder="请输入积分数额" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">扣减描述:</label>
+                        <div class="layui-input-block">
+                            <textarea name="DeductionRemark" placeholder="请输入描内容" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <!-- 手动增加积分 -->
+                <div class="AddPoint-group hide">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">赠送积分:</label>
+                        <div class="layui-input-block">
+                            <input type="number" min="1" name="AddPoint" placeholder="请输入积分数额" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">赠送描述:</label>
+                        <div class="layui-input-block">
+                            <textarea name="AddPointRemark" placeholder="请输入描内容" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <span class="layui-btn btn-submit">立即提交</span><span class="layui-btn close-layer layui-btn-danger">取消关闭</span>
+                </div>
+            </div>
+        </div>
+        <!-- 劵类型弹窗 -->
+        <div class="coupon-pop hide">
+            <form>
+                <div class="m-20">
+                    <table class="site-table table-hover">
+                        <thead>
+                            <tr>
+                                <th>选择</th>
+                                <th>名称</th>
+                                <th>状态</th>
+                                <th>备注</th>
+                            </tr>
+                        </thead>
+                        <tbody class="coupon-Category-table"></tbody>
+                    </table>
+                </div>
+                <div class="m-20 clearfix">
+                    <span class="layui-btn coupon submit-btn fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="site-text site-block SendCoupon-group hide">
+        <form class="layui-form" style="margin-right: auto;">
+            <fieldset class="layui-elem-field layui-field-title">
+                <legend>赠送券</legend>
+            </fieldset>
+            <div class="layui-form-item">
+                <label class="layui-form-label">客户编号:</label>
+                <div class="layui-input-block">
+                    <input type="text" class="layui-input layui-disabled SendCoupCuID" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">赠送券数:</label>
+                <div class="layui-input-block pay-way fl">
+                    <input type="hidden" name="CouponCategoryId" />
+                    <input type="text" name="CouponCategoryName" readonly="readonly" placeholder="选择券类型" class="layui-input pointer">
+                </div>
+                <div class="layui-input-block pay-way fl">
+                    <input type="number" min="1" name="SendCoupon" placeholder="券额" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">赠送描述:</label>
+                <div class="layui-input-block">
+                    <textarea name="SendCouponRemark" placeholder="请输入描内容" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <span class="layui-btn SendCoupon-btn">立即提交</span><span class="layui-btn close-layer layui-btn-danger">取消关闭</span>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="site-text site-block DeductCoupon-group hide">
+        <form class="layui-form" style="margin-right: auto;">
+            <fieldset class="layui-elem-field layui-field-title">
+                <legend>扣减券</legend>
+            </fieldset>
+            <div class="layui-form-item">
+                <label class="layui-form-label">客户编号:</label>
+                <div class="layui-input-block">
+                    <input type="text" class="layui-input layui-disabled DeductCouponID" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">剩余券额:</label>
+                <div class="layui-input-block" style="max-height:200px;overflow:auto;">
+                    <table class="site-table table-hover" style="height:150px;">
+                        <thead>
+                            <tr>
+                                <th>券编号</th>
+                                <th>券类型</th>
+                                <th>券总金额</th>
+                                <th>券剩金额</th>
+                            </tr>
+                        </thead>
+                        <tbody class="tb-NoDoneCoupon"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">扣券编号:</label>
+                <div class="layui-input-block">
+                    <input type="number" min="1" name="DeductCouponID" placeholder="请输入编号" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">扣减券数:</label>
+                <div class="layui-input-block">
+                    <input type="number" min="1" name="DeductCoupon" placeholder="请输入券数" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">扣减描述:</label>
+                <div class="layui-input-block">
+                    <textarea name="DeductCouponRemark" placeholder="请输入描内容" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <span class="layui-btn DeductCoupon-btn">立即提交</span><span class="layui-btn close-layer layui-btn-danger">取消关闭</span>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="doT-temp">
+        <!--查询剩余券额-->
+        <script class="NoDoneCoupon-tmp" type="text/x-dot-template">
+            {{ for(var item in it){ }}
+            <tr>
+                <td>{{= it[item].CouponID }}</td>
+                <td>{{= it[item].CouponCategoryName }}</td>
+                <td>{{= it[item].Amount }}</td>
+                <td>{{= it[item].Rest }}</td>
+            </tr>
+            {{ } }}
+        </script>
+        <!-- 积分回填公用数据-弹窗模版 -->
+        <script class="memberDesk-info-tmp" type="text/x-dot-template">
+            <div class="layui-form-item">
+                <label class="layui-form-label">客户编号:</label>
+                <div class="layui-input-block">
+                    <input type="text" class="layui-input layui-disabled CustomerID" readonly="readonly" value="{{= it.CustomerID }}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">客户姓名:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="" class="layui-input layui-disabled" readonly="readonly" value="{{= it.CustomerName }}">
+                </div>
+            </div>
+            <div class="layui-form-item NowCoupon">
+                <label class="layui-form-label">现有积分:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="" class="layui-input layui-disabled" readonly="readonly" value="{{= it.Point }}">
+                </div>
+            </div>
+        </script>
+        <!-- 劵类型表格 -->
+        <script class="coupon-Category-tmp" type="text/x-dot-template">
+            {{ for(var item in it){ }}
+            <tr couponId="{{= it[item].ID }}">
+                <td><input type="checkbox" value="{{= it[item].ID }}" lay-skin="primary" lay-filter="coupon" data-name="{{= it[item].Name }}" title="选择" name="checkboxName" /></td>
+                <td>{{= it[item].Name }}</td>
+                <td>{{= it[item].Status == 1?"使用":"停用" }}</td>
+                <td>{{= it[item].Remark }}</td>
+            </tr>
+            {{ } }}
+        </script>
+        <!--账户查询-->
+        <script type="text/x-dot-template" class="money-temp">
+
+            <tr>
+                <td>{{= it.Coupon}}</td>
+                <td>{{= it.Commission}}</td>
+                <td>{{= it.Point}}</td>
+                <td>{{= it.Deposit }}</td>
+                <td customerId="">
+
+                    <span class="layui-btn layui-btn-mini add-point-btn">赠送积分</span>
+                    <span class="layui-btn layui-btn-mini sub-point">扣减积分</span>
+                    <span class="layui-btn layui-btn-mini point-to-coupon">积分兑换券</span>
+                    <span class="layui-btn layui-btn-mini add-coupon-btn">赠送券</span>
+                    <span class="layui-btn layui-btn-mini sub-coupon">扣减券</span>
+                    <span class="layui-btn layui-btn-mini commissionOut">佣金提现</span>
+                </td>
+            </tr>
+
+        </script>
+        <!--预收款-->
+        <script type="text/x-dot-template" class="money-deposit-temp">
+            {{ for(var item in it){ }}
+            <tr>
+                <td>{{= it[item].CreateTime == null ? "":it[item].CreateTime.slice(0,10) }}</td>
+                <td>{{= it[item].DepositChargeName}}</td>
+                <td>{{= it[item].HospitalName}}</td>
+                <td>
+                    {{ if (it[item].Access ==1){ }}
+                    订单购买
+                    {{ } }}
+                    {{ if (it[item].Access ==2){ }}
+                    退项目获得
+                    {{ } }}
+                    {{ if (it[item].Access ==3){ }}
+                    退款获得
+                    {{ } }}
+                    {{ if (it[item].Access ==4){ }}
+                    转让
+                    {{ } }}
+                </td>
+                <td>{{= it[item].Amount}}</td>
+                <td>{{= it[item].Rest}}</td>
+                <td>{{= it[item].CreateUserName}}</td>
+                <td>{{= it[item].Remark}}</td>
+            </tr>
+            {{ } }}
+        </script>
+        <!--有效-->
+        <script type="text/x-dot-template" class="money-coupon-temp">
+            {{ for(var item in it){ }}
+            <tr>
+                <td>{{= it[item].CreateTime == null ? "":it[item].CreateTime.slice(0,10) }}</td>
+                <td>{{= it[item].CouponCategoryName}}</td>
+                <td>{{= it[item].HospitalName}}</td>
+                <td>
+                    {{ if (it[item].Access ==1){ }}
+                    预收款赠送
+                    {{ } }}
+                    {{ if (it[item].Access ==2){ }}
+                    手工赠送
+                    {{ } }}
+                    {{ if (it[item].Access ==3){ }}
+                    积分兑换
+                    {{ } }}
+                    {{ if (it[item].Access ==4){ }}
+                    退款获得
+                    {{ } }}
+                    {{ if (it[item].Access ==5){ }}
+                    激活码兑换
+                    {{ } }}
+                </td>
+                <td>{{= it[item].Amount}}</td>
+                <td>{{= it[item].Rest}}</td>
+                <td>{{= it[item].CreateUserName}}</td>
+                <td>{{= it[item].Remark}}</td>
+            </tr>
+            {{ } }}
+        </script>
+        <!--失效-->
+        <script type="text/x-dot-template" class="money-overcoupon-temp">
+
+            {{ for(var item in it){ }}
+            <tr>
+                <td>{{= it[item].CreateTime == null ? "":it[item].CreateTime.slice(0,10) }}</td>
+                <td>{{= it[item].CouponCategoryName}}</td>
+                <td>{{= it[item].HospitalName}}</td>
+                <td>
+                    {{ if (it[item].Access ==1){ }}
+                    预收款赠送
+                    {{ } }}
+                    {{ if (it[item].Access ==2){ }}
+                    手工赠送
+                    {{ } }}
+                    {{ if (it[item].Access ==3){ }}
+                    积分兑换
+                    {{ } }}
+                    {{ if (it[item].Access ==4){ }}
+                    退款获得
+                    {{ } }}
+                    {{ if (it[item].Access ==5){ }}
+                    激活码兑换
+                    {{ } }}
+                </td>
+                <td>{{= it[item].Amount}}</td>
+                <td>{{= it[item].Rest}}</td>
+                <td>{{= it[item].CreateUserName}}</td>
+                <td>
+                    {{ if (it[item].Status ==1){ }}
+                    有效
+                    {{ } }}
+                    {{ if (it[item].Status ==2){ }}
+                    失效
+                    {{ } }}
+                </td>
+                <td>{{= it[item].OverDueTime  == null ? "":it[item].OverDueTime.slice(0,10)}}</td>
+                <td>{{= it[item].Remark}}</td>
+            </tr>
+            {{ } }}
+
+        </script>
+        <!--券变动-->
+        <script type="text/x-dot-template" class="money-coupchan-temp">
+            {{ for(var item in it){ }}
+            <tr>
+                <td>{{= it[item].CreateTime == null ? "":it[item].CreateTime.slice(0,10) }}</td>
+                <td>{{= it[item].CouponCategoryName}}</td>
+                <td>
+                    {{ if (it[item].Access ==1){ }}
+                    预收款赠送
+                    {{ } }}
+                    {{ if (it[item].Access ==2){ }}
+                    手工赠送
+                    {{ } }}
+                    {{ if (it[item].Access ==3){ }}
+                    积分兑换
+                    {{ } }}
+                    {{ if (it[item].Access ==4){ }}
+                    退款获得
+                    {{ } }}
+                    {{ if (it[item].Access ==5){ }}
+                    激活码兑换
+                    {{ } }}
+                    {{ if (it[item].Access ==6){ }}
+                    消费扣减
+                    {{ } }}
+                    {{ if (it[item].Access ==7){ }}
+                    手工扣减
+                    {{ } }}
+                    {{ if (it[item].Access ==8){ }}
+                    退款扣减
+                    {{ } }}
+                </td>
+                <td>{{= it[item].Amount}}</td>
+                <td>{{= it[item].CreateUserName}}</td>
+                <td>{{= it[item].Remark}}</td>
+            </tr>
+            {{ } }}
+        </script>
+        <!--预收款变动-->
+        <script type="text/x-dot-template" class="money-depochan-temp">
+            {{ for(var item in it){ }}
+            <tr>
+                <td>{{= it[item].CreateTime == null ? "":it[item].CreateTime.slice(0,10) }}</td>
+                <td>{{= it[item].DepositChargeName}}</td>
+                <td>
+                    {{ if (it[item].Access ==1){ }}
+                    订单购买
+                    {{ } }}
+                    {{ if (it[item].Access ==2){ }}
+                    退项目获得
+                    {{ } }}
+                    {{ if (it[item].Access ==3){ }}
+                    退款获得
+                    {{ } }}
+                    {{ if (it[item].Access ==4){ }}
+                    转让获得
+                    {{ } }}
+                    {{ if (it[item].Access ==5){ }}
+                    消费使用
+                    {{ } }}
+                </td>
+                <td>{{= it[item].Amount}}</td>
+                <td>{{= it[item].CreateUserName}}</td>
+                <td>{{= it[item].Remark}}</td>
+            </tr>
+            {{ } }}
+        </script>
+        <!--积分变动-->
+        <script type="text/x-dot-template" class="money-poinchan-temp">
+            {{ for(var item in it){ }}
+            <tr>
+                <td>{{= it[item].CreateTime == null ? "":it[item].CreateTime.slice(0,10) }}</td>
+                <td>
+                    {{ if (it[item].Type ==11){ }}
+                    手工赠送
+                    {{ } }}
+                    {{ if (it[item].Type ==12){ }}
+                    消费赠送
+                    {{ } }}
+                    {{ if (it[item].Type ==21){ }}
+                    手工扣减
+                    {{ } }}
+                    {{ if (it[item].Type ==22){ }}
+                    兑换券
+                    {{ } }}
+                    {{ if (it[item].Type ==23){ }}
+                    兑换产品
+                    {{ } }}
+                    {{ if (it[item].Type ==24){ }}
+                    退项目扣减
+                    {{ } }}
+                    {{ if (it[item].Type ==25){ }}
+                    退款扣减
+                    {{ } }}
+                </td>
+                <td>{{= it[item].HospitalName}}</td>
+                <td>{{= it[item].Amount}}</td>
+                <td>{{= it[item].CreateUserName}}</td>
+                <td>{{= it[item].Remark}}</td>
+            </tr>
+            {{ } }}
+        </script>
+        <!--佣金记录-->
+        <script type="text/x-dot-template" class="money-commichan-temp">
+            {{ for(var item in it){ }}
+            <tr>
+                <td>{{= it[item].CreateTime == null ? "":it[item].CreateTime.slice(0,10) }}</td>
+                <td>
+                    {{ if (it[item].Type ==1){ }}
+                    消费
+                    {{ } }}
+                    {{ if (it[item].Type ==2){ }}
+                    提现
+                    {{ } }}
+                    {{ if (it[item].Type ==3){ }}
+                    转让
+                    {{ } }}
+                </td>
+                <td>{{= it[item].Amount}}</td>
+                <td>{{= it[item].CreateUserName}}</td>
+                <td>{{= it[item].Remark}}</td>
+            </tr>
+            {{ } }}
+        </script>
+    </div>
+
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/lay_component/js/hcommon.js"></script>
+    <script src="~/Scripts/FlyDog.Common.js"></script>
+    <script src="~/doT-master/doT-master/doT.min.js"></script>
+    <script src="~/lay_component/plugins/layui/layui.js"></script>
+    <script src="~/lay_component/sampleJs/AccountManage.js"></script>
+</body>
+</html>

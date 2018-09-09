@@ -1,0 +1,99 @@
+﻿@using Com.IFlyDog.CommonDTO
+@using Com.IFlyDog.FlyDogWeb.Helper
+
+<div class="callBackPlan hide">
+    <div class="layui-field-box ">
+        <style>
+            .pad-9 {float: left;display: inline-block;padding: 9px;}
+        </style>
+        <div class="site-text site-block">
+            <form class="layui-form callBackPlan-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">起始日期</label>
+                    <div class="layui-input-block">
+                        <input name="TaskTime" placeholder="请输入回访日期" class="layui-input" value="" onclick="layui.laydate({elem:this})" />
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">回访计划</label>
+                    <div class="layui-input-block">
+                        <input type="hidden" name="SetID" />
+                        <table class="site-table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>天数</th>
+                                    <th>回访类型</th>
+                                    <th>说明</th>
+                                </tr>
+                            </thead>
+                            <tbody class="callBackPlan-detail-table"></tbody>
+                        </table>
+                    </div>
+                    <div class="layui-input-block">
+                        <span class="layui-btn layui-btn-small add-plan">选择计划</span>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">回访人员</label>
+                    <div class="layui-input-block">
+                        <input type="hidden" name="UserID" value="" />
+                        <input name="UserName" class="layui-input" value="" placeholder="请选择用户" />
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="clearfix m-20">
+            <span class="layui-btn CallBackPlan add-submit fr">立即提交</span>
+            <span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+        </div>
+    </div>
+    <div class="page-pops">
+        <div class="callBackPlans-pop hide">
+            <div class="m-20">
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>描述</th>
+                            <th>选择</th>
+                        </tr>
+                    </thead>
+                    <tbody class="callBackPlan-table"></tbody>
+                </table>
+            </div>
+            <div class="m-20">
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <th>天数</th>
+                            <th>回访类型</th>
+                            <th>说明</th>
+                        </tr>
+                    </thead>
+                    <tbody class="callBackPlan-detail-table"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="dot-tmp hide">
+        <script class="callBackPlan-detail-tmp" type="text/x-dot-template">
+            {{~it:item }}
+            <tr data-id="{{= item.SetID }}">
+                <td>{{= item.Days }}</td>
+                <td>{{= item.CallbackCategoryName }}</td>
+                <td>{{= item.Remark }}</td>
+            </tr>
+            {{~}}
+        </script>
+        <script class="callBackPlan-tmp" type="text/x-dot-template">
+            {{~it:item }}
+            <tr data-id="{{= item.SetID }}">
+                <td>{{= item.Name }}</td>
+                <td>{{= item.Remark }}</td>
+                <td><span class="layui-btn layui-btn-mini btn-select">选择</span></td>
+            </tr>
+            {{~}}
+        </script>
+
+    </div>
+</div>

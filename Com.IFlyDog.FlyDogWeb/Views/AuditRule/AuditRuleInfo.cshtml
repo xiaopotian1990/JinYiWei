@@ -1,0 +1,264 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>审核规则管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+    <style>
+        .auditRule-form{float:left;width:45%;}
+        .layui-input-block{margin-left:0;}
+        .level-tables{float:left;width:55%;}
+        .types{display:none;position:absolute;top:45px;border-top:10px solid transparent;width:175px;color:#555;}
+        .types li:first-child{border-top:1px solid #eee;}
+        .types li:last-child{border-bottom:1px solid #eee;}
+        .types li{padding:0 10px;border-left:1px solid #eee;border-right:1px solid #eee;width:155px;height:34px;line-height:34px;cursor:pointer;background:#FFF;}
+        .types li:hover{background:#f6f6f6;}
+    </style>
+</head>
+<body>
+    <div class="admin-main">
+        <blockquote class="layui-elem-quote relative">
+            <a href="javascript:;" class="layui-btn layui-btn-small btn-add">
+                添加
+            </a>
+            <a href="/AuditRule/AuditRuleHospitalInfo" class="layui-btn layui-btn-small">
+                返回
+            </a>
+            <ul class="types">
+                <li data-type="1">折扣</li>
+                <li data-type="2">退项目</li>
+                <li data-type="3">退预收款</li>
+                <li data-type="4">咨询人员变更</li>
+                <li data-type="5">开发人员变更</li>
+            </ul>
+        </blockquote>
+        <fieldset class="layui-elem-field">
+            <legend>审核规则管理</legend>
+            <div class="layui-field-box">
+                <p>折扣</p>
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <th width="25%">级数</th>
+                            <th width="25%">折扣</th>
+                            <th width="25%">备注</th>
+                            <th width="25%">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="auditRule-table" type="1"></tbody>
+                </table>
+                <p>退项目</p>
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <th width="25%">级数</th>
+                            <th width="25%">金额</th>
+                            <th width="25%">备注</th>
+                            <th width="25%">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="auditRule-table" type="2"></tbody>
+                </table>
+                <p>退预收款</p>
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <th width="25%">级数</th>
+                            <th width="25%">金额</th>
+                            <th width="25%">备注</th>
+                            <th width="25%">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="auditRule-table" type="3"></tbody>
+                </table>
+                <p>咨询人员变更</p>
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <th width="25%">级数</th>
+                            <th width="25%">金额</th>
+                            <th width="25%">备注</th>
+                            <th width="25%">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="auditRule-table" type="4"></tbody>
+                </table>
+                <p>开发人员变更</p>
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <th width="25%">级数</th>
+                            <th width="25%">金额</th>
+                            <th width="25%">备注</th>
+                            <th width="25%">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="auditRule-table" type="5"></tbody>
+                </table>
+            </div>
+        </fieldset>
+        <div class="page-pop">
+            <div class="auditRule-info-pop hide">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>审核规则</legend>
+                </fieldset>
+                <form class="layui-form auditRule-form clearfix"></form>
+                <div class="layui-input-inline level-tables">
+                    <div class="level" data-level="1">
+                        <div class="layui-input-inline">
+                            <table class="site-table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>用户账号</th>
+                                        <th>用户姓名</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="user-table"></tbody>
+                            </table>
+                        </div>
+                        <span class="layui-btn add-user">增加</span>
+                    </div>
+                    <div class="level hide" data-level="2">
+                        <div class="layui-input-inline">
+                            <table class="site-table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>用户账号</th>
+                                        <th>用户姓名</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="user-table"></tbody>
+                            </table>
+                        </div>
+                        <span class="layui-btn add-user">增加</span>
+                    </div>
+                    <div class="level hide" data-level="3">
+                        <div class="layui-input-inline">
+                            <table class="site-table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>用户账号</th>
+                                        <th>用户姓名</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="user-table"></tbody>
+                            </table>
+                        </div>
+                        <span class="layui-btn add-user">增加</span>
+                    </div>
+                    <div class="level hide" data-level="4">
+                        <div class="layui-input-inline">
+                            <table class="site-table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>用户账号</th>
+                                        <th>用户姓名</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="user-table"></tbody>
+                            </table>
+                        </div>
+                        <span class="layui-btn add-user">增加</span>
+                    </div>
+                    <div class="level hide" data-level="5">
+                        <div class="layui-input-inline">
+                            <table class="site-table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>用户账号</th>
+                                        <th>用户姓名</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="user-table"></tbody>
+                            </table>
+                        </div>
+                        <span class="layui-btn add-user">增加</span>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="m-20 clearfix">
+                    <span class="layui-btn auditRule btn-submit fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+                </div>
+            </div>
+        </div>
+        <div class="dot-tmp">
+            <!-- 审核规则表格 -->
+            <script class="auditRule-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                {{ var flag = it[item].Type == 1,field = flag ? "Discount" : "Amount"; }}
+                <tr data-id="{{= it[item].ID }}">
+                    <td>{{= it[item].Level }}</td>
+                    <td>{{= it[item][field] }}</td>
+                    <td>{{= it[item].Remark }}</td>
+                    <td>
+                        <span class="layui-btn layui-btn-small btn-edit" data-id="{{= it[item].ID }}">修改</span>
+                        <span class="layui-btn layui-btn-small {{= it[item].Status == 1 && "layui-btn-danger" }} btn-status" data-id="{{= it[item].ID }}" data-status="{{= it[item].Status }}">{{= it[item].Status == 0 ? "使用" : "停用" }}</span>
+                    </td>
+                </tr>
+                {{ } }}
+            </script>
+            <!-- 弹窗模版 -->
+            <script class="auditRule-form-tmp" type="text/x-dot-template">
+                <input type="hidden" name="ID" value="{{= it.ID }}" />
+                <input type="hidden" name="Type" value="{{= it.Type }}" />
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">级数</label>
+                    <div class="layui-input-inline" style="width:163px;">
+                        <select name="Level" value="{{= it.Level }}" lay-filter="level">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10">
+                    {{ var flag = it.Type == 1,field = flag ? "Discount" : "Amount",fieldName = flag ? "折扣" : "金额"; }}
+                    <label class="layui-form-label">{{= fieldName }}</label>
+                    <div class="layui-input-inline">
+                        <input class="layui-input" name="{{= field }}" placeholder="请输入{{= fieldName }}" value="{{= it[field] }}" />
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">描述</label>
+                    <div class="layui-input-inline">
+                        <textarea class="layui-textarea" name="Remark" placeholder="请输入描述">{{= it.Remark }}</textarea>
+                    </div>
+                </div>
+            </script>
+            <!-- 用户表格 -->
+            <script class="user-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                <tr data-userid="{{= it[item].ID }}">
+                    <td>{{= it[item].Account }}</td>
+                    <td>{{= it[item].Name }}</td>
+                    <td>
+                        <span class="layui-btn layui-btn-small btn-remove">删除</span>
+                    </td>
+                </tr>
+                {{ } }}
+            </script>
+        </div>
+    </div>
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/lay_component/js/hcommon.js"></script>
+    <script src="~/Scripts/FlyDog.Common.js"></script>
+    <script src="~/doT-master/doT-master/doT.min.js"></script>
+    <script src="~/lay_component/plugins/layui/layui.js"></script>
+    <script src="~/lay_component/sampleJs/SmartUser.js"></script>
+    <script src="~/lay_component/sampleJs/AuditRule.js"></script>
+</body>
+</html>

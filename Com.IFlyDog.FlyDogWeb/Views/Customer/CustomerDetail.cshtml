@@ -1,0 +1,365 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>客户操作</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet"/>
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all"/>
+    <link href="~/lay_component/css/global.css" rel="stylesheet"/>
+    <style>
+        .img_customer {height: 100px;width: 100px;}
+        .cu-gy > li > .layui-form-label { padding: 5px 18px; }
+        .cu-gy > li {float: right;width: 50%;}
+        .cu-gy > li > div { padding: 4px; }
+        .layui-form-mid {float: initial;padding: 0px;}
+    </style>
+</head>
+<body>
+<div class="admin-main">
+    <div class="site-title">
+        <fieldset>
+            <legend>客户操作</legend>
+            <div class="layui-field-box">
+                <div class="layui-collapse">
+                    <div class="layui-colla-item">
+                        <h2 class="layui-colla-title">操作客户(手术,订单,回访,预约,退款,咨询等..)</h2>
+                        <div class="layui-colla-content">
+                            <blockquote class="layui-elem-quote">
+                                <span class="layui-btn layui-btn-mini"><i class="layui-icon">&#xe61f;</i>添加咨询</span>
+                                <span class="layui-btn layui-btn-mini"><i class="layui-icon">&#xe61f;</i>添加预收款</span>
+                                <span class="layui-btn layui-btn-mini"><i class="layui-icon">&#xe61f;</i>添加订单</span>
+                                <span class="layui-btn layui-btn-mini"><i class="layui-icon">&#xe61f;</i>添加咨询预约</span>
+                                <span class="layui-btn layui-btn-mini"><i class="layui-icon">&#xe61f;</i>添加治疗预约</span>
+                                <span class="layui-btn layui-btn-mini"><i class="layui-icon">&#xe61f;</i>添加手术</span>
+                                <span class="layui-btn layui-btn-mini"><i class="layui-icon">&#xe61f;</i>添加回访</span>
+                                <span class="layui-btn layui-btn-mini"><i class="layui-icon">&#xe61f;</i>添加回访提醒</span>
+                                <span class="layui-btn layui-btn-mini"><i class="layui-icon">&#xe61f;</i>添加回访计划</span>
+                                <span class="layui-btn layui-btn-mini"><i class="layui-icon">&#xe61f;</i>添加退项目</span>
+                                <span class="layui-btn layui-btn-mini"><i class="layui-icon">&#xe61f;</i>添加退预收款</span>
+                                <span class="layui-btn layui-btn-mini"><i class="layui-icon">&#xe61f;</i>添加未成交</span>
+
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-collapse">
+                    <div class="layui-colla-item">
+                        <h2 class="layui-colla-title">操作客户(照片,分组,标签,病历...)</h2>
+                        <div class="layui-colla-content">
+                            <blockquote class="layui-elem-quote">
+                                <span class="layui-btn layui-btn-mini si-add-img"><i class="layui-icon">&#xe61f;</i>添加照片</span>
+                                <span class="layui-btn layui-btn-mini"><i class="layui-icon">&#xe61f;</i>添加分组</span>
+                                <span class="layui-btn layui-btn-mini"><i class="layui-icon">&#xe61f;</i>添加标签</span>
+                                <span class="layui-btn layui-btn-mini"><i class="layui-icon">&#xe61f;</i>添加病历</span>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+<fieldset class="layui-elem-field">
+<legend>客户信息</legend>
+
+<div class="layui-field-box">
+<div class="layui-tab layui-tab-card" style="width: 100%;">
+<ul class="layui-tab-title">
+    <li class="layui-this">顾客概况</li>
+    <li>消费项目</li>
+    <li class="li-custo-getConsult-cli">咨询情况</li>
+    <li>预约情况</li>
+    <li>上门情况</li>
+    <li>未成交情况</li>
+    <li>订单情况</li>
+    <li>照片管理</li>
+    <li>划扣记录</li>
+    <li>回访情况</li>
+    <li>问卷情况</li>
+    <li>病历记录</li>
+    <li>账户情况</li>
+    <li>会员权益</li>
+    <li>负责用户</li>
+    <li>客户间关系</li>
+    <li>投诉反馈</li>
+    <li>耗材成本</li>
+    <li>审核申请</li>
+    <li>店家</li>
+    <li>微信分销</li>
+</ul>
+<div class="layui-tab-content">
+<div class="layui-tab-item layui-show">
+    <!--顾客概况-->
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">客户概要</h2>
+            <div class="layui-colla-content">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <div class="layui-field-box">
+                        <div class="layui-input-inline m-20">
+                            <div class="layui-input-inline">
+                                <img class="img_customer" src="~/lay_component/images/0.jpg" />
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">顾客头像</div>
+                        </div>
+
+                        <div class="layui-input-inline m-20">
+                            <div class="layui-input-inline">
+                                <img class="img_customer" src="~/lay_component/images/0.jpg" />
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">会员等级</div>
+                        </div>
+
+                        <div class="layui-input-inline m-20">
+                            <div class="layui-input-inline">
+                                <img class="img_customer" src="~/lay_component/images/0.jpg" />
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">分享等级</div>
+                        </div>
+                    </div>
+
+                    <ul class="cu-gy">
+                        <li>
+                            <label class="layui-form-label">顾客特征:</label>
+                            <div class="">
+                                <span class="layui-btn layui-btn-mini layui-btn-disabled">暂无</span>
+                            </div>
+                            <label class="layui-form-label">咨询项目:</label>
+                            <div class="">
+                                <span class="layui-btn layui-btn-mini layui-btn-disabled">暂无</span>
+                            </div>
+                        </li>
+                        <li>
+                            <label class="layui-form-label">顾客分组:</label>
+                            <div class="">
+                                <span class="layui-btn layui-btn-mini layui-btn-disabled">暂无</span>
+                            </div>
+                            <label class="layui-form-label">顾客标签:</label>
+                            <div class="">
+                                <span class="layui-btn layui-btn-mini layui-btn-disabled">暂无</span>
+                            </div>
+                        </li>
+                    </ul>
+
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    <!--顾客信息-->
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">客户信息</h2>
+            <div class="layui-colla-content">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <div class="layui-field-box">
+                        <table class="layui-table customer-info">
+                            <tbody>
+                            <tr>
+                                <td>顾客编号:</td>
+                                <td>11</td>
+                                <td>顾客姓名:</td>
+                                <td>张三</td>
+                                <td>顾客性别:</td>
+                                <td>男</td>
+                                <td>渠道:</td>
+                                <td>美容美发</td>
+                                <td>联系方式:</td>
+                                <td>18511445555</td>
+                                <td>备用联系方式:</td>
+                                <td>
+                                    <i class="layui-icon">&#xe642;</i>
+                                </td>
+                                <td>登记人:</td>
+                                <td>【锦医卫北京机构】【总裁办】【测试医生】</td>
+                            </tr>
+                            <tr>
+                                <td>咨询项目:</td>
+                                <td>
+                                    <span>双眼皮</span><span>双眼皮</span><span>双眼皮</span>
+                                </td>
+                                <td>开发人员:</td>
+                                <td>测试医生</td>
+                                <td>咨询人员:</td>
+                                <td>cscscs</td>
+                                <td>推荐店家:</td>
+                                <td>
+                                    <i class="layui-icon">&#xe642;</i>
+                                </td>
+                                <td>推荐人:</td>
+                                <td></td>
+                                <td>地区:</td>
+                                <td>广东省 汕头市</td>
+                                <td>地址:</td>
+                                <td>广东省广东省广东省广东省广东省</td>
+                            </tr>
+                            <tr>
+                                <td>咨询次数:</td>
+                                <td>1</td>
+                                <td>初次咨询:</td>
+                                <td>2017-03-01</td>
+                                <td>最后咨询:</td>
+                                <td>2017-03-01</td>
+                                <td>初诊医院:</td>
+                                <td>北京机构</td>
+                                <td>初诊日期:</td>
+                                <td>2017-03-01</td>
+                                <td>上门次数:</td>
+                                <td>2</td>
+                                <td>最近到诊:</td>
+                                <td>2017-03-01</td>
+                            </tr>
+                            <tr>
+                                <td>年龄:</td>
+                                <td>19</td>
+                                <td>生日:</td>
+                                <td>1997-05-02</td>
+                                <td>绑定微信:</td>
+                                <td></td>
+                                <td>绑定时间:</td>
+                                <td>2017-03-01</td>
+                                <td>档案号:</td>
+                                <td>222</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+    </div>
+    <!--顾客详细信息-->
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">客户详细信息</h2>
+            <div class="layui-colla-content">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <div class="layui-field-box">
+                        <table class="layui-table customer-detail-info">
+                            <tbody>
+                            <tr>
+                                <td>微信:</td>
+                                <td>11</td>
+                                <td>QQ:</td>
+                                <td>张三</td>
+                                <td>身份证:</td>
+                                <td>130434199502031155</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="layui-tab-item"></div>
+<!--咨询情况-->
+<div class="layui-tab-item ">
+    <div class="layui-field-box">
+        <table class="site-table table-hover">
+            <thead>
+            <tr>
+                <th>顾客编号</th>
+                <th>提交时间</th>
+                <th>提交用户</th>
+                <th>方式</th>
+                <th>内容</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody class="tbody-custo-getConsult"></tbody>
+        </table>
+        <div class="tb-cu-getConsult-nullinfo"></div>
+    </div>
+</div>
+
+<div class="layui-tab-item">4</div>
+<div class="layui-tab-item">5</div>
+<div class="layui-tab-item">6</div>
+<div class="layui-tab-item">7</div>
+<div class="layui-tab-item">8</div>
+<div class="layui-tab-item">9</div>
+<div class="layui-tab-item">10</div>
+<div class="layui-tab-item">11</div>
+<div class="layui-tab-item">12</div>
+<div class="layui-tab-item">13</div>
+<div class="layui-tab-item">14</div>
+<div class="layui-tab-item">15</div>
+<div class="layui-tab-item">16</div>
+<div class="layui-tab-item">17</div>
+<div class="layui-tab-item">18</div>
+<div class="layui-tab-item">19</div>
+<div class="layui-tab-item">20</div>
+</div>
+</div>
+</div>
+</fieldset>
+
+</div>
+<!--添加照片-->
+<div class="hide add-custmer-img">
+    <div class="site-text site-block">
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+                <label class="layui-form-label">选择日期:</label>
+                <div class="layui-input-block">
+                    <input type="text" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">选择类型:</label>
+                <div class="layui-input-block">
+                    <input type="text" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">选择图片:</label>
+                <div class="layui-input-block">
+                     
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">备注描述:</label>
+                <div class="layui-input-block">
+                    <textarea  placeholder="请输入内容" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="" lay-filter="formDemo">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="data-doT-tem">
+    <!--咨询情况-->
+    <script type="text/x-dot-template" class="data-doT-temp-getConsult">
+        {{for(var item in it){ }}
+        <tr>
+            <td>{{= it[item].CustomerID == null ? "暂无":  it[item].CustomerID}}</td>
+            <td>{{= it[item].CreateTime == null ? "暂无":  it[item].CreateTime}}</td>
+            <td>{{= it[item].CreateUserName == null ? "暂无": it[item].CreateUserName}}</td>
+            <td>{{= it[item].Symptoms == null ? "暂无":it[item].Symptoms}}</td>
+            <td>{{= it[item].Content == null ? "暂无": it[item].Content}}</td>
+            <td>
+                <span class="layui-btn layui-btn-mini layui-btn-danger"><i class="layui-icon">&#xe642;</i>编辑</span>
+                <span class="layui-btn layui-btn-mini layui-btn-primary"><i class="layui-icon">&#xe640;</i>删除</span>
+            </td>
+        </tr>
+        {{ } }}
+    </script>
+</div>
+<script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+<script src="~/lay_component/js/hcommon.js"></script>
+<script src="~/Scripts/FlyDog.Common.js"></script>
+<script src="~/doT-master/doT-master/doT.min.js"></script>
+<script src="~/lay_component/plugins/layui/layui.js"></script>
+<script src="~/lay_component/sampleJs/CustomerDetail.js"></script>
+</body>
+</html>

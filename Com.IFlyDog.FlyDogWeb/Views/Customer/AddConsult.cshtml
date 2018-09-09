@@ -1,0 +1,39 @@
+﻿@using Com.IFlyDog.CommonDTO
+@using Com.IFlyDog.FlyDogWeb.Helper
+ 
+<div class="site-text site-block">
+    <input type="hidden" name="consultId" consultId="" />
+    <div class="layui-form-item">
+        <label class="layui-form-label">沟通方式:</label>
+        <div class="layui-input-block">
+            @Html.SelectCategoryByHospital(SelectType.Tool, "AddcustomerTool", "AddcustomerTool")
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">咨询项目:</label>
+        <div class="layui-input-block">
+            @Html.SelectCategoryByHospital(SelectType.Symptom, "AddcustomerSymptom", "AddcustomerSymptom")
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"></label>
+        <div class="layui-input-block add-selected">
+
+        </div>
+
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">描述备注:</label>
+        <div class="layui-input-block">
+            <textarea name="AddRemark" placeholder="请输入描述备注" class="layui-textarea AddRemark"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <span class="layui-btn add-sub">立即提交</span>
+        </div>
+    </div>
+</div>
+ 
+<script src="~/lay_component/sampleJs/customer_operation/addconsult.js"></script> 
+ 

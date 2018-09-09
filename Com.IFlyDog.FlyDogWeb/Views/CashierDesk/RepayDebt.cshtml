@@ -1,0 +1,110 @@
+﻿@using Com.IFlyDog.CommonDTO
+@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>欠款记录</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+</head>
+<body>
+<div class="admin-main">
+<!--tab导航-->
+<fieldset class="layui-elem-field ">
+        <legend>欠款记录</legend>
+        <input type="hidden" name="custid" />
+        <input type="hidden" name="orderid" />
+        <div class="layui-form m-20 clearfix">
+            <div class="fl">
+                <label class="layui-form-label">欠款日期:</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" id="beginTime" name="debtstartTime" placeholder="结算日期起始" onclick="layui.laydate({elem: this, festival: true})">
+                </div>
+                <div class="layui-input-inline">
+                    <input class="layui-input" id="endTime" name="debtendTime" placeholder="结算日期结束" onclick="layui.laydate({elem: this, festival: true})">
+                </div>
+            </div>
+            <div class="fl">
+                <label class="layui-form-label">客户编号:</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" id="cuID" name="debtCuId" placeholder="请输入客户编号">
+                </div>
+            </div>
+            <div class="fl">
+                <label class="layui-form-label">选择医院:</label>
+                <div class="layui-input-inline">
+                    @Html.SelectCategoryByHospital(SelectType.Hospital, "debtHospital", "debtHospital")
+                </div>
+            </div>
+            
+            <span class="layui-btn  debt-search-btn fr">查询</span> 
+        </div>
+        <div class="layui-field-box">
+            <table class="site-table table-hover">
+                <thead>
+                <tr>
+                    <th>客户编号</th>
+                    <th>客户姓名</th>
+                    <th>提交人</th>
+                    <th>提交时间</th>
+                    <th>订单总额</th>
+                    <th>已付金额</th>
+                    <th>欠款金额</th>
+                    <th>订单类型</th> 
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody class="tb-debt">
+                  
+                </tbody>
+            </table>
+            <!--分页容器-->
+            <div id="pageDiv" class="fr"></div>
+        </div>
+    </fieldset>
+</div>
+<form class="layui-form hide"   id="cuoPerationComm"></form> 
+<!--欠款查询-->
+<div class="doT-data-template">
+    <script type="text/html" class="debt-tmp">
+        {{for(var item in it) { }}
+        <tr data-orderid="{{= it[item].ID}}" data-customerid="{{= it[item].CustomerID}}">
+            <td>{{= it[item].CustomerID}}</td>
+            <td>{{= it[item].CustomerName}}</td>
+            <td>{{= it[item].CreateUserName}}</td>
+            <td>{{= it[item].CreateTime == null ? "暂无":it[item].CreateTime.slice(0,10)}}</td>
+            <td>{{= it[item].FinalPrice}}</td>
+            <td>{{= it[item].RealAmount}}</td>
+            <td>{{= it[item].DebtAmount}}</td>
+            <td>{{? it[item].OrderType == 1}}
+                项目订单
+                {{?? it[item].OrderType == 2}}
+                住院单
+                {{?? it[item].OrderType == 3}}
+                预收款订单
+                {{?? it[item].OrderType == 4}}
+                退单
+                {{?? it[item].OrderType == 5}}
+                退款
+                {{?? it[item].OrderType == 6}}
+                欠款
+                {{?}}
+            </td>
+            <td><span class="layui-btn layui-btn-small layui-btn-normal model-btn" data-model="RefundMoney" data-action="DebtCashier">还款</span></td>
+        </tr>
+        {{ } }}
+    </script>
+</div>
+<script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+<script src="~/lay_component/js/hcommon.js"></script>
+<script src="~/Scripts/FlyDog.Common.js"></script>
+<script src="~/doT-master/doT-master/doT.min.js"></script>
+<script src="~/lay_component/plugins/layui/layui.js"></script> 
+<script src="~/lay_component/sampleJs/CashinerDesk/RepayDebt.js"></script> 
+</body>
+</html>

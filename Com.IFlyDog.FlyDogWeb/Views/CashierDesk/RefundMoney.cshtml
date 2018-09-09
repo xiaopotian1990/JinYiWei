@@ -1,0 +1,136 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<div class="RefundMoney hide">
+    <style>
+        .pay-way {margin-left: auto;}
+
+        .layui-table td {
+            padding: 9px 0px 15px;
+        }
+
+        .layui-form-item .layui-input-inline {
+            width: 132px;
+        }
+
+        .card-money {
+            margin-left: 8px;
+        }
+    </style>
+    <form class="layui-form">
+        <div class="m-10 fl" style="width: 35%">
+            <div class="site-title">
+                <fieldset><legend>收银</legend></fieldset>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">应收金额:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="toAmount" placeholder="0" readonly="readonly" class="layui-input ToMoney">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">收取现金:</label>
+                <div class="layui-input-inline">
+                    <input name="FinalPrice" type="number" min="0" placeholder="请输入现金金额" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">支付方式:</label>
+                <div class="layui-input-block">
+                    <table class="layui-table" lay-even lay-skin="nob" style="width:auto">
+                        <tbody class="order-pay-tbody">
+                            <tr>
+                                <td>
+                                    <div class="layui-input-inline fl">
+                                        @Html.SelectCategory(Com.IFlyDog.CommonDTO.SelectType.CardCategory, "RefundMoneyCard", "RefundMoneyCard")
+                                    </div>
+
+                                </td>
+                                <td>
+                                    <div class="layui-input-inline fl">
+                                        <input type="number" min="0" value="0" name="tRefundMoneyAmount" placeholder="刷卡金额" class="layui-input card-money">
+                                    </div>
+                                </td>
+                                <td class="fl">
+                                    <span class="layui-btn layui-btn-normal layui-btn-normal  add-pay-btn fr "><i class="layui-icon">&#xe61f;</i></span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">备注描述:</label>
+                <div class="layui-input-block">
+                    <textarea name="Remark" placeholder="请输入内容描述" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <span class="layui-btn layui-btn-danger add-debt-submit">欠款收银</span>
+                    <span class="layui-btn add-submit">收银</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="m-10 fr" style="width: 50%">
+            <div class="site-title">
+                <fieldset><legend>项目单</legend></fieldset>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">客户编号:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="CustomerID" placeholder="" readonly="readonly" class="layui-input ToMoney">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">提交时间:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="CreateTime" placeholder="" readonly="readonly" class="layui-input ToMoney">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">提交用户:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="CreateUserName" placeholder="" readonly="readonly" class="layui-input ToMoney">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">订单金额:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="Amount" placeholder="" readonly="readonly" class="layui-input ToMoney">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">欠款金额:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="DebtAmount" placeholder="" readonly="readonly" class="layui-input ToMoney">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">备注:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="Remark" placeholder="备注" readonly="readonly" class="layui-input ToMoney">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">详细:</label>
+                <div class="layui-input-block">
+                    <table class="site-table table-hover">
+                        <thead>
+                            <tr>
+                                <th>项目编号</th>
+                                <th>项目名称</th>
+                                <th>数量</th>
+                                <th>金额</th>
+                                <th>成交金额</th>
+                                <th>套餐</th>
+                            </tr>
+                        </thead>
+                        <tbody class="order-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

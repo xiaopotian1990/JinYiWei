@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{939B16B1-F767-4823-9031-1FAD07D7B6D2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Com.FlyDog.IFlyDogAPIBLL</RootNamespace>
+    <AssemblyName>Com.FlyDog.IFlyDogAPIBLL</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IAllocateService.cs" />
+    <Compile Include="IAppointmentService.cs" />
+    <Compile Include="IAuditApplyService.cs" />
+    <Compile Include="IAuditRuleService.cs" />
+    <Compile Include="IAuditWorkbenchService.cs" />
+    <Compile Include="IBackOrderService.cs" />
+    <Compile Include="IBedService.cs" />
+    <Compile Include="IBillService.cs" />
+    <Compile Include="ICallbackCategoryService.cs" />
+    <Compile Include="ICallbackGroupService.cs" />
+    <Compile Include="ICallbackService.cs" />
+    <Compile Include="ICardCategoryService.cs" />
+    <Compile Include="ICaseTemplateService.cs" />
+    <Compile Include="ICashierService.cs" />
+    <Compile Include="IChannelGroupService.cs" />
+    <Compile Include="IChannelService.cs" />
+    <Compile Include="IChargeCategoryService.cs" />
+    <Compile Include="IChargeDiscountService.cs" />
+    <Compile Include="IChargeService.cs" />
+    <Compile Include="IChargeSetService.cs" />
+    <Compile Include="ICheckService.cs" />
+    <Compile Include="IClubService.cs" />
+    <Compile Include="IComplainCategoryService.cs" />
+    <Compile Include="IComplainService.cs" />
+    <Compile Include="IConsultService.cs" />
+    <Compile Include="ICouponActivityDetailService.cs" />
+    <Compile Include="ICouponActivityService.cs" />
+    <Compile Include="ICouponCategoryService.cs" />
+    <Compile Include="ICouponService.cs" />
+    <Compile Include="ICustomerGroupService.cs" />
+    <Compile Include="ICustomerMedicalRecordService.cs" />
+    <Compile Include="ICustomerProfileService.cs" />
+    <Compile Include="ICustomerService.cs" />
+    <Compile Include="IDepositChargeService.cs" />
+    <Compile Include="IDepositRebateOrderService.cs" />
+    <Compile Include="IDepositService.cs" />
+    <Compile Include="IDeptDeskService.cs" />
+    <Compile Include="IDeptSendService.cs" />
+    <Compile Include="IDeptService.cs" />
+    <Compile Include="IEquityService.cs" />
+    <Compile Include="IFailtureCategoryService.cs" />
+    <Compile Include="IFailtureService.cs" />
+    <Compile Include="IFrontDeskService.cs" />
+    <Compile Include="IHospitalPrintService.cs" />
+    <Compile Include="IHospitalService.cs" />
+    <Compile Include="IInpatientService.cs" />
+    <Compile Include="IInvoiceService.cs" />
+    <Compile Include="IitemGroupService.cs" />
+    <Compile Include="IKnowledgeCategoryService.cs" />
+    <Compile Include="ILoginService.cs" />
+    <Compile Include="IMemberCategoryService.cs" />
+    <Compile Include="IMemberDeskService.cs" />
+    <Compile Include="IOperationLogService.cs" />
+    <Compile Include="IOptionService.cs" />
+    <Compile Include="IOrderService.cs" />
+    <Compile Include="IOwnerShipOrderService.cs" />
+    <Compile Include="IOwnerShipService.cs" />
+    <Compile Include="IPhotoService.cs" />
+    <Compile Include="IPointService.cs" />
+    <Compile Include="IPositionService.cs" />
+    <Compile Include="IPromoterCommissionService.cs" />
+    <Compile Include="IProvinceService.cs" />
+    <Compile Include="IReceptionService.cs" />
+    <Compile Include="IRelationService.cs" />
+    <Compile Include="IReportService.cs" />
+    <Compile Include="IRoleService.cs" />
+    <Compile Include="ISaleBackService.cs" />
+    <Compile Include="ISettlementService.cs" />
+    <Compile Include="IShareCategoryService.cs" />
+    <Compile Include="IShiftService.cs" />
+    <Compile Include="ISmartItemService.cs" />
+    <Compile Include="ISmartProductCategoryService.cs" />
+    <Compile Include="ISmartProductService.cs" />
+    <Compile Include="ISmartPurchaseService.cs" />
+    <Compile Include="ISmartReturnService.cs" />
+    <Compile Include="ISmartShiftCategoryService.cs" />
+    <Compile Include="ISmartStockService.cs" />
+    <Compile Include="ISmartSupplierService.cs" />
+    <Compile Include="ISmartToolService.cs" />
+    <Compile Include="ISmartUnitService.cs" />
+    <Compile Include="ISmartUserService.cs" />
+    <Compile Include="ISmartWarehouseService.cs" />
+    <Compile Include="IStoreManagerService.cs" />
+    <Compile Include="IStoreService.cs" />
+    <Compile Include="ISurgeryService.cs" />
+    <Compile Include="ISymptomService.cs" />
+    <Compile Include="IKnowledgeService.cs" />
+    <Compile Include="ITagGroupService.cs" />
+    <Compile Include="ITagService.cs" />
+    <Compile Include="ITreatService.cs" />
+    <Compile Include="IUserDiscountService.cs" />
+    <Compile Include="IUserTriggerService.cs" />
+    <Compile Include="IUseService.cs" />
+    <Compile Include="IWXOptionService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Com.IFlyDog.APIDTO\Com.IFlyDog.APIDTO.csproj">
+      <Project>{F707F110-1D34-4414-931B-1C0F72A61B6E}</Project>
+      <Name>Com.IFlyDog.APIDTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.IFlyDog.CommonDTO\Com.IFlyDog.CommonDTO.csproj">
+      <Project>{83090A4D-EA80-4E89-9023-272CE55D2C14}</Project>
+      <Name>Com.IFlyDog.CommonDTO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

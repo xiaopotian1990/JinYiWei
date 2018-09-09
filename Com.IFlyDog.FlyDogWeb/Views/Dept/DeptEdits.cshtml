@@ -1,0 +1,69 @@
+﻿<!-- 注意：请将要放入弹框的内容放在比如id="HBox"的容器中，然后将box的值换成该ID即可，比如：$(element).hDialog({'box':'#HBox'}); -->
+<div id="wrapper">
+    <div class="box">
+        <!-- 注意：请将要放入弹框的内容放在比如id="HBox"的容器中，然后将box的值换成该ID即可，比如：$(element).hDialog({'box':'#HBox'}); -->
+        <div id="HBoxDeptInfoEdit" class="HBox">
+            <form action="" method="post" class="form-horizontal" onsubmit="return false;" role="form">
+                <div class="form-body">
+                    <h3 class="header smaller lighter blue col-sm-12"><i class="icon-user"></i>修改部门信息</h3>
+
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label no-padding-right" for="form-field-1">部门编号:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="col-xs-10 col-sm-5" value="2" placeholder="2" disabled="disabled">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label no-padding-right" for="form-field-1">部门名称:</label>
+                        <div class="col-sm-6">
+                            <input type="text" placeholder="输入部门名称" class="col-xs-10 col-sm-5">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label no-padding-right" for="form-field-1">部门状态:</label>
+                        <div class="col-sm-6">
+                            <select class="col-xs-10 col-sm-5" id="form-field-select-1">
+                                <option value="">请选择</option>
+                                <option value="AL">Alabama</option>
+                                <option value="AK">Alaska</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label no-padding-right" for="form-field-1">排序号:</label>
+                        <div class="col-sm-6">
+                            <input type="text" placeholder="输入部门名称" class="col-xs-10 col-sm-5">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label no-padding-right" for="form-field-1">备注:</label>
+                        <div class="col-sm-6">
+                            <textarea class="form-control" placeholder="备注"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="_deptedit col-sm-12">
+                    <button class="btn  btn-success">
+                        <i class="icon-ok"></i>
+                        提交
+                    </button>
+                    <button class="btn btn-danger">
+                        <i class="icon-remove icon-only"></i>
+                        取消
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<style>
+    ._deptedit {
+        margin-top: 90px;
+        margin-left: 37%;
+    }
+
+    textarea {
+        resize: none;
+    }
+</style>

@@ -1,0 +1,54 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<html>
+<head>
+    <link href="~/lay_component/css/loginGoogleapis.css" rel="stylesheet" />
+    @*<style type="text/css">
+        .logo_border_img {
+            background-image: url('../../lay_component/images/iwlogo.png');
+            background-repeat: no-repeat;
+            height: 110px;
+            margin-bottom: -45px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 1px 1px 1px 1px;
+            width: 110px;
+        }
+    </style>*@
+</head>
+<body>
+    <div class="container">
+    
+        <div class="row">
+            <div class="login">
+                <div class="login-triangle">
+                </div>
+                <div class="login-header">
+                    <h2>欢迎登录爱飞狗</h2> 
+                </div>
+                <form class="login-container" action="/Login/Login" method="post">
+                    <p>
+                        <input name="Account" id="Account" value="super" type="text" placeholder="帐户名">
+                    </p>
+                    <p>
+                        <input name="Password" id="Password" value="123456" type="password" onclick="a();" placeholder="密码">
+                    </p>
+                    <p>
+                        <span style="color: red"> @ViewData["Info"] </span>
+                    </p>
+                    <p>
+                        <input type="submit" value="登录">
+                    </p>
+                </form>
+                <div class="page-footer" style="text-align: center;">
+                    <div class="page-footer-inner">
+                        <h3>
+                            <b>2016 © 2017 北京爱飞狗互联科技有限公司</b>
+                        </h3>
+                        <span>BeiJing Love Fly Dog Internet Technology Co.Ltd</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

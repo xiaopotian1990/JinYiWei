@@ -1,0 +1,594 @@
+﻿@using Com.IFlyDog.CommonDTO
+@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>前台接待</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet"/>
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all"/>
+    <link href="~/lay_component/css/global.css" rel="stylesheet"/>
+    <style>
+        .site-block {border: none;padding: 10px;}
+        span { margin-left: 10px; }
+        .layui-form-label { width: auto; }
+        .layui-word-aux{color:#FF5722;}
+        .layui-disabled, .layui-disabled:hover {color:#FF5722 !important;}
+        .layui-form-select .layui-input { padding-right: 0px; }
+        img{width:20px;height:20px;}
+         .tagbox {
+	        width: 100px;
+	        height: auto;
+	        border: 1px solid #CCCCCC;
+	        POSITION: fixed;
+	        _position: absolute;
+	        _margin-top: expression(document.documentElement.clientHeight-this.style.pixelHeight+document.documentElement.scrollTop);
+	        z-index: 99;
+	        right: 0px;
+	        bottom: 25px;
+	        background-color: #FFFFFF;
+	        -webkit-border-radius: 5px;
+	        -moz-border-radius: 5px;
+	        border-radius: 5px;
+        }   
+         .addCustomerTab {color: #3598dc !important;text-decoration: underline;}
+    </style>
+</head>
+
+<body>
+<div class="admin-main">
+<!--tab导航-->
+<fieldset class="layui-elem-field"> 
+    <legend>前台接待</legend>
+    <div class="layui-field-box">
+        <div class="layui-tab layui-tab-brief">
+            <ul class="layui-tab-title" name="menu">
+                <li class="layui-this khsbCli">顾客识别</li>
+                <li class="jzry-cli">接诊人员列表</li>
+                <li class="jryysm-cli">今日预约上门列表</li>
+                <li class="jrsm-cli">今日上门记录</li>
+                <li class="jrfz-cli">今日分诊记录</li>
+                <li class="jrhz-cli">今日候诊记录</li>
+                <li class="today-cu-click">今日新登记顾客</li>
+                <li class="today-addAppo-click">今日新增预约</li>
+            </ul>
+
+            <div class="layui-tab-content">
+                <!--顾客识别-->
+                <div class="layui-tab-item layui-show">
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                            <input type="text" name="cuident" placeholder="请输入顾客编号/手机号/电话号码/预约号/姓名" class="layui-input fl">
+                            <span class="layui-btn  online-cu-discbut">立即识别</span>
+                            <span class="layui-btn layui-btn-primary online-cu-resetbut">重置</span>
+                        </div>
+                    </form>
+                    <!--添加顾客按钮-->
+                    <div class="add-cu-hint"></div>
+                    <!--顾客识别显示的信息-->
+                    <fieldset class="layui-elem-field">
+                        <legend>顾客信息</legend>
+                        <form class="layui-form">
+                            <div class="layui-field-box">
+                                <table class="site-table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>顾客编号</th>
+                                        <th>顾客姓名</th>
+                                        <th>性别</th>
+                                        <th>手机号</th>
+                                        <th>会员名称</th>
+                                        <th>会员等级图标</th>
+                                        <th>分享等级</th>
+                                        <th>分享等级图标</th>
+                                        <th>渠道</th>
+                                        <th>上门状态</th>
+                                        <th>成交状态</th>
+                                        <th>隶属医院</th>
+                                        <th>初诊医院</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="tbody-cust-inshow"></tbody>
+                                </table>
+                            </div>
+                        </form>
+                    </fieldset>
+                </div>
+                <!--接诊人员列表-->
+                <div class="layui-tab-item">
+                    <table class="site-table table-hover">
+                        <thead>
+                        <tr>
+                            <th>用户姓名</th>
+                            <th>排版信息</th>
+                        </tr>
+                        </thead>
+                        <tbody class="tbody-jzry-inshow"></tbody>
+                    </table>
+                    <div class="jzry-info">
+
+                    </div>
+                </div>
+                <!--今日预约上门列表-->
+                <div class="layui-tab-item">
+                    <table class="site-table table-hover">
+                        <thead>
+                        <tr>
+                            <th>顾客编号</th>
+                            <th>顾客姓名</th>
+                            <th>联系方式</th>
+                            <th>预约时间</th>
+                            <th>预约类型</th>
+                            <th>预约内容</th>
+                        </tr>
+                        </thead>
+                        <tbody class="tbody-jryysm-inshow"></tbody>
+                    </table>
+                    <div class="jryysm-info">
+
+                    </div>
+                </div>
+                <!--今日上门列表-->
+                <div class="layui-tab-item">
+                    <table class="site-table table-hover">
+                        <thead>
+                        <tr>
+                            <th>顾客编号</th>
+                            <th>顾客姓名</th>
+                            <th>上门时间</th>
+                            <th>消费类型</th>
+                            <th>新老客</th>
+                            <th>接待用户</th>
+                            <th>接诊人员/部门</th>
+                            <th>归属咨询师</th>
+                        </tr>
+                        </thead>
+                        <tbody class="tbody-jrsm-inshow"></tbody>
+                    </table>
+                    <div class="jrsm-info">
+
+                    </div>
+                </div>
+                <!--今日分诊记录-->
+                <div class="layui-tab-item">
+                    <table class="site-table table-hover">
+                        <thead>
+                        <tr>
+                            <th>顾客编号</th>
+                            <th>顾客姓名</th>
+                            <th>分诊时间</th>
+                            <th>分诊人员</th>
+                            <th>接诊人员</th>
+                            <th>备注描述</th>
+                        </tr>
+                        </thead>
+                        <tbody class="tbody-jrfz-inshow"></tbody>
+                    </table>
+                    <div class="jrfz-info">
+
+                    </div>
+                </div>
+                <!--今日候诊记录-->
+                <div class="layui-tab-item">
+                    <table class="site-table table-hover">
+                        <thead>
+                        <tr>
+                            <th>顾客编号</th>
+                            <th>顾客姓名</th>
+                            <th>创建时间</th>
+                            <th>归属咨询人员</th>
+                            <th>顾客头像</th>
+                            <th>备注描述</th>
+                        </tr>
+                        </thead>
+                        <tbody class="tbody-jrhz-inshow"></tbody>
+                    </table>
+                    <div class="jrhz-info">
+
+                    </div>
+                </div>
+                <!--今日新登记顾客-->
+                <div class="layui-tab-item">
+                    <table class="site-table table-hover">
+                        <thead>
+                        <tr>
+                            <th>顾客编号</th>
+                            <th>顾客姓名</th>
+                            <th>性别</th>
+                            <th>来源渠道</th>
+                            <th>咨询项目</th>
+                            <th>创建人</th>
+
+                        </tr>
+                        </thead>
+                        <tbody class="tbody-today-inshow"></tbody>
+                    </table>
+                    <div class="notoday-info">
+
+                    </div>
+                </div>
+                <!--今日新增预约-->
+                <div class="layui-tab-item">
+                    <table class="site-table table-hover">
+                        <thead>
+                        <tr>
+                            <th>顾客编号</th>
+                            <th>顾客姓名</th>
+                            <th>预约日期</th>
+                            <th>登记时间</th>
+                            <th>预约类型</th>
+                            <th>内容</th>
+
+                        </tr>
+                        </thead>
+                        <tbody class="tbody-todayAppo-inshow"></tbody>
+                    </table>
+                    <div class="notodayAppo-info">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+<!--添加未识别,新的顾客新顾客信息-->
+<div class="layui-form hide data-addcustomer-pop">
+    <form class="layui-form">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>顾客信息</legend>
+        </fieldset>
+        <div class="layui-input-inline m-bt-10">
+            <label class="layui-form-label">顾客姓名:</label>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" name="addcuName" placeholder="请输入顾客姓名">
+            </div>
+        </div>
+        <div class="layui-input-inline m-bt-10">
+            <label class="layui-form-label">联系方式:</label>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" name="addcuMobile" placeholder="请输入联系方式">
+            </div>
+        </div>
+        <div class="layui-input-inline m-bt-10">
+            <label class="layui-form-label">顾客生日:</label>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" lay-filter="Birthday" name="addcuBirthday" placeholder="请输入顾客生日" onclick="layui.laydate({ elem: this, min: '1900-01-01 00:00:00' })">
+            </div>
+        </div>
+        <div class="layui-input-inline m-bt-10">
+            <label class="layui-form-label">渠道来源:</label>
+            <div class="layui-input-inline">
+                @Html.SelectCategoryByHospital(SelectType.Channel, "smartaddcustomerChannel", "smartaddcustomerChannel")
+            </div>
+        </div>
+
+        <div class="layui-input-inline m-bt-10">
+            <label class="layui-form-label">选择省区:</label>
+            <div class="layui-input-inline">
+                @Html.SelectCategory(SelectType.Province, "customerProvince", "customerProvince")
+            </div>
+        </div>
+        <div class="layui-input-inline m-bt-10">
+            <label class="layui-form-label">顾客地址:</label>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" name="addcuAddress" placeholder="请输入顾客地址">
+            </div>
+        </div>
+        <div class="layui-input-inline m-bt-10">
+            <label class="layui-form-label">选择市区:</label>
+            <div class="layui-input-inline ">
+                <select name="smartAddCity" id="smartAddCity" class="City-selected">
+                    <option>请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-input-inline m-bt-10">
+            <label class="layui-form-label">顾客性别:</label>
+            <div class="layui-input-inline">
+                <input type="radio" name="addcuGender" value="1" title="男" checked="checked">
+                <input type="radio" name="addcuGender" value="2" title="女">
+
+            </div>
+        </div>
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
+            <legend>顾客咨询情况</legend>
+        </fieldset>
+        <div class="layui-form-item">
+            <label class="layui-form-label">咨询症状:</label>
+            <div class="layui-input-block">
+                @Html.SelectCategoryByHospital(SelectType.Symptom, "smartaddcustomerSymptom", "smartaddcustomerSymptom")
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <div class="layui-form-mid layui-word-aux" style="color: brown">(咨询症状可多选,主咨询项目请列在第一位!)</div>
+            </div>
+            <div class="layui-input-block addSymptom-selected">
+
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">沟通方式:</label>
+            <div class="layui-input-block">
+                @Html.SelectCategoryByHospital(SelectType.Tool, "smartaddcustomerTool", "smartaddcustomerTool")
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">顾客描述:</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item fr " style="margin-right: 10px;">
+            <div class="layui-input-block">
+                <span class="layui-btn add-cu-submit">确认添加</span>
+                <span type="reset" class="layui-btn layui-btn-primary add-cu-reset">重置</span>
+            </div>
+        </div>
+    </form>
+</div>
+<!--顾客识别出信息.进行分诊-->
+<div class="layui-form hide data-triage-pop">
+    <form class="layui-form">
+        <blockquote class="layui-elem-quote">
+            <div class="layui-form-item">
+                <label class="layui-form-label">顾客编号:</label>
+                <div class="layui-form-mid layui-word-aux" name="triagecuId">
+                    <span></span>
+                </div>
+                <label class="layui-form-label">顾客姓名:</label>
+                <div class="layui-form-mid layui-word-aux" name="triagecuName">
+                    <span></span>
+                </div>
+
+            </div>
+            <div class="layui-form-item" style="margin-left: 15px">
+                <p>请根据客户来院的目的进行分流。</p>
+                <p>1.如果客户需要咨询，请为其指派相应的咨询师。</p>
+                <p>2.如果客户需要直接进行治疗，请分派给相应的科室部门。</p>
+            </div>
+        </blockquote>
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">咨询</li>
+                <li>治疗/手术</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <div class="site-text site-block">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">咨询项目:</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="fz-zxpro-inp" class="layui-input layui-disabled">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">归属咨询师:</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="fz-gszxUser-inp" class="layui-input layui-disabled">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">指派咨询师:</label>
+                            <div class="layui-input-block">
+                                @Html.SelectFZUserByHospital("SelectFZUserByHospital", "SelectFZUserByHospital")
+                            </div>
+                        </div>
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">备注描述:</label>
+                            <div class="layui-input-block">
+                                <textarea placeholder="请输入内容" class="layui-textarea fz-gszxUser-Remark"></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <span class="layui-btn addfz-sub">立即提交</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="layui-tab-item">
+
+                    <div class="site-text site-block">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">选择部门:</label>
+                            <div class="layui-input-block">
+                                @Html.SelectCategoryByHospital(SelectType.Dept, "SelectCategoryByDeptByFz", "SelectCategoryByDeptByFz")
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <span class="layui-btn addfz-zlss-sub">立即提交</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>  
+</div>
+<!--顾客识别出信息.进行候诊-->
+<div class="layui-form hide data-Wartez-pop">
+    <form class="layui-form">
+        <div class="layui-form-item layui-form-text">
+            <div class="site-text site-block">
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">候诊描述:</label>
+                        <div class="layui-input-block">
+                            <textarea placeholder="请输入候诊描述" class="layui-textarea hzRemark"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn hz-sub" >提交候诊</button>
+                        </div>
+                    </div>
+            </div>
+          
+        </div>
+    </form>  
+</div>
+</div>
+<!--引擎-->
+<div class="doT-data-template">
+    <!--顾客识别后的信息-->
+    <script type="text/html" class="cust-inshow-temp">
+        {{for(var item in it) { }}
+        <tr>
+            <td>{{= it[item].ID}}</td>
+            <td><a  class="pointer addCustomerTab">{{= it[item].Name}}</a></td>
+            <td>{{= it[item].Gender}}</td>
+            <td>{{= it[item].Mobile}}</td> 
+            <td>
+                <img src='{{= it[item].MemberIcon == null ? "":it[item].MemberIcon}}'/>
+            </td>
+            <td>{{= it[item].ShareCategoryName == null ? "":it[item].ShareCategoryName}}</td>
+            <td><img src='{{= it[item].ShareIcon == null ? "":it[item].ShareIcon}}' /></td>
+            <td>{{= it[item].Code == null ? "":it[item].Code}}</td>
+            <td>{{= it[item].ChannelName == null ? "":it[item].ChannelName}}</td>
+            <td>{{= it[item].Come}}</td>
+            <td>{{= it[item].Cash}}</td>
+            <td>{{= it[item].CreateHospital == null ? "":it[item].CreateHospital}}</td>
+            <td>{{= it[item].FirstVisitHospital == null ? "":it[item].FirstVisitHospital}}</td>
+            <td>
+                <span class="layui-btn layui-btn-mini online-cu-triage-but" tr-customerID="{{= it[item].ID}}"><i class="layui-icon">&#xe606;</i>添加分诊</span>
+                <span class="layui-btn layui-btn-warm layui-btn-mini online-cu-Wartez-but" tr-customerID="{{= it[item].ID}}"><i class="layui-icon">&#xe606;</i>添加候诊</span>
+            </td>
+        </tr>
+        {{ } }}
+    </script>
+    <!--接诊人员列表-->
+    <script class="fd-jzry-inshow-temp" type="text/html">
+        {{for(var item in it) { }}
+        <tr>
+            <td>{{= it[item].Name}}</td>
+            <td>{{= it[item].Shift == "" ? "暂无排班信息": it[item].Shift}}</td>
+        </tr>
+        {{ } }}
+    </script>
+    <!--今日预约上门列表-->
+    <script class="fd-jryysm-inshow-temp" type="text/html">
+        {{for(var item in it) { }}
+        <tr>
+            <td>{{= it[item].CustomerID == "" ? "暂无": it[item].CustomerID}}</td>
+            <td>{{= it[item].CustomerName == "" ? "暂无": it[item].CustomerName}}</td>
+            <td>{{= it[item].Mobile == "" ? "暂无": it[item].Mobile}}</td>
+            <td>{{= it[item].AppointmentStartTime == "" ? "暂无": it[item].AppointmentStartTime}}-{{= it[item].AppointmentEndTime== "" ? "暂无": it[item].AppointmentEndTime}}</td>
+            <td>{{= it[item].Type == "" ? "暂无": it[item].Type}}</td>
+            <td>{{= it[item].Content == "" ? "暂无": it[item].Content}}</td>
+        </tr>
+        {{ } }}
+    </script>
+    <!--今日上门列表-->
+    <script class="fd-jrsm-inshow-temp" type="text/html">
+        {{for(var item in it) { }}
+        <tr>
+            <td>{{= it[item].CustomerID == "" ? "暂无": it[item].CustomerID}}</td>
+            <td><a class="pointer addCustomerTab">{{= it[item].CustomerName}}</a></td> 
+            <td>{{= it[item].CreateTime == "" ? "暂无": it[item].CreateTime}}</td>
+            <td>
+                {{ if (it[item].VisitType ==1){ }}
+
+                初诊
+                {{ } }}
+                {{ if (it[item].VisitType ==2){ }}
+                复诊
+                {{ } }}
+                {{ if (it[item].VisitType ==3){ }}
+                复查
+                {{ } }}
+                {{ if (it[item].VisitType ==4){ }}
+                再消费
+                {{ } }}
+               
+            </td>
+            <td> 
+                {{ if (it[item].CustomerType ==1){ }}
+                 新客 
+                {{ } }}
+                {{ if (it[item].CustomerType ==2){ }}
+                 老客 
+                {{ } }}
+            </td>
+            <td>{{= it[item].CreateUserName == "" ? "暂无": it[item].CreateUserName}}</td>
+            <td>{{= it[item].AssignUserName == "" ? "暂无": it[item].AssignUserName}}</td>
+            <td>{{= it[item].ManagerUserName  == "" ? "暂无": it[item].ManagerUserName}}</td>
+        </tr>
+        {{ } }}
+    </script>
+    <!--今日分诊列表-->
+    <script class="fd-jrfz-inshow-temp" type="text/html">
+        {{for(var item in it) { }}
+        <tr>
+            <td>{{= it[item].CustomerID == "" ? "暂无": it[item].CustomerID}}</td>
+            <td><a class="pointer addCustomerTab">{{= it[item].CustomerName}}</a></td> 
+            <td>{{= it[item].CreateTime == "" ? "暂无": it[item].CreateTime}}</td>
+            <td>{{= it[item].CreateUserName == "" ? "暂无": it[item].CreateUserName}}</td>
+            <td>{{= it[item].AssignUserName == "" ? "暂无": it[item].AssignUserName}}</td>
+            <td>{{= it[item].Remark == "" ? "暂无": it[item].Remark}}</td>
+        </tr>
+        {{ } }}
+    </script>
+    <!--今日候诊列表-->
+    <script class="fd-jrhz-inshow-temp" type="text/html">
+        {{for(var item in it) { }}
+        <tr>
+            <td>{{= it[item].CustomerID == "" ? "暂无": it[item].CustomerID}}</td>
+            <td><a class="pointer addCustomerTab">{{= it[item].CustomerName}}</a></td> 
+            <td>{{= it[item].CreateTime == "" ? "暂无": it[item].CreateTime}}</td>
+            <td>{{= it[item].ManagerUserName == "" ? "暂无": it[item].ManagerUserName}}</td>
+            <td><img src='{{= it[item].ImageUrl == null ? "":it[item].ImageUrl}}' /></td>
+            <td>{{= it[item].Remark == "" ? "暂无": it[item].Remark}}</td>
+        </tr>
+        {{ } }}
+    </script>
+    <!--今日新登记顾客-->
+    <script class="fd-tbody-today-inshow-temp" type="text/html">
+        {{for(var item in it) { }}
+        <tr>
+            <td>
+                <a>{{= it[item].ID}}</a>
+            </td>
+         
+            <td><a class="pointer addCustomerTab">{{= it[item].Name}}</a></td> 
+            <td>{{= it[item].Gender == 1 ? "女":"男"}}</td>
+            <td>{{= it[item].ChannelName == null ? "":it[item].ChannelName}}</td>
+            <td>{{= it[item].ConsultSymptom == null ? "":it[item].ConsultSymptom}}</td>
+            <td>{{= it[item].CreateUserName == null ? "":it[item].CreateUserName}}</td>
+        </tr>
+        {{ } }}
+    </script>
+    <!--今日新增预约列表-->
+    <script class="fd-tbody-todayAppo-inshow-temp" type="text/html">
+        {{for(var item in it) { }}
+        <tr>
+            <td>{{= it[item].CustomerID == "" ? "暂无": it[item].CustomerID}}</td>
+            <td><a class="pointer addCustomerTab">{{= it[item].CustomerName}}</a></td>  
+            <td>{{= it[item].AppointmentStartTime == "" ? "暂无": it[item].AppointmentStartTime}}-{{= it[item].AppointmentEndTime == "" ? "暂无": it[item].AppointmentEndTime}}</td>
+            <td>{{= it[item].CreateTime == "" ? "暂无": it[item].CreateTime}}</td>
+            <td>{{= it[item].Type}}</td>
+            <td>{{= it[item].Content == "" ? "暂无": it[item].Content}}</td>
+        </tr>
+        {{ } }}
+        </script>
+
+</div>
+<script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+<script src="~/lay_component/js/hcommon.js"></script>
+<script src="~/Scripts/FlyDog.Common.js"></script>
+<script src="~/doT-master/doT-master/doT.min.js"></script>
+<script src="~/lay_component/plugins/layui/layui.js"></script>
+<script src="~/lay_component/sampleJs/FrontDesk.js"></script>
+<script src="~/lay_component/signalr/jquery.signalR-2.0.3.min.js"></script>
+<script src="http://192.168.11.220:8066/chat/hubs"></script>
+<script src="~/lay_component/js/chat.js"></script>  
+</body>
+</html>

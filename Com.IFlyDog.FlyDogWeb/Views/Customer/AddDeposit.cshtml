@@ -1,0 +1,94 @@
+﻿<style>
+    .layui-input-block {margin-left: auto;}
+    .layui-form-label {padding: 9px 0;}
+    .layui-input, .layui-textarea {padding-left: 5px;}
+    .layui-form-select .layui-input {padding-right: 0;}
+    .layui-form-label {width: 50px;}
+    .layui-input-block.fl{padding:0 0 10px 0;}
+</style>
+<blockquote class="layui-elem-quote">
+    <p>总金额:<span id="fAmount">0</span></p>
+    <p>送券:<span id="couponAmount">0</span></p> 
+</blockquote>
+<fieldset class="layui-elem-field  fl" style="width:40%;">
+    <legend>添加预收款</legend>
+    <div class="layui-field-box">
+        <div class="site-title">
+            <fieldset><legend>订单</legend></fieldset>
+        </div>
+        <div class="layui-form-item layui-form-text" id="orderDepositChargeDiv">
+            <table class="site-table table-hover">
+                <thead>
+                    <tr>
+                        <th>项目</th>
+                        <th>价格</th>
+                        <th>数量</th>
+                        <th>总额</th>
+                        <th>操作</th>
+                    </tr>				 
+                </thead>
+                <tbody class="order-deposit-charge-table">
+
+                </tbody>
+            </table>
+        </div>
+        <div class="layui-form-item layui-form-text"> 
+            <div class="layui-input-block">
+                <textarea id="Remark" name="Remark" placeholder="请输入描述内容" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-input-block fl">
+            <span class="layui-btn" id="saveDepositOrder">立即提交</span>
+        </div>
+
+    </div>
+</fieldset>
+<fieldset class="layui-elem-field  fr" style="width:55%;">
+    <legend>添加预收款项目</legend>
+    <div class="layui-field-box">
+        <div class="layui-form-item layui-form-text" id="depositChargesDiv">
+            <table class="site-table table-hover">
+                <thead>
+                    <tr>			 
+                        <th>名称</th>
+                        <th>价格</th>
+                        <th>使用范围</th>
+                        <th>赠券</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody class="deposit-charge-table">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</fieldset>
+
+<div class="dot-tmp">
+   
+</div>
+<script src="~/lay_component/sampleJs/customer_operation/AddDeposit.js"></script>
+  <!--查看模板-->
+<script class="see-Deposit-temp" type="text/x-dot-template">
+    {{ for(var item in it){ }}
+    <tr data-id="{{= it[item].ChargeID }}">
+        <td>{{= it[item].ChargeName }}</td>
+        <td>{{= it[item].Price }}</td> 
+        <td>{{= it[item].Num }}</td> 
+        <td>{{= it[item].Total }}</td> 
+        <td><span class="layui-btn layui-btn-mini layui-btn-danger layui-btn-disabled">删除</span></td>
+    </tr>
+    {{ } }}
+</script>
+
+<script class="deposit-charge-tmp" type="text/x-dot-template">
+    {{ for(var item in it){ }}
+    <tr data-id="{{= it[item].ID }}">
+        <td>{{= it[item].Name }}</td>
+        <td>{{= it[item].Price }}</td>
+        <td>{{= it[item].ScopeLimit }}</td>
+        <td CouponAmount="{{= it[item].CouponAmount }}">{{= it[item].HasCoupon }}</td>
+        <td><span class="layui-btn layui-btn-primary layui-btn-mini" name="add-deposit-charge">选择此项</span></td>
+    </tr>
+    {{ } }}
+</script>

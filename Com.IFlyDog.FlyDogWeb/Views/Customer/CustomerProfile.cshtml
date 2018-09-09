@@ -1,0 +1,2432 @@
+﻿@using Com.IFlyDog.CommonDTO
+@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>客户操作</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+    <link href="~/Styles/Public/CustomerPlugin.css" rel="stylesheet" />
+    <style>
+        .img_customer {height: 100px;width: 100px;}
+        .img_Member_customer {width: 48px;height: 48px;}
+        .layui-form-mid {float: initial;padding: 0px;}
+        i:hover {cursor: pointer;}
+        .tag-st > p {line-height: 35px;}
+        .cu-msimg {margin-left: 20%;}
+        .layui-tab-title li {min-width: 50px;}
+    </style>
+</head>
+
+<body>
+<div class="admin-main">
+<input type="hidden" name="hicutomerId" hicutomerId="" />
+<input type="hidden" id="opration" data-type="" data-orderId="" />
+<!--顾客的操作-->
+<div class="site-title">
+            <fieldset>
+                <legend>客户操作</legend>
+                <div class="layui-field-box coll-top">
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">操作客户(手术,订单,回访,预约,退款,咨询等..)</h2>
+                            <div class="layui-colla-content model-btns add">
+                                <blockquote class="layui-elem-quote">
+                                    <span class="layui-btn layui-btn-small add-custmer-consult"><i class="layui-icon">&#xe61f;</i>添加咨询</span>
+                                    <span class="layui-btn layui-btn-small add-deposit-btn"><i class="layui-icon">&#xe61f;</i>添加预收款</span>
+                                    <span class="layui-btn layui-btn-small add-order-sp"><i class="layui-icon">&#xe61f;</i>添加订单</span>
+                                    <span class="layui-btn layui-btn-small" data-model="Appointment" data-action="AppointmentAdd"><i class="layui-icon">&#xe61f;</i>添加咨询预约</span>
+                                    <span class="layui-btn layui-btn-small" data-model="Treat" data-action="Add"><i class="layui-icon">&#xe61f;</i>添加治疗预约</span>
+                                    <span class="layui-btn layui-btn-small" data-model="Surgery" data-action="Add"><i class="layui-icon">&#xe61f;</i>添加手术</span>
+                                    <span class="layui-btn layui-btn-small" data-model="CallBack" data-action="CallbackAdd"><i class="layui-icon">&#xe61f;</i>添加回访</span>
+                                </blockquote>
+                                <blockquote class="layui-elem-quote">
+                                    <span class="layui-btn layui-btn-small add-failture-btn"><i class="layui-icon">&#xe61f;</i>添加未成交</span>
+                                    <span class="layui-btn layui-btn-small si-add-img"><i class="layui-icon">&#xe61f;</i>添加照片</span> 
+                                    <span class="layui-btn layui-btn-small add-Tags-btn"><i class="layui-icon">&#xe61f;</i>添加标签</span>
+                                    <span class="layui-btn layui-btn-small" data-model="MedicalRecord" data-action="CustomerMedicalRecordAdd"><i class="layui-icon">&#xe61f;</i>添加病历</span>
+                                    <span class="layui-btn layui-btn-small add-actCoupon-btn"><i class="layui-icon">&#xe61f;</i>激活券</span>
+                                    <span class="layui-btn layui-btn-small" data-model="OwnerShipOrder" data-action="CustomerDeveloperAdd"><i class="layui-icon">&#xe61f;</i>开发人员变更</span>
+                                    <span class="layui-btn layui-btn-small" data-model="OwnerShipOrder" data-action="CustomerConsultanAdd"><i class="layui-icon">&#xe61f;</i>咨询人员变更</span> 
+                                </blockquote>
+                                <blockquote class="layui-elem-quote">
+                                    <span class="layui-btn layui-btn-small" data-model="CallBackRemind" data-action="CallbackRemindAdd"><i class="layui-icon">&#xe61f;</i>添加回访提醒</span>
+                                    <span class="layui-btn layui-btn-small" data-model="CallBackPlan" data-action="CallbackPlanAdd"><i class="layui-icon">&#xe61f;</i>添加回访计划</span>
+                                    <span class="layui-btn layui-btn-small" data-model="BackOrder" data-action="AddBackOrder"><i class="layui-icon">&#xe61f;</i>添加退项目</span>
+                                    <span class="layui-btn layui-btn-small" data-model="DepositRebateOrder" data-action="AddDepositRebate"><i class="layui-icon">&#xe61f;</i>添加退预收款</span> 
+                                    <span class="layui-btn layui-btn-small add-custmer-storeCommi"><i class="layui-icon">&#xe61f;</i>添加店家佣金</span> 
+                                    <span class="layui-btn layui-btn-small add-custmer-Relation"><i class="layui-icon">&#xe61f;</i>添加关系</span>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </fieldset>
+        </div>
+<!--顾客的各种信息-->  
+<div class="layui-field-box">
+        <div class="layui-tab layui-tab-card" overflow>
+            <ul class="layui-tab-title">
+                <li class="layui-this">客户信息</li>
+                <li class="custo-charges-cli">消费项目</li>
+                <li class="custo-getConsult-cli">咨询情况</li>
+                <li class="custo-appointment-cli">预约情况</li>
+                <li class="custo-Visit-cli">上门情况</li>
+                <li class="custo-Failture-cli">未成交情况</li>
+                <li class="custo-order-cli">订单情况</li>
+                <li class="custo-poto-cli">照片管理</li>
+                <li class="custo-oper-cli">划扣记录</li>
+                <li class="custo-callBack-cli">回访情况</li> 
+                <li class="custo-medicalRecord-cli">病历记录</li>
+                <li class="custo-money-cli">账户情况</li>
+                <li class="custo-owinerShip-cli">负责用户</li>
+                <li class="custo-rela-cli">客户间关系</li> 
+                <li class="custo-record-cli">店家</li>
+                <li>微信分销</li>
+            </ul>
+            <div class="layui-tab-content model-btns edit" id="commonInfoDiv">
+                <div class="layui-tab-item layui-show">
+                    <!--顾客概况-->
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">客户概要</h2>
+                            <div class="layui-colla-content layui-show">
+                                <fieldset class="layui-elem-field layui-field-title fi-cugy-info"></fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <!--顾客信息-->
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">客户信息</h2>
+                            <div class="layui-colla-content">
+                                <fieldset class="layui-elem-field layui-field-title">
+                                    <legend><span class="pointer "><i class="layui-icon">&#xe642;</i>修改顾客信息</span></legend>
+                                    <div style="overflow:auto;width:100%;">
+                                        <table class="layui-table tb-cu-info" style="width: 108%;"></table>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--顾客详细信息-->
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">客户详细信息</h2>
+                            <div class="layui-colla-content">
+                                <fieldset class="layui-elem-field layui-field-title">
+                                    <div class="layui-field-box">
+                                        <table class="layui-table tb-cu-detail-info"></table>
+
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                <!--消费项目-->
+                <div class="layui-tab-item">
+                    <table class="site-table table-hover tb-charges"></table>
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">消费项目</h2>
+                            <div class="layui-colla-content">
+                                <table class="site-table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>购买医院</th>
+                                        <th>购买日期</th>
+                                        <th>项目名称</th>
+                                        <th>单位</th>
+                                        <th>规格</th>
+                                        <th>总数量</th>
+                                        <th>划扣数量</th>
+                                        <th>剩余数量</th>
+                                        <th>下单用户</th>
+                                        <th>成交金额</th>
+                                        <th>现金+刷卡</th>
+                                        <th>预收款</th>
+                                        <th>券</th>
+                                        <th>佣金</th>
+                                        <th>欠款</th>
+                                        <th>退数量</th>
+                                        <th>退金额</th>
+                                    </tr>
+                                    </thead> 
+                                    <tbody class="tb-expense-charges"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--咨询情况-->
+                <div class="layui-tab-item ">
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">咨询情况</h2>
+                            <div class="layui-colla-content">
+
+                                <table class="site-table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>顾客编号</th>
+                                            <th>提交时间</th>
+                                            <th>提交用户</th>
+                                            <th>方式</th>
+                                            <th>咨询项目</th>
+                                            <th>内容</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tb-cus-zxqk"></tbody>
+                                </table>
+                                <div class="tb-cus-zxqknull"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--预约情况-->
+                <div class="layui-tab-item">
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">咨询预约</h2>
+                            <div class="layui-colla-content">
+                                <table class="site-table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>顾客编号</th>
+                                            <th>提交人</th>
+                                            <th>提交时间</th>
+                                            <th>预约日期</th>
+                                            <th>时间段</th>
+                                            <th>预约医院</th>
+                                            <th>预约内容</th>
+                                            <th>预约码</th>
+                                            <th>预约状态</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tb-Appo-Appointment"></tbody>
+
+                                </table>
+
+                                <div class="tb-Appo-Appointment-null"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">治疗预约</h2>
+                            <div class="layui-colla-content">
+                                <table class="site-table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>顾客编号</th>
+                                            <th>提交人</th>
+                                            <th>提交时间</th>
+                                            <th>预约日期</th>
+                                            <th>时间段</th>
+                                            <th>预约医生</th>
+                                            <th>预约项目</th>
+                                            <th>预约医院</th>
+                                            <th>预约状态</th>
+                                            <th>备注</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tb-Appoi-Treat"></tbody>
+
+                                </table>
+
+                                <div class="tb-Appoi-Treat-null"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">手术预约</h2>
+                            <div class="layui-colla-content">
+                                <table class="site-table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>顾客编号</th>
+                                            <th>提交人</th>
+                                            <th>提交时间</th>
+                                            <th>预约日期</th>
+                                            <th>麻醉类型</th>
+                                            <th>预约医生</th>
+                                            <th>预约项目</th>
+                                            <th>预约医院</th>
+                                            <th>手术预约状态</th>
+                                            <th>手术开始时间</th>
+                                            <th>手术结束时间</th>
+                                            <th>备注</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tb-Appo-Surgery"></tbody>
+
+                                </table>
+
+                                <div class="tb-Appo-Surgery-null"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--上门情况-->
+                <div class="layui-tab-item">
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">上门记录</h2>
+                            <div class="layui-colla-content">
+                                <table class="site-table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>顾客编号</th>
+                                            <th>上门时间</th>
+                                            <th>消费类型</th>
+                                            <th>新老客</th>
+                                            <th>分诊用户</th>
+                                            <th>上门医院</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tb-visitCase-visit"></tbody>
+                                </table>
+
+                                <div class="tb-visitCase-visit-null"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">分诊记录</h2>
+                            <div class="layui-colla-content">
+                                <table class="site-table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>顾客编号</th>
+                                            <th>分诊医院</th>
+                                            <th>分诊人员</th>
+                                            <th>分诊时间</th>
+                                            <th>接诊人员</th>
+                                            <th>备注</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tb-visitCase-Triage"></tbody>
+                                </table>
+                                <div class="tb-visitCase-Triage-null"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">部门接待</h2>
+                            <div class="layui-colla-content">
+                                <table class="site-table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>顾客编号</th>
+                                            <th>上门时间</th>
+                                            <th>部门名称</th>
+                                            <th>上门医院</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tb-visitCase-DeptVisit"></tbody>
+
+                                </table>
+
+                                <div class="tb-visitCase-DeptVisit-null"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">住院记录</h2>
+                            <div class="layui-colla-content">
+                                <table class="site-table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>顾客编号</th>
+                                            <th>住院时间</th>
+                                            <th>出院时间</th>
+                                            <th>操作用户</th>
+                                            <th>医院</th>
+                                            <th>住院状态</th>
+                                            <th>备注</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tb-visitCase-Inpatient"></tbody>
+                                </table>
+
+                                <div class="tb-visitCase-Inpatient-null"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--未成交情况-->
+                <div class="layui-tab-item">
+                <table class="site-table table-hover">
+                    <thead>
+                    <tr>
+                        <th>顾客编号</th>
+                        <th>提交人</th>
+                        <th>未成交类型</th>
+                        <th>未成交原因</th>
+                        <th>登记时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody class="tb-failture"></tbody>
+
+                </table>
+
+                <div class="tb-failture-null"></div>
+
+            </div>
+                <!--订单情况-->
+                <div class="layui-tab-item"> 
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">我的订单</h2>
+                            <div class="layui-colla-content">
+                                <table class="site-table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>顾客编号</th>  
+                                        <th>提交人</th>
+                                        <th>下单医院</th>
+                                        <th>提交时间</th>
+                                        <th>总价格</th>
+                                        <th>折后价格</th>
+                                        <th>支付状态</th>
+                                        <th>审核状态</th>
+                                        <th>支付时间</th>
+                                        <th>欠款金额</th>
+                                        <th>是否是住院单</th>
+                                        <th>总体折扣率</th>
+                                        <th>备注</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead> 
+                                    <tbody class="tb-or-Orders"></tbody>
+                                </table>
+                                <div class="tb-or-Ordersnull"></div>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">住院单</h2>
+                            <div class="layui-colla-content">
+                                <table class="site-table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>顾客编号</th> 
+                                        <th>提交人</th>
+                                        <th>下单医院</th>
+                                        <th>提交时间</th>
+                                        <th>总价格</th>
+                                        <th>折后价格</th>
+                                        <th>支付状态</th>
+                                        <th>审核状态</th>
+                                        <th>支付时间</th>
+                                        <th>欠款金额</th>
+                                        <th>是否是住院单</th>
+                                        <th>总体折扣率</th>
+                                        <th>备注</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead> 
+                                    <tbody class="tb-or-InpOrders"></tbody>
+                                </table>
+                                <div class="tb-or-InpOrdersnull"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">预收款单</h2>
+                            <div class="layui-colla-content">
+                                <table class="site-table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>顾客编号</th>
+                                        <th>下单医院</th>
+                                        <th>下单时间</th>
+                                        <th>下单人</th>
+                                        <th>总金额</th>
+                                        <th>支付状态</th>
+                                        <th>支付时间</th>
+                                        <th>备注</th> 
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="tb-or-DepositOrder"></tbody>
+                                </table>
+                                <div class="tb-or-DepositOrdernull"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title"> 退项目订单</h2>
+                            <div class="layui-colla-content">
+                                <table class="site-table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>下单医院</th>
+                                        <th>下单时间</th>
+                                        <th>下单人</th>
+                                        <th>总金额</th>
+                                        <th>扣减积分</th>
+                                        <th>支付状态</th>
+                                        <th>审核状态</th>
+                                        <th>支付时间</th> 
+                                        <th>备注</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                        <tbody class="tb-or-bkOrder"></tbody>
+                                </table>
+                                <div class="tb-or-bkOrdernull"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title"> 退预收款单</h2>
+                            <div class="layui-colla-content">
+                                <table class="site-table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>下单医院</th>
+                                        <th>下单时间</th>
+                                        <th>下单人</th>
+                                        <th>总金额</th>
+                                        <th>退预收款总额</th>
+                                        <th>退积分总额</th>
+                                        <th>退券总额</th>
+                                        <th>支付时间</th>
+                                        <th>支付状态</th>
+                                        <th>审核状态</th>
+                                        <th>备注</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                        <tbody class="tb-or-drebateOrder"></tbody>
+                                </table>
+                                <div class="tb-or-drebateOrdernull"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--照片-->
+                <div class="layui-tab-item">
+                <div class="layui-collapse">
+                    <div class="layui-colla-item">
+                        <h2 class="layui-colla-title">咨询</h2>
+                        <div class="layui-colla-content">
+
+                            <table class="site-table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>顾客编号</th>
+                                    <th>提交时间</th>
+                                    <th>提交用户</th>
+                                    <th>项目</th>
+                                    <th>缩略图</th>
+                                    <th>内容</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody class="tb-poto-Consult"></tbody>
+                            </table>
+
+                            <div class="tb-poto-Consultnull"></div>
+
+                        </div>
+                    </div>
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">治疗前</h2>
+                            <div class="layui-colla-content">
+
+                                <table class="site-table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>顾客编号</th>
+                                        <th>提交时间</th>
+                                        <th>提交用户</th>
+                                        <th>症状</th>
+                                        <th>缩略图</th>
+                                        <th>内容</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="tb-poto-Before"></tbody>
+                                </table>
+                                <div class="tb-poto-Beforenull"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">治疗中</h2>
+                            <div class="layui-colla-content">
+
+                                <table class="site-table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>顾客编号</th>
+                                        <th>提交时间</th>
+                                        <th>提交用户</th>
+                                        <th>症状</th>
+                                        <th>缩略图</th>
+                                        <th>内容</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="tb-poto-Under"></tbody>
+                                </table>
+                                <div class="tb-poto-Undernull"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">治疗后</h2>
+                            <div class="layui-colla-content">
+
+                                <table class="site-table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>顾客编号</th>
+                                        <th>提交时间</th>
+                                        <th>提交用户</th>
+                                        <th>症状</th>
+                                        <th>缩略图</th>
+                                        <th>内容</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="tb-poto-After"></tbody>
+                                </table>
+                                <div class="tb-poto-Afternull"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">其他</h2>
+                            <div class="layui-colla-content">
+
+                                <table class="site-table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>顾客编号</th>
+                                        <th>提交时间</th>
+                                        <th>提交用户</th>
+                                        <th>缩略图</th>
+                                        <th>内容</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="tb-poto-Other"></tbody>
+                                </table>
+                                <div class="tb-poto-Othernull"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              
+            </div>
+                <!--划扣记录-->
+                <div class="layui-tab-item">
+                    <table class="site-table table-hover">
+                        <thead>
+                            <tr>
+                                <th>顾客编号</th>
+                                <th>顾客姓名</th>
+                                <th>项目名称</th>
+                                <th>划扣数量</th>
+                                <th>划扣时间</th>
+                                <th>操作用户</th>
+                                <th>执行医生</th>
+                                <th>操作医院</th> 
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody class="tb-Opera"> 
+                        </tbody> 
+                    </table>
+                </div>
+                <div class="layui-tab-item">
+
+                    <table class="site-table table-hover">
+                        <thead>
+                            <tr>
+                                <th>回访提醒日期</th>
+                                <th>类型</th>
+                                <th>提醒内容</th>
+                                <th>提醒用户</th>
+                                <th>状态</th>
+                                <th>回访用户</th>
+                                <th>回访时间</th>
+                                <th>方式</th>
+                                <th>回访内容</th>
+                                <th>提醒创建用户</th>
+                                <th>提醒创建时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody class="callBack-table"></tbody>
+
+                    </table>
+                </div>
+                <div class="layui-tab-item">
+                        <table class="site-table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>提交时间</th>
+                                    <th>提交用户</th>
+                                    <th>病历类型</th>
+                                    <th>病历号</th>
+                                    <th>存放位置</th>
+                                    <th>备注</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="medicalRecord-table"></tbody>
+                        
+                    </table>
+                    </div> 
+                <div class="layui-tab-item">
+                        <table class="site-table table-hover tb-money"></table>
+                        <div class="layui-collapse">
+                            <div class="layui-colla-item">
+                                <h2 class="layui-colla-title">预收款</h2>
+                                <div class="layui-colla-content">
+                                    <table class="site-table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>购买日期</th>
+                                            <th>预收款类型</th>
+                                            <th>购买医院</th>
+                                            <th>获得方式</th>
+                                            <th>总金额</th>
+                                            <th>剩余金额</th>
+                                            <th>提交人</th>
+                                            <th>备注</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="tb-money-deposit"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-collapse">
+                            <div class="layui-colla-item">
+                                <h2 class="layui-colla-title">券变动</h2>
+                                <div class="layui-colla-content">
+                                    <table class="site-table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>购买日期</th>
+                                                <th>券类型</th>
+                                                <th>获得方式</th>
+                                                <th>金额</th>
+                                                <th>提交人</th>
+                                                <th>备注</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody  class="tb-money-coupchan">
+                                     
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-collapse">
+                            <div class="layui-colla-item">
+                                <h2 class="layui-colla-title">有效代金券</h2>
+                                <div class="layui-colla-content">
+                                    <table class="site-table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>购买日期</th>
+                                            <th>券类型</th>
+                                            <th>购买医院</th>
+                                            <th>获得方式</th>
+                                            <th>总金额</th>
+                                            <th>剩余金额</th>
+                                            <th>提交人</th>
+                                            <th>备注</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="tb-money-coupon"></tbody>
+                                    </table>
+                                    <div class="tb-money-couponnull"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-collapse">
+                            <div class="layui-colla-item">
+                                <h2 class="layui-colla-title">失效代金券</h2>
+                                <div class="layui-colla-content">
+                                    <table class="site-table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>购买日期</th>
+                                            <th>预收款类型</th>
+                                            <th>购买医院</th>
+                                            <th>获得方式</th>
+                                            <th>总金额</th>
+                                            <th>剩余金额</th>
+                                            <th>提交人</th>
+                                            <th>券状态</th>
+                                            <th>失效日期</th>
+                                            <th>备注</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="tb-money-overcoupon"></tbody>
+                                    </table>
+                                    <div class="tb-money-overconull"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-collapse">
+                            <div class="layui-colla-item">
+                                <h2 class="layui-colla-title">积分变动</h2>
+                                <div class="layui-colla-content">
+                                    <table class="site-table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>日期</th>
+                                            <th>类型</th> 
+                                            <th>操作医院</th>
+                                            <th>数量</th> 
+                                            <th>提交人</th> 
+                                            <th>备注</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="tb-money-poichan"></tbody>
+                                    </table> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-collapse">
+                            <div class="layui-colla-item">
+                                <h2 class="layui-colla-title">预收款变动</h2>
+                                <div class="layui-colla-content">
+                                    <table class="site-table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>购买日期</th>
+                                            <th>预收款类型</th>
+                                            <th>获得方式</th>
+                                            <th>金额</th>
+                                            <th>提交人</th>
+                                            <th>备注</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="tb-money-depochan"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-collapse">
+                            <div class="layui-colla-item">
+                                <h2 class="layui-colla-title">佣金记录</h2>
+                                <div class="layui-colla-content">
+                                    <table class="site-table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>创建时间</th> 
+                                                <th>获得方式</th>
+                                                <th>金额</th>
+                                                <th>提交人</th>
+                                                <th>备注</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="tb-money-commichange"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="layui-tab-item">
+                    <div class="">
+                        <div class="">
+                            <blockquote class="layui-elem-quote layui-quote-nm">
+                                <span>开发人员</span>
+                                <span class="layui-btn layui-btn-small history-detail fr" data-type="1" style="margin-top:-4px;">历史详细</span>
+                            </blockquote>
+                            <div>
+                                <table class="site-table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>医院</th>
+                                            <th>用户</th>
+                                            <th>开始时间</th>
+                                            <th>备注</th>
+                                        </tr>
+                                    </thead>
+                                        <tbody class="owinerShip-table" type="1"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="">
+                            <blockquote class="layui-elem-quote layui-quote-nm">
+                                <span>咨询人员</span>
+                                <span class="layui-btn layui-btn-small history-detail fr" data-type="2" style="margin-top:-4px;">历史详细</span>
+                            </blockquote>
+                            <div>
+                                <table class="site-table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>医院</th>
+                                            <th>用户</th>
+                                            <th>开始时间</th>
+                                            <th>备注</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="owinerShip-table" type="2"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="owinerShip-detail-pop hide">
+                            <div class="m-20">
+                                <table class="site-table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>医院</th>
+                                            <th>用户</th>
+                                            <th>开始时间</th>
+                                            <th>结束时间</th>
+                                            <th>备注</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="owinerShip-detail-table"></tbody>
+                                </table>
+                    </div>
+                </div>
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    <table class="site-table table-hover">
+                        <thead>
+                            <tr>
+                                <th>顾客编号</th>
+                                <th>提交用户</th>
+                                <th>关系</th>
+                                <th>关联的顾客</th>
+                                <th>提交时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody class="tb-rela"></tbody>
+                    </table>
+                    <div class="tb-rela-null"></div>
+                </div> 
+                <div class="layui-tab-item">
+                    <table class="site-table table-hover">
+                        <thead>
+                            <tr>
+                                <th>店家名称</th>
+                                <th>提交时间</th>
+                                <th>提交人</th>
+                                <th>金额</th>
+                                <th>医院</th>
+                                <th>备注</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody class="tb-storeCommi"></tbody>
+                    </table>
+                    <div class="tb-storeCommi-null"></div>
+                </div>
+                <div class="layui-tab-item">21</div>
+                            @*<!--顾客查询公用DIV-->*@
+                            @*                        <div id="commonInfoDiv" class="layui-tab-item hide "></div>*@
+                        </div>
+                    </div>
+                </div> 
+</div>
+<!--客户操作按钮公用打开页面DIV-->
+<form class="layui-form hide" id="cuoPerationComm"></form>
+<!--修改客户渠道-->
+<form class="layui-form hide edit-customer-channel m-20">
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择渠道:</label>
+        <div class="layui-input-block">
+            @Html.SelectCategoryByHospital(SelectType.Channel, "EditCustomerChannel", "EditCustomerChannel")
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <span class="layui-btn edit-Channel-btn">立即修改</span>
+        </div>
+    </div>
+</form>
+<!--修改客户店铺-->
+<form class="layui-form hide edit-customer-StoreCategory m-20">
+  
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择店家:</label>
+        <div class="layui-input-block">
+            @Html.SelectCategoryByHospital(SelectType.StoreCategory, "EditCustomerStoreCategory", "EditCustomerStoreCategory")
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <span class="layui-btn edit-StoreCategory-btn">立即修改</span>
+        </div>
+    </div>
+</form>
+<!--修改客户主咨询项目-->
+<form class="layui-form hide edit-customer-Symptom m-20">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">主咨询项目:</label>
+        <div class="layui-input-block">
+            @Html.SelectCategoryByHospital(SelectType.Symptom, "EditCustomerSymptom", "EditCustomerSymptom")
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <span class="layui-btn edit-Symptom-btn">立即修改</span>
+        </div>
+    </div>
+</form>
+<!--添加照片-->
+<form class="layui-form hide add-custmer-img" action="">
+    <hr />
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择日期:</label>
+        <div class="layui-input-block">
+            <input class="layui-input" name="CreateTime" placeholder="请选择日期" onclick="layui.laydate({ elem: this, festival: true })">
+
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择类型:</label>
+        <div class="layui-input-block">
+            <select class="Type" selected="selected" name="Type" lay-filter="addImgType">
+                <option value="-1" selected="selected">请选择</option>
+                <option value="1">咨询</option>
+                <option value="2">治疗前</option>
+                <option value="3">治疗中</option>
+                <option value="4">治疗后</option>
+                <option value="5">其他</option>
+            </select>
+
+        </div>
+    </div>
+
+    <div class="layui-form-item imgaddCharge_div">
+        <label class="layui-form-label">治疗项目:</label>
+        <div class="layui-input-block">
+            <input type="hidden" name="ChargeID" />
+            <input type="text" id="addCharge" name="addCharge" placeholder="点击请选择" class="layui-input layui-disabled Charge-add" readonly="readonly">
+            <div class="charge-selected m-bt-10"></div>
+        </div>
+    </div>
+    <div class="layui-form-item imgaddSymptom_div">
+        <label class="layui-form-label">咨询项目:</label>
+        <div class="layui-input-block">
+            @Html.SelectCategoryByHospital(SelectType.Symptom, "SymptomID", "SymptomID", "SymptomID")
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择图片:</label>
+        <div class="layui-input-block">
+            <input type="file" name="imagepath" class="layui-upload-file" lay-type="jpg|png|gif" multiple="multiple" />
+        </div>
+        <div class="layui-input-block" name="percentProgress" hidden>
+            <div class="layui-progress" lay-showPercent="true">
+                <div class="layui-progress-bar layui-bg-red" style="width: 10%;" lay-percent="10%">
+                    <span class="layui-progress-text">10%</span>
+                </div>
+            </div>
+        </div>
+        <div class="layui-input-block" name="ReducedImageInfo">
+
+        </div>
+        <div name="ImageInfoDiv" hidden>
+
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">备注描述:</label>
+        <div class="layui-input-block">
+            <textarea placeholder="请输入内容" name="Remark" class="layui-textarea"></textarea>
+        </div>
+    </div>
+    <input type="hidden" name="CustomerID" />
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn img_sub" lay-submit="" lay-filter="formDemo">立即提交</button>
+        </div>
+    </div>
+</form>
+<!-- 项目弹窗 -->
+<div class="charge-pop hide">
+    <div class="layui-form m-10 clearfix">
+        <form class="m-20">
+            <div class="fl" style="margin-left:-35px;">
+                <label class="layui-form-label" style="width:70px;">拼音码</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" name="smartProductPinYin" placeholder="请输入拼音码">
+                </div>
+            </div>
+            <div class="fl">
+                <label class="layui-form-label" style="width:70px;">名称</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" name="smartProductNmae" placeholder="请输入名称">
+                </div>
+            </div>
+            <span class="layui-btn search-charge-btn fr">查询</span>
+        </form>
+    </div>
+    <div class="m-20">
+        <table class="site-table table-hover">
+            <thead>
+            <tr>
+                <td>选择</td>
+                <th>项目名称</th>
+                <th>拼音码</th>
+                <th>类型</th>
+                <th>规格</th>
+            </tr>
+            </thead>
+            <tbody class="charge-table"></tbody>
+        </table>
+    </div>
+    <div class="m-20 clearfix">
+        <span class="layui-btn charge submit-btn fr" name="chargeConfirmBtn">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+    </div>
+</div>
+<!--修改划扣-->
+<div class="layui-form hide edit-depar-pop">
+        <div class="site-text site-block">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">姓名:</label>
+                    <div class="layui-input-block">
+                        <input type="hidden" name="cuId">
+                        <input type="hidden" name="cuOperId">
+                        <input type="text" name="cuName" class="layui-input layui-fontColor-6" readonly="readonly">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">项目:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="cuChargeName" class="layui-input layui-fontColor-6" readonly="readonly">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">数量:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="cuNum" class="layui-input layui-fontColor-6" readonly="readonly">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">医生:</label>
+                    <input type="hidden" name="edittrIndex" />
+                    <div class="layui-input-block">
+                        <table class="site-table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>选择医生</th>
+                                    <th>选择分工</th>
+                                    <th style="border: none"><span class="layui-btn layui-btn-normal add-pay-btn fr"><i class="layui-icon">&#xe61f;</i></span></th>
+                                </tr>
+                            </thead>
+                            <tbody class="tb-editDoc"></tbody>
+                        </table>
+
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <span class="layui-btn edit-btn">保存</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+</div> 
+<!--医生弹窗-->
+<div class="layui-form doctor-pop hide">
+        <form class="layui-form">
+            <div class="layui-field-box">
+                <!--无加载-->
+                <div class="layui-form-item">
+                    <div class="fl">
+                        <label class="layui-form-label">选择部门:</label>
+                        <div class="layui-input-inline" style="width: 115px">
+                            @Html.SelectCategoryByHospital(SelectType.Dept, "smartaddcuDept", "smartaddcuDept")
+                        </div>
+                    </div>
+
+                    <div class="fl">
+                        <label class="layui-form-label">用户姓名:</label>
+                        <div class="layui-input-inline" style="width: 115px">
+                            <input type="text" id="addcuuserNmae" name="addcuuserNmae" placeholder="请输入顾客姓名" class="layui-input ">
+                        </div>
+                    </div>
+                    <span class="layui-btn fr search-user">查询</span>
+                </div>
+
+                <!--数据table-->
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <th>账号</th>
+                            <th>姓名</th>
+                            <th>部门</th>
+                            <th>性别</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="user-table"></tbody>
+                </table>
+                <div class="user-info"></div>
+                <!--分页容器-->
+                <div id="remindUserpageDiv"></div>
+            </div>
+        </form>
+</div> 
+<!--查看退预收款单-->
+<form class="layui-form see-DepositRebate hide">
+    <div class="m-10" style="width: 80%">
+        <div class="site-title">
+            <fieldset><legend>退预收款</legend></fieldset>
+        </div> 
+        <div class="layui-form-item">
+            <label class="layui-form-label">提交时间:</label>
+            <div class="layui-input-block">
+                <input type="text" name="CreateTime" placeholder="500" readonly="readonly" class="layui-input ToMoney">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">提交用户:</label>
+            <div class="layui-input-block">
+                <input type="text" name="CreateUserName" placeholder="500" readonly="readonly" class="layui-input ToMoney">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">订单金额:</label>
+            <div class="layui-input-block">
+                <input type="text" name="Amount" placeholder="500" readonly="readonly" class="layui-input ToMoney">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">备注:</label>
+            <div class="layui-input-block">
+                <input type="text" name="Remark" placeholder="500" readonly="readonly" class="layui-input ToMoney">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">预收款详细:</label>
+            <div class="layui-input-block">
+                <table class="site-table table-hover">
+                    <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>名称</th>
+                        <th>金额</th>
+                    </tr>
+                    </thead>
+                    <tbody class="DepositRebate-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">券详细:</label>
+            <div class="layui-input-block">
+                <table class="site-table table-hover">
+                    <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>名称</th>
+                        <th>金额</th>
+                    </tr>
+                    </thead>
+                    <tbody class="DepositRebateC-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</form>
+<!--查看退项目单-->
+<form class="layui-form see-BackOrder hide">
+    <div class="m-10" style="width: 100%">
+        <div class="site-title">
+            <fieldset><legend>退项目单</legend></fieldset>
+        </div>
+     
+        <div class="layui-form-item">
+            <label class="layui-form-label">提交时间:</label>
+            <div class="layui-input-block">
+                <input type="text" name="CreateTime" placeholder="500" readonly="readonly" class="layui-input ToMoney">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">提交用户:</label>
+            <div class="layui-input-block">
+                <input type="text" name="CreateUserName" placeholder="500" readonly="readonly" class="layui-input ToMoney">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">订单金额:</label>
+            <div class="layui-input-block">
+                <input type="text" name="Amount" placeholder="500" readonly="readonly" class="layui-input ToMoney">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">备注:</label>
+            <div class="layui-input-block">
+                <input type="text" name="Remark" placeholder="500" readonly="readonly" class="layui-input ToMoney">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">详细:</label>
+            <div class="layui-input-block">
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <th>项目编号</th>
+                            <th>项目名称</th>
+                            <th>数量</th>
+                            <th>金额</th>
+                        </tr>
+                    </thead>
+                    <tbody class="BackOrder-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>    
+</form>
+            
+<div class="customer-pops"></div> 
+<div class="data-doT-tem">
+<!--客户概要-->
+<script type="text/x-dot-template" class="cu-gy-temp"> 
+<div class="layui-field-box">
+    <div class="fl tag-st">
+        <p>
+            顾客特征:<span>
+                {{ if (it.ComeType =="已上门"){ }}
+                <span class="layui-btn layui-btn-mini">已上门</span>
+                {{ } else { }}
+                <span class="layui-btn layui-btn-danger layui-btn-mini">未上门</span>
+                {{ } }}
+
+                {{ if (it.DealType =="已成交"){ }}
+                <span class="layui-btn layui-btn-mini">已成交</span>
+                {{ } else { }}
+                <span class="layui-btn layui-btn-danger layui-btn-mini">未成交</span>
+                {{ } }}
+            </span>
+        </p>
+        <p>
+            咨询项目: 
+                {{~it.Symptoms:value:index}}
+                <span class="layui-btn layui-btn-mini">{{= value }}</span>
+                {{~}}
+          
+        </p>
+        <p class="tags">
+            顾客标签: 
+                {{~it.Tags:value:index}}
+                <span class="layui-btn layui-btn-mini">{{= value }}</span>
+                {{~}} 
+        </p>
+        <p>
+            会员权益: 
+                {{~it.Equitys:value:index}}
+                 <span class="layui-btn layui-btn-mini">{{= value }}</span>
+                {{~}} 
+        </p>
+    </div>
+    <div class="cu-msimg">
+        <div class="layui-input-inline m-20">
+            <div class="layui-input-inline">
+                <img class="img_Member_customer" src="{{=it.MemberCategoryImage == null ? '':it.MemberCategoryImage}}" />
+            </div>
+            <div class="layui-form-mid layui-word-aux">会员等级</div>
+        </div>
+
+        <div class="layui-input-inline m-20">
+            <div class="layui-input-inline">
+                <img class="img_Member_customer" src="{{=it.ShareCategoryImage == null ? '':it.ShareCategoryImage}}" />
+            </div>
+            <div class="layui-form-mid layui-word-aux">分享等级</div>
+        </div>
+    </div>
+</div> 
+</script>
+<!--客户信息-->
+<script type="text/x-dot-template" class="cuinfo-temp">
+    <tbody>
+        <tr>
+            <td>顾客编号:</td>
+            <td>{{=it.CustomerID}}</td>
+            <td>顾客姓名:</td>
+            <td>{{=it.CustomerName}}</td>
+            <td>顾客性别:</td>
+            <td>
+                {{ if (it.Gender ==1){ }}
+                男
+                {{ } else { }}
+                女
+                {{ } }}
+            </td>
+            <td>渠道:</td>
+            <td><i class="layui-icon">&#xe642;</i>{{=it.ChannelName == null ? "暂无": it.ChannelName}}</td>
+            <td>联系方式:</td>
+            <td><i class="layui-icon">&#xe642;</i>{{=it.Mobile == null ? "暂无": it.Mobile}}</td>
+            <td>备用联系方式:</td>
+            <td><i class="layui-icon">&#xe642;</i>{{=it.MobileBackup == null ? "暂无": it.MobileBackup }}</td>
+            <td>登记人:</td>
+            <td>{{=it.CreateUserName  == null ? "暂无": it.CreateUserName }}</td>
+        </tr>
+        <tr>
+            <td ConsultSymptomID="{{=it.ConsultSymptomID}}">咨询项目:</td>
+            <td><i class="layui-icon">&#xe642;</i><span>{{=it.ConsultSymptomName}}</span> </td>
+            <td>开发人员:</td>
+            <td>{{=it.ExploitUserName == null ? "暂无":it.ExploitUserName}}</td>
+            <td>咨询人员:</td>
+            <td>{{=it.ManagerUserName == null ? "暂无":it.ManagerUserName}}</td>
+            <td>登记时间</td>
+            <td>{{=it.CreateTime == null ? "暂无":it.CreateTime.substring(0,10)}}</td>
+            <td PromoterID="{{=it.PromoterID}}">推荐人:</td>
+            <td>{{=it.PromoterName == null ? "暂无":it.PromoterName}}</td>
+            <td>地区:</td>
+            <td>{{=it.City == null ? "暂无":it.City}}</td>
+            <td>地址:</td>
+            <td>{{=it.Address == null ? "暂无":it.Address}}</td>
+        </tr>
+        <tr>
+            <td>推荐店家:</td>
+            <td>
+                <i class="layui-icon">&#xe642;</i>
+                {{=it.StoreName == null ? "暂无":it.StoreName}}
+            </td>
+            <td>咨询次数:</td>
+            <td>{{=it.ConsultTimes ==null ? "0": it.ConsultTimes}}次</td>
+            <td>最后光临时间:</td>
+            <td>{{=it.LastVisitTime  == null ? "暂无":it.LastVisitTime.substring(0,10) }}</td>
+            <td>初诊医院:</td>
+            <td>{{=it.FirstVisitHospital  == null ? "暂无":it.FirstVisitHospital}}</td>
+            <td>初诊日期:</td>
+            <td>{{=it.FirstVistiTime   == null ? "暂无":it.FirstVistiTime.substring(0,10) }}</td>
+            <td>年龄:</td>
+            <td>{{=it.Age  == null ? "暂无":it.Age}}</td>
+            <td>生日:</td>
+            <td>{{=it.Birthday   == null ? "暂无":it.Birthday.slice(0,10) }}</td>
+        </tr>
+        <tr>
+            <td>微信绑定状态:</td>
+            <td>{{=it.WeChat == null ? "暂无绑定":it.WeChat}}</td>
+            <td>绑定时间:</td>
+            <td>{{=it.WechatBindTime   == null ? "暂无":it.WechatBindTime.slice(0,10) }}</td>
+            <td>上门状态:</td>
+            <td>
+                {{ if (it.ComeType ==1){ }}
+                已上门
+                {{ } else { }}
+                未上门
+                {{ } }}
+            </td>
+            <td>成交状态:</td>
+            <td>
+                {{ if (it.DealType ==1){ }}
+                已成交
+                {{ } else { }}
+                未成交
+                {{ } }}
+            </td>
+            <td>登记医院:</td>
+            <td>{{=it.CreateHospital  == null ? "暂无":it.CreateHospital}}</td>
+            <td>预约医院:</td>
+            <td>{{=it.AppointmentHospital  == null ? "暂无":it.AppointmentHospital}}</td>
+            <td>预约时间:</td>
+            <td>{{=it.AppointmentDate  == null ? "暂无":it.AppointmentDate.slice(0,10) }}</td>
+        </tr>
+    </tbody> 
+</script>
+<!--客户详细信息-->
+<script type="text/x-dot-template" class="cuinfo-detail-temp">
+    <tbody>
+        <tr>
+            <td>微信:</td>
+            <td><i class="layui-icon">&#x1007;</i>{{=it.WeChat == null ? "暂无绑定":it.WeChat}}</td>
+            <td>QQ:</td>
+            <td>{{=it.QQ == null ? "暂无":it.QQ}}</td>
+            <td>{{=it.Custom1Name == null ? "暂无":it.Custom1Name}}</td>
+            <td>{{=it.Custom1 == null ? "暂无":it.Custom1}}</td>
+            <td>{{=it.Custom2Name == null ? "暂无":it.Custom2Name}}</td>
+            <td>{{=it.Custom2 == null ? "暂无":it.Custom2}}</td>
+            <td>{{=it.Custom3Name == null ? "暂无":it.Custom3Name}}</td>
+            <td>{{=it.Custom3 == null ? "暂无":it.Custom3}}</td>
+            <td>{{=it.Custom4Name == null ? "暂无":it.Custom4Name}}</td>
+            <td>{{=it.Custom4 == null ? "暂无":it.Custom4}}</td> 
+        </tr>
+        <tr>
+            <td>{{=it.Custom5Name == null ? "暂无":it.Custom5Name}}</td>
+            <td>{{=it.Custom5 == null ? "暂无":it.Custom5}}</td>
+            <td>{{=it.Custom6Name == null ? "暂无":it.Custom6Name}}</td>
+            <td>{{=it.Custom6 == null ? "暂无":it.Custom6}}</td>
+            <td>{{=it.Custom7Name == null ? "暂无":it.Custom7Name}}</td>
+            <td>{{=it.Custom7 == null ? "暂无":it.Custom7}}</td>
+            <td>{{=it.Custom8Name == null ? "暂无":it.Custom8Name}}</td>
+            <td>{{=it.Custom8 == null ? "暂无":it.Custom8}}</td>
+            <td>{{=it.Custom9Name == null ? "暂无":it.Custom9Name}}</td>
+            <td>{{=it.Custom9 == null ? "暂无":it.Custom9}}</td>
+            <td>{{=it.Custom10Name == null ? "暂无":it.Custom10Name}}</td>
+            <td>{{=it.Custom10 == null ? "暂无":it.Custom10}}</td>
+        </tr>
+    </tbody>
+</script>
+<!--咨询情况-->
+<script type="text/x-dot-template" class="cu-consult-temp">
+    {{for(var item in it){ }}
+    <tr>
+        <td>{{= it[item].CustomerID == null ? "暂无":  it[item].CustomerID}}</td>
+        <td>{{= it[item].CreateTime.substring(0,10) == null ? "暂无":  it[item].CreateTime.substring(0,10)}}</td>
+        <td>{{= it[item].CreateUserName == null ? "暂无": it[item].CreateUserName}}</td>
+        <td>{{= it[item].Tool == null ? "暂无":it[item].Tool}}</td>
+        <td>{{= it[item].Symptoms == null ? "暂无":it[item].Symptoms}}</td>
+        <td>{{= it[item].Content == null ? "暂无": it[item].Content}}</td>
+        <td edId="{{= it[item].ID}}">
+            <span class="layui-btn layui-btn-mini editConsult"><i class="layui-icon">&#xe642;</i>编辑</span>
+            <span class="layui-btn layui-btn-mini layui-btn-danger delConsult"><i class="layui-icon">&#xe640;</i>删除</span>
+        </td>
+    </tr>
+    {{ } }}
+</script>
+<!--预约情况-咨询预约-->
+<script type="text/x-dot-template" class="Appo-Appointment-temp">
+    {{~it:value}}
+    <tr>
+        <td>{{= value.CustomerID == null ? "暂无":  value.CustomerID}}</td>
+        <td>{{= value.CreateUserName == null ? "暂无":  value.CreateUserName}}</td>
+        <td>{{= value.CreateTime.substring(0,10) == null ? "暂无": value.CreateTime.substring(0,10)}}</td>
+        <td>{{= value.AppointmentDate.substring(0,10) == null ? "暂无": value.AppointmentDate.substring(0,10)}}</td>
+        <td>{{= value.AppointmentStartTime == null ? "暂无": value.AppointmentStartTime}}-{{= value.AppointmentEndTime == null ? "暂无": value.AppointmentEndTime}}</td>
+        <td>{{= value.HospitalName == null ? "暂无": value.HospitalName}}</td>
+        <td>{{= value.Content == null ? "暂无":value.Content}}</td>
+        <td>{{= value.Code == null ? "暂无":value.Code}}</td>
+        <td>{{ if (value.Status ==1){ }}未上门{{ } else { }}已完成预约{{ } }}</td>
+        <td data-id="{{= value.ID}}">
+            <span class="layui-btn layui-btn-mini btn-edit" data-model="Appointment" data-action="Update"><i class="layui-icon">&#xe642;</i>编辑</span>
+            <span class="layui-btn layui-btn-mini layui-btn-danger btn-rmv" data-model="Appointment"><i class="layui-icon">&#xe640;</i>删除</span>
+        </td>
+    </tr>
+    {{~}}
+</script>
+<!--预约情况-治疗预约-->
+<script type="text/x-dot-template" class="Appo-Treat-temp">
+    {{~it:value}}
+    <tr>
+        <td>{{= value.CustomerID == null ? "暂无":  value.CustomerID}}</td>
+        <td>{{= value.CreateUserName == null ? "暂无":  value.CreateUserName}}</td>
+        <td>{{= value.CreateTime == null ? "暂无": value.CreateTime}}</td>
+        <td>{{= value.AppointmentDate.substring(0,10) == null ? "暂无":value.AppointmentDate.substring(0,10)}}</td>
+        <td>{{= value.AppointmentStartTime == null ? "暂无": value.AppointmentStartTime}}-{{= value.AppointmentEndTime == null ? "暂无": value.AppointmentEndTime}}</td>
+        <td>{{= value.HospitalName == null ? "暂无":value.HospitalName}}</td>
+
+        <td>{{= value.ChargeName == null ? "暂无":value.ChargeName}}</td>
+        <td>{{= value.HospitalName == null ? "暂无":value.HospitalName}}</td>
+        <td>{{ if (value.Status ==1){ }}未上门{{ } else { }}已完成预约{{ } }}</td>
+        <td>{{= value.Remark == null ? "暂无":value.Remark}}</td>
+        <td data-id="{{= value.ID}}">
+            <span class="layui-btn layui-btn-mini btn-edit" data-model="Treat" data-action="Update"><i class="layui-icon">&#xe642;</i>编辑</span>
+            <span class="layui-btn layui-btn-mini layui-btn-danger btn-rmv" data-model="Treat"><i class="layui-icon">&#xe640;</i>删除</span>
+        </td>
+    </tr>
+    {{~}}
+</script>
+<!---预约情况-手术预约-->
+<script type="text/x-dot-template" class="Appo-Surgery-temp">
+        {{~it:value}}
+        <tr>
+            <td>{{= value.CustomerID == null ? "暂无":  value.CustomerID}}</td>
+            <td>{{= value.CreateUserName == null ? "暂无":  value.CreateUserName}}</td>
+            <td>{{= value.CreateTime == null ? "暂无": value.CreateTime}}</td>
+            <td>{{= value.AppointmentDate == null ? "暂无":value.AppointmentDate.substring(0,10)}}</td>
+            <td>{{= value.AppointmentStartTime == null ? "暂无": value.AppointmentStartTime}}-{{= value.AppointmentEndTime == null ? "暂无": value.AppointmentEndTime}}</td>
+            <td>{{ if (value.AnesthesiaType ==1){ }}全麻{{ } else { }}局麻{{ } }}</td>
+
+            <td>{{= value.ChargeName == null ? "暂无":value.ChargeName}}</td>
+            <td>{{= value.HospitalName == null ? "暂无":value.HospitalName}}</td>
+            <td>
+                {{ if (value.Status ==0){ }}
+                未完成
+                {{ } }}
+                {{ if (value.Status ==1){ }}
+                正在进行中
+                {{ } }}
+                {{ if (value.Status ==2){ }}
+                已完成
+                {{ } }}
+            </td>
+            <td>{{= value.StartTime == null ? "暂无":value.StartTime}}</td>
+            <td>{{= value.EndTime == null ? "暂无":value.EndTime}}</td>
+            <td>{{= value.Remark == null ? "暂无":value.Remark}}</td>
+            <td data-id="{{= value.ID}}">
+                <span class="layui-btn layui-btn-mini btn-edit" data-model="Surgery" data-action="Update"><i class="layui-icon">&#xe642;</i>编辑</span>
+                <span class="layui-btn layui-btn-mini layui-btn-danger btn-rmv" data-model="Surgery"><i class="layui-icon">&#xe640;</i>删除</span>
+            </td>
+        </tr>
+        {{~}}
+    </script>
+<!--上门情况-上门记录-->
+<!-- 回访情况 -->
+<script type="text/x-dot-template" class="callBack-tmp">
+        {{~it:value}}
+        {{ var flag = (value.Status == 0); }}
+        <tr>
+            <td>{{= value.TaskTime }}</td>
+            <td>{{= value.CategoryName }}</td>
+            <td>{{= value.Name }}</td>
+            <td>{{= value.UserName }}</td>
+            <td>{{= flag ? "未完成" : "已完成" }}</td>
+            <td>{{= value.TaskCreateUser }}</td>
+            <td>{{= value.TaskCreateTime }}</td>
+            <td>{{= value.Tool }}</td>
+            <td>{{= value.Content }}</td>
+            <td>{{= value.CreateUserName }}</td>
+            <td>{{= value.CreateTime }}</td>
+            <td data-id="{{= value.ID}}">
+                <span class="layui-btn layui-btn-mini btn-edit" data-model="{{= flag ? "CallBackRemind" : "CallBack" }}" data-action="{{= flag ? "UpdateCallbackRemind" : "UpdateCallback" }}"><i class="layui-icon">&#xe642;</i>编辑</span>
+            </td>
+        </tr>
+        {{~}}
+    </script>
+<!-- End 回访情况 -->
+<!-- 负责用户 -->
+<script type="text/x-dot-template" class="owinerShip-tmp">
+        {{~it:value}}
+        <tr type="{{= value.Type }}">
+            <td>{{= value.HospitalName }}</td>
+            <td>{{= value.UserName }}</td>
+            <td>{{= value.StartTime }}</td>
+            <td>{{= value.Remark }}</td>
+        </tr>
+        {{~}}
+    </script>
+<script type="text/x-dot-template" class="owinerShip-detail-tmp">
+        {{~it:value}}
+        <tr type="{{= value.Type }}">
+            <td>{{= value.HospitalName }}</td>
+            <td>{{= value.UserName }}</td>
+            <td>{{= value.StartTime }}</td>
+            <td>{{= value.EndTime }}</td>
+            <td>{{= value.Remark }}</td>
+            </tr>
+            {{~}}
+        </script>
+<!-- End 负责用户 -->
+<!-- 病历记录 -->
+<script type="text/x-dot-template" class="medicalRecord-tmp">
+            {{~it:value}}
+            <tr>
+                <td>{{= value.CreateTime }}</td>
+                <td>{{= value.CreateUserInfo }}</td>
+                <td>{{= value.Title }}</td>
+                <td>{{= value.No }}</td>
+                <td>{{= value.Location }}</td>
+                <td>{{= value.Remark }}</td>
+                <td data-id="{{= value.ID }}">
+                    <span class="layui-btn layui-btn-mini btn-edit" data-model="MedicalRecord" data-action="CustomerMedicalRecordSubmit"><i class="layui-icon">&#xe642;</i>编辑</span>
+                    <span class="layui-btn layui-btn-mini btn-look" data-model="MedicalRecord"><i class="layui-icon">&#xe642;</i>查看</span>
+                    <span class="layui-btn layui-btn-mini layui-btn-danger btn-rmv" data-model="MedicalRecord"><i class="layui-icon">&#xe640;</i>删除</span>
+                </td>
+        </tr>
+        {{~}}
+    </script>
+<!-- End 负责用户 -->
+<script type="text/x-dot-template" class="visitCase-visit-temp">
+    {{~it.VisitList:value:index}}
+    <tr>
+        <td>{{= value.CustomerID == null ? "暂无":  value.CustomerID}}</td>
+        <td>{{= value.CreateTime == null ? "暂无":  value.CreateTime}}</td>
+        <td>
+            {{ if (value.VisitType ==1){ }}
+            初诊
+            {{ } }}
+            {{ if (value.VisitType ==2){ }}
+            复诊
+            {{ } }}
+            {{ if (value.VisitType ==3){ }}
+            复查
+            {{ } }}
+            {{ if (value.VisitType ==4){ }}
+            再消费
+            {{ } }}
+
+        </td>
+        <td>
+            {{ if (value.VisitType ==1){ }}
+            新客
+            {{ } else { }}
+            老客
+            {{ } }}
+        </td>
+        <td>{{= value.CreateUserName == null ? "暂无":  value.CreateUserName}}</td>
+        <td>{{= value.HospitalName == null ? "暂无": value.HospitalName}}</td>
+    </tr>
+    {{~}}
+</script>
+<!--上门情况-分诊记录-->
+<script type="text/x-dot-template" class="visitCase-Triage-temp">
+    {{~it.TriageList:value:index}}
+
+    <tr>
+        <td>{{= value.CustomerID == null ? "暂无":  value.CustomerID}}</td>
+        <td>{{= value.HospitalName == null ? "暂无":  value.HospitalName}}</td>
+        <td>{{= value.CreateUserName == null ? "暂无":  value.CreateUserName}}</td>
+        <td>{{= value.CreateTime == null ? "暂无": value.CreateTime}}</td>
+        <td>{{= value.AssignUserName == null ? "暂无":  value.AssignUserName}}</td>
+        <td>{{= value.Remark == null ? "暂无":  value.Remark}}</td>
+    </tr>
+    {{~}}
+</script>
+<!--上门情况-部门接待-->
+<script type="text/x-dot-template" class="visitCase-DeptVisit-temp">
+    {{~it.DeptVisitList:value:index}}
+    <tr>
+        <td>{{= value.CustomerID == null ? "暂无":  value.CustomerID}}</td>
+        <td>{{= value.CreateTime == null ? "暂无":  value.CreateTime}}</td>
+        <td>{{= value.DeptName == null ? "暂无":  value.DeptName}}</td>
+        <td>{{= value.HospitalName == null ? "暂无":  value.HospitalName}}</td>
+
+    </tr>
+    {{~}}
+</script>
+<!--上门情况-住院记录-->
+<script type="text/x-dot-template" class="visitCase-Inpatient-temp">
+    {{~it.InpatientList:value:index}}
+    <tr>
+        <td>{{= value.CustomerID == null ? "暂无":  value.CustomerID}}</td>
+        <td>{{= value.InTime == null ? "暂无":  value.InTime}}</td>
+        <td>{{= value.OutTime == null ? "暂无":  value.OutTime}}</td>
+        <td>{{= value.CreateUserName == null ? "暂无":  value.CreateUserName}}</td>
+        <td>{{= value.HospitalName == null ? "暂无": value.HospitalName}}</td>
+        <td>
+            {{ if (value.Status ==0){ }}
+            住院中
+            {{ }else{}}
+            已出院
+            {{ } }}
+        </td>
+        <td>{{= value.Remark == null ? "暂无": value.Remark}}</td>
+    </tr>
+    {{~}}
+</script>
+<!-- 收费项目表格 -->
+<script class="charge-tmp" type="text/x-dot-template">
+    {{ for(var item in it){ }}
+    <tr chargeId="{{= it[item].ID }}">
+        <td><input type="radio" name="radio" value="{{= it[item].ID }}" title="{{= it[item].Name }}" /></td>
+        <td>{{= it[item].Name }}</td>
+        <td>{{= it[item].PinYin }}</td>
+        <td>{{= it[item].CategoryName }}</td>
+        <td>{{= it[item].Size }}</td>
+    </tr>
+    {{ } }}
+</script>
+<!--客户关系-->
+<script class="relation-tmp" type="text/x-dot-template">
+{{ for(var item in it){ }}
+<tr>
+    <td>{{= it[item].CustomerID }}</td>
+    <td>{{= it[item].CreateUserName }}</td>
+    <td>{{= it[item].RelationName }}</td>
+    <td>{{= it[item].RelationCustomerName }}</td>
+    <td>{{= it[item].CreateTime == null ? "暂无": it[item].CreateTime.slice(0,10)}}</td>
+                <td rela="{{= it[item].ID }}"><span class="layui-btn  layui-btn-mini layui-btn-danger delrelation">删除关系</span></td>
+</tr>
+{{ } }}
+</script>
+<!--未成交-->
+<script class="failture-tmp" type="text/x-dot-template">
+            {{ for(var item in it){ }}
+            <tr chargeId="{{= it[item].ID }}">
+                <td>{{= it[item].CustomerID }}</td>
+                <td>{{= it[item].CreateUserName }}</td>
+                <td>{{= it[item].CategoryName }}</td>
+                <td>{{= it[item].Content == null ? "暂无": it[item].Content }}</td>
+                <td>{{= it[item].CreateTime == null ? "暂无": it[item].CreateTime.slice(0,10)}}</td>
+                <td edId="{{= it[item].ID}}">
+                    <span class="layui-btn layui-btn-mini edit"><i class="layui-icon">&#xe642;</i>编辑</span>
+                    <span class="layui-btn layui-btn-mini layui-btn-danger delete"><i class="layui-icon">&#xe640;</i>删除</span>
+                </td>
+            </tr>
+            {{ } }}
+    </script>
+<!--查询照片-->
+<script class="poto-consul-tmp" type="text/x-dot-template">
+        {{ for(var item in it){ }}
+        <tr>
+            <td>{{= it[item].CustomerID }}</td>
+            <td>{{= it[item].CreateTime == null ? "暂无": it[item].CreateTime.slice(0,10)}}</td>
+            <td>{{= it[item].CreateUserName }}</td>
+            <td>{{= it[item].SymptomName == null ? "暂无": it[item].SymptomName }}</td>
+            <td><img src="{{= it[item].ReducedImage }}" style="width:20px;height:20px;" /></td>
+            <td>{{= it[item].Remark }}</td>
+            <td potoId="{{= it[item].ID }}">
+                <img id="Bigimg" class="hide img" src="{{= it[item].ImageUrl}}" />
+                <span class="layui-btn layui-btn-mini layui-btn-primary max-img">查看大图</span>
+                <span class="layui-btn layui-btn-mini layui-btn-danger del-img">删除图片</span>
+            </td>
+
+        </tr>
+        {{ } }}
+    </script>
+<!--前中后-->
+<script class="poto-baU-tmp" type="text/x-dot-template">
+        {{ for(var item in it){ }}
+        <tr>
+            <td>{{= it[item].CustomerID }}</td>
+            <td>{{= it[item].CreateTime == null ? "暂无": it[item].CreateTime.slice(0,10)}}</td>
+            <td>{{= it[item].CreateUserName }}</td>
+            <td>{{= it[item].ChargeName  == null ? "暂无": it[item].ChargeName  }}</td>
+            <td><img src="{{= it[item].ReducedImage }}" style="width:20px;height:20px;" /></td>
+            <td>{{= it[item].Remark }}</td>
+            <td potoId="{{= it[item].ID }}">
+                <img id="Bigimg" class="hide img" src="{{= it[item].ImageUrl}}" />
+                <span class="layui-btn layui-btn-mini layui-btn-primary max-img">查看大图</span>
+                <span class="layui-btn layui-btn-mini layui-btn-danger del-img">删除图片</span>
+            </td>
+
+        </tr>
+        {{ } }}
+    </script>
+<!--其他-->
+<script class="poto-other-tmp" type="text/x-dot-template">
+    {{ for(var item in it){ }}
+    <tr>
+        <td>{{= it[item].CustomerID }}</td>
+        <td>{{= it[item].CreateTime == null ? "暂无": it[item].CreateTime.slice(0,10)}}</td>
+        <td>{{= it[item].CreateUserName }}</td>
+        <td><img src="{{= it[item].ReducedImage }}" style="width:20px;height:20px;" /></td>
+        <td>{{= it[item].Remark }}</td>
+        <td potoId="{{= it[item].ID }}">
+            <img id="Bigimg" class="hide img" src="{{= it[item].ImageUrl}}" />
+            <span class="layui-btn layui-btn-mini layui-btn-primary max-img">查看大图</span>
+            <span class="layui-btn layui-btn-mini layui-btn-danger del-img">删除图片</span>
+        </td>
+
+    </tr>
+    {{ } }}
+</script> 
+<!--店铺佣金信息-->
+<script class="storeCommission-temp" type="text/x-dot-template"> 
+  {{~it.List:value:index}}
+        <tr> 
+            <td>{{= value.StoreName == null ? "暂无":  value.StoreName}}</td>
+            <td>{{= value.CreateTime.slice(0,10) == null ? "暂无":  value.CreateTime.slice(0,10)}}</td>
+            <td>{{= value.CreateUserName == null ? "暂无":  value.CreateUserName}}</td>
+            <td>{{= value.Amount == null ? "暂无":  value.Amount}}</td>
+            <td>{{= value.HospitalName == null ? "暂无":  value.HospitalName}}</td>
+            <td>{{= value.Remark == null ? "暂无":  value.Remark}}</td>
+            <td storeId="{{= value.ID }}">
+                <span class="layui-btn layui-btn-mini layui-btn-danger del-storeCommi">删除佣金</span>
+            </td> 
+        </tr>
+    {{~}} 
+</script>
+<!--订单情况-->
+<script type="text/x-dot-template" class="order-Orders-temp">
+    {{ for(var item in it){ }}
+    <tr orderId="{{= it[item].OrderID}}">
+        <td>{{= it[item].CustomerID }}</td>
+ 
+        <td>{{= it[item].CreateUserName }}</td>
+        <td>{{= it[item].HospitalName }}</td>
+        <td>{{= it[item].CreateTime == null ? "暂无":it[item].CreateTime.slice(0,10) }}</td>
+        <td>{{= it[item].TotalPrice }}</td>
+        <td>{{= it[item].FinalPrice }}</td>
+        <td>
+            {{ if (it[item].PaidStatus ==1){ }}
+            未付款
+            {{ } }}
+            {{ if (it[item].PaidStatus ==2){ }}
+            已付款
+            {{ } }}
+            {{ if (it[item].PaidStatus ==3){ }}
+            欠款
+            {{ } }}
+            {{ if (it[item].PaidStatus ==4){ }}
+            取消
+            {{ } }}
+
+        </td>
+        <td>
+            {{ if (it[item].AuditStatus ==1){ }}
+            待审核
+            {{ } }}
+            {{ if (it[item].AuditStatus ==2){ }}
+            无需审核
+            {{ } }}
+            {{ if (it[item].AuditStatus ==3){ }}
+            审核不通过
+            {{ } }}
+            {{ if (it[item].AuditStatus ==4){ }}
+            审核通过
+            {{ } }}
+            {{ if (it[item].AuditStatus ==5){ }}
+            未提交
+            {{ } }}
+
+        </td>
+        <td>{{= it[item].PaidTime == null ? "暂无":it[item].PaidTime.slice(0,10) }}</td>
+        <td>{{= it[item].DebtAmount == 0 ? "未欠款":it[item].DebtAmount }}</td>
+        <td>
+            {{ if (it[item].IsInpatient ==1){ }}
+            住院单
+            {{ } }}
+            {{ if (it[item].IsInpatient ==0){ }}
+            普通订单
+            {{ } }}
+        </td>
+        <td>{{= it[item].Discount }}</td>
+        <td>{{= it[item].Remark }}</td>
+        <td>
+            <span class="layui-btn layui-btn-mini layui-btn-normal" name="seeOrder">查看</span>
+            {{ if (it[item].PaidStatus ==1){ }}
+            <span class="layui-btn layui-btn-mini layui-btn-danger cancel-btn" order-Type="1">删除</span>
+            <span class="layui-btn layui-btn-mini layui-btn-warm" name="modifyOrder">修改</span>
+            {{ } }}
+        </td>
+    </tr>
+    {{ } }}
+</script>
+<!--预收款-->
+<script type="text/x-dot-template" class="order-deOrder-temp">
+        {{ for(var item in it){ }}
+        <tr orderId="{{= it[item].OrderID}}">
+            <td>{{= it[item].CustomerID }}</td>
+            <td>{{= it[item].HospitalName }}</td>
+            <td>{{= it[item].CreateTime == null ? "暂无":it[item].CreateTime.slice(0,10) }}</td>
+            <td>{{= it[item].CreateUserName }}</td>
+            <td>{{= it[item].Amount }}</td> 
+            <td>
+                {{ if (it[item].PaidStatus ==1){ }}
+                未付款
+                {{ } }}
+                {{ if (it[item].PaidStatus ==2){ }}
+                已付款
+                {{ } }}
+                {{ if (it[item].PaidStatus ==3){ }}
+                欠款
+                {{ } }}
+                {{ if (it[item].PaidStatus ==4){ }}
+                取消
+                {{ } }}
+
+            </td> 
+            <td>{{= it[item].PaidTime == null ? "暂无":it[item].PaidTime.slice(0,10) }}</td>
+            <td>{{= it[item].Remark }}</td>
+            <td> 
+                <span class="layui-btn layui-btn-mini layui-btn-normal " name="seeDeposit">查看</span> 
+                {{ if (it[item].PaidStatus ==1){ }}
+                <span class="layui-btn layui-btn-mini  layui-btn-danger cancel-btn" order-Type="3">删除</span>
+               
+                {{ } }}
+            </td>
+        </tr>
+        {{ } }}
+    </script>  
+<!--退项目单-->
+<script type="text/x-dot-template" class="order-bkOrder-temp">
+        {{ for(var item in it){ }}
+        <tr orderId="{{= it[item].OrderID}}">
+            <td>{{= it[item].HospitalName }}</td>
+            <td>{{= it[item].CreateTime == null ? "暂无":it[item].CreateTime.slice(0,10) }}</td>
+            <td>{{= it[item].CreateUserName }}</td>
+            <td>{{= it[item].Amount }}</td>
+            <td>{{= it[item].Point }}</td>
+            <td>
+                {{ if (it[item].PaidStatus ==1){ }}
+                未付款
+                {{ } }}
+                {{ if (it[item].PaidStatus ==2){ }}
+                已付款
+                {{ } }}
+                {{ if (it[item].PaidStatus ==3){ }}
+                欠款
+                {{ } }}
+                {{ if (it[item].PaidStatus ==4){ }}
+                取消
+                {{ } }}
+
+            </td>
+            <td>
+                {{ if (it[item].AuditStatus ==1){ }}
+                待审核
+                {{ } }}
+                {{ if (it[item].AuditStatus ==2){ }}
+                无需审核
+                {{ } }}
+                {{ if (it[item].AuditStatus ==3){ }}
+                审核不通过
+                {{ } }}
+                {{ if (it[item].AuditStatus ==4){ }}
+                审核通过
+                {{ } }}
+                {{ if (it[item].AuditStatus ==5){ }}
+                未提交
+                {{ } }}
+
+            </td>
+            <td>{{= it[item].PaidTime == null ? "暂无":it[item].PaidTime.slice(0,10) }}</td>
+            <td>{{= it[item].Remark }}</td>
+            <td> 
+                <span class="layui-btn layui-btn-mini layui-btn-normal" name="seeorderBk">查看</span> 
+                {{ if (it[item].PaidStatus ==1){ }}
+                <span class="layui-btn layui-btn-mini layui-btn-danger cancel-btn" order-Type="4">删除</span>
+               
+                {{ } }}
+            </td>
+        </tr>
+        {{ } }}
+    </script> 
+<!--退预收款-->
+<script type="text/x-dot-template" class="order-drebateOrder-temp">
+        {{ for(var item in it){ }}
+        <tr orderId="{{= it[item].OrderID}}">
+            <td>{{= it[item].HospitalName }}</td>
+            <td>{{= it[item].CreateTime == null ? "暂无":it[item].CreateTime.slice(0,10) }}</td>
+            <td>{{= it[item].CreateUserName }}</td>
+            <td>{{= it[item].Amount }}</td>
+            <td>{{= it[item].Deposit }}</td>
+            <td>{{= it[item].Point }}</td>
+            <td>{{= it[item].Coupon }}</td>
+            <td>{{= it[item].PaidTime == null ? "暂无":it[item].PaidTime.slice(0,10)}}</td>
+            <td>
+                {{ if (it[item].PaidStatus ==1){ }}
+                未付款
+                {{ } }}
+                {{ if (it[item].PaidStatus ==2){ }}
+                已付款
+                {{ } }}
+                {{ if (it[item].PaidStatus ==3){ }}
+                欠款
+                {{ } }}
+                {{ if (it[item].PaidStatus ==4){ }}
+                取消
+                {{ } }}
+
+            </td>
+            <td>
+                {{ if (it[item].AuditStatus ==1){ }}
+                待审核
+                {{ } }}
+                {{ if (it[item].AuditStatus ==2){ }}
+                无需审核
+                {{ } }}
+                {{ if (it[item].AuditStatus ==3){ }}
+                审核不通过
+                {{ } }}
+                {{ if (it[item].AuditStatus ==4){ }}
+                审核通过
+                {{ } }}
+                {{ if (it[item].AuditStatus ==5){ }}
+                未提交
+                {{ } }}
+
+            </td> 
+            <td>{{= it[item].Remark }}</td>
+            <td> 
+                <span class="layui-btn layui-btn-mini layui-btn-normal" name="seeBackDeposit">查看</span> 
+                {{ if (it[item].PaidStatus ==1){ }}
+                <span class="layui-btn layui-btn-mini layui-btn-danger cancel-btn" order-Type="5">删除</span> 
+                {{ } }}
+            </td>
+        </tr>
+        {{ } }}
+    </script> 
+<!--账户查询-->
+<script type="text/x-dot-template" class="money-temp">
+    <tbody>
+        <tr>
+            <td>总余额:</td>
+            <td>{{=it.Deposit}}</td>
+            <td>总券额:</td>
+            <td>{{=it.Coupon}}</td>
+            <td>总积分:</td>
+            <td>{{=it.Point}}</td>
+        </tr>
+    </tbody>
+</script>
+<!--预收款-->
+<script type="text/x-dot-template" class="money-deposit-temp"> 
+{{ for(var item in it){ }}
+    <tr>
+        <td>{{= it[item].CreateTime == null ? "":it[item].CreateTime.slice(0,10) }}</td>
+        <td>{{= it[item].DepositChargeName}}</td>
+        <td>{{= it[item].HospitalName}}</td> 
+        <td> 
+            {{ if (it[item].Access ==1){ }}
+            订单购买
+            {{ } }}
+            {{ if (it[item].Access ==2){ }}
+            退项目获得
+            {{ } }}
+            {{ if (it[item].Access ==3){ }}
+            退款获得
+            {{ } }}
+            {{ if (it[item].Access ==4){ }}
+            转让
+            {{ } }}
+        </td>
+        <td>{{= it[item].Amount}}</td>
+        <td>{{= it[item].Rest}}</td>
+        <td>{{= it[item].CreateUserName}}</td>
+        <td>{{= it[item].Remark}}</td>
+    </tr>
+{{ } }}
+</script>
+<!--有效-->
+<script type="text/x-dot-template" class="money-coupon-temp">
+        {{ for(var item in it){ }}
+        <tr>
+            <td>{{= it[item].CreateTime == null ? "":it[item].CreateTime.slice(0,10) }}</td>
+            <td>{{= it[item].CouponCategoryName}}</td>
+            <td>{{= it[item].HospitalName}}</td>
+            <td> 
+                {{ if (it[item].Access ==1){ }}
+                预收款赠送
+                {{ } }}
+                {{ if (it[item].Access ==2){ }}
+                手工赠送
+                {{ } }}
+                {{ if (it[item].Access ==3){ }}
+                积分兑换
+                {{ } }}
+                {{ if (it[item].Access ==4){ }}
+                退款获得
+                {{ } }}
+                {{ if (it[item].Access ==5){ }}
+                激活码兑换
+                {{ } }}
+            </td>
+            <td>{{= it[item].Amount}}</td>
+            <td>{{= it[item].Rest}}</td>
+            <td>{{= it[item].CreateUserName}}</td>
+            <td>{{= it[item].Remark}}</td>
+        </tr>
+        {{ } }}
+    </script>
+<!--失效-->
+<script type="text/x-dot-template" class="money-overcoupon-temp">
+    
+{{ for(var item in it){ }}
+    <tr>
+        <td>{{= it[item].CreateTime == null ? "":it[item].CreateTime.slice(0,10) }}</td>
+        <td>{{= it[item].CouponCategoryName}}</td>
+        <td>{{= it[item].HospitalName}}</td>
+        <td>
+            {{ if (it[item].Access ==1){ }}
+            预收款赠送
+            {{ } }}
+            {{ if (it[item].Access ==2){ }}
+            手工赠送
+            {{ } }}
+            {{ if (it[item].Access ==3){ }}
+            积分兑换
+            {{ } }}
+            {{ if (it[item].Access ==4){ }}
+            退款获得
+            {{ } }}
+            {{ if (it[item].Access ==5){ }}
+            激活码兑换
+            {{ } }}
+        </td>
+        <td>{{= it[item].Amount}}</td>
+        <td>{{= it[item].Rest}}</td>
+        <td>{{= it[item].CreateUserName}}</td>
+        <td>
+            {{ if (it[item].Status ==1){ }}
+            有效
+            {{ } }}
+            {{ if (it[item].Status ==2){ }}
+            失效
+            {{ } }} 
+        </td>
+        <td>{{= it[item].OverDueTime  == null ? "":it[item].OverDueTime.slice(0,10)}}</td>
+        <td>{{= it[item].Remark}}</td>
+    </tr>
+{{ } }}
+    
+</script>
+<!--券变动-->
+<script type="text/x-dot-template" class="money-coupchan-temp">
+        {{ for(var item in it){ }}
+        <tr>
+            <td>{{= it[item].CreateTime == null ? "":it[item].CreateTime.slice(0,10) }}</td>
+            <td>{{= it[item].CouponCategoryName}}</td>
+            <td>
+                {{ if (it[item].Access ==1){ }}
+                预收款赠送
+                {{ } }}
+                {{ if (it[item].Access ==2){ }}
+                手工赠送
+                {{ } }}
+                {{ if (it[item].Access ==3){ }}
+                积分兑换
+                {{ } }}
+                {{ if (it[item].Access ==4){ }}
+                退款获得
+                {{ } }}
+                {{ if (it[item].Access ==5){ }}
+                激活码兑换
+                {{ } }}
+                {{ if (it[item].Access ==6){ }}
+                消费扣减
+                {{ } }}
+                {{ if (it[item].Access ==7){ }}
+                手工扣减
+                {{ } }}
+                {{ if (it[item].Access ==8){ }}
+                退款扣减
+                {{ } }}
+            </td>
+            <td>{{= it[item].Amount}}</td>
+            <td>{{= it[item].CreateUserName}}</td>
+            <td>{{= it[item].Remark}}</td>
+        </tr>
+        {{ } }}
+    </script>
+<!--预收款变动-->      
+<script type="text/x-dot-template" class="money-depochan-temp">
+        {{ for(var item in it){ }}
+        <tr>
+            <td>{{= it[item].CreateTime == null ? "":it[item].CreateTime.slice(0,10) }}</td>
+            <td>{{= it[item].DepositChargeName}}</td>
+            <td>
+                {{ if (it[item].Access ==1){ }}
+                订单购买
+                {{ } }}
+                {{ if (it[item].Access ==2){ }}
+                退项目获得
+                {{ } }}
+                {{ if (it[item].Access ==3){ }}
+                退款获得
+                {{ } }}
+                {{ if (it[item].Access ==4){ }}
+                转让获得
+                {{ } }}
+                {{ if (it[item].Access ==5){ }}
+                消费使用
+                {{ } }} 
+            </td>
+            <td>{{= it[item].Amount}}</td>
+            <td>{{= it[item].CreateUserName}}</td>
+            <td>{{= it[item].Remark}}</td>
+        </tr>
+        {{ } }}
+    </script>  
+<!--积分变动-->
+<script type="text/x-dot-template" class="money-poinchan-temp">
+        {{ for(var item in it){ }}
+        <tr>
+            <td>{{= it[item].CreateTime == null ? "":it[item].CreateTime.slice(0,10) }}</td>
+            <td>
+                {{ if (it[item].Type ==11){ }}
+                手工赠送
+                {{ } }}
+                {{ if (it[item].Type ==12){ }}
+                消费赠送
+                {{ } }}
+                {{ if (it[item].Type ==21){ }}
+                手工扣减
+                {{ } }}
+                {{ if (it[item].Type ==22){ }}
+                兑换券
+                {{ } }}
+                {{ if (it[item].Type ==23){ }}
+                兑换产品
+                {{ } }}
+                {{ if (it[item].Type ==24){ }}
+                退项目扣减
+                {{ } }}
+                {{ if (it[item].Type ==25){ }}
+                退款扣减
+                {{ } }}
+            </td>
+            <td>{{= it[item].HospitalName}}</td>
+            <td>{{= it[item].Amount}}</td>
+            <td>{{= it[item].CreateUserName}}</td>
+            <td>{{= it[item].Remark}}</td>
+        </tr>
+        {{ } }}
+    </script> 
+<!--佣金记录-->
+<script type="text/x-dot-template" class="money-commichan-temp">
+        {{ for(var item in it){ }}
+        <tr>
+            <td>{{= it[item].CreateTime == null ? "":it[item].CreateTime.slice(0,10) }}</td>
+            <td>
+                {{ if (it[item].Type ==1){ }}
+                消费
+                {{ } }}
+                {{ if (it[item].Type ==2){ }}
+                提现
+                {{ } }}
+                {{ if (it[item].Type ==3){ }}
+                转让
+                {{ } }} 
+            </td> 
+            <td>{{= it[item].Amount}}</td>
+            <td>{{= it[item].CreateUserName}}</td>
+            <td>{{= it[item].Remark}}</td>
+        </tr>
+        {{ } }}
+    </script>   
+<!--消费项目记录-->
+<script type="text/x-dot-template" class="cu-charges-temp">
+    <tbody>
+        <tr>
+            <td>合计消费金额:</td>
+            <td>{{=it.Amount}}</td>
+            <td>现金:</td>
+            <td>{{=it.CashCardAmount}}</td>
+            <td>预收款:</td>
+            <td>{{=it.Deposit}}</td>
+            <td>券:</td>
+            <td>{{=it.Coupon}}</td>
+            <td>欠款:</td>
+            <td>{{=it.Debt}}</td>
+            <td>退款金额:</td>
+            <td>{{=it.RebateAmount}}</td>
+            <td>佣金:</td>
+            <td>{{=it.Commission}}</td>
+        </tr>
+    </tbody>
+</script>
+<script type="text/x-dot-template" class="expense-charges-temp">
+        {{ for(var item in it){ }}
+        <tr>
+            <td>{{= it[item].HospitalName}}</td>
+            <td>{{= it[item].PaidTime == null ? "":it[item].PaidTime.slice(0,10) }}</td>
+            <td>{{= it[item].ChargeName}}</td>
+            <td>{{= it[item].UnitName}}</td>
+            <td>{{= it[item].Size}}</td>
+            <td>{{= it[item].Num}}</td>
+            <td>{{= it[item].UseNum}}</td>
+            <td>{{= it[item].RestNum}}</td>
+            <td>{{= it[item].CreateUserName}}</td>
+            <td>{{= it[item].FinalPrice}}</td>
+            <td>{{= it[item].CashCardAmount}}</td>
+            <td>{{= it[item].Deposit}}</td>
+            <td>{{= it[item].Coupon}}</td>
+            <td>{{= it[item].Commission}}</td>
+            <td>{{= it[item].Debt}}</td>
+            <td>{{= it[item].RebateNum}}</td>
+            <td>{{= it[item].RebateAmount}}</td>
+        </tr>
+        {{ } }}
+    </script>
+<!--划扣记录-->
+<script type="text/x-dot-template" class="opera-temp">
+        {{ for(var item in it){ }}
+        <tr>
+            <td>{{= it[item].CustomerID}}</td>
+            <td>{{= it[item].CustomerName}}</td>
+            <td>{{= it[item].ChargeName}}</td>
+            <td>{{= it[item].Num}}</td>
+            <td>{{= it[item].CreateTime == null ? "":it[item].CreateTime.slice(0,10) }}</td>
+            <td>{{= it[item].CreateUserName}}</td>
+            <td>
+                {{~it[item].OperatorList:value:index }}
+                <span UserID="{{= value.UserID }}">医生名称:{{= value.UserName }}</span>
+                <span PositionID="{{= value.PositionID }}">分工:{{= value.PositionName }}</span><br />
+                {{~}}
+            </td>
+            <td>{{= it[item].HospitalName}}</td>
+            <td operId="{{= it[item].OperationID}}">
+                <span class="layui-btn layui-btn-mini btn-edit"><i class="layui-icon">&#xe642;</i>编辑</span>
+                <span class="layui-btn layui-btn-mini layui-btn-danger btn-rmv"><i class="layui-icon">&#xe640;</i>删除</span>
+            </td>
+        </tr>
+        {{ } }}
+    </script>
+<!--选择岗位-->
+<script class="position-tmp" type="text/x-dot-template">
+    {{ for(var item in it){ }}
+    <option value="{{= it[item].ID }}">{{= it[item].Name }}</option>
+    {{ } }}
+</script> 
+<!--选择医生-->
+<script class="user-tmp" type="text/x-dot-template">
+        {{for(var item in it){ }}
+        <tr>
+            <td>{{= it[item].Account }}</td>
+            <td>{{= it[item].Name }}</td>
+            <td>{{= it[item].DeptName }}</td>
+            <td>{{= it[item].Gender}}</td>
+            <td><span class="layui-btn layui-btn-primary layui-btn-mini present-user" value="{{= it[item].ID }}">选择此用户</span></td>
+        </tr>
+        {{ } }}
+    </script> 
+<!--查看退预收款-->
+<script type="text/x-dot-template" class="DepositRebate-tmp">
+        {{for(var item in it) { }}
+        <tr data-DepositID="{{= it[item].DepositID}}">
+            <td>{{= it[item].DepositID}}</td>
+            <td>{{= it[item].DepositName}}</td>
+            <td>{{= it[item].Amount}}</td>
+        </tr>
+        {{ } }}
+    </script>
+<script type="text/x-dot-template" class="DepositRebateC-tmp">
+        {{for(var item in it) { }}
+        <tr data-DepositID="{{= it[item].CouponID}}">
+            <td>{{= it[item].CouponID}}</td>
+            <td>{{= it[item].CouponName}}</td>
+            <td>{{= it[item].Amount}}</td>
+        </tr>
+        {{ } }}
+    </script>
+<!--查看退项目单-->
+<script type="text/html" class="BackOrder-tmp">
+    {{for(var item in it) { }}
+    <tr data-DepositID="{{= it[item].ChargeID}}">
+        <td>{{= it[item].ChargeID}}</td>
+        <td>{{= it[item].ChargeName}}</td>
+        <td>{{= it[item].Num}}</td>
+        <td>{{= it[item].Amount}}</td>
+    </tr>
+    {{ } }}
+</script>
+</div>
+
+<script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+<script src="~/UEditer/ueditor.config.js"></script>
+<script src="~/UEditer/ueditor.all.min.js"></script>
+<script src="~/lay_component/js/hcommon.js"></script>
+<script src="~/Scripts/FlyDog.Common.js"></script>
+<script src="~/doT-master/doT-master/doT.min.js"></script>
+<script src="~/lay_component/plugins/layui/layui.js"></script>
+<script src="~/Scripts/CustomerPlugin.js"></script>
+<script src="~/lay_component/sampleJs/SmartUser.js"></script>
+<script src="~/lay_component/sampleJs/CustomerProfile.js"></script> 
+</body>
+</html>

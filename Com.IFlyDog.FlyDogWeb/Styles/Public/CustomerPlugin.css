@@ -1,0 +1,13 @@
+﻿/* 时间插件 */
+.timer{position:absolute;left:0;top:0;border:1px solid #D2D2D2;width:163px;height:38px;line-height:38px;text-align:center;color:#545454;background:#FFF;display:none;z-index:100;}
+.timer .hour,.timer .minute{position:absolute;top:-1px;border:1px solid #D2D2D2;width:70px;height:38px;line-height:38px;background:#FFF;cursor:pointer;}
+.timer .colon{float:left;margin-left:70px;width:21px;height:38px;line-height:38px;}
+.timer .hour{left:-1px;}
+.timer .minute{right:-1px;}
+.timer li {display:none;}
+.timer li.active{display:block;}
+.timer .hour.open,.timer .minute.open{height:304px;overflow:scroll;}
+.hour.open li,.minute.open li{display:block;border-bottom:1px solid #D2D2D2;}
+.hour.open li:last-child,.minute.open li:last-child{border-bottom:none;}
+.hour.open li.active,.minute.open li.active{background:#EEE;}
+/*  */

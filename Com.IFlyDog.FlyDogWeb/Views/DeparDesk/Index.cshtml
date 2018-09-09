@@ -1,0 +1,490 @@
+﻿@using Com.IFlyDog.CommonDTO
+@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>科室中心</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+    <style>
+        .site-block {
+            border: none;
+            padding: 10px;
+        }
+
+        span {
+            margin-left: 10px;
+        }
+
+        img {
+            height: 25px;
+            width: 25px;
+        }
+
+        .layui-form-select .layui-input {
+            padding-right: 0px;
+        }
+
+        .site-block .layui-form {
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-main">
+        <!--tab导航-->
+        <fieldset class="layui-elem-field">
+            <legend>科室中心</legend>
+            <div class="layui-field-box">
+                <div class="layui-tab layui-tab-brief">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this hosVisToday">今日到院客户</li>
+                        <li class="deVisToday">今日科室顾客</li>
+                        <li class="operToday">今日执行记录</li>
+                        <li>客户识别</li>
+                    </ul>
+                    <div class="layui-tab-content">
+                        <!--今日到院客户-->
+                        <div class="layui-tab-item layui-show">
+                            <div class="layui-form-item">
+                                <input type="text" name="cuHosName" placeholder="请输入顾客姓名" class="layui-input fl" style="width: 45%;">
+                                <span class="layui-btn hos-search-btn">查询</span>
+                            </div>
+                            <table class="site-table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>客户编号</th>
+                                        <th>客户姓名</th>
+                                        <th>上门时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tb-HosVisToday"></tbody>
+                            </table>
+                        </div>
+                        <!--今日科室顾客-->
+                        <div class="layui-tab-item">
+                            <div class="layui-form-item">
+                                <input type="text" name="cuDeName" placeholder="请输入顾客姓名" class="layui-input fl" style="width: 45%;">
+                                <span class="layui-btn de-search-btn">查询</span>
+                            </div>
+                            <table class="site-table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>客户编号</th>
+                                        <th>客户姓名</th>
+                                        <th>上门时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tb-DeVisToday"></tbody>
+                            </table>
+                        </div>
+                        <!--今日执行记录-->
+                        <div class="layui-tab-item">
+                            <table class="site-table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>客户编号</th>
+                                        <th>客户姓名</th>
+                                        <th>项目名称</th>
+                                        <th>划扣数量</th>
+                                        <th>划扣时间</th>
+                                        <th>操作用户</th>
+                                        <th>操作医院</th>
+                                        <th>执行医生列表</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tb-OperToday"></tbody>
+                            </table>
+                        </div>
+                        <!--客户识别-->
+                        <div class="layui-tab-item">
+                            <div class="add-cu-hint"></div>
+                            <form class="layui-form">
+                                <div class="layui-form-item">
+                                    <input type="text" name="cuident" placeholder="请输入顾客编号/手机号/电话号码/预约号/姓名" class="layui-input fl">
+                                    <span class="layui-btn  cu-discbut">立即识别</span>
+                                    <span class="layui-btn layui-btn-primary cu-resetbut">重置</span>
+                                </div>
+                            </form>
+                            <fieldset class="layui-elem-field">
+                                <legend>顾客信息</legend>
+
+                                <form class="layui-form">
+                                    <div class="layui-field-box">
+                                        <table class="site-table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>客户编号</th>
+                                                    <th>客户姓名</th>
+                                                    <th>客户性别</th>
+                                                    <th>手机号</th>
+                                                    <th>来源渠道</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="tbody-cust-inshow"></tbody>
+                                        </table>
+                                    </div>
+                                </form>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <!--客户识别出信息进行分诊-->
+    <div class="layui-form hide data-triage-pop">
+        <form class="layui-form">
+            <blockquote class="layui-elem-quote">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">顾客编号:</label>
+                    <div class="layui-form-mid layui-word-aux" name="triagecuId">
+                        <span></span>
+                    </div>
+                    <label class="layui-form-label">顾客姓名:</label>
+                    <div class="layui-form-mid layui-word-aux" name="triagecuName">
+                        <span></span>
+                    </div>
+
+                </div>
+                <div class="layui-form-item" style="margin-left: 15px">
+                    <p>请根据客户来院的目的进行分流。</p>
+                    <p>1.如果客户需要咨询，请为其指派相应的咨询师。</p>
+                    <p>2.如果客户需要直接进行治疗，请分派给相应的科室部门。</p>
+                </div>
+            </blockquote>
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">咨询</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div class="site-text site-block">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">选择部门:</label>
+                                <div class="layui-input-block">
+                                    @Html.SelectCategoryByHospital(SelectType.Dept, "SelectCategoryByDeptByFz", "SelectCategoryByDeptByFz")
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <span class="layui-btn addfz-zlss-sub">立即提交</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+ 
+    <!--修改划扣-->
+    <div class="layui-form hide edit-depar-pop">
+        <div class="site-text site-block">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">姓名:</label>
+                    <div class="layui-input-block">
+                        <input type="hidden" name="cuId">
+                        <input type="hidden" name="cuOperId">
+                        <input type="text" name="cuName" class="layui-input layui-fontColor-6" readonly="readonly">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">项目:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="cuChargeName" class="layui-input layui-fontColor-6" readonly="readonly">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">数量:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="cuNum" class="layui-input layui-fontColor-6" readonly="readonly">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">医生:</label>
+                    <input type="hidden" name="edittrIndex" />
+                    <div class="layui-input-block">
+                        <table class="site-table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>选择医生</th>
+                                    <th>选择分工</th>
+                                    <th style="border: none"><span class="layui-btn layui-btn-normal add-pay-btn fr"><i class="layui-icon">&#xe61f;</i></span></th>
+                                </tr>
+                            </thead>
+                            <tbody class="tb-editDoc"></tbody>
+                        </table>
+
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <span class="layui-btn edit-btn">保存</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--添加耗材-->
+    <div class="layui-form hide addOpeProduct">
+        <div class="site-text site-block">
+            <form class="layui-form operDetail-form">
+            </form>
+        </div>
+    </div>
+    <!--医生弹窗-->
+    <div class="layui-form doctor-pop hide">
+        <form class="layui-form">
+            <div class="layui-field-box">
+                <!--无加载-->
+                <div class="layui-form-item">
+                    <div class="fl">
+                        <label class="layui-form-label">选择部门:</label>
+                        <div class="layui-input-inline" style="width: 115px">
+                            @Html.SelectCategoryByHospital(SelectType.Dept, "smartaddcuDept", "smartaddcuDept")
+                        </div>
+                    </div>
+
+                    <div class="fl">
+                        <label class="layui-form-label">用户姓名:</label>
+                        <div class="layui-input-inline" style="width: 115px">
+                            <input type="text" id="addcuuserNmae" name="addcuuserNmae" placeholder="请输入顾客姓名" class="layui-input ">
+                        </div>
+                    </div>
+                    <span class="layui-btn fr search-user">查询</span>
+                </div>
+
+                <!--数据table-->
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <th>账号</th>
+                            <th>姓名</th>
+                            <th>部门</th>
+                            <th>性别</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="user-table"></tbody>
+                </table>
+                <div class="user-info"></div>
+                <!--分页容器-->
+                <div id="remindUserpageDiv"></div>
+            </div>
+        </form>
+    </div>
+    <div class="doT-data-template">
+        <!-- 耗材弹窗表单 -->
+        <script class="operDetail-form-tmp" type="text/x-dot-template">
+            <div class="layui-form-item">
+                <label class="layui-form-label">项目</label>
+                <div class="layui-input-block">
+                    <input type="text" name="cuChargeName" class="layui-input layui-fontColor-6" readonly="readonly" value="{{= it.ChargeName }}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">数量</label>
+                <div class="layui-input-block">
+                    <input type="text" name="cuNum" class="layui-input layui-fontColor-6" readonly="readonly" value="{{= it.Num }}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">耗材</label>
+                <div class="layui-input-block">
+                    <table class="site-table table-hover">
+                        <thead>
+                            <tr>
+                                <th>名称</th>
+                                <th>规格</th>
+                                <th>单位</th>
+                                <th width="180px">发货仓库</th>
+                                <th width="150px">数量</th>
+                                <th>状态</th>
+                                <th width="100px">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody class="product-table">
+                            {{~ it.Products:pItem }}
+                            <tr>
+                                <td>{{= pItem.ProductName }}</td>
+                                <td>{{= pItem.Size }}</td>
+                                <td>{{= pItem.UnitName }}</td>
+                                <td>{{= pItem.WarehouseName }}</td>
+                                <td>{{= pItem.MinNum }}</td>
+                                <td>{{= pItem.Status }}</td>
+                                <td>
+                                    <span class="layui-btn layui-btn-small btn-rmv" data-id="{{= pItem.OperationProductID }}" data-operid="{{= it.OperationID }}">删除</span>
+                                </td>
+                            </tr>
+                            {{~ }}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">默认耗材:</label>
+                <div class="layui-input-block">
+                    <table class="site-table table-hover">
+                        <thead>
+                            <tr>
+                                <th>名称</th>
+                                <th>规格</th>
+                                <th>单位</th>
+                                <th>发货仓库</th>
+                                <th>数量</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody class="">
+                            {{~ it.DefaultProducts : item }}
+                            <tr>
+                                <td>{{= item.ProductName }}</td>
+                                <td>{{= item.Size }}</td>
+                                <td>{{= item.UnitName }}</td>
+                                <td width="180px">{{= doT.template($(".Warehouse-tmp").text())(item.WarehouseID) }}</td>
+                                <td width="150px"><input type="text" class="layui-input" name="num" value="{{= item.MinNum }}"/></td>
+                                <td>{{= item.Status }}</td>
+                                <td width="100px">
+                                    <span class="layui-btn layui-btn-small add-default" data-id="{{= item.ProductID }}" data-min="{{= item.MinNum }}" data-max="{{= item.MaxNum }}" data-operid="{{= it.OperationID }}">添加</span>
+                                </td>
+                            </tr>
+                            {{~ }}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            {{ if(it.ProductAdd == 1){ }}
+            <div class="layui-form-item">
+                <label class="layui-form-label">默认耗材:</label>
+                <div class="layui-input-inline fl">
+                    <input type="text" name="" class="layui-input pointer" placeholder="选择耗材" readonly="readonly">
+                </div>
+                <div class="layui-input-inline fl">
+                    <input type="number" name="" class="layui-input" placeholder="请输入数量" readonly="readonly">
+                </div>
+                <div class="layui-input-inline fl">
+                    @Html.SelectCategoryByHospital(SelectType.Warehouse, "Warehouse", "Warehouse")
+                </div>
+                <div class="layui-input-inline fl">
+                    <span class="layui-btn layui-btn-normal add-product">增加耗材</span>
+                </div>
+            </div>
+            {{ } }}
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <span class="layui-btn layui-btn-danger close-layer">取消关闭</span>
+                </div>
+            </div>
+        </script>
+        <script class="Warehouse-tmp" type="text/x-dot-template">
+            {{ var selected = 'selected="selected"'; }}
+            {{= $('@Html.SelectCategoryByHospital(SelectType.Warehouse, "WarehouseID", "WarehouseID", "WarehouseID")')[0].outerHTML.replaceAll(selected,"").replace(it+"\"",it+"\" selected") }}
+        </script>
+        <!--顾客识别后的信息-->
+        <script type="text/x-dot-template" class="cust-inshow-temp">
+            {{for(var item in it) { }}
+            <tr>
+                <td>{{= it[item].ID}}</td>
+                <td><a class="pointer addCustomerTab">{{= it[item].Name}}</a></td>
+                <td>{{= it[item].Gender}}</td>
+                <td>{{= it[item].Mobile}}</td>
+                <td>{{= it[item].ChannelName == null ? "":it[item].ChannelName}}</td>
+                <td>
+                    <span class="layui-btn layui-btn-mini online-cu-triage-but" tr-customerID="{{= it[item].ID}}"><i class="layui-icon">&#xe606;</i>添加分诊</span>
+                </td>
+            </tr>
+            {{ } }}
+        </script>
+        <!--今日医院上门 -->
+        <script type="text/x-dot-template" class="HosVisToday-temp">
+            {{for(var item in it) { }}
+            <tr>
+                <td>{{= it[item].CustomerID}}</td>
+                <td><a class="pointer addCustomerTab">{{= it[item].CustomerName}}</a></td>
+                <td>{{= it[item].CreateTime == null ? "":it[item].CreateTime}}</td>
+                <td><span class="layui-btn layui-btn-small layui-btn-normal add-peration-btn">划扣</span></td>
+
+            </tr>
+            {{ } }}
+        </script>
+        <!--今日科室客户-->
+        <script type="text/x-dot-template" class="DeVisToday-temp">
+            {{for(var item in it) { }}
+            <tr>
+                <td>{{= it[item].CustomerID}}</td>
+                <td><a class="pointer addCustomerTab">{{= it[item].CustomerName}}</a></td>
+                <td>{{= it[item].CreateTime == null ? "":it[item].CreateTime}}</td>
+                <td><span class="layui-btn layui-btn-small layui-btn-normal" data-id="{{= it[item].CustomerID}}">划扣</span></td>
+            </tr>
+            {{ } }}
+        </script>
+        <!--今日(科室)(执行)记录-->
+        <script class="OperToday-temp" type="text/x-dot-template">
+            {{for(var item in it) { }}
+            <tr>
+                <td>{{= it[item].CustomerID}}</td>
+                <td><a class="pointer addCustomerTab">{{= it[item].CustomerName}}</a></td>
+                <td>{{= it[item].ChargeName}}</td>
+                <td>{{= it[item].Num}}</td>
+                <td>{{= it[item].CreateTime == null ? "-": it[item].CreateTime.slice(0,10)}}</td>
+                <td>{{= it[item].CreateUserName}}</td>
+                <td>{{= it[item].HospitalName.length == 0 ? "暂无": it[item].HospitalName}}</td>
+                <td>
+                    {{~it[item].OperatorList:value:index }}
+                    <span HospitId="{{= value.UserID }}">医生名称:{{= value.UserName }}</span>
+                    <span>分工:{{= value.PositionName }}</span><br />
+                    {{~}}
+                </td>
+                <td operId="{{= it[item].OperationID}}" class="oper">
+                    <span class="layui-btn layui-btn-small layui-btn-primary oper-edit-btn">编辑</span>
+                    <span class="layui-btn layui-btn-small layui-btn-danger oper-del-btn">删除</span>
+                    <span class="layui-btn layui-btn-small layui-btn-warm oper-pro-btn">耗材</span>
+                    <span class="layui-btn layui-btn-small layui-btn-normal oper-pin-btn">打印</span>
+                </td>
+            </tr>
+            {{ } }}
+        </script>
+        <!--选择医生-->
+        <script class="user-tmp" type="text/x-dot-template">
+            {{for(var item in it){ }}
+            <tr>
+                <td>{{= it[item].Account }}</td>
+                <td>{{= it[item].Name }}</td>
+                <td>{{= it[item].DeptName }}</td>
+                <td>{{= it[item].Gender}}</td>
+                <td><span class="layui-btn layui-btn-primary layui-btn-mini present-user" value="{{= it[item].ID }}">选择此用户</span></td>
+            </tr>
+            {{ } }}
+        </script>
+        <script class="position-tmp" type="text/x-dot-template">
+            {{ for(var item in it){ }}
+            <option value="{{= it[item].ID }}">{{= it[item].Name }}</option>
+            {{ } }}
+        </script>
+        <!--选择分工-->
+    </div>
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/lay_component/js/hcommon.js"></script>
+    <script src="~/Scripts/FlyDog.Common.js"></script>
+    <script src="~/doT-master/doT-master/doT.min.js"></script>
+    <script src="~/lay_component/plugins/layui/layui.js"></script>
+    <script src="~/lay_component/sampleJs/SmartUser.js"></script>
+    <script src="~/lay_component/sampleJs/DeparDesk.js"></script>
+</body>
+</html>

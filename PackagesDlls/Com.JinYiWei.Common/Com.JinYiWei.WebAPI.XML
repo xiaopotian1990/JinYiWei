@@ -1,0 +1,327 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Com.JinYiWei.WebAPI</name>
+    </assembly>
+    <members>
+        <member name="T:Com.JinYiWei.WebAPI.Controllers.NewTokenController">
+            <summary>
+            新的Token获取
+            </summary>
+        </member>
+        <member name="M:Com.JinYiWei.WebAPI.Controllers.NewTokenController.#ctor(Com.JinYiWei.Common.WebAPI.ITokenService)">
+            <summary>
+            依赖注入
+            </summary>
+            <param name="tokenService"></param>
+        </member>
+        <member name="M:Com.JinYiWei.WebAPI.Controllers.NewTokenController.Token(Com.JinYiWei.WebAPI.Model.Client)">
+            <summary>
+            授权验证（新的）
+            </summary>
+            <param name="client">AppID等客户端的值</param>
+            <returns>Token信息</returns>
+        </member>
+        <member name="T:Com.JinYiWei.WebAPI.Controllers.TokenController">
+            <summary>
+            旧的Token获取
+            </summary>
+        </member>
+        <member name="M:Com.JinYiWei.WebAPI.Controllers.TokenController.#ctor(Com.JinYiWei.Common.WebAPI.ITokenService)">
+            <summary>
+            依赖注入
+            </summary>
+            <param name="tokenService"></param>
+        </member>
+        <member name="M:Com.JinYiWei.WebAPI.Controllers.TokenController.Token(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            授权验证（旧的）
+            </summary>
+            <param name="appid">申请应用时分配的appid 必选</param>
+            <param name="appsecret">申请应用时分配的AppSecret 必选</param>
+            <param name="grant_type">请求的类型，填写client_credentials 必选</param>
+            <param name="timestamp">当前时间戳 必选</param>
+            <param name="sign">签名 必选</param>
+            <returns>Token信息</returns>
+        </member>
+        <member name="T:Com.JinYiWei.WebAPI.Filters.AllowSignAnonymousAttribute">
+            <summary>
+            allow anonymous access without sign
+            </summary>
+        </member>
+        <member name="T:Com.JinYiWei.WebAPI.Filters.AllowTokenAnonymousAttribute">
+            <summary>
+            allow anonymous access without token
+            </summary>
+        </member>
+        <member name="T:Com.JinYiWei.WebAPI.Filters.AbsCommonExceptionFilterAttribute">
+            <summary>
+            WebAPI异常响应处理
+            </summary>
+        </member>
+        <member name="M:Com.JinYiWei.WebAPI.Filters.AbsCommonExceptionFilterAttribute.OnException(System.Web.Http.Filters.HttpActionExecutedContext)">
+            <summary>  
+            Raises the exception event  
+            </summary>  
+            <param name="actionExecutedContext">The context for the action.</param>  
+        </member>
+        <member name="P:Com.JinYiWei.WebAPI.Filters.AbsCommonExceptionFilterAttribute.AllowException">
+            <summary>  
+            是否允许返回异常信息，测试环境中应当允许返回异常以辅助测试，正式环境中应禁止返回异常  
+            </summary>  
+        </member>
+        <member name="M:Com.JinYiWei.WebAPI.Filters.AbsCommonExceptionFilterAttribute.HandleException(System.Web.Http.Filters.HttpActionExecutedContext,System.Net.HttpStatusCode@)">
+            <summary>  
+            异常处理策略  
+            </summary>  
+            <param name="actionExecutedContext"></param>  
+            <param name="ex"></param>  
+            <returns></returns>  
+        </member>
+        <member name="T:Com.JinYiWei.WebAPI.Filters.SignFilterAttribute">
+            <summary>
+            base security filter
+            </summary>
+        </member>
+        <member name="F:Com.JinYiWei.WebAPI.Filters.SignFilterAttribute.sign_param_name">
+            <summary>
+            log
+            </summary>
+        </member>
+        <member name="M:Com.JinYiWei.WebAPI.Filters.SignFilterAttribute.BadReturn(System.Web.Http.Controllers.HttpActionContext,Com.JinYiWei.Common.Data.CommonResultType,System.String)">
+            <summary>
+            Occurs before the action method is invoked.
+            </summary>
+            <param name="actionContext">The action context</param>
+        </member>
+        <member name="M:Com.JinYiWei.WebAPI.Filters.SignFilterAttribute.GeSignKey(System.String)">
+            <summary>
+            get sign key by appid
+            </summary>
+            <param name="appid">appid</param>
+            <returns>sign key</returns>
+        </member>
+        <member name="T:Com.JinYiWei.WebAPI.Filters.CommonSignFilterAttribute">
+            <summary>
+            base security filter
+            </summary>
+        </member>
+        <member name="F:Com.JinYiWei.WebAPI.Filters.CommonSignFilterAttribute.sign_param_name">
+            <summary>
+            log
+            </summary>
+        </member>
+        <member name="M:Com.JinYiWei.WebAPI.Filters.CommonSignFilterAttribute.BadReturn(System.Web.Http.Controllers.HttpActionContext,Com.JinYiWei.Common.Data.CommonResultType,System.String)">
+            <summary>
+            Occurs before the action method is invoked.
+            </summary>
+            <param name="actionContext">The action context</param>
+        </member>
+        <member name="M:Com.JinYiWei.WebAPI.Filters.CommonSignFilterAttribute.GeSignKey(System.String)">
+            <summary>
+            get sign key by appid
+            </summary>
+            <param name="appid">appid</param>
+            <returns>sign key</returns>
+        </member>
+        <member name="T:Com.JinYiWei.WebAPI.Filters.TokenFilterAttribute">
+            <summary>
+            base token filter
+            </summary>
+        </member>
+        <member name="F:Com.JinYiWei.WebAPI.Filters.TokenFilterAttribute.Logger">
+            <summary>
+            log
+            </summary>
+        </member>
+        <member name="M:Com.JinYiWei.WebAPI.Filters.TokenFilterAttribute.IsExist(System.String)">
+            <summary>
+            verify weather token is exist
+            </summary>
+            <param name="token">token</param>
+            <returns>if exist,return true;Or return false;</returns>
+        </member>
+        <member name="T:Com.JinYiWei.WebAPI.Filters.CommonTokenFilterAttribute">
+            <summary>
+            base token filter
+            </summary>
+        </member>
+        <member name="F:Com.JinYiWei.WebAPI.Filters.CommonTokenFilterAttribute.Logger">
+            <summary>
+            log
+            </summary>
+        </member>
+        <member name="M:Com.JinYiWei.WebAPI.Filters.CommonTokenFilterAttribute.IsExist(System.String)">
+            <summary>
+            verify weather token is exist
+            </summary>
+            <param name="token">token</param>
+            <returns>if exist,return true;Or return false;</returns>
+        </member>
+        <member name="T:Com.JinYiWei.WebAPI.Filters.OldBaseCommonSignFilterAttribute">
+            <summary>
+            base security filter
+            </summary>
+        </member>
+        <member name="F:Com.JinYiWei.WebAPI.Filters.OldBaseCommonSignFilterAttribute.Logger">
+            <summary>
+            log
+            </summary>
+        </member>
+        <member name="F:Com.JinYiWei.WebAPI.Filters.OldBaseCommonSignFilterAttribute.Token_Param">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Com.JinYiWei.WebAPI.Filters.OldBaseCommonSignFilterAttribute.OnActionExecuting(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            Occurs before the action method is invoked.
+            </summary>
+            <param name="actionContext">The action context</param>
+        </member>
+        <member name="M:Com.JinYiWei.WebAPI.Filters.OldBaseCommonSignFilterAttribute.GetPartnerKey(System.String)">
+            <summary>
+            获取合作号对应的合作Key,如果未能获取，则返回空字符串或者null
+            </summary>
+            <param name="partner"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Com.JinYiWei.WebAPI.Filters.ModuleAuthorizationAttribute">
+            <summary>
+            authorization control
+            </summary>
+        </member>
+        <member name="P:Com.JinYiWei.WebAPI.Filters.ModuleAuthorizationAttribute.Authorizations">
+            <summary>
+            the roles to allow access
+            </summary>
+        </member>
+        <member name="P:Com.JinYiWei.WebAPI.Filters.MonitorLog.FormCollections">
+            <summary>
+            Form 表单数据
+            </summary>
+        </member>
+        <member name="P:Com.JinYiWei.WebAPI.Filters.MonitorLog.QueryCollections">
+            <summary>
+            URL 参数
+            </summary>
+        </member>
+        <member name="P:Com.JinYiWei.WebAPI.Filters.MonitorLog.Exception">
+            <summary>
+            异常信息
+            </summary>
+        </member>
+        <member name="T:Com.JinYiWei.WebAPI.Filters.MonitorLog.MonitorType">
+            <summary>
+            监控类型
+            </summary>
+        </member>
+        <member name="M:Com.JinYiWei.WebAPI.Filters.MonitorLog.GetLoginfo(Com.JinYiWei.WebAPI.Filters.MonitorLog.MonitorType)">
+            <summary>
+            获取监控指标日志
+            </summary>
+            <param name="mtype"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.JinYiWei.WebAPI.Filters.MonitorLog.GetCollections(System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            获取Post 或Get 参数
+            </summary>
+            <param name="Collections"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Com.JinYiWei.WebAPI.Model.Token">
+            <summary>
+            token
+            </summary>
+        </member>
+        <member name="P:Com.JinYiWei.WebAPI.Model.Token.Appid">
+            <summary>
+            app id
+            </summary>
+        </member>
+        <member name="P:Com.JinYiWei.WebAPI.Model.Token.Timestamp">
+            <summary>
+            time stamp
+            </summary>
+        </member>
+        <member name="P:Com.JinYiWei.WebAPI.Model.Token.Roles">
+            <summary>
+            roles
+            </summary>
+        </member>
+        <member name="P:Com.JinYiWei.WebAPI.Model.NewToken.Appid">
+            <summary>
+            app id
+            </summary>
+        </member>
+        <member name="P:Com.JinYiWei.WebAPI.Model.NewToken.ExpriedTime">
+            <summary>
+            time stamp
+            </summary>
+        </member>
+        <member name="P:Com.JinYiWei.WebAPI.Model.NewToken.Roles">
+            <summary>
+            roles
+            </summary>
+        </member>
+        <member name="T:Com.JinYiWei.WebAPI.Model.Client">
+            <summary>
+            客户端值
+            </summary>
+        </member>
+        <member name="P:Com.JinYiWei.WebAPI.Model.Client.appid">
+            <summary>
+            分配的APPID
+            </summary>
+        </member>
+        <member name="P:Com.JinYiWei.WebAPI.Model.Client.appsecret">
+            <summary>
+            分配的APPSECRET
+            </summary>
+        </member>
+        <member name="P:Com.JinYiWei.WebAPI.Model.Client.grant_type">
+            <summary>
+            请求的类型，填写client_credentials 必选
+            </summary>
+        </member>
+        <member name="T:Com.JinYiWei.WebAPI.MultiParameterSupportAttribute">
+            <summary>
+            Make an attribute to determine the Action is whether to use MultiParameter
+            </summary>
+        </member>
+        <member name="M:Com.JinYiWei.WebAPI.SimplePostVariableParameterBinding.ExecuteBindingAsync(System.Web.Http.Metadata.ModelMetadataProvider,System.Web.Http.Controllers.HttpActionContext,System.Threading.CancellationToken)">
+            <summary>
+            Check for simple binding parameters in POST data. Bind POST
+            data as well as query string data
+            </summary>
+            <param name="metadataProvider"></param>
+            <param name="actionContext"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.JinYiWei.WebAPI.SimplePostVariableParameterBinding.HookupParameterBinding(System.Web.Http.Controllers.HttpParameterDescriptor)">
+            <summary>
+            Method that implements parameter binding hookup to the global configuration object's
+            ParameterBindingRules collection delegate.
+            
+            This routine filters based on POST/PUT method status and simple parameter
+            types.
+            </summary>
+            <example>
+            GlobalConfiguration.Configuration.
+                  .ParameterBindingRules
+                  .Insert(0,SimplePostVariableParameterBinding.HookupParameterBinding);
+            </example>    
+            <param name="descriptor"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.JinYiWei.WebAPI.SimplePostVariableParameterBinding.TryReadBody(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Read and cache the request body
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

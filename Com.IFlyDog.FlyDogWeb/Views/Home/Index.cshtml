@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>医帮管家</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet"/>
+    <link href="~/lay_component/css/global.css" rel="stylesheet"/>
+    <link href="~/lay_component/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+
+</head>
+<body>
+<div class="layui-layout-admin">
+    <div class="layui-header header header-demo">
+        <div class="layui-main">
+            <div class="admin-login-box">
+                <a class="logo" style="left: 0;" href="#">
+                    <span style="font-size: 22px;">医帮管家</span>
+                </a>
+                <div class="admin-side-toggle">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </div>
+                <div class="admin-side-full">
+                    <i class="fa fa-life-bouy" aria-hidden="true"></i>
+                </div>
+            </div>
+            <ul class="layui-nav admin-header-item">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">清除缓存</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" class="admin-header-user">
+                        <img src="~/lay_component/images/0.jpg"/>
+                        <span>超级管理员</span>
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="javascript:;"><i class="fa fa-user-circle" aria-hidden="true"></i> 个人信息</a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;"><i class="fa fa-gear" aria-hidden="true"></i> 设置</a>
+                        </dd>
+                        <dd id="lock">
+                            <a href="javascript:;">
+                                <i class="fa fa-lock" aria-hidden="true" style="padding-right: 3px;padding-left: 1px;"></i> 锁屏 (Alt+L)
+                            </a>
+                        </dd>
+                        <dd>
+                            <a href="/Login/LoginOut"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+            <ul class="layui-nav admin-header-item-mobile">
+                <li class="layui-nav-item">
+                    <a href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="layui-side layui-bg-black" id="admin-side">
+        <div class="layui-side-scroll" id="admin-navbar-side" lay-filter="side"></div>
+    </div>
+    <div class="layui-body" style="bottom: 0; border-left: solid 2px #1AA094;" id="admin-body">
+        <div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab">
+            <ul class="layui-tab-title">
+                <li class="layui-this">
+                    <i class="fa fa-dashboard" aria-hidden="true"></i>
+                    <cite>主页面</cite>
+                </li>
+            </ul>
+            <div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
+                <div class="layui-tab-item">
+                    <iframe src="../Home/Main"></iframe>            
+                      
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-footer footer footer-demo" id="admin-footer">
+        <div class="layui-main">
+            <p>2017 &copy;<a href="#">iflyDog.com</a> i飞狗</p>
+        </div>
+    </div>
+    <div class="site-tree-mobile layui-hide">
+        <i class="layui-icon">&#xe602;</i>
+    </div>
+    <div class="site-mobile-shade"></div>
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/lay_component/plugins/layui/layui.js"></script>
+    <script src="~/lay_component/signalr/jquery.signalR-2.0.3.min.js"></script>
+    <script src="http://192.168.11.220:8066/chat/hubs"></script>
+    <script src="~/lay_component/js/chat.js"></script> 
+    <script src="~/lay_component/plugins/layui/layui.js"></script>
+    <script src="~/lay_component/js/index.js"></script>
+<script>
+layui.use("layer", function () {
+    var layer = layui.layer;
+});
+//分针弹出消息
+chat.client.sendMessage = function (message) {  
+    layer.open({
+        type: 1,
+        offset: "rb",
+        title: "顾客信息",
+        content: message,
+        btn: "关闭消息",
+        area: ["260px;", "267px"],
+        btnAlign: "c",  //按钮居中
+        shade: 0,//不显示遮罩
+        zIndex: layer.zIndex,
+        success: function(layero){
+            layer.setTop(layero); //重点2
+        },
+        yes: function () {
+            layer.closeAll();
+        }
+    }); 
+};
+
+//顾客大金额消费
+chat.client.bigConsume = function (message) {
+ 
+    var html = "<p>顾客编号:" + message.ID + "</p>" +
+               "<p>顾客姓名:" + message.Name + "</p>" +
+               "<p>会员名称:" + message.MemberCategoryName + "</p>" +
+               "<p>俪人等级:" + message.ShareCategoryName + "</p>" +
+               "<p>开发人员:" + message.ExploitName + "</p>" +
+               "<p>咨询人员:" + message.ManagerName + "</p>" +
+               "<p>消费金额:" + message.Amount + "</p>";
+    layer.open({
+        type: 1,
+        offset: "rb",
+        title: "给力奥!顾客又消费了",
+        content: html,
+        btn: "关闭消息",
+        area: ["260px;", "300px"],
+        btnAlign: "c",  //按钮居中
+        shade: 0,//不显示遮罩
+        zIndex: layer.zIndex,
+        success: function (layero) {
+            layer.setTop(layero); //重点2
+        },
+        yes: function () {
+            layer.closeAll();
+        }
+    });
+}; 
+//顾客小金额消费
+chat.client.consume = function (message) {
+    var html = "<p>顾客编号:" + message.ID + "</p>" +
+              "<p>顾客姓名:" + message.Name + "</p>" +
+              "<p>会员名称:" + message.MemberCategoryName + "</p>" +
+              "<p>俪人等级:" + message.ShareCategoryName + "</p>" +
+              "<p>开发人员:" + message.ExploitName + "</p>" +
+              "<p>咨询人员:" + message.ManagerName + "</p>" +
+              "<p>消费金额:" + message.Amount + "</p>";
+    layer.open({
+        type: 1,
+        offset: "rb",
+        title: "给力奥!顾客又消费了",
+        content: html,
+        btn: "关闭消息",
+        area: ["260px;", "300px"],
+        btnAlign: "c",  //按钮居中
+        shade: 0,//不显示遮罩
+        zIndex: layer.zIndex,
+        success: function (layero) {
+            layer.setTop(layero); //重点2
+        },
+        yes: function () {
+            layer.closeAll();
+        }
+    });
+};
+
+</script>
+</div>
+</body>
+</html>

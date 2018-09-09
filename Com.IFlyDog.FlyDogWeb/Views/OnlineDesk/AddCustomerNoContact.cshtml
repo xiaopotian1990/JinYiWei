@@ -1,0 +1,132 @@
+﻿<!-- 注意：请将要放入弹框的内容放在比如id="HBox"的容器中，然后将box的值换成该ID即可，比如：$(element).hDialog({'box':'#HBox'}); -->
+<div id="wrapper">
+    <div class="box">
+        <!-- 注意：请将要放入弹框的内容放在比如id="HBox"的容器中，然后将box的值换成该ID即可，比如：$(element).hDialog({'box':'#HBox'}); -->
+        <div id="HBox" class="HBox">
+            <form action="" method="post" onsubmit="return false;">
+                <div class="form-body">
+
+                    <h3 class="header smaller lighter blue"><i class="icon-user"></i>添加客户信息</h3>
+                    <div class="col-md-4">
+                        <label class="col-md-4 control-label">姓名:</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control input-sm" placeholder="请输入姓名" id="Name" name="Name">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="col-md-4 control-label">性别:</label>
+                        <div class="col-md-6">
+                            <select class="col-md-6 input-sm" selected="selected" id="qGender" name="Gender">
+                                <option value="">请选择</option>
+                                <option value="1">男</option>
+                                <option value="2" selected="selected">女</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="col-md-2 control-label">渠道:</label>
+                        <div class="col-md-6">
+                            <select class="col-md-6 input-sm" selected="selected" id="qGender" name="Gender">
+                                <option value="">请选择</option>
+                                <option value="1">男</option>
+                                <option value="2" selected="selected">女</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="col-md-4 control-label">联系方式:</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control input-sm" placeholder="请联系方式">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="col-md-4 control-label">沟通方式:</label>
+                        <div class="col-md-6">
+                            <select class="col-md-6 input-sm" selected="selected" id="qGender" name="Gender">
+                                <option value="">请选择</option>
+                                <option value="1">男</option>
+                                <option value="2" selected="selected">女</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="col-md-2 control-label">地区:</label>
+                        <div class="col-md-6">
+                            <select class="col-md-6 input-sm" selected="selected" id="qGender" name="Gender">
+                                <option value="">请选择</option>
+                                <option value="1">男</option>
+                                <option value="2" selected="selected">女</option>
+                            </select>
+                            <select class="col-md-6 input-sm" selected="selected" id="qGender" name="Gender">
+                                <option value="">请选择</option>
+                                <option value="1">男</option>
+                                <option value="2" selected="selected">女</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="col-md-4 control-label">备用联系:</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control input-sm" placeholder="请联系方式">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">开发人员:</label>
+                            <div class="col-md-6">
+                                <input type="text" id="UserName" name="UserName" class="form-control input-sm" readonly=""><i class=""></i>
+                                <input type="hidden" value="1" id="UserID" name="UserID">
+                            </div>
+                        </div>
+                    </div>
+
+                    <br class="brclear" />
+
+                    <h3 class="header smaller lighter red"><i class="icon-user"></i>客户咨询情况</h3>
+
+                    <div class="col-md-4">
+                        <label class="col-md-4 control-label">咨询项目:</label>
+                        <div class="col-md-6">
+                            <select class="col-md-6 input-sm" selected="selected" id="qGender" name="Gender">
+                                <option value="">请选择</option>
+                                <option value="1">男</option>
+                                <option value="2" selected="selected">女</option>
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <label class="col-md-2 control-label">咨询内容</label>
+                        <div class="col-md-8">
+                            <textarea class="form-control input-sm textareaGd" placeholder="请输入咨询情况" id="Remark" name="Remark" rows="5"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="_wdaddcust">
+
+                    <button class="btn  btn-success">
+                        <i class="icon-ok"></i>
+                        提交
+                    </button>
+                    <button class="btn btn-danger">
+                        <i class="icon-remove icon-only"></i>
+                        取消
+                    </button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    ._wdaddcust {
+        margin-top: 65px;
+        float: right;
+    }
+</style>

@@ -1,0 +1,137 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+
+    <div class="BackOrder hide">
+        <style>
+            .layui-form-item .layui-input-inline {
+                width: 30%;
+            }
+
+            .card-money {
+                margin-left: 8px;
+            }
+        </style>
+        <form class="layui-form">
+            <div class="m-10 fl" style="width: 40%">
+                <div class="site-title">
+                    <fieldset><legend>收银</legend></fieldset>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">应收金额:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="toAmount" placeholder="0" readonly="readonly" class="layui-input ToMoney">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">收取现金:</label>
+                    <div class="layui-input-inline">
+                        <input name="FinalPrice" type="number" min="0"  value="0" placeholder="请输入现金金额" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="add-pay-div">
+                        <label class="layui-form-label">支付方式:</label>
+                        <div class="layui-input-inline pay-way fl">
+                            @Html.SelectCategory(Com.IFlyDog.CommonDTO.SelectType.CardCategory, "BackOrderCard", "BackOrderCard")
+                        </div>
+                        <div class="layui-input-inline pay-way fl">
+                            <input type="number" min="0" name="tBackOrderAmount" value="0" placeholder="刷卡金额" class="layui-input card-money">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">退到券:</label>
+                    <div class="layui-input-inline pay-way fl">
+                        @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.CouponCategory, "BackOrderCoupon", "BackOrderCoupon")
+                    </div>
+                    <div class="layui-input-inline pay-way fl">
+                        <input type="number" min="0" name="tBackOrderCAmount" value="0" placeholder="退券金额" class="layui-input card-money">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">退到预收款:</label>
+                    <div class="layui-input-inline pay-way fl">
+                        @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.DepositCharge, "BackOrderDeposit", "BackOrderDeposit")
+                    </div>
+                    <div class="layui-input-inline pay-way fl">
+                        <input type="number" min="0" name="tBackOrderDAmount" value="0" placeholder="退预收款金额" class="layui-input card-money">
+                    </div>
+                </div>
+
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">备注描述:</label>
+                    <div class="layui-input-block">
+                        <textarea name="desc" placeholder="请输入内容描述" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <span class="layui-btn add-submit">保存</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="m-10 fr" style="width: 50%">
+                <div class="site-title">
+                    <fieldset><legend>退项目单</legend></fieldset>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">客户编号:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="CustomerID" placeholder="500" readonly="readonly" class="layui-input ToMoney">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">提交时间:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="CreateTime" placeholder="500" readonly="readonly" class="layui-input ToMoney">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">提交用户:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="CreateUserName" placeholder="500" readonly="readonly" class="layui-input ToMoney">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">订单金额:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="Amount" placeholder="500" readonly="readonly" class="layui-input ToMoney">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">备注:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="Remark" placeholder="500" readonly="readonly" class="layui-input ToMoney">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">详细:</label>
+                    <div class="layui-input-block">
+                        <table class="site-table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>项目编号</th>
+                                    <th>项目名称</th>
+                                    <th>数量</th>
+                                    <th>金额</th>
+                                </tr>
+                            </thead>
+                            <tbody class="BackOrder-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+            <script type="text/html" class="BackOrder-tmp">
+                {{for(var item in it) { }}
+                <tr data-DepositID="{{= it[item].ChargeID}}">
+                    <td>{{= it[item].ChargeID}}</td>
+                    <td>{{= it[item].ChargeName}}</td>
+                    <td>{{= it[item].Num}}</td>
+                    <td>{{= it[item].Amount}}</td>
+                </tr>
+                {{ } }}
+            </script>
+</div>

@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>接诊工作台</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet"/>
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all"/>
+    <link href="~/lay_component/css/global.css" rel="stylesheet"/>
+    <style>
+        img{height:20px;width:20px;}
+    </style>
+</head>
+
+<body>
+<div class="admin-main">
+    <blockquote class="layui-elem-quote">
+        <span  class="layui-btn layui-btn-small refresh-btn"><i class="layui-icon">&#x1002;</i>刷新</span>
+    </blockquote>
+    <fieldset class="layui-elem-field">
+        <legend>接诊工作台</legend>
+        <div class="layui-field-box">
+            <!--统计信息-->
+            <table class="site-table table-hover tb-receToday"></table>
+            <table class="site-table table-hover">
+                <thead>
+                <tr>
+                    <th>顾客编号</th>
+                    <th>顾客名称</th>
+                    <th>咨询人员</th>
+                    <th>接诊人员</th>
+                    <th>上门时间</th>
+                    <th>上门状态</th>
+                    <th>新老客</th>
+                    <th>成交状态</th> 
+                    <th>主咨询项目</th> 
+                    <th>会员图标</th>
+                    <th>分享家图标</th> 
+                    <th>单项目图标</th>
+                    <th>成交金额</th>
+                    <th>成交项目</th>
+                </tr>
+                </thead>
+                <tbody class="tb-receptions">
+                    
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+</div>
+<!--引擎-->
+<div class="doT-data-template">
+<!--统计信息-->    
+<script type="text/x-dot-template" class="rec-TodayInfo-temp">
+        <tbody>
+            <tr>
+                <td>到诊客户:</td>
+                <td>{{=it.AllPeople}}<span>人</span></td>
+                <td>新客户:</td>
+                <td>{{=it.New}}<span>人</span></td>
+                <td>老客户:</td>
+                <td>{{=it.New}}<span>人</span></td>
+                <td>初诊客户:</td> 
+                <td>{{=it.First}}<span>人</span></td>
+                <td>复诊客户:</td>
+                <td>{{=it.Old}}<span>人</span></td>  
+            </tr>
+            <tr>
+                <td>复查客户:</td>
+                <td>{{=it.Check}}<span>人</span></td>
+                <td>再消费:</td>
+                <td>{{=it.Again}}<span>人</span></td>
+                <td>未成交:</td>
+                <td>{{=it.NotDeal}}<span>人</span></td>
+                <td>成交:</td>
+                <td>{{=it.Deal}}<span>人</span></td>
+                <td>成交总金额:</td>
+                <td>{{=it.Amount}}<span>元</span></td>
+            </tr>   
+        </tbody> 
+    </script>
+<!--详细信息-->
+<script type="text/x-dot-template" class="receptions-temp">
+{{ for(var item in it){ }}
+    <tr> 
+        <td>{{= it[item].CustomerID }}</td>
+        <td>{{= it[item].CustomerName }}</td>
+        <td>{{= it[item].ManagerName }}</td>
+        <td>{{= it[item].AssignUserName }}</td> 
+        <td>{{= it[item].CreateTime == null ? "":it[item].CreateTime.slice(0,10)}}</td> 
+        <td>
+            {{ if (it[item].VisitType ==1){ }}
+            <span class="layui-fontColor-1">初诊</span>
+            {{ } }}
+            {{ if (it[item].VisitType ==2){ }}
+            <span class="layui-fontColor-2">复诊</span>
+            {{ } }}
+            {{ if (it[item].VisitType ==3){ }}
+            <span class="layui-fontColor-3">复查</span>
+            {{ } }}
+            {{ if (it[item].VisitType ==4){ }}
+            <span class="layui-fontColor-4">再消费</span>
+            {{ } }}
+        </td>
+        <td> 
+            {{ if (it[item].CustomerType ==1){ }}
+            <span class="layui-fontColor-7">新客</span>
+            {{ } }}
+            {{ if (it[item].CustomerType ==2){ }}
+            <span class="layui-fontColor-8">老客</span>
+            {{ } }} 
+        </td>
+        <td>
+            {{ if (it[item].DealType ==0){ }}
+            <span class="layui-fontColor-6">未成交</span>
+            {{ } }}
+            {{ if (it[item].DealType ==1){ }}
+            <span class="layui-fontColor-1">已成交</span>
+            {{ } }}
+        </td> 
+        <td class="layui-fontColor-6">{{= it[item].SymptomName == null ? "暂无":it[item].SymptomName}}</td> 
+        <td><img src="{{= it[item].MemberIcon == null ? "":it[item].MemberIcon}}"/></td> 
+        <td><img src="{{= it[item].ShareIcon == null ? "":it[item].ShareIcon}}" /></td> 
+        <td>
+            {{~it[item].ClubIconList:value:index}} 
+                <img src="{{= value == null ? "":value}}" />
+            {{~}} 
+        </td> 
+        <td>{{= it[item].FinalPrice }}</td>
+        <td>{{= it[item].ChargeName == null ? "暂无":it[item].ChargeName }}</td>  
+    </tr>
+{{ } }}
+</script>
+</div>
+<script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+<script src="~/lay_component/js/hcommon.js"></script>
+<script src="~/Scripts/FlyDog.Common.js"></script>
+<script src="~/doT-master/doT-master/doT.min.js"></script>
+<script src="~/lay_component/plugins/layui/layui.js"></script>
+<script src="~/lay_component/sampleJs/LiveDesk.js"></script>
+</body>
+</html>

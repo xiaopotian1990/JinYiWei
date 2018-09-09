@@ -1,0 +1,65 @@
+﻿@using Com.IFlyDog.CommonDTO
+@using Com.IFlyDog.FlyDogWeb.Helper
+<div class="layui-field-box "> 
+    <div class="site-text site-block">
+        <div class="layui-form-item">
+            <label class="layui-form-label">关联编号:</label>
+            <div class="layui-input-block">
+                <input type="number" name="CuRelateID" min="1"  placeholder="请输入顾客关联编号"  class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">选择关系:</label>
+            <div class="layui-input-block">
+                @Html.SelectCategoryByHospital(SelectType.Relation, "AddRelation", "AddRelation")
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <span class="layui-btn add-Rela-submit">立即提交</span>
+            </div>
+        </div>
+    </div> 
+</div>   
+<script type="text/javascript">
+$(function () {
+    //sourceURL=AddRelation.js 
+    var custid = $("input[name='hicutomerId']").attr("hicutomerId");
+    $(".add-Rela-submit").click(function () {
+        if (!verify()) { return false; }
+        var paraObj = {};
+        paraObj.data = {
+            CustomerID: custid,
+            RelationCustomerID: $("input[name='CuRelateID']").val(),
+            RelationID: $(".AddRelation").val()
+        };
+        var url = "/CustomerProfile/" + $(this).parents(".layui-layer").data("url");
+        var result = ajaxProcess(url, paraObj);
+        if (result) {
+            if (result.ResultType === 0) {
+                layer.msg(result.Message, { icon: 1, time: 1000 });
+                closeLayer(this);
+                getRelationt();
+
+            } else {
+                layer.msg(result.Message, { icon: 5 });
+            }
+        };
+        return false;
+    });
+
+});
+var verify = function () {
+    var relateId = $("input[name='CuRelateID']").val();
+    var relationName = $(".AddRelation").val();
+    if (relateId === null || relateId === "") {
+        layer.msg("请输入关联人编号！", { icon: 5 });
+        return false;
+    }
+    if (relationName === null || relationName === "-1") {
+        layer.msg("请选择关系！", { icon: 5 });
+        return false;
+    } 
+    return true;
+};
+</script>

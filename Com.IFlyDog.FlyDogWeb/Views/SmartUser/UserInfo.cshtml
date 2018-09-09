@@ -1,0 +1,61 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+
+<div> 
+
+    <div class="user-info-content m-10">
+        <form class="layui-form">
+            <label class="layui-form-label hospital-dom m-bt-10" style="width:35px;">医院</label>
+            <div class="layui-input-inline fl hospital-dom m-bt-10" style="width:150px;">
+                @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.Hospital,"smartHospital", "smartHospital")
+            </div>
+            <label class="layui-form-label m-bt-10" style="width:35px;">部门</label>
+            <div class="layui-input-inline fl m-bt-10" style="width:150px;">
+                @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.Dept,"smartDept", "smartDept")
+            </div>
+            <label class="layui-form-label m-bt-10" style="width:35px;">姓名</label>
+            <div class="layui-input-inline fl m-bt-10" style="width:150px;">
+                <input type="text" class="layui-input" name="name" placeholder="输入姓名" />
+            </div>
+            <span class="layui-btn search-user m-10 m-r-20 fr">搜索</span>
+        </form>
+        <div class="m-20">
+            <table class="layui-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>账号</th>
+                        <th>姓名</th>
+                        <th>部门</th>
+                        <th>性别</th>
+                    </tr>
+                </thead>
+                <tbody class="user-table"></tbody>
+            </table>
+        </div>
+        <div>
+            <span class="layui-btn confim-user fr m-20">确认</span><span class="layui-btn layui-btn-danger close-layer m-20 fr">取消关闭</span>
+        </div>
+    </div>
+    <div class="dot-tmp">
+
+        <script class="user-tmp" type="text/x-dot-template">
+            {{for(var item in it){ }}
+            <tr>
+                <td><input type="checkbox" name="userDept" lay-filter="userDept" value="{{= it[item].ID }}" data-name="{{= it[item].Name }}" data-account="{{= it[item].Account }}" /></td>
+                <td>{{= it[item].Account }}</td>
+                <td>{{= it[item].Name }}</td>
+                <td>{{= it[item].DeptName }}</td>
+                <td>{{= it[item].Gender == 1?"男":"女" }}</td>
+            </tr>
+            {{ } }}
+        </script>
+
+        <script class="dept-tmp" type="text/x-dot-template">
+            {{ if(it.length == 0){it.push({ID:"",Name:"请选择"});} }}
+            {{ for(var item in it){ }}
+            <option value="{{= it[item].ID }}">{{= it[item].Name }}</option>
+            {{ } }}
+        </script>
+
+    </div>
+</div>

@@ -1,0 +1,155 @@
+[
+  {
+    "title": "用户中心",
+    "icon": "fa-cubes",
+    "children": [
+      {
+        "title": "消息记录",
+        "icon": "fa-table",
+        "href": "#"
+      }, {
+        "title": "知识库",
+        "icon": "fa-navicon",
+        "href": "#"
+      }, {
+        "title": "公告记录",
+        "icon": "fa-navicon",
+        "href": "#"
+      }, {
+        "title": "网电工作台",
+        "icon": "fa-navicon",
+        "href": "#"
+      }, {
+        "title": "分诊工作台",
+        "icon": "fa-navicon",
+        "href": "#"
+      }, {
+        "title": "接诊工作台",
+        "icon": "fa-navicon",
+        "href": "#"
+      }, {
+        "title": "回访工作台",
+        "icon": "fa-navicon",
+        "href": "#"
+      }, {
+        "title": "会员工作台",
+        "icon": "fa-navicon",
+        "href": "#"
+      }, {
+        "title": "短信工作台",
+        "icon": "fa-navicon",
+        "href": "#"
+      }
+    ]
+  }, {
+    "title": "基础信息",
+    "icon": "fa-address-book",
+    "spread": false,
+    "children": [
+      {
+        "title": "用户管理",
+        "icon": "fa-table",
+        "href": "#"
+      }, {
+        "title": "部门设置",
+        "icon": "fa-navicon",
+        "href": "../Dept/DeptInfo"
+      }, {
+        "title": "角色管理",
+        "icon": "fa-navicon",
+        "href": "#"
+      }, {
+        "title": "症状管理",
+        "icon": "fa-navicon",
+        "href": "#"
+      }, {
+        "title": "咨询师排序",
+        "icon": "fa-navicon",
+        "href": "#"
+      }, {
+        "title": "渠道设计",
+        "icon": "fa-navicon",
+        "href": "#"
+      }, {
+        "title": "未成交类型",
+        "icon": "fa-navicon",
+        "href": "#"
+      }, {
+        "title": "代金券设置",
+        "icon": "fa-navicon",
+        "href": "#"
+      }, {
+        "title": "预收款设置",
+        "icon": "fa-navicon",
+        "href": "#"
+      }, {
+        "title": "审核规则设置",
+        "icon": "fa-navicon",
+        "href": "#"
+      }, {
+        "title": "回访设置",
+        "icon": "fa-navicon",
+        "href": "#"
+      }, {
+        "title": "回访组设置",
+        "icon": "fa-navicon",
+        "href": "#"
+      }, {
+        "title": "投诉反馈类型",
+        "icon": "fa-navicon",
+        "href": "#"
+      }, {
+        "title": "问卷设置",
+        "icon": "fa-navicon",
+        "href": "#"
+      }, {
+        "title": "权益设置",
+        "icon": "fa-navicon",
+        "href": "#"
+      }, {
+        "title": "短信设置",
+        "icon": "fa-navicon",
+        "href": "#"
+      }, {
+        "title": "微信设置",
+        "icon": "fa-navicon",
+        "href": "#"
+      }
+    ]
+  }, {
+    "title": "第三方组件",
+    "icon": "&#x1002;",
+    "spread": false,
+    "children": [
+      {
+        "title": "iCheck组件",
+        "icon": "fa-check-square-o",
+        "href": "icheck.html"
+      }
+    ]
+  }, {
+    "title": "地址本",
+    "icon": "fa-address-book",
+    "href": "",
+    "spread": true,
+    "children": [
+      {
+        "title": "Github",
+        "icon": "fa-github",
+        "href": "https://www.github.com/"
+      }, {
+        "title": "QQ",
+        "icon": "fa-qq",
+        "href": "http://www.qq.com/"
+      }, {
+        "title": "Fly社区",
+        "icon": "&#xe609;",
+        "href": "http://fly.layui.com/"
+      }, {
+        "title": "新浪微博",
+        "icon": "fa-weibo",
+        "href": "http://weibo.com/"
+      }
+    ]
+  }
+]

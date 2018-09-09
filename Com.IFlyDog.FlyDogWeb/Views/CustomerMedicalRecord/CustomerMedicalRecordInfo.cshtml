@@ -1,0 +1,50 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<div class="MedicalRecord hide">
+    <div>
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>电子病例</legend>
+        </fieldset>
+        <form class="layui-form MedicalRecord-form"></form>
+        <div class="layui-input-block m-bt-10">
+            <label class="layui-form-label">内容</label>
+            <div class="layui-input-block" style="margin-right:50px;">
+                <textarea id="caseTemplateContent" style="width:100%;min-height:260px;"></textarea>
+            </div>
+        </div>
+        <div class="m-20 clearfix">
+            <span class="layui-btn medicalRecord btn-submit fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+        </div>
+    </div>
+    <div class="dot-tmp hide">
+        <script class="MedicalRecord-form-tmp" type="text/x-dot-template">
+            {{ if(!it.look){ }}
+            <input type="hidden" name="ID" value="{{= it.ID }}" />
+            <div class="layui-input-block m-bt-10">
+                <label class="layui-form-label">病历模板</label>
+                <div class="layui-input-inline" style="width:163px;">
+                    @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.CaseTemplate, "MedicalRecordID", "MedicalRecordID", "MedicalRecordID")
+
+                </div>
+            </div>
+            <div class="layui-input-block m-bt-10">
+                <label class="layui-form-label">病历号</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" name="No" placeholder="请输入病例号" value="{{= it.No }}" />
+                </div>
+            </div>
+            <div class="layui-input-block m-bt-10">
+                <label class="layui-form-label">存放位置</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" name="Location" placeholder="请输入存放位置" value="{{= it.Location }}" />
+                </div>
+            </div>
+            <div class="layui-input-block m-bt-10">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-inline">
+                    <textarea type="text" class="layui-textarea" name="Remark" placeholder="请输入备注">{{= it.Remark }}</textarea>
+                </div>
+            </div>
+            {{ } }}
+        </script>
+    </div>
+</div>

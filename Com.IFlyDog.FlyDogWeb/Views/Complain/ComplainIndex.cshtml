@@ -1,0 +1,132 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>投诉管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+    <style>
+        .store-a {
+            color: indianred;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .m-9{display:inline-block;padding:9px;}
+        .layui-form-label{width:100px;}
+    </style>
+</head>
+<body>
+    <div class="admin-main">
+        <fieldset class="layui-elem-field">
+            <legend>投诉管理</legend>
+            <div class="layui-form m-10 clearfix">
+                <div class="fl">
+                    <label class="layui-form-label">投诉客户名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="sCustomerName" placeholder="请输入投诉客户名称" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="fl">
+                    <label class="layui-form-label">处理用户名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="sFinishUserName" placeholder="请输入处理用户名称" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="fl">
+                    <label class="layui-form-label">投诉日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="sBeginTime" lay-verify="date" placeholder="开始日期" autocomplete="off" class="layui-input" onclick="layui.laydate({ elem: this })">
+                    </div>
+              &nbsp;&nbsp;&nbsp;
+                    <div class="layui-input-inline">
+                        <input type="text" name="sEndTime" lay-verify="date" placeholder="结束日期" autocomplete="off" class="layui-input" onclick="layui.laydate({ elem: this })">
+                    </div>
+                </div>
+                <span class="layui-btn search-btn fr complain m-r-10">查询</span>
+            </div>
+            <div class="layui-field-box">
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <th>投诉客户名称</th>
+                            <th>投诉时间</th>
+                            <th>投诉内容</th>
+                            <th>处理状态</th>
+                            <th>处理时间</th>
+                            <th>处理结果</th>
+                            <th>处理用户</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="complain-table"></tbody>
+                </table>
+                <div id="pageDiv"></div>
+            </div>
+        </fieldset>
+        <div class="page-pop">
+            <div class="complain-info-pop hide">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>投诉信息</legend>
+                </fieldset>
+                <div class=""></div>
+                <div class="complain-form layui-form clearfix"></div>
+                <div class="m-20 clearfix">
+                    <span class="layui-btn btn-submit fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+                </div>
+            </div>
+
+        </div>
+        <div class="dot-tmp">
+            <!-- 店家表格 -->
+            <script class="complain-tmp" type="text/x-dot-template">
+                {{~ it : item }}
+                <tr>
+                    <td>{{= item.CustomerName }}</td>
+                    <td>{{= item.CreateTime }}</td>
+                    <td>{{= item.Content }}</td>
+                    <td>{{= item.Status == 0 ? "未处理" : "已处理" }}</td>
+                    <td>{{= item.FinishTime }}</td>
+                    <td>{{= item.Solution }}</td>
+                    <td>{{= item.FinishUserName }}</td>
+                    <td><span class="layui-btn layui-btn-mini btn-edit" data-id="{{= item.ID }}"> 处理</span></td>
+                </tr>
+                {{~ }}
+            </script>
+            <!-- 弹窗模版 -->
+            <script class="complain-form-tmp" type="text/x-dot-template">
+                <input type="hidden" name="ID" value="{{= it.ID }}" />
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">客户名称</label>
+                    <div class="layui-input-inline">
+                        <span class="m-9">{{= it.CustomerName }}</span>
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">投诉内容</label>
+                    <div class="layui-input-inline">
+                        <span class="m-9">{{= it.Content }}</span>
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">处理内容</label>
+                    <div class="layui-input-inline">
+                        <textarea class="layui-textarea" name="Solution" placeholder="请输入处理内容">{{= it.Solution }}</textarea>
+                    </div>
+                </div>
+            </script>
+        </div>
+    </div>
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/lay_component/js/hcommon.js"></script>
+    <script src="~/Scripts/FlyDog.Common.js"></script>
+    <script src="~/doT-master/doT-master/doT.min.js"></script>
+    <script src="~/lay_component/plugins/layui/layui.js"></script>
+    <script src="~/lay_component/sampleJs/Complain.js"></script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>店家管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+    <style>
+        .store-a {
+            color: indianred;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-main">
+        <blockquote class="layui-elem-quote">
+            <a href="javascript:;" class="layui-btn layui-btn-small btn-add">
+                <i class="layui-icon"></i> 添加
+            </a>
+        </blockquote>
+        <fieldset class="layui-elem-field">
+            <legend>店家负责人管理</legend>
+            <div class="layui-field-box">
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <th>用户</th>
+                            <th>店家数</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="storeManager-table"></tbody>
+                </table>
+            </div>
+        </fieldset>
+        <div class="page-pop">
+            <div class="storeManager-pop hide">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>添加负责人</legend>
+                </fieldset>
+                <form class="clearfix">
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">用户</label>
+                        <div class="layui-input-inline">
+                            <input type="hidden" name="UserID" />
+                            <input class="layui-input" name="UserName" placeholder="请输入名称" />
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">店家</label>
+                        <div class="layui-input-inline">
+                            <table class="site-table table-hover">
+                                <thead>
+                                    <tr>
+                                        <td>名称</td>
+                                        <td>操作</td>
+                                    </tr>
+                                </thead>
+                                <tbody class="store-table"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+                <div class="m-20 clearfix">
+                    <span class="layui-btn add-stroe fl">添加</span>
+                    <span class="layui-btn storeManager btn-submit fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+                </div>
+            </div>
+            <div class="store-pop hide">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>添加店家</legend>
+                </fieldset>
+                <form class="clearfix">
+                    <div>
+                        <div class="layui-form clearfix">
+                            <label class="layui-form-label">名称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" name="sName" placeholder="请输入名称" />
+                            </div>
+                            <span class="layui-btn store btn-search fr m-r-20">查询</span>
+                        </div>
+                        <div class="layui-input-block" style="margin-left:0;padding-right:20px;">
+                            <label class="layui-form-label">店家</label>
+                            <div class="layui-input-block">
+                                <table class="site-table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td>选择</td>
+                                            <td>名称</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="store-pop-table"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="m-20 clearfix">
+                    <span class="layui-btn store btn-submit fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+                </div>
+            </div>
+            <div class="store-info-pop hide">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>店家信息</legend>
+                </fieldset>
+                <div class="clearfix m-20">
+                    <input type="hidden" name="StoreUserID" />
+                    <table class="site-table table-hover">
+                        <thead>
+                            <tr>
+                                <th>商铺编号</th>
+                                <th>名称</th>
+                                <th>联系人</th>
+                                <th>地址</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody class="user-store-table"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="dot-tmp">
+            <!-- 店家表格 -->
+            <script class="storeManager-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                <tr data-id="{{= it[item].UserID }}">
+                    <td>{{= it[item].UserName }}</td>
+                    <td>{{= it[item].SumCount }}</td>
+                    <td>
+                        <span class="layui-btn layui-btn-small btn-list" data-id="{{= it[item].UserID }}">列表</span>
+                        <span class="layui-btn layui-btn-small storeManager btn-remove" data-id="{{= it[item].UserID }}">删除</span>
+                    </td>
+                </tr>
+                {{ } }}
+            </script>
+            <!-- 添加弹窗店家表格 -->
+            <script class="store-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                <tr storeid="{{= it[item].ID }}">
+                    <td>{{= it[item].Name }}</td>
+                    <td><span class="layui-btn layui-btn-mini btn-remove">删除</span></td>
+                </tr>
+                {{ } }}
+            </script>
+            <!-- 选择店家表格 -->
+            <script class="store-pop-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                <tr>
+                    <td><input type="checkbox" title="选择" lay-skin="primary" data-id="{{= it[item].ID }}" data-name="{{= it[item].Name }}" /></td>
+                    <td>{{= it[item].Name }}</td>
+                </tr>
+                {{ } }}
+            </script>
+            <!-- 店家表格 -->
+            <script class="user-store-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                <tr data-id="{{= it[item].StoreID }}">
+                    <td>{{= it[item].StoreID }}</td>
+                    <td>{{= it[item].Name }}</td>
+                    <td>{{= it[item].Linkman }}</td>
+                    <td>{{= it[item].Address }}</td>
+                    <td>
+                        <span class="layui-btn layui-btn-small userStore btn-remove" data-id="{{= it[item].StoreID }}" data-userid="{{= it[item].UserId }}">删除</span>
+                    </td>
+                </tr>
+                {{ } }}
+            </script>
+        </div>
+    </div>
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/lay_component/js/hcommon.js"></script>
+    <script src="~/Scripts/FlyDog.Common.js"></script>
+    <script src="~/doT-master/doT-master/doT.min.js"></script>
+    <script src="~/lay_component/plugins/layui/layui.js"></script>
+    <script src="~/lay_component/sampleJs/SmartUser.js"></script>
+    <script src="~/lay_component/sampleJs/StoreManager.js"></script>
+</body>
+</html>

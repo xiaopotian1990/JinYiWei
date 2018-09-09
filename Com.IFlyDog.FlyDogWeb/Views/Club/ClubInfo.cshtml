@@ -1,0 +1,214 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>单项目管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+    <style>
+        .layui-upload-button input[type=button] {
+            cursor: pointer;
+        }
+
+        [name=icon] {
+            width: 80px;
+            height: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-main">
+        <blockquote class="layui-elem-quote">
+            <a href="javascript:;" class="layui-btn layui-btn-small btn-add">
+                <i class="layui-icon"></i> 添加
+            </a>
+        </blockquote>
+        <fieldset class="layui-elem-field">
+            <legend>单项目</legend>
+            <div class="layui-field-box">
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <th>单项目名称</th>
+                            <th>图标</th>
+                            <th>项目名称</th>
+                            <th>操作人</th>
+                            <th>操作日期</th>
+                            <th>备注</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="club-table"></tbody>
+                </table>
+                <!--分页容器-->
+                <div id="pageDiv"></div>
+            </div>
+        </fieldset>
+        <!-- 添加/编辑弹窗 -->
+        <div class="club-pop hide">
+            <form class="layui-form">
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                    <legend>单项目</legend>
+                </fieldset>
+                <hidden name="shareCategoryId"></hidden>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">单项目名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" name="name" placeholder="请输入名称" />
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">图标</label>
+                    <div class="layui-input-inline" style="width:163px;">
+                        <span class="upload-btn layui-btn layui-btn-primary">
+                            <i class="layui-icon"></i>上传图标
+                        </span>
+                        <input id="hideFile" type="file" name="file" class="hide">
+                    </div>
+                    <div class="layui-input-block">
+                        <img src="" name="icon" data-url="" />
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label"></label>
+                    <div class="layui-input-inline" style="width:163px;">
+                        <div class="layui-input-inline">
+                            <input type="radio" name="useScope" data-id="1" value="chargeCategory" title="指定项目分类" checked />
+                        </div>
+                        <div class="layui-input-inline">
+                            <input type="hidden" class="layui-input" name="chargeCategoryId" />
+                            <input type="text" class="layui-input" name="chargeCategoryName" />
+                        </div>
+                        <div class="layui-input-inline">
+                            <input type="radio" name="useScope" data-id="2" value="charge" title="指定项目" />
+                        </div>
+                        <div class="layui-input-inline">
+                            <input type="hidden" class="layui-input" name="chargeId" />
+                            <input type="text" class="layui-input" name="chargeName" />
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">备注</label>
+                    <div class="layui-input-inline" style="width:410px;">
+                        <textarea type="text" class="layui-textarea" name="remark" placeholder="请输入备注"></textarea>
+                    </div>
+                </div>
+                <div class="m-20 clearfix">
+                    <span class="layui-btn club submit-btn fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+                </div>
+            </form>
+        </div>
+        <!-- End  添加/编辑弹窗 -->
+        <!-- 项目类型弹窗 -->
+        <div class="chargeCategory-pop hide">
+            <form class="m-20">
+                <table class="site-table table-hover m-20">
+                    <thead>
+                        <tr>
+                            <th width="50%">名称</th>
+                            <th width="50%">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="chargeCategory-table"></tbody>
+                </table>
+            </form>
+            <div class="m-20 clearfix">
+                <span class="layui-btn chargeCategory submit-btn fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+            </div>
+        </div>
+        <!-- 项目类型弹窗 End -->
+        <!-- 项目弹窗 -->
+        <div class="charge-pop hide">
+            <div class="layui-form m-10 clearfix">
+                <form class="m-20">
+                    <div class="fl">
+                        <label class="layui-form-label" style="width:70px;">拼音码</label>
+                        <div class="layui-input-inline">
+                            <input class="layui-input" name="smartProductPinYin" placeholder="请输入拼音码">
+                        </div>
+                    </div>
+                    <div class="fl">
+                        <label class="layui-form-label" style="width:70px;">名称</label>
+                        <div class="layui-input-inline">
+                            <input class="layui-input" name="smartProductNmae" placeholder="请输入名称">
+                        </div>
+                    </div>
+                    <span class="layui-btn search-btn fr">查询</span>
+                </form>
+            </div>
+            <div class="m-20">
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <td>选择</td>
+                            <th>项目名称</th>
+                            <th>拼音码</th>
+                            <th>类型</th>
+                            <th>规格</th>
+                        </tr>
+                    </thead>
+                    <tbody class="charge-table"></tbody>
+                </table>
+            </div>
+            <div class="m-20 clearfix">
+                <span class="layui-btn charge submit-btn fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+            </div>
+        </div>
+        <!-- 项目弹窗 End -->
+        <div class="dot-tmp">
+            <!-- 单项目表格 -->
+            <script class="club-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                <tr data-id="{{= it[item].ID }}">
+                    <td>{{= it[item].Name }}</td>
+                    <td><img style="height: 25px; width: 25px;" src="{{= it[item].Icon }}" /></td>
+
+                    <td>{{= it[item].ChargeName }}</td>
+                    <td>{{= it[item].UserName }}</td>
+                    <td>{{= it[item].CreateTime }}</td>
+                    <td>{{= it[item].Remark }}</td>
+                    <td>
+                        <span class="layui-btn layui-btn-mini btn-remove" data-id="{{= it[item].ID }}">删除</span>
+                    </td>
+                </tr>
+                {{ } }}
+            </script>
+            <!-- 收费项目类型表格 -->
+            <script class="chargeCategory-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                <tr chargeCategoryId="{{= it[item].ID}}">
+                    <td><input type="checkbox" value="{{= it[item].ID }}" title="{{= it[item].Name }}" /></td>
+                    <td>{{= it[item].Name }}</td>
+                </tr>
+                {{ } }}
+            </script>
+            <!-- 收费项目表格 -->
+            <script class="charge-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                <tr chargeId="{{= it[item].ID }}">
+                    <td><input type="checkbox" value="{{= it[item].ID }}" title="{{= it[item].Name }}" /></td>
+                    <td>{{= it[item].Name }}</td>
+                    <td>{{= it[item].PinYin }}</td>
+                    <td>{{= it[item].CategoryName }}</td>
+                    <td>{{= it[item].Size }}</td>
+                </tr>
+                {{ } }}
+            </script>
+        </div>
+    </div>
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/lay_component/js/ajaxfileupload.js"></script>
+    <script src="~/lay_component/plugins/layui/layui.js"></script>
+    <script src="~/doT-master/doT-master/doT.min.js"></script>
+    <script src="~/lay_component/js/hcommon.js"></script>
+    <script src="~/Scripts/FlyDog.Common.js"></script>
+    <script src="~/lay_component/sampleJs/Club.js"></script>
+</body>
+</html>

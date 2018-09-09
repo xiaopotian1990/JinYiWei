@@ -1,0 +1,194 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+  
+<div class="cashier-order hide">
+    <style>
+        .layui-table td {
+            padding: 9px 0px 15px;
+        }
+
+        .layui-form-item .layui-input-inline {
+            width: 132px;
+        }
+    </style>
+    <form class="layui-form">
+        <div class="m-10 fl" style="width: 40%">
+            <div class="site-title">
+                <fieldset><legend>收银</legend></fieldset>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">应收金额:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="toAmount" placeholder="0" readonly="readonly" class="layui-input ToMoney">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">剩余佣金:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="toMoney" placeholder="0" readonly="readonly" class="layui-input ToMoney">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">折扣:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="toDiscount" placeholder="0" readonly="readonly" class="layui-input ToMoney">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">预收款:</label>
+                <div class="layui-input-block">
+                    <table class="site-table table-hover">
+                        <thead>
+                            <tr>
+                                <th>医院</th>
+                                <th>预收款</th>
+                                <th>可用金额</th>
+                                <th>使用金额</th>
+                            </tr>
+                        </thead>
+                        <tbody class="deposits-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">收取现金:</label>
+                <div class="layui-input-inline">
+                    <input name="FinalPrice" type="number" min="0" value="0"  placeholder="请输入现金金额" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">支付佣金:</label>
+                <div class="layui-input-inline">
+                    <input name="Commission" type="number" min="0" value="0"   placeholder="请输入佣金额度" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">支付方式:</label>
+                <div class="layui-input-block">
+                    <table class="layui-table" lay-even lay-skin="nob" style="width:auto">
+                        <tbody class="order-pay-tbody">
+                            <tr class="pay-way">
+                                <td>
+                                    <div class="layui-input-inline fl">
+                                        @Html.SelectCategory(Com.IFlyDog.CommonDTO.SelectType.CardCategory, "CardCategory", "CardCategory")
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="layui-input-inline fl">
+                                        <input type="number" min="0" value="0"   name="tCasherAmount" placeholder="刷卡金额" class="layui-input card-money">
+                                    </div>
+                                </td>
+                                <td class="fl">
+                                    <span class="layui-btn layui-btn-normal add-pay-btn fr "><i class="layui-icon">&#xe61f;</i></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">券:</label>
+                <div class="layui-input-block">
+                    <table class="site-table table-hover">
+                        <thead>
+                            <tr>
+                                <th>医院</th>
+                                <th>券类型</th>
+                                <th>可用金额</th>
+                                <th>使用金额</th>
+                            </tr>
+                        </thead>
+                        <tbody class="coupons-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">备注描述:</label>
+                <div class="layui-input-block">
+                    <textarea name="orderRemark" placeholder="请输入内容描述" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <span class="layui-btn layui-btn-danger add-debt-submit">欠款收银</span>
+                    <span class="layui-btn add-submit">收银</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="m-10 fr" style="width: 50%">
+            <div class="site-title">
+                <fieldset><legend>项目单</legend></fieldset>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">客户编号:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="CustomerID" placeholder="" readonly="readonly" class="layui-input ToMoney">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">提交时间:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="CreateTime" placeholder="" readonly="readonly" class="layui-input ToMoney">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">提交用户:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="CreateUserName" placeholder="" readonly="readonly" class="layui-input ToMoney">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">订单金额:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="FinalPrice" placeholder="" readonly="readonly" class="layui-input ToMoney">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">备注:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="Remark" placeholder="备注" readonly="readonly" class="layui-input ToMoney">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">详细:</label>
+                <div class="layui-input-block">
+                    <table class="site-table table-hover">
+                        <thead>
+                            <tr>
+                                <th>项目编号</th>
+                                <th>项目名称</th>
+                                <th>数量</th>
+                                <th>金额</th>
+                                <th>成交金额</th>
+                                <th>套餐</th>
+                            </tr>
+                        </thead>
+                        <tbody class="order-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </form>
+        <script type="text/html" class="deposits-tmp">
+            {{for(var item in it) { }}
+            <tr data-DepositID="{{= it[item].DepositID}}">
+                <td>{{= it[item].HospitalName}}</td>
+                <td>{{= it[item].DepositChargeName}}</td>
+                <td>{{= it[item].Rest}}</td>
+                <td><input name="tUseDepositAmount" type="number" min="0" value="0" placeholder="请输入金额" class="layui-input"></td>
+            </tr>
+            {{ } }}
+        </script>
+        <script type="text/html" class="coupons-tmp">
+            {{for(var item in it) { }}
+            <tr data-CouponID="{{= it[item].CouponID }}">
+                <td>{{= it[item].HospitalName}}</td>
+                <td>{{= it[item].CouponChargeName}}</td>
+                <td>{{= it[item].Rest}}</td>
+                <td><input name="tUseCouponAmount" type="number" min="0" value="0" placeholder="请输入金额" class="layui-input"></td>
+            </tr>
+            {{ } }}
+        </script>
+</div>

@@ -1,0 +1,192 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>住院工作台</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+    <style>
+        .customer-a {
+            color: indianred;
+            text-decoration: underline;
+            cursor:pointer;
+        }
+        .user-img{width:100px;height:100px;}
+    </style>
+</head>
+<body>
+    <div class="admin-main">
+        <fieldset class="layui-elem-field">
+            <legend>住院工作台</legend>
+
+            <input type="hidden" name="hicutomerId" hicutomerId="" />
+            <input type="hidden" name="opration"/>
+
+            <div class="layui-tab layui-tab-brief" lay-filter="inpatient">
+                <ul class="layui-tab-title">
+                    <li class="layui-this" data-action="getInpatientData">住院列表</li>
+                    <li data-action="">办理住院</li>
+                    <li data-action="getBedData">床位列表</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div class="layui-field-box">
+                            <table class="site-table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>头像</th>
+                                        <th>客户</th>
+                                        <th>入院时间</th>
+                                        <th>床位</th>
+                                        <th>备注</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="inpatient-table"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="layui-tab-item">
+                        <div class="layui-form m-20">
+                            <div class="layui-input-inline">
+                                <div class="layui-input-inline" style="width:360px;">
+                                    <input type="text" class="layui-input" name="name" placeholder="请输入客户编号/手机号/电话号码/预约号">
+                                </div>
+                            </div>
+                            <span class="layui-btn search-btn fr">查询</span>
+                        </div>
+                        <div class="layui-field-box hide">
+                            <blockquote class="layui-elem-quote">
+                                找到<span class="c-d92 coustomer-count"></span>条符合条件的客户资料
+                            </blockquote>
+                        </div>
+                        <div class="layui-field-box hide">
+                            <table class="site-table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>客户</th>
+                                        <th>手机号</th>
+                                        <th>渠道</th>
+                                        <th>会员</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="inpatient-live-table"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="layui-tab-item">
+                        <div class="layui-field-box">
+                            <table class="site-table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>名称</th>
+                                        <th>占用状态</th>
+                                        <th>描述</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="inpatient-bed-table"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            <form class="layui-form hide" id="inPerationComm"></form>
+        </fieldset>
+        <div class="page-pop">
+            <div class="inpatient-live-pop hide">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>办理住院</legend>
+                </fieldset>
+                <div class="layui-field-box">
+                    <blockquote class="layui-elem-quote">
+                        <p>客户：<customer></customer></p>
+                        <p>选择床位办理住院。</p>
+                    </blockquote>
+                </div>
+                <form class="channel-form layui-form">
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">床位</label>
+                        <div class="layui-input-inline" style="width:159px;">
+                            <select name="BedID" class="bed-select">
+                                <option>请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">备注</label>
+                        <div class="layui-input-inline">
+                            <textarea class="layui-textarea" name="Remark"></textarea>
+                        </div>
+                    </div>
+                </form>
+                <div class="m-20 clearfix">
+                    <span class="layui-btn inpatient-in btn-submit fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+                </div>
+            </div>
+        </div>
+        <div class="dot-tmp">
+            <!-- 住院工作台表格 -->
+            <script class="inpatient-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                <tr data-id="{{= it[item].ID }}">
+                    <td><img src="{{= it[item].ImageUrl }}" class="user-img" /></td>
+                    <td><span class="customer-a" data-cusid="{{= it[item].CustomerID }}">{{= it[item].CustomerName }}</span></td>
+                    <td>{{= it[item].InTime }}</td>
+                    <td>{{= it[item].BedName }}</td>
+                    <td>{{= it[item].Remark }}</td>
+                    <td>
+                        <span class="layui-btn layui-btn-small btn-out" data-id="{{= it[item].ID }}" data-name="{{= it[item].CustomerName }}" data-bedid="{{= it[item].BedID }}">出院</span>
+                        <span name="upOutHosOrder" class="layui-btn layui-btn-small btn-order" data-id="{{= it[item].ID }}" data-customerID="{{= it[item].CustomerID }}" data-orderID="{{= it[item].OrderID }}">住院单维护</span>
+                    </td>
+                </tr>
+                {{ } }}
+            </script>
+            <!-- 办理住院表格 -->
+            <script class="inpatient-live-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                <tr data-id="{{= it[item].ID }}">
+                    <td><span class="customer-a" data-cusid="{{= it[item].ID }}">{{= it[item].Name }}</span></td>
+                    <td>{{= it[item].Mobile }}</td>
+                    <td>{{= it[item].ChannelName }}</td>
+                    <td>{{= it[item].MemberCategoryName }}</td>
+                    <td>
+                        <span class="layui-btn layui-btn-small btn-in" data-id="{{= it[item].ID }}" data-name="{{= it[item].Name }}">办理住院</span>
+                    </td>
+                </tr>
+                {{ } }}
+                {{ $(".coustomer-count").text(it.length); }}
+            </script>
+            <!-- 床位下拉框表格 -->
+            <script class="bed-select-tmp" type="text/x-dot-template">
+                <option>请选择</option>
+                {{ for(var item in it){ }}
+                <option value="{{= it[item].ID }}">{{= it[item].Name }}</option>
+                {{ } }}
+            </script>
+            <!-- 床位表格 -->
+            <script class="inpatient-bed-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                <tr data-id="{{= it[item].ID }}">
+                    <td>{{= it[item].Name }}</td>
+                    <td>{{= it[item].Usage == 0 ? "空闲" : "使用中" }}</td>
+                    <td>{{= it[item].Remark }}</td>
+                </tr>
+                {{ } }}
+            </script>
+        </div>
+    </div>
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/lay_component/js/hcommon.js"></script>
+    <script src="~/Scripts/FlyDog.Common.js"></script>
+    <script src="~/doT-master/doT-master/doT.min.js"></script>
+    <script src="~/lay_component/plugins/layui/layui.js"></script>
+    <script src="~/lay_component/sampleJs/Inpatient.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+﻿
+    <div class="AddInvoice m-20 hide">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">发票号:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="Code" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">发票名称:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="Name" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">发票金额:</label>
+                <div class="layui-input-block">
+                    <input type="number" min="1" name="Amount" value="0" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">选择时间:</label>
+                <div class="layui-input-block">
+                    <input name="BillTime" placeholder="请输入时间" onclick="layui.laydate({ elem: this, festival: true })" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">备注描述:</label>
+                <div class="layui-input-block">
+                    <textarea name="Remark" placeholder="请输入备注描述" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <div class="fr">
+                    <span class="layui-btn layui-btn-mini layui-btn-normal add-detail">增加详细</span>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">详细信息:</label>
+                <div class="layui-input-block">
+
+                    <table class="site-table table-hover">
+                        <thead>
+                            <tr>
+                                <th>项目</th>
+                                <th>数量</th>
+                                <th>成交价</th>
+                                <th>券额</th>
+                                <th>佣金额</th>
+                                <th>退款金额</th>
+                                <th>现金额</th>
+                                <th>操作时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="invoice-detail-tbody"></tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <span class="layui-btn add-submit">立即提交</span>
+                </div>
+            </div>
+        </form>
+
+</div>

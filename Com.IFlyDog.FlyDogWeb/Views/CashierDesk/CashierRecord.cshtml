@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>收银记录</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" /> 
+</head>
+<body>
+<div class="admin-main">
+    <!--tab导航-->
+    <fieldset class="layui-elem-field ">
+        <legend>收银记录</legend>
+        <div class="layui-form m-20 clearfix">
+            <div class="fl">
+                <label class="layui-form-label">收银日期:</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" name="castartTime" placeholder="结算日期起始" onclick="layui.laydate({elem: this, festival: true})">
+                </div>
+                <div class="layui-input-inline">
+                    <input class="layui-input" name="caendTime" placeholder="结算日期结束" onclick="layui.laydate({elem: this, festival: true})">
+                </div>
+            </div> 
+            <div class="fl">
+                <label class="layui-form-label">客户编号:</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" name="caCuID" placeholder="请输入客户编号" >
+                </div> 
+            </div> 
+            <div class="fl">
+                <label class="layui-form-label">单号:</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" name="caNo" placeholder="单号">
+                </div>
+            </div>
+          
+                <span class="layui-btn  cashi-search-btn fr">查询</span>
+                
+        </div>
+        <div class="layui-field-box" style="max-width: 100%;overflow:auto;">
+            <table class="site-table table-hover" style="width: 150%;">
+                <thead>
+                <tr> 
+                    <th>客户编号</th>
+                    <th>客户姓名</th>
+                    <th>订单类型</th>
+                    <th>所属医院</th>
+                    <th>订单号</th>
+                    <th>收银时间</th>
+                    <th>收银用户</th>
+                    <th>应收金额</th>
+                    <th>实收金额</th>
+                    <th>现金</th>
+                    <th>刷卡</th>
+                    <th>预收款</th>
+                    <th>代金券</th>
+                    <th>欠款</th>
+                    <th>佣金</th>
+                    <th>结算状态</th>
+                    <th>卡类型</th>
+                    <th>备注</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody class="tb-cashier">
+  
+                </tbody>
+            </table>
+        </div>
+        <!--分页容器--> 
+        <div id="pageDiv" class="fr"></div>
+    </fieldset>
+</div>
+<div class="doT-data-template">
+<!--收银记录-->
+<script class="cashier-temp" type="text/x-dot-template">
+    {{for(var item in it) { }}
+        <tr>
+        <td>{{= it[item].CustomerID}}</td>
+        <td>{{= it[item].CustomerName}}</td>
+        <td>
+            {{? it[item].OrderType == 1}}
+            项目订单
+            {{?? it[item].OrderType == 2}}
+            住院单
+            {{?? it[item].OrderType == 3}}
+            预收款订单
+            {{?? it[item].OrderType == 4}}
+            退单
+            {{?? it[item].OrderType == 5}}
+            退款
+            {{?? it[item].OrderType == 6}}
+            欠款
+            {{?}}
+        </td>
+        <td>{{= it[item].HospitalName}}</td>
+        <td>{{= it[item].No}}</td>
+        <td>{{= it[item].CreateTime}}</td>
+        <td>{{= it[item].CreateUserName == null ? "-":it[item].CreateUserName.slice(0,10)}}</td>
+        <td>{{= it[item].Amount}}</td>
+        <td>{{= it[item].RealAmount}}</td>
+        <td>{{= it[item].Cash}}</td>
+        <td>{{= it[item].Card}}</td>
+        <td>{{= it[item].Deposit}}</td>
+        <td>{{= it[item].Coupon}}</td>
+        <td>{{= it[item].Debt}}</td>
+        <td>{{= it[item].Commission}}</td>
+        <td>
+            {{if(it[item].Status == 1){}}
+            已结算
+            {{ } }}
+            {{if(it[item].Status == 0){}}
+            未结算
+            {{ } }}
+        </td>
+        <td>
+            {{~it[item].CardCategoryNames:value:index }}
+            {{= value  == null ? "":value}}
+            {{~}}
+        </td>
+        <td>{{= it[item].Remark}}</td>
+        <td>
+            <a href="/CashierDesk/CashierTodayPrint?cashierTodayId={{= it[item].ID }}" target="_blank"  class="layui-btn  layui-btn-normal layui-btn-mini model-btn">打印</a>
+        </td>
+    </tr>
+    {{ } }}
+</script>    
+</div> 
+<script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+<script src="~/lay_component/js/hcommon.js"></script>
+<script src="~/Scripts/FlyDog.Common.js"></script>
+<script src="~/doT-master/doT-master/doT.min.js"></script>
+<script src="~/lay_component/plugins/layui/layui.js"></script>
+<script src="~/lay_component/sampleJs/CashinerDesk/CashierRecord.js"></script>
+</body>
+</html>

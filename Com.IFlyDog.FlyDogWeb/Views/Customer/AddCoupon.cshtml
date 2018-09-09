@@ -1,0 +1,80 @@
+﻿ <div class="site-text site-block">
+    <div class="layui-form-item">
+        <label class="layui-form-label">激活码:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="Code" class="layui-input layui-radio-disbaled" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">券活动:</label>
+        <div class="layui-input-block">
+            <input type="text" name="ActiveName" class="layui-input layui-radio-disbaled" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">券类型:</label>
+        <div class="layui-input-block">
+            <input type="text" name="CouponCategory" class="layui-input layui-radio-disbaled" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">券金额:</label>
+        <div class="layui-input-block">
+            <input type="text" name="Amount" class="layui-input layui-radio-disbaled" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">发放日期:</label>
+        <div class="layui-input-block">
+            <input type="text" name="CreateDate" class="layui-input layui-radio-disbaled" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">有效日期:</label>
+        <div class="layui-input-block">
+            <input type="text" name="Expiration" class="layui-input layui-radio-disbaled" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">重复使用:</label>
+        <div class="layui-input-block">
+            <input type="text" name="IsRepetition" class="layui-input layui-radio-disbaled" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">是否失效:</label>
+        <div class="layui-input-block">
+            <input type="text" name="IsEfficacy" class="layui-input layui-radio-disbaled" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">激活后券码:</label>
+        <div class="layui-input-block">
+            <input type="text" name="CouponID" class="layui-input layui-radio-disbaled" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-inline">
+            <span class="layui-btn  code-sub">立即激活</span>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+var custid = $("input[name='hicutomerId']").attr("hicutomerId");
+$(".code-sub").click(function() {
+    var paraObj = {};
+    paraObj.data = {
+        CustomerID: custid,
+        Code: $("input[name=Code]").val()
+    };
+    var url = "/CustomerProfile/" + $(this).parents(".layui-layer").data("url");
+    var result = ajaxProcess(url, paraObj);
+    if (result.ResultType === 0) {
+        layer.msg(result.Message, { icon: 1 });  
+        getcustomerMoney();
+        setTimeout(function(){ layer.closeAll();},2000); 
+    } else {
+        layer.msg(result.Message, { icon: 5 });
+    }
+});
+</script>

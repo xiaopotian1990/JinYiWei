@@ -1,0 +1,102 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper;
+@*@model List<Com.JinYiWei.JHOMS.Model.SmartUser>
+    @{
+        ViewBag.Title = "Index";
+
+        string page = Request.QueryString["Page"];
+        int currentPage = String.IsNullOrEmpty(page) ? 1 : Convert.ToInt32(page);
+        var index = 1 + (currentPage - 1) * Convert.ToInt32(ViewBag.PagerInfo.PageSize);
+    }*@
+<div class="widget-container-span ui-sortable">
+    <div class="widget-box">
+        <div class="widget-header">
+            <h5>接待记录</h5>
+        </div>
+        <div class="col-xs-12  widget-body">
+            <div class="widget-main">
+                <form id="queryForm" class="form-inline margin-top-10" action="/SMSDesk/Index">
+
+                    <div class="form-group">
+                        <label class="control-label">上门日期：</label>
+                    </div>
+                    <div class="form-group">
+                        <input placeholder="开始日期" size="14" type="text" value="" class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        @*<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>*@
+                    </div>
+                    -
+                    <div class="form-group">
+                        <input placeholder="结束日期" size="16" type="text" value="" class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        @*<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>*@
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">部门：</label>
+                        <select class="input-sm" selected="selected" id="DeptID" name="DeptID"><option value="" selected="selected">请选择</option><option value="55">董事会</option><option value="56">新部门</option><option value="1056">111</option><option value="29">美容外科</option><option value="8">美容皮肤科</option><option value="40">注射中心</option><option value="35">美容牙科</option><option value="42">美容中医科</option><option value="34">药房</option><option value="11">护理部(手术室)</option><option value="15">检验科</option><option value="10">护理部(病房)</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">顾客编号：</label>
+                        <input id="Name" type="text" class="input-small input-sm" placeholder="输入顾客编号" name="Name">
+                    </div>
+                    <div class="form-group">
+                        <button style="border-radius: 10px;" class="btn btn-xs btn-warning  "><i class="icon-search "></i>查询</button>
+                        <button style="border-radius: 10px;" class="btn btn-xs btn-danger "><i class="icon-remove"></i>重置</button>
+                    </div>
+
+
+
+                </form>
+
+                <div id="tab0" class="tab-pane">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="header smaller lighter blue"></div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="table-responsive">
+                                        <div id="sample-table-2_wrapper" class="dataTables_wrapper" role="grid">
+                                            <div class="row">
+                                                <fieldset></fieldset>
+                                            </div>
+                                            <table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2_info">
+                                                <thead>
+                                                    <tr role="row">
+                                                        <th role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" style="">顾客编号</th>
+                                                        <th role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" style="">顾客名称</th>
+                                                        <th role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" style="">接待部门</th>
+                                                        <th role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" style=""><i class="icon-time bigger-110 hidden-480"></i>接待时间</th>
+                                                        <th role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" style="">接待人员</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody role="alert" aria-live="polite" aria-relevant="all">
+                                                    <tr class=""></tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="row">
+                                                @Html.Raw(PagerHelper.GetNormalPage(@ViewBag.PagerInfo))
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('.form_date').datetimepicker({
+        language: 'zh-CN',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+    });
+
+</script>

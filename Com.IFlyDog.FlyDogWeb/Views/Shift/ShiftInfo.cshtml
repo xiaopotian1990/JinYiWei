@@ -1,0 +1,185 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>排班管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+    <style>
+        .info-remove.hide{
+            display:none;
+        }
+        .shift-table thead tr th,.shift-table tbody tr td{
+            text-align:center;
+        }
+        .m-bt-9{display:inline-block;margin:9px 5px;}
+        .layui-input-block{margin-left:0;}
+        .layui-form-label.wide{}
+    </style>
+</head>
+<body>
+    <div class="admin-main">
+        <blockquote class="layui-elem-quote">
+            <a href="javascript:;" class="layui-btn fr next">
+                下一周
+            </a>
+            <a href="javascript:;" class="layui-btn fr self m-lr-10">
+                本周
+            </a>
+            <a href="javascript:;" class="layui-btn fr last">
+                上一周
+            </a>
+            <a href="javascript:;" class="layui-btn btn-add">
+                <i class="layui-icon"></i> 批量添加
+            </a>
+        </blockquote>
+        <fieldset class="layui-elem-field">
+            <legend>排班管理</legend>
+            <div class="layui-field-box">
+                <table class="site-table table-hover shift-table">
+                </table>
+                <!--分页容器-->
+                <div id="pageDiv"></div>
+            </div>
+        </fieldset>
+        <!-- 添加/编辑弹窗 -->
+        <div class="shift-pop hide">
+            <form class="layui-form">
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                    <legend>批量设置</legend>
+                </fieldset>
+                <div class="layui-input-block">
+                    <label class="layui-form-label">用户</label>
+                    <div class="layui-input-inline">
+                        <table class="site-table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>用户账号</th>
+                                    <th>用户姓名</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="suser-table">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <span class="layui-btn layui-btn-small add-user">添加</span>
+                </div>
+                <div class="layui-input-block">
+                    <label class="layui-form-label">日期</label>
+                    <div class="layui-input-inline">
+                        <table class="site-table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>日期</th>
+                                    <th>排班类型</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="sshift-table"></tbody>
+                        </table>
+                    </div>
+                    <span class="layui-btn layui-btn-small reset-shift">清空</span>
+                </div>
+                <div class="layui-input-block">
+                    <label class="layui-form-label">增加日期</label>
+                    <div class="layui-input-inline">
+                        <label class="m-bt-9">日期：</label>
+                        <div class="layui-input-inline" style="width:100px;">
+                            <input type="text" class="layui-input" name="start" onclick="layui.laydate({ elem: this, min: laydate.now(+1) });" />
+                        </div>
+                        <label class="m-bt-9">至:</label>
+                        <div class="layui-input-inline" style="width:100px;">
+                            <input type="text" class="layui-input" name="end" onclick="layui.laydate({ elem: this, min: laydate.now(+1) });" />
+                        </div>
+                        <label class="m-bt-9">类型：</label>
+                        <div class="layui-input-inline" style="width:100px;">
+                            @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.ShiftCategory, "ShiftCategory", "ShiftCategory")
+                        </div>
+                        <span class="layui-btn add-shift fr">添加</span>
+                    </div>
+                </div>
+                <div class="m-20 clearfix">
+                    <span class="layui-btn submit-btn fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+                </div>
+            </form>
+        </div>
+        <!-- End  添加/编辑弹窗 -->
+        <!-- 项目类型弹窗 -->
+        <div class="shiftInfo-pop hide">
+            <form class="m-20 layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用户：</label>
+                    <span class="info-user layui-input-inline"></span>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">日期：</label>
+                    <span class="info-date layui-input-inline"></span>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">班次类型：</label>
+                    <div class="layui-input-inline">
+                        @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.ShiftCategory, "infoShiftCategory", "infoShiftCategory")
+                    </div>
+                </div>
+            </form>
+            <div class="m-20 clearfix">
+                <span class="layui-btn layui-btn-danger fl info-remove hide">删除</span>
+                <span class="layui-btn chargeCategory info-submit fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+            </div>
+        </div>
+        <!-- 项目类型弹窗 End -->
+        <div class="dot-tmp">
+            <!-- 项目折扣表格 -->
+            <script class="shift-tmp" type="text/x-dot-template">
+                <thead>
+                    {{ thead = it.HeaderList; }}
+                    <tr>
+                        {{ for(var item in thead){ }}
+                        <th>{{= thead[item] }}</th>
+                        {{ } }}
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ tbody = it.UserInfoList; }}
+                    {{ for(var item in tbody){ }}
+                    {{ var Monday = tbody[item].Monday; }}
+                    {{ var Tuesday = tbody[item].Tuesday; }}
+                    {{ var Wednesday = tbody[item].Wednesday; }}
+                    {{ var Thursday = tbody[item].Thursday; }}
+                    {{ var Friday = tbody[item].Friday; }}
+                    {{ var Saturday = tbody[item].Saturday; }}
+                    {{ var Sunday = tbody[item].Sunday; }}
+                    {{ var sUtils = Common.StrUtils; }}
+                    <tr data-id="{{= tbody[item].UserID }}">
+                        <td>{{= tbody[item].DeptName }}</td>
+                        <td class="t-user">{{= tbody[item].UserName }}</td>
+                        <td data-date="{{= thead[2].replace(/星期./,"") }}" data-categoryid="{{= Monday != null ? Monday.CategoryID : "" }}" data-id="{{= Monday != null ? Monday.ShiftID : "" }}">{{= Monday != null ? sUtils.isFalseSetEmpty(Monday.CategoryName):"" }}</td>
+                        <td data-date="{{= thead[3].replace(/星期./,"") }}" data-categoryid="{{= Tuesday != null ? Tuesday.CategoryID : "" }}" data-id="{{= Tuesday != null ? Tuesday.ShiftID : "" }}">{{= Tuesday != null ? sUtils.isFalseSetEmpty(Tuesday.CategoryName):"" }}</td>
+                        <td data-date="{{= thead[4].replace(/星期./,"") }}" data-categoryid="{{= Wednesday != null ? Wednesday.CategoryID : "" }}" data-id="{{= Wednesday != null ? Wednesday.ShiftID : "" }}">{{= Wednesday != null ? sUtils.isFalseSetEmpty(Wednesday.CategoryName):"" }}</td>
+                        <td data-date="{{= thead[5].replace(/星期./,"") }}" data-categoryid="{{= Thursday != null ? Thursday.CategoryID : "" }}" data-id="{{= Thursday != null ? Thursday.ShiftID : "" }}">{{= Thursday != null ? sUtils.isFalseSetEmpty(Thursday.CategoryName):"" }}</td>
+                        <td data-date="{{= thead[6].replace(/星期./,"") }}" data-categoryid="{{= Friday != null ? Friday.CategoryID : "" }}" data-id="{{= Friday != null ? Friday.ShiftID : "" }}">{{= Friday != null ? sUtils.isFalseSetEmpty(Friday.CategoryName):"" }}</td>
+                        <td data-date="{{= thead[7].replace(/星期./,"") }}" data-categoryid="{{= Saturday != null ? Saturday.CategoryID : "" }}" data-id="{{= Saturday != null ? Saturday.ShiftID : "" }}">{{= Saturday != null ? sUtils.isFalseSetEmpty(Saturday.CategoryName):"" }}</td>
+                        <td data-date="{{= thead[8].replace(/星期./,"") }}" data-categoryid="{{= Sunday != null ? Sunday.CategoryID : "" }}" data-id="{{= Sunday != null ? Sunday.ShiftID : "" }}">{{= Sunday != null ? sUtils.isFalseSetEmpty(Sunday.CategoryName):"" }}</td>
+                    </tr>
+                    {{ } }}
+                </tbody>
+            </script>
+        </div>
+    </div>
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/lay_component/js/hcommon.js"></script>
+    <script src="~/Scripts/FlyDog.Common.js"></script>
+    <script src="~/doT-master/doT-master/doT.min.js"></script>
+    <script src="~/lay_component/plugins/layui/layui.js"></script>
+    <script src="~/lay_component/sampleJs/SmartUser.js"></script>
+    <script src="~/lay_component/sampleJs/Shift.js"></script>
+</body>
+</html>

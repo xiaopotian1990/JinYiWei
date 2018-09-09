@@ -1,0 +1,215 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>劵活动管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+    <style>
+        .couponActivity-a {
+            color: indianred;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-main">
+        <blockquote class="layui-elem-quote">
+            <a href="javascript:;" class="layui-btn layui-btn-small btn-add">
+                <i class="layui-icon"></i> 添加
+            </a>
+        </blockquote>
+        <fieldset class="layui-elem-field">
+            <legend>劵活动管理</legend>
+            <div class="layui-form m-10 clearfix">
+                <div class="fl">
+                    <label class="layui-form-label">名称</label>
+                    <div class="layui-input-inline">
+                        <input class="layui-input" name="sName" placeholder="请输入名称">
+                    </div>
+                </div>
+                <div class="fl">
+                    <label class="layui-form-label">开始时间</label>
+                    <div class="layui-input-inline">
+                        <input class="layui-input" name="sBeginTime" placeholder="请输入开始时间" onclick="layui.laydate({ elem: this })">
+                    </div>
+                </div>
+                <div class="fl">
+                    <label class="layui-form-label">结束时间</label>
+                    <div class="layui-input-inline">
+                        <input class="layui-input" name="sEndTime" placeholder="请输入结束时间" onclick="layui.laydate({ elem: this })">
+                    </div>
+                </div>
+                <span class="layui-btn search-btn fr couponActivity m-r-10">查询</span>
+            </div>
+            <div class="layui-field-box">
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>券类型</th>
+                            <th>券金额</th>
+                            <th>价格</th>
+                            <th>发放渠道</th>
+                            <th>发放日期</th>
+                            <th>失效日期</th>
+                            <th>重复使用</th>
+                            <th>代码前缀</th>
+                            <th>备注</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="couponActivity-table"></tbody>
+                </table>
+                <div id="pageDiv"></div>
+            </div>
+        </fieldset>
+        <div class="page-pop">
+            <div class="couponActivity-info-pop hide">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>劵活动信息</legend>
+                </fieldset>
+                <div class=""></div>
+                <div class="couponActivity-form layui-form clearfix"></div>
+                <div class="m-20 clearfix">
+                    <span class="layui-btn couponActivity btn-submit fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+                </div>
+            </div>
+
+            <div class="category-pop hide">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>选择劵类型</legend>
+                </fieldset>
+                <div class="m-20">
+                    <table class="site-table table-hover">
+                        <thead>
+                            <tr>
+                                <th>选择</th>
+                                <th>名称</th>
+                                <th>备注</th>
+                            </tr>
+                        </thead>
+                        <tbody class="category-table"></tbody>
+                    </table>
+                </div>
+                <div class="m-20 clearfix">
+                    <span class="layui-btn category btn-submit fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+                </div>
+            </div>
+
+        </div>
+        <div class="dot-tmp">
+            <!-- 劵活动表格 -->
+            <script class="couponActivity-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                <tr data-id="{{= it[item].ID }}">
+                    <td>{{= it[item].ActivityName }}</td>
+                    <td>{{= it[item].CouponCategoryName }}</td>
+                    <td>{{= it[item].Amount }}</td>
+                    <td>{{= it[item].Price }}</td>
+                    <td>{{= it[item].Channel }}</td>
+                    <td>{{= it[item].CreateDate }}</td>
+                    <td>{{= it[item].Expiration }}</td>
+                    <td>{{= it[item].IsRepetition == 1 ? "允许" : "不允许" }}</td>
+                    <td>{{= it[item].Prefix }}</td>
+                    <td>{{= it[item].Remark }}</td>
+                    <td>
+                        <span class="layui-btn layui-btn-small btn-edit" data-id="{{= it[item].ID }}">修改</span>
+                        <span class="layui-btn layui-btn-small btn-remove" data-id="{{= it[item].ID }}">删除</span>
+                        <a href="/CouponActivity/CouponActivityDetailInfo?ActivityID={{= it[item].ID }}" class="layui-btn layui-btn-small">管理</a>
+                    </td>
+                </tr>
+                {{ } }}
+            </script>
+            <!-- 弹窗模版 -->
+            <script class="couponActivity-form-tmp" type="text/x-dot-template">
+                <input type="hidden" name="ID" value="{{= it.ID }}" />
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">名称</label>
+                    <div class="layui-input-inline">
+                        <input class="layui-input" name="ActivityName" placeholder="请输入名称" value="{{= it.ActivityName }}" />
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">劵类型</label>
+                    <div class="layui-input-inline">
+                        <input type="hidden" class="layui-input" name="CategoryID" value="{{= it.CategoryID }}" />
+                        <input class="layui-input" name="CouponCategoryName" placeholder="请选择卷类型" value="{{= it.CouponCategoryName }}" />
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">卷金额</label>
+                    <div class="layui-input-inline">
+                        <input class="layui-input" name="Amount" placeholder="请输入卷金额" value="{{= it.Amount }}" />
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">售价</label>
+                    <div class="layui-input-inline">
+                        <input class="layui-input" name="Price" placeholder="请输入售价" value="{{= it.Price }}" />
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">发放渠道</label>
+                    <div class="layui-input-inline">
+                        <input class="layui-input" name="Channel" placeholder="请输入发放渠道" value="{{= it.Channel }}" />
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">生效日期</label>
+                    <div class="layui-input-inline">
+                        <input class="layui-input" name="CreateDate" placeholder="请输入生效日期" value="{{= it.CreateDate }}" onclick="layui.laydate({ elem: this })" />
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">失效日期</label>
+                    <div class="layui-input-inline">
+                        <input class="layui-input" name="Expiration" placeholder="请输入失效日期" value="{{= it.Expiration }}" onclick="layui.laydate({ elem: this })" />
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">重复使用</label>
+                    <div class="layui-input-inline">
+                        <input type="radio" class="layui-input" name="IsRepetition" title="允许" value="1" {{= it.IsRepetition == 1 ? "checked" : "" }} />
+                        <input type="radio" class="layui-input" name="IsRepetition" title="不允许" value="0" {{= it.IsRepetition == 0 ? "checked" : "" }} />
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">代码前缀</label>
+                    <div class="layui-input-inline">
+                        <input class="layui-input" name="Prefix" placeholder="请输入代码前缀" value="{{= it.Prefix }}" />
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">备注</label>
+                    <div class="layui-input-inline">
+                        <textarea class="layui-textarea" name="Remark" placeholder="请输入备注">{{= it.Remark }}</textarea>
+                    </div>
+                </div>
+            </script>
+            <script class="category-tmp" type="text/x-dot-template">
+                {{ it = it.length ? it : [it]; }}
+                {{ for(var item in it){ }}
+                <tr>
+                    <td><input type="checkbox" value="{{= it[item].ID }}" data-name="{{= it[item].Name }}" /></td>
+                    <td>{{= it[item].Name }}</td>
+                    <td>{{= it[item].Remark }}</td>
+                </tr>
+                {{ } }}
+            </script>
+        </div>
+    </div>
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/lay_component/js/hcommon.js"></script>
+    <script src="~/Scripts/FlyDog.Common.js"></script>
+    <script src="~/doT-master/doT-master/doT.min.js"></script>
+    <script src="~/lay_component/plugins/layui/layui.js"></script>
+    <script src="~/lay_component/sampleJs/CouponActivity.js"></script>
+</body>
+</html>

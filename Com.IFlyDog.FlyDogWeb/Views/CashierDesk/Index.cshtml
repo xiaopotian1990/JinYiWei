@@ -1,0 +1,438 @@
+﻿@using Com.IFlyDog.CommonDTO
+@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>收银台</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+    <style>
+        .site-block {
+            border: none;
+            padding: 10px;
+        }
+
+        span {
+            margin-left: 10px;
+        }
+
+        .layui-form-select .layui-input {
+            padding-right: 0px;
+        }
+        .pad-9{display:inline-block;padding:11px;}
+        .site-title {
+            margin: 0;
+        }
+
+        .layui-table.pay-way td {
+        }
+        .list-row{margin-bottom:15px;}
+        .list-row .add-pay-btn{display:none;}
+        .pay-method-list .list-row:last-child .add-pay-btn{display:inline-block;}
+        .pay-method-list .list-row:last-child .rmv-pay-btn{display:none;}
+    </style>
+</head>
+<body>
+<div class="admin-main">
+    <!--tab导航-->
+    <fieldset class="layui-elem-field ">
+        <legend>收银台</legend>
+        <div class="layui-field-box ">
+            <blockquote class="layui-elem-quote">
+                <span class="layui-btn layui-btn-small">结算记录</span>
+                <span class="layui-btn layui-btn-small">收银记录</span>
+                <span class="layui-btn layui-btn-small">还欠款</span>
+                <span class="layui-btn layui-btn-small">结算</span>
+            </blockquote>
+            <!--收银台-->
+                <input type="hidden" name="custid" />
+            <input type="hidden" name="orderid" />
+            <div class="layui-tab layui-tab-brief">
+                <ul class="layui-tab-title cashier-desk-ul">
+                    <li class="layui-this">待收费列表</li>
+                    <li class="cashiToday">今日收银列表</li>
+                    <li class="billToday">今日发票记录</li>
+                    <li class="">查询顾客</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <!--待收费列表-->
+                    <div class="layui-tab-item  layui-show" name="WaitingCharge">
+                        <table class="site-table table-hover">
+                            <thead>
+                            <tr>
+                                <th>审核状态</th>
+                                <th>订单类型</th>
+                                <th>客户</th>
+                                <th>金额</th>
+                                <th>提交用户</th>
+                                <th>提交时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody class="tb-noPaidOrder">
+                            
+                            </tbody>
+                        </table>
+                        <div class=""> </div>
+                    </div>
+                    <!--今日收银列表-->
+                    <div class="layui-tab-item" style="max-width: 100%;    overflow:auto;">
+                        <table class="site-table table-hover" style="width: 150%;">
+                            <thead>
+                            <tr>
+                                <th>客户编号</th>
+                                <th>客户姓名</th>
+                                <th>订单类型</th>
+                                <th>所属医院</th>
+                                <th>订单号</th>
+                                <th>收银时间</th>
+                                <th>收银用户</th>
+                                <th>应收金额</th>
+                                <th>实收金额</th>
+                                <th>现金</th>
+                                <th>刷卡</th>
+                                <th>预收款</th>
+                                <th>代金券</th>
+                                <th>欠款</th>
+                                <th>佣金</th>
+                                <th>卡类型</th> 
+                                <th>结算状态</th>  
+                                <th>备注</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody class="tb-cashierToday"></tbody> 
+                        </table>
+                        <div class="cashierToday-null"></div>
+                    </div>
+                    <!--今日发票记录-->
+                    <div class="layui-tab-item">
+                        <table class="site-table table-hover">
+                            <thead>
+                            <tr>
+                                <th>顾客编号</th>
+                                <th>顾客姓名</th>
+                                <th>开票日期</th>
+                                <th>发票日期</th>
+                                <th>开票人员</th>
+                                <th>金额</th>
+                                <th>发票号</th>
+                                <th>发票头</th>
+                                <th>备注</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody class="tb-billToday"></tbody>
+                
+                        </table>
+                        <div class="billToday-null"></div>
+                    </div>
+                    <!--查询顾客-->
+                    <div class="layui-tab-item">
+                        <form class="layui-form">
+                            <div class="layui-form-item">
+                                <input type="text" name="cuident" placeholder="请输入顾客编号/手机号/电话号码/预约号/姓名" class="layui-input fl">
+                                <span class="layui-btn layui-btn-normal discbut">立即识别</span>
+                                <span class="layui-btn layui-btn-primary resetbut">重置</span>
+                            </div>
+                        </form>
+                        <div class="custo-null">
+                            
+                        </div>  
+                        <!--顾客识别显示的信息-->
+                        <fieldset class="layui-elem-field">
+                            <legend>顾客信息</legend>
+                                <form class="layui-form">
+                                    <div class="layui-field-box">
+                                    <table class="site-table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>编号</th>
+                                            <th>客户</th>
+                                            <th>性别</th>
+                                            <th>手机号</th>
+                                            <th>会员名称</th>
+                                            <th>渠道</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="tb-cust-inshow"></tbody>
+                                    </table>
+                                </div>
+                            </form>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>
+    <div class="hide bill-detail">
+    <form class="layui-form">
+        <table class="site-table table-hover">
+            <thead>
+                <tr>
+                    <th>项目</th>
+                    <th>数量</th>
+                    <th>成交价</th>
+                    <th>券额</th>
+                    <th>佣金额</th>
+                    <th>退款金额</th>
+                    <th>现金额</th>
+                    <th>操作时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+
+            <tbody class="bill-detail-tbody"></tbody>
+        </table>
+    </form> 
+</div>
+
+<!--调整收银-->
+    <div class="site-text site-block hide editCashier">
+        <form class="layui-form Cashier-form">
+        </form>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <span class="layui-btn submit-btn" lay-filter="formDemo">立即提交</span>
+            </div>
+        </div>
+    </div>
+    <div class="doT-data-template">
+        <!--发票详情信息-->
+        <script type="text/html" class="bill-detail-tmp">
+            {{for(var item in it) { }}
+            <tr data-id="{{= it[item].ID}}">
+                <td>{{= it[item].ChargeName}}</td>
+                <td>{{= it[item].Num}}</td>
+                <td>{{= it[item].FinalPrice}}</td>
+                <td>{{= it[item].Coupon}}</td>
+                <td>{{= it[item].Commission}}</td>
+                <td>{{= it[item].RebateAmount}}</td>
+                <td>{{= it[item].RealAmount}}</td>
+                <td>{{= it[item].PaidTime}}</td>
+                <td>
+                    <span class="layui-btn layui-btn-normal layui-btn-mini select-detail">选择</span>
+                </td>
+            </tr>
+            {{ } }}
+        </script>
+        <!--发票详情信息-->
+        <script type="text/html" class="Cashier-form-tmp">
+            <input type="hidden" name="ID" value="{{= it.ID }}" />
+            <input type="hidden" name="OrderType" value="{{= it.OrderType }}" />
+        <div class="layui-form-item">
+            <label class="layui-form-label">现金总额:</label>
+            <div class="layui-input-block">
+                    <div class="pad-9">{{= it.Cash }}</div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">刷卡总额:</label>
+            <div class="layui-input-block">
+                    <div class="pad-9">{{= it.Card }}</div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">共计总额:</label>
+            <div class="layui-input-block">
+                    <div class="pad-9">{{= it.Cash + it.Card }}</div>
+            </div>
+        </div> 
+        <div class="layui-form-item">
+            <label class="layui-form-label">收取现金:</label>
+            <div class="layui-input-block">
+                    <input type="text" name="Cash" placeholder="请输入金额" autocomplete="off" class="layui-input" value="{{= it.Cash }}">
+            </div>
+        </div>
+        <div class="layui-form-item"> 
+            <label class="layui-form-label">支付方式:</label>
+                {{ if(it.CardList.length == 0){it.CardList.push(emptyCard)}; }}
+                <div class="layui-input-block pay-method-list">
+                    {{= doT.template($(".card-tmp").text())(it.CardList) }}
+                </div>
+            </div>
+        </script>
+        <script class="card-tmp" type="text/x-dot-template">
+            {{~ it : item }}
+            <div class="list-row clearfix">
+                                <div class="layui-input-inline fl">
+                    {{= doT.template($(".CardCategory-tmp").text())(item.CardCategoryID) }}
+                                </div>
+                                <div class="layui-input-inline fl">
+                    <input type="number" min="0" value="{{= item.Amount }}" name="Amount" placeholder="刷卡金额" class="layui-input card-money">
+                                </div>
+                                <span class="layui-btn layui-btn-normal add-pay-btn fr "><i class="layui-icon">&#xe61f;</i></span>
+                <span class="layui-btn layui-btn-danger rmv-pay-btn fr "><i class="layui-icon">&#xe640;</i></span>
+</div>
+            {{~ }}
+        </script>
+        <script class="CardCategory-tmp" type="text/x-dot-template">
+            {{ var selected = 'selected="selected"'; }}
+            {{= $('@Html.SelectCategory(SelectType.CardCategory, "CardCategoryID", "CardCategoryID", "CardCategoryID")')[0].outerHTML.replaceAll(selected,"").replaceAll(it+"\"",it+"\" selected") }}
+    </script>
+<!--顾客识别后的信息-->
+<script type="text/html" class="cust-inshow-temp">
+        {{for(var item in it) { }}
+        <tr data-customerid="{{= it[item].ID}}">
+            <td>{{= it[item].ID}}</td>
+            <td><a class="pointer addCustomerTab">{{= it[item].Name}}</a></td> 
+            <td>{{= it[item].Gender}}</td>
+            <td>{{= it[item].Mobile}}</td>
+            <td>{{= it[item].MemberCategoryName == null ? "":it[item].MemberCategoryName}}</td>
+            <td>{{= it[item].ChannelName == null ? "":it[item].ChannelName}}</td>
+            <td>
+                <span class="layui-btn layui-btn-normal layui-btn-mini invoice-btn" data-model="AddInvoice" data-action="AddBill">开发票</span>
+                <span class="layui-btn layui-btn-danger layui-btn-mini repayMoney-btn">还欠款</span>
+            </td>
+    </tr>
+    {{ } }}
+</script> 
+<!--待收费模板-->
+<script type="text/html" class="noPaidOrder-temp">
+        {{for(var item in it) { }}
+        <tr data-orderid="{{= it[item].OrderID}}" data-customerid="{{= it[item].CustomerID}}">
+            <td>
+                {{? it[item].AuditStatus == 1}}
+                待审核
+                {{?? it[item].AuditStatus == 2}}
+                无需审核
+                {{?? it[item].AuditStatus == 3}}
+                审核不通过
+                {{??}}
+                审核通过
+                {{?}}
+            </td>
+            <td class="layui-fontColor-{{= it[item].OrderType}}">
+                {{? it[item].OrderType == 1}}
+                项目订单
+                {{?? it[item].OrderType == 2}}
+                住院单
+                {{?? it[item].OrderType == 3}}
+                预收款订单
+                {{?? it[item].OrderType == 4}}
+                退项目单
+                {{??}}
+                退预收款单
+                {{?}}
+            </td>
+            <td>{{= it[item].CustomerName}}</td>
+            <td>{{= it[item].Amount}}</td>
+            <td>{{= it[item].CreateUserName}}</td>
+            <td>{{= it[item].CreateTime}}</td>
+            <td>
+                {{? it[item].OrderType == 1}}
+                <span class="layui-btn  layui-btn-normal layui-btn-mini model-btn" data-model="CashierOrder" data-action="OrderCashier">收银</span>
+                <span class="layui-btn layui-btn-danger layui-btn-mini cas-cancel-btn"  order-Type="1">删除</span>
+                {{?? it[item].OrderType == 2}}
+                <span class="layui-btn  layui-btn-normal layui-btn-mini model-btn" data-model="CashierOrder" data-action="OrderCashier">收银</span>
+                <span class="layui-btn layui-btn-danger layui-btn-mini cas-cancel-btn"  order-Type="1">删除</span>
+                {{?? it[item].OrderType == 3}}
+                <span class="layui-btn  layui-btn-normal layui-btn-mini model-btn" data-model="AddDeposit" data-action="DepositOrderCashier">收银</span>
+                <span class="layui-btn layui-btn-danger layui-btn-mini cas-cancel-btn" order-Type="3">删除</span>
+                {{?? it[item].OrderType == 4}}
+                <span class="layui-btn  layui-btn-normal layui-btn-mini model-btn" data-model="BackOrder" data-action="BackOrderCashier">收银</span>
+                <span class="layui-btn layui-btn-danger layui-btn-mini cas-cancel-btn" order-Type="4">删除</span>
+                {{??}}
+                <span class="layui-btn  layui-btn-normal layui-btn-mini model-btn" data-model="DepositRebate" data-action="DepositRebateOrderCashier">收银</span>
+                <span class="layui-btn layui-btn-danger layui-btn-mini cas-cancel-btn" order-Type="5">删除</span>
+                {{?}}
+            </td>
+        </tr>
+        {{ } }}
+    </script> .
+<!--今日收费-->
+<script type="text/html" class="cashierToday-temp">
+        {{for(var item in it) { }}
+        <tr  data-customerid="{{=it[item].CustomerID}}">
+            <td>{{= it[item].CustomerID}}</td>
+            <td>{{= it[item].CustomerName}}</td>
+            <td>
+                {{? it[item].OrderType == 1}}
+                项目订单
+                {{?? it[item].OrderType == 2}}
+                住院单
+                {{?? it[item].OrderType == 3}}
+                预收款订单
+                {{?? it[item].OrderType == 4}}
+                退单
+                {{?? it[item].OrderType == 5}}
+                退款
+                {{?? it[item].OrderType == 6}}
+                欠款
+                {{?}}
+            </td>
+            <td>{{= it[item].HospitalName}}</td>
+            <td>{{= it[item].No}}</td>
+            <td>{{= it[item].CreateTime}}</td>
+            <td>{{= it[item].CreateUserName}}</td>
+            <td>{{= it[item].Amount}}</td>
+            <td>{{= it[item].RealAmount}}</td>
+            <td>{{= it[item].Cash}}</td>
+            <td>{{= it[item].Card}}</td>
+            <td>{{= it[item].Deposit}}</td>
+            <td>{{= it[item].Coupon}}</td>
+            <td>{{= it[item].Debt}}</td>
+            <td>{{= it[item].Commission}}</td> 
+            <td>
+                {{~it[item].CardCategoryNames:value:index }}
+                {{= value  == null ? "":value}}
+                {{~}}
+            </td> 
+            <td>
+                {{if(it[item].Status == 1){}}
+                已结算
+                {{ } }}
+                {{if(it[item].Status == 0){}}
+                未结算
+                {{ } }} 
+            </td>
+            <td>{{= it[item].Remark}}</td>
+            <td>
+                <span class="layui-btn  layui-btn-warm layui-btn-mini caToday-deit" data-id="{{= it[item].ID}}">修改</span>
+                <span class="layui-btn layui-btn-mini invoice-btn"  data-model="AddInvoice" data-action="AddBill">开发票</span>
+                <a href="/CashierDesk/CashierTodayPrint?cashierTodayId={{= it[item].ID }}" target="_blank" class="layui-btn  layui-btn-normal layui-btn-mini  caToday-print"  cashierTodayId="{{= it[item].ID}}">打印</a> 
+            </td>
+        </tr>
+        {{ } }}
+    </script>
+<!--今日发票记录-->
+<script type="text/html" class="billToday-temp">
+        {{for(var item in it) { }}
+        <tr>
+            <td>{{= it[item].CustomerID}}</td>
+            <td>
+                <a>{{= it[item].CustomerName}}</a>
+            </td>
+            <td>{{= it[item].CreateTime == null ? "-":it[item].CreateTime.slice(0,10)}}</td>
+            <td>{{= it[item].CreateDate == null ? "-":it[item].CreateDate.slice(0,10)}}</td>
+            <td>{{= it[item].CreateUserName}}</td>
+            <td>{{= it[item].Amount}}</td>
+            <td>{{= it[item].Code}}</td>
+            <td>{{= it[item].Name}}</td>
+            <td>{{= it[item].Remark}}</td>
+            <td bill-id="{{= it[item].ID}}">
+                <span class="layui-btn layui-btn-danger layui-btn-mini bill-del-btn">删除</span>
+            </td>
+        </tr>
+        {{ } }}
+    </script> 
+</div>
+<script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+<script src="~/lay_component/js/hcommon.js"></script>
+<script src="~/Scripts/FlyDog.Common.js"></script>
+<script src="~/doT-master/doT-master/doT.min.js"></script>
+<script src="~/lay_component/plugins/layui/layui.js"></script>
+<script src="~/lay_component/sampleJs/SmartUser.js"></script>
+<script src="~/lay_component/sampleJs/CashierDesk.js"></script>
+<script src="~/lay_component/signalr/jquery.signalR-2.0.3.min.js"></script>
+<script src="http://192.168.11.220:8066/chat/hubs"></script>
+<script src="~/lay_component/js/chat.js"></script>  
+</body>
+</html>

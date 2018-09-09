@@ -1,0 +1,45 @@
+﻿@using Com.IFlyDog.CommonDTO
+@using Com.IFlyDog.FlyDogWeb.Helper
+
+<div class="callBack hide">
+    <div class="layui-field-box ">
+        <style>
+            .pad-9 {float: left;display: inline-block;padding: 9px;}
+        </style>
+        <div class="site-text site-block">
+            <form class="layui-form callBack-form"></form>
+        </div>
+        <div class="clearfix m-20">
+            <span class="layui-btn CallBack add-submit fr">立即提交</span>
+            <span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+        </div>
+    </div>
+    <div class="dot-tmp hide">
+        <script class="callBack-form-tmp" type="text/x-dot-template">
+            <input type="hidden" name="ID" value="{{= it.ID }}" />
+            <div class="layui-form-item">
+                <label class="layui-form-label">回访类型</label>
+                <div class="layui-input-block">
+                    {{ if(!it.CategoryName){ }}
+                    @Html.SelectCategoryByHospital(SelectType.CallbackCategory, "CategoryID", "CategoryID", "CategoryID")
+                    {{ }else{ }}
+                    <span class="pad-9">{{= it.CategoryName }}</span>
+                    {{ } }}
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">回访方式</label>
+                <div class="layui-input-block">
+                    @Html.SelectCategoryByHospital(SelectType.Tool, "Tool", "Tool", "Tool")
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">回访内容</label>
+                <div class="layui-input-block">
+                    <textarea name="Content" placeholder="请输入回访内容" class="layui-textarea">{{= it.Content }}</textarea>
+                </div>
+            </div>
+        </script>
+
+    </div>
+</div>

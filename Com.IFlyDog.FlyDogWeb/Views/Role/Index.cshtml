@@ -1,0 +1,218 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>角色管理</title>  
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+    <style>
+        .layui-tree-skin-treeC .layui-tree-branch {
+            color: cadetblue;
+        }
+
+        .layui-tree-skin-treeC .layui-tree-leaf {
+            color: cadetblue;
+        }
+
+        .layui-form-item .layui-block label {
+            width: auto;
+        }
+
+        .layui-form-item .layui-block {
+            overflow:hidden;
+        }
+
+        #demoTree input[type=checkbox] {
+            display: initial;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="admin-main">
+        <blockquote class="layui-elem-quote">
+            <a href="javascript:;" class="layui-btn layui-btn-small" id="roleAdd">
+                <i class="layui-icon">&#xe608;</i> 添加角色
+            </a>
+        </blockquote>
+
+        <fieldset class="layui-elem-field">
+            <legend>角色信息</legend>
+            <div class="layui-field-box">
+                <div class="layui-form">
+                    <input type="hidden" id="pageCountValue" lay-verify="title" autocomplete="off" class="layui-input " value="">
+                    <div class="layui-form-item">
+                        <div class="fl">
+                            <label class="layui-form-label">选择医院:</label>
+                            <div class="layui-input-inline ">
+                                @*@Html.SelectHospitalInfoState("smartDRWarehouse", "smartDRWarehouse", "required", Request.QueryString["CategoryID"])*@
+                                @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.Hospital, "smartDRWarehouse", "smartDRWarehouse")                          
+                             </div>
+                        </div>
+                        <button class="layui-btn fr" id="subtmValue">查询</button>
+                    </div>
+                </div>
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr class="">
+                            <th>序号</th>
+                            <th>名称</th>
+                            <th>描述</th>
+                            <th>创建人</th>
+                            <th>所属医院</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="showRoleInfo_tb"></tbody>
+
+                </table>
+            </div>
+
+        </fieldset>
+    </div>
+    <!--添加角色-->
+    <div id="RoleInfoPop" class="layui-form"></div>
+    <!--doT模版-->
+    <div class="doT-template">
+
+        <script id="roleinfo_template" type="text/html">
+            {{ for(var prop in it) { }}
+            <tr class="" trid="{{= it[prop].ID }}">
+                <td>{{= i++ }}</td>
+                <td>{{= it[prop].Name }}</td>
+                <td>{{= it[prop].Remark }}</td>
+                <td>{{= it[prop].CreateUserName }}</td>
+                <td>{{= it[prop].HospitalName }}</td>
+                <td class="disableTd">
+                    <a class="layui-btn layui-btn-mini Edit" id="infoiEdit" infoiEditId="{{= it[prop].ID }}" hositalID="{{= it[prop].HospitalID }}"><i></i>编辑</a>
+                    <a href="javascript:;" infoiDeleteId="{{= it[prop].ID }}" class="layui-btn layui-btn-danger layui-btn-mini deleteBut">删除</a>
+                </td>
+            </tr>
+            {{ } }}
+        </script>
+
+        <script id="RoleInfoTmp" type="text/x-dot-template">
+            <div class="site-title">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>编辑角色信息</legend>
+                </fieldset>
+            </div>
+            <form>
+
+                <div class="site-text site-block">
+                    <div class="layui-form-item">
+                        <div class="fl">
+                            <label class="layui-form-label">选择医院:</label>
+                            <div class="layui-input-block ">
+                                @*@Html.SelectHospitalInfoState("smartDRWarehouse", "smartDRWarehouse", "required", Request.QueryString["CategoryID"])*@
+                          @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.Hospital, "Hospital", "Hospital")       
+                              </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item role-num">
+                        <label class="layui-form-label">角色编号:</label>
+                        <div class="layui-input-block ">
+                            <input type="text" lay-verify="required" id="roleInfoID" disabled="disabled" autocomplete="off" value="{{= Common.StrUtils.isFalseSetEmpty(it.ID) }}" class="layui-input ">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">角色名称:</label>
+                        <div class="layui-input-block ">
+                            <input type="text" lay-verify="required" id="roleInfoName" autocomplete="off" placeholder="角色名称" value="{{= Common.StrUtils.isFalseSetEmpty(it.Name) }}" class="layui-input ">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">描述:</label>
+                        <div class="layui-input-block">
+                            <textarea placeholder="请输入描述内容" lay-verify="required" id="roleInfoRemark" class="layui-textarea">{{= Common.StrUtils.isFalseSetEmpty(it.Remark) }}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="site-text site-block">
+                    <div class="beg-table-box">
+                        <div class="beg-table-body">
+                            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                                <ul class="layui-tab-title">
+                                    <li class="layui-this">可操作的菜单</li>
+                                    <li>角色信息</li>
+                                    <li>集团报表</li>
+                                </ul>
+                                <div class="layui-tab-content">
+                                    <div class="layui-tab-item layui-show">
+                                        <ul id="demoTree" class="layui-box layui-tree layui-tree-skin-as "></ul>
+                                    </div>
+
+                                    <div class="layui-tab-item">
+                                        <div class="layui-form-item">
+                                            <div class="layui-block">
+                                                <label class="layui-form-label">是否可以接受分诊:</label>
+                                                <input type="radio" name="FZ" value="1" title="是" {{= it.FZ == "1"?"checked='bbb'":""}}>
+                                                <input type="radio" name="FZ" value="0" title="否" {{= it.FZ != "1"?"checked='aaa'":""}}>
+                                            </div>
+
+                                            <div class="layui-block">
+                                                <label class="layui-form-label">是否医护人员:</label>
+                                                <input type="radio" name="YHRY" value="1" title="是" {{= it.YHRY == "1"?"checked='checked'":""}}>
+                                                <input type="radio" name="YHRY" value="0" title="否" {{= it.YHRY != "1"?"checked='checked'":""}}>
+                                            </div>
+
+                                            <div class="layui-block">
+                                                <label class="layui-form-label">是否参与排班:</label>
+                                                <input type="radio" name="CYPB" value="1" title="是" {{= it.CYPB == "1"?"checked='checked'":""}}>
+                                                <input type="radio" name="CYPB" value="0" title="否" {{= it.CYPB != "1"?"checked='checked'":""}}>
+                                            </div>
+                                            <div class="layui-block">
+                                                <label class="layui-form-label">是否可接受手术预约:</label>
+                                                <input type="radio" name="SSYY" value="1" title="是" {{= it.SSYY == "1"?"checked='checked'":""}}>
+                                                <input type="radio" name="SSYY" value="0" title="否" {{= it.SSYY != "1"?"checked='checked'":""}}>
+                                            </div>
+
+                                            <div class="layui-block">
+                                                <label class="layui-form-label">是否允许查看联系方式:</label>
+                                                <input type="radio" name="CKLXFS" value="1" title="是" {{= it.CKLXFS == "1"?"checked='checked'":""}}>
+                                                <input type="radio" name="CKLXFS" value="0" title="否" {{= it.CKLXFS != "1"?"checked='checked'":""}}>
+                                            </div>
+
+                                            <div class="layui-block">
+                                                <label class="layui-form-label">是否允许查看药品成本价:</label>
+                                                <input type="radio" name="CKYPCBJ" value="1" title="是" {{= it.CKYPCBJ == "1"?"checked='checked'":""}}>
+                                                <input type="radio" name="CKYPCBJ" value="0" title="否" {{= it.CKYPCBJ != "1"?"checked='checked'":""}}>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="layui-tab-item">
+                                        <ul id="statementTree" class="layui-box layui-tree layui-tree-skin-as "></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="layui-form-item pull-right" style="margin:20px;">
+                <button class="layui-btn layui-btn-normal dept_commit">确认提交</button>
+                <button class="layui-btn layui-btn-danger dept_close">取消关闭</button>
+            </div>
+        </script>
+
+    </div>
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/Scripts/FlyDog.Common.js"></script>
+    <script src="~/lay_component/js/hcommon.js"></script>
+    <script src="~/doT-master/doT-master/doT.min.js"></script>
+    <script src="~/lay_component/plugins/layui/layui.js"></script>
+    <script src="~/lay_component/sampleJs/role.js"></script>
+</body>
+</html>

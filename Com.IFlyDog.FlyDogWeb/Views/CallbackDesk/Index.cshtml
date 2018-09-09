@@ -1,0 +1,628 @@
+﻿@using Com.IFlyDog.CommonDTO
+@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>回访工作台</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet"/>
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all"/>
+    <link href="~/lay_component/css/global.css" rel="stylesheet"/>
+    <style>
+        .layui-form-label {
+            padding: 9px 1px;
+            text-align: left;
+            width: auto;
+        }
+
+        .layui-form-item .layui-input-inline { width: 135px; }
+         .addCustomerTab {color: #3598dc !important;text-decoration: underline;}
+        .layui-input-block { margin-left: 62px; }
+    </style>
+</head>
+<body>
+<div class="admin-main">
+<blockquote class="layui-elem-quote">
+
+</blockquote>
+
+<fieldset class="layui-elem-field">
+    <legend>回访工作台</legend>
+    <!--数据显示-->
+    <div class="layui-field-box">
+        <!--无加载-->
+        <div class="layui-form">
+            <input type="hidden" id="pageCountValue" lay-verify="title" autocomplete="off" class="layui-input " value="">
+            <div class="layui-form-item">
+                <div class="fl">
+                    <label class="layui-form-label">回访日期:</label>
+                    <div class="layui-input-inline">
+                        <input class="layui-input" placeholder="开始日" id="beginDate">
+                    </div>
+                    <div class="layui-input-inline">
+                        <input class="layui-input" placeholder="截止日" id="endDate">
+                    </div>
+                </div>
+                <div class="fl">
+                    <label class="layui-form-label">回访类型:</label>
+                    <div class="layui-input-inline ">
+                        @Html.SelectCategoryByHospital(SelectType.CallbackCategory, "smartCallback", "smartCallback")
+                    </div>
+                </div>
+                <div class="fl">
+                    <label class="layui-form-label">回访状态:</label>
+                    <div class="layui-input-inline ">
+                        @*@Html.SelectCategoryByHospital(SelectType.CallbackCategory, "smartCallback", "smartCallback")*@
+                        <select name="status">
+                            <option value="99">请选择</option>
+                            <option value="1">完成</option>
+                            <option value="0">未完成</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="fl">
+                    <label class="layui-form-label">顾客编号:</label>
+                    <div class="layui-input-inline ">
+                        <input type="text" id="cmId" name="cmId" placeholder="请输入顾客编号" class="layui-input ">
+                    </div>
+                </div>
+                <div class="fl">
+                    <label class="layui-form-label">计划:</label>
+                    <div class="layui-input-inline ">
+                        <input type="text" id="cmplan" name="cmplan" placeholder="请输入计划" class="layui-input ">
+                    </div>
+                </div>
+                <div class="fl">
+                    <label class="layui-form-label">提醒用户:</label>
+                    <div class="layui-input-inline ">
+                        <input type="text" id="remindUserName" name="remindUserName" placeholder="点击请选择" class="layui-input layui-disabled remindUsercl">
+                    </div>
+                </div>
+                <span class="layui-btn fr" id="subtmValue">查询</span>
+
+            </div>
+        </div>
+        <!--数据table表格-->
+        <table class="site-table table-hover">
+            <thead>
+            <tr>
+                <th>顾客</th>
+                <th>回访日期</th>
+                <th>回访类型</th>
+                <th>提醒用户</th>
+                <th>计划</th>
+                <th>方式</th>
+                <th>回访人</th>
+                <th>回访时间</th>
+                <th>回访内容</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody class="callback-tabtbody">
+            </tbody>
+        </table>
+        <!--分页容器-->
+        <div id="pageDiv" class="fr pageDiv"></div>
+    </div>
+
+</fieldset>
+<!--选择用户弹窗-->
+<div class="layui-form hide data-remindUser-pop ">
+    <form>
+        <div class="layui-field-box">
+            <!--无加载-->
+            <div class="layui-form-item">
+                <div class="fl">
+                    <label class="layui-form-label">选择部门:</label>
+                    <div class="layui-input-inline" style="width: 115px">
+                        @Html.SelectCategoryByHospital(SelectType.Dept, "smartDept", "smartDept")
+                    </div>
+                </div>
+                <div class="fl">
+                    <label class="layui-form-label">用户姓名:</label>
+                    <div class="layui-input-inline" style="width: 115px">
+                        <input type="text" id="userNmae" name="userNmae" placeholder="请输入顾客姓名" class="layui-input ">
+                    </div>
+                </div>
+                <span class="layui-btn fr index-reUserSeaBtn">查询</span>
+            </div>
+            <!--数据table-->
+            <table class="site-table table-hover">
+                <thead>
+                <tr>
+                    <th>账号</th>
+                    <th>姓名</th>
+                    <th>部门</th>
+                    <th>性别</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody class="callba-index-user-table">
+                 
+                </tbody>
+               
+            </table>
+            <div class="callba-index-user-info"></div>
+            <!--分页容器-->
+            <div id="remindUserpageDiv"></div>
+        </div>
+    </form>
+</div>
+<!--添加回访按钮-->
+<div class="layui-form hide data-callBack-pop">
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>回访信息</legend>
+</fieldset>
+
+<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+
+<ul class="layui-tab-title">
+    <li class="layui-this">添加回访</li>
+    <li class="call-zxqk-cl">咨询情况</li>
+    <li class="call-hfqk-cl">回访情况</li>
+    <li class="call-wcjqk-cl">未成交情况</li>
+    <li>消费情况</li>
+    <li>划扣情况</li>
+
+</ul>
+
+<div class="layui-tab-content">
+<!--添加回访-->
+<div class="layui-tab-item layui-show">
+    <!--顾客信息-->
+    <form class="layui-form">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>顾客信息</legend>
+        </fieldset>
+        <div class="layui-input-inline  ">
+            <label class="layui-form-label">顾客名称:</label>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" name="callBaCustomerName" value="">
+            </div>
+        </div>
+        <div class="layui-input-inline  ">
+            <label class="layui-form-label">顾客年龄:</label>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" name="callBaAge" value="">
+            </div>
+        </div>
+        <div class="layui-input-inline  ">
+            <label class="layui-form-label">顾客性别:</label>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" name="callBaGender" value="">
+            </div>
+        </div>
+        <div class="layui-input-inline  ">
+            <label class="layui-form-label">联系方式:</label>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" name="callBaMobile" value="">
+            </div>
+        </div>
+        <div class="layui-input-inline  ">
+            <label class="layui-form-label">备用联系:</label>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" name="callBaMobileBackup" value="">
+            </div>
+        </div>
+        <div class="layui-input-inline  ">
+            <label class="layui-form-label">来自渠道:</label>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" name="callBChannelName" value="">
+            </div>
+        </div>
+        <input type="hidden" class="layui-input" name="callBackID" callBackID="" customerID="">
+    </form>
+    <!--回访情况-->
+    <form class="layui-form">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>回访情况</legend>
+        </fieldset>
+        <div class="layui-form-item">
+            <label class="layui-form-label">回访描述:</label>
+            <div class="layui-input-block">
+                <textarea type="text" class="layui-textarea callbremark" name="remark" lay-verify="title" autocomplete="off" placeholder="请输入备注信息"></textarea>
+            </div>
+        </div>
+        <div class="layui-input-inline  ">
+            <label class="layui-form-label">回访名称:</label>
+            <div class="layui-input-inline" style="width: 95px">
+                <input type="text" class="layui-input" name="callBaCategoryName">
+            </div>
+        </div>
+        <div class="layui-input-inline  ">
+            <label class="layui-form-label">回访方式:</label>
+            <div class="layui-input-inline" style="width: 115px">
+                @Html.SelectCategoryByHospital(SelectType.Tool, "smartCallbackTool", "smartCallbackTool")
+            </div>
+        </div>
+        <div class="layui-input-inline  ">
+            <label class="layui-form-label">下次回访开关:</label>
+            <div class="layui-input-inline">
+                <input type="checkbox" name="callbackswitch" lay-skin="switch" lay-filter="cabkswitch" title="开关">
+                <input type="hidden" name="callbackcheIsNext" value="">
+            </div>
+        </div>
+        <div class="layui-input-inline   fr">
+            <div class="layui-input-inline">
+                <span class="layui-btn  add-callbk-submit-btn ">确认提交</span>
+            </div>
+        </div>
+    </form>
+    <!--增加下次回访-->
+    <form class="layui-form hide addnextcallBack">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>增加下次回访</legend>
+        </fieldset>
+        <div class="layui-input-inline  ">
+            <label class="layui-form-label">回访类型:</label>
+            <div class="layui-input-inline" style="width: 115px">
+                @Html.SelectCategoryByHospital(SelectType.CallbackCategory, "smartaddCallback", "smartaddCallback")
+            </div>
+        </div>
+        <div class="layui-input-inline  ">
+            <label class="layui-form-label">回访日期:</label>
+            <div class="layui-input-inline">
+                <div class="layui-input-inline" style="width: 115px">
+                    <input type="text" class="layui-input" name="addCallbackNextTaskTime" placeholder="请输入日期" onclick="layui.laydate({ elem: this, istime: true, format: 'YYYY-MM-DD' })">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-input-inline">
+            <label class="layui-form-label">回访人员:</label>
+            <div class="layui-input-inline">
+                <div class="layui-input-inline" style="width: 115px">
+                    <input type="text" name="callbaUserName" placeholder="点击请选择" class="layui-input layui-disabled callbaUserNamecl" readonly="readonly">
+                </div>
+            </div>
+        </div>
+        <div class="layui-input-inline">
+            <label class="layui-form-label">回访计划:</label>
+            <div class="layui-input-inline">
+                <div class="layui-input-inline">
+                    <input type="text" name="callbaNextName" placeholder="回访计划" class="layui-input">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!--咨询情况-->
+<div class="layui-tab-item">
+    <table class="site-table table-hover">
+        <thead>
+        <tr>
+            <th>顾客姓名</th>
+            <th>提交时间</th>
+            <th>提交用户</th>
+            <th>咨询项目</th>
+            <th>咨询内容</th>
+        </tr>
+        </thead>
+        <tbody class="tbody-zxqk-callB">
+
+        </tbody>
+    </table>
+    <div class="zxqk-hint-info"></div>
+</div>
+<!--回访情况-->
+<div class="layui-tab-item hkqkdiv">
+    <table class="site-table table-hover">
+        <thead>
+        <tr>
+            <th>回访提醒日期</th>
+            <th>类型</th>
+            <th>提醒内容</th>
+            <th>状态</th>
+            <th>回访用户</th>
+            <th>回访时间</th>
+            <th>方式</th>
+            <th>回访内容</th>
+            <th>提醒创建用户</th>
+            <th>提醒创建时间</th>
+        </tr>
+        </thead>
+        <tbody class="tbody-hfqk-callB">
+
+
+        </tbody>
+    </table>
+    <div class="hfqk-hint-info"></div>
+</div>
+<!--未成交-->
+<div class="layui-tab-item">
+    <table class="site-table table-hover">
+        <thead>
+        <tr>
+            <th>操作人</th>
+            <th>未成交原因</th>
+            <th>登记时间</th>
+            <th>未成交类型</th>
+
+        </tr>
+        </thead>
+        <tbody class="tbody-wcjqk-callB">
+
+        </tbody>
+    </table>
+    <div class="wcjqk-hint-info"></div>
+</div>
+<!--消费情况-->
+<div class="layui-tab-item xfqkdiv">
+    <table class="site-table table-hover">
+        <thead>
+        <tr>
+            <th>序号</th>
+            <th>购买医院</th>
+            <th>购买日期</th>
+            <th>订单号</th>
+            <th>项目编号</th>
+            <th>项目名称</th>
+            <th>规格</th>
+            <th>分类</th>
+            <th>单位</th>
+            <th>数量</th>
+            <th>划扣数量</th>
+            <th>未完全数量</th>
+            <th>下单用户</th>
+            <th>成交金额</th>
+            <th>现金</th>
+            <th>刷卡</th>
+            <th>预收款</th>
+            <th>券</th>
+
+        </tr>
+        </thead>
+        <tbody class="tbody-xfqk-callB">
+        <tr>
+            <td>1</td>
+            <td>购买医院</td>
+            <td>购买日期</td>
+            <td>订单号</td>
+            <td>项目编号</td>
+            <td>项目名称</td>
+            <td>规格</td>
+            <td>分类</td>
+            <td>单位</td>
+            <td>数量</td>
+            <td>划扣数量</td>
+            <td>未完全数量</td>
+            <td>下单用户</td>
+            <td>成交金额</td>
+            <td>现金</td>
+            <td>刷卡</td>
+            <td>预收款</td>
+            <td>券</td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+<!--划扣情况-->
+<div class="layui-tab-item hkqkdiv">
+    <table class="site-table table-hover">
+        <thead>
+        <tr>
+            <th>序号</th>
+            <th>操作时间</th>
+            <th>操作医院</th>
+            <th>操作用户</th>
+            <th>项目名称</th>
+            <th>订购日期</th>
+            <th>单位</th>
+            <th>数量</th>
+            <th>备注</th>
+            <th>医生</th>
+        </tr>
+        </thead>
+        <tbody class="tbody-hkqk-callB">
+        <tr>
+            <td>1</td>
+            <td>操作时间</td>
+            <td>操作医院</td>
+            <td>操作用户</td>
+            <td>项目名称</td>
+            <td>订购日期</td>
+            <td>单位</td>
+            <td>数量</td>
+            <td>备注</td>
+            <td>医生</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</div>
+</div>
+
+</div>
+<!--增加回访中-选择回访人员-->
+<div class="layui-form hide data-callBackUser-pop">
+    <form>
+        <div class="layui-field-box">
+            <!--无加载-->
+            <div class="layui-form-item">
+                <div class="fl">
+                    <label class="layui-form-label">选择部门:</label>
+                    <div class="layui-input-inline" style="width: 115px">
+                        @Html.SelectCategoryByHospital(SelectType.Dept, "smartDept", "smartDept")
+                    </div>
+                </div>
+                <div class="fl">
+                    <label class="layui-form-label">用户姓名:</label>
+                    <div class="layui-input-inline" style="width: 115px">
+                        <input type="text" id="clBkUserNmae" name="clBkUserNmae" placeholder="请输入顾客姓名" class="layui-input ">
+                    </div>
+                </div>
+                <span class="layui-btn fr" id="clBkUserSeaBtn">查询</span>
+            </div>
+            <!--数据table-->
+            <table class="site-table table-hover">
+                <thead>
+                <tr>
+                    <th>账号</th>
+                    <th>姓名</th>
+                    <th>部门</th>
+                    <th>性别</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody class="addcallba-index-user-table">
+                
+                </tbody>
+       
+            </table>
+            <div class="addcallba-index-user-info"></div>
+            <!--分页容器-->
+            <div id=""></div>
+        </div>
+    </form>
+</div>
+<!--编辑信息-->
+<div class="layui-form hide data-claaBackedit-pop">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>回访情况</legend>
+    </fieldset>
+    <form>
+        <div class="site-text site-block">
+            <div class="layui-form-item">
+                <label class="layui-form-label">回访方式:</label>
+                <div class="layui-input-block">
+                    @Html.SelectCategoryByHospital(SelectType.Tool, "smartCallbackeditTool", "smartCallbackeditTool")
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">回访类型:</label>
+                <div class="layui-input-block">
+                    <input type="text" required="" name="editCategoryName" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">回访内容:</label>
+                <div class="layui-input-block">
+                    <textarea   placeholder="请输入内容" class="layui-textarea editcallbkContent"></textarea>
+                </div>
+            </div>
+            <input type="hidden" name="edithideTId" hidcustomerID="" hidedit-id="">
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <span class="layui-btn editsub" >提交信息</span>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+<!--模版-->
+<div class="doT-data-template">
+    <!--数据table表格-->
+    <script class="callback-temp" type="text/html">
+        {{for(var item in it ){}}
+        <tr data-id="">
+            <td class="hide">{{= it[item].CustomerID}}</td> 
+            <td><a class="pointer addCustomerTab">{{= it[item].CustomerName}}</a></td> 
+            <td>{{= it[item].CreateTime}}</td>
+            <td>{{= it[item].CategoryName === null ? "暂无": it[item].CategoryName }}</td>
+            <td>{{= it[item].CreateUserName === null ? "暂无": it[item].CreateUserName}}</td>
+            <td>{{= it[item].Name === null ? "暂无": it[item].Name}}</td>
+            <td>{{= it[item].Tool === null ? "暂无": it[item].Tool }}</td>
+            <td>{{= it[item].UserName === null ? "暂无": it[item].UserName}}</td>
+            <td>{{= it[item].TaskTime === null ? "暂无": it[item].TaskTime}}</td>
+            <td>{{= it[item].Content === null ? "暂无": it[item].Content}}</td>
+            <td>
+                {{ if (it[item].Status !=0){ }}
+                <i class="layui-icon" style="color: green;">&#xe616;已回访</i>
+                {{ } else { }}
+                <i class="layui-icon" style="color: red;">&#x1007;未回访</i>
+                {{ } }}
+            </td>
+            <td>
+                {{ if (it[item].Status !=0){ }}
+                <span class="layui-btn layui-btn-mini  callBackEditbtn" edit-id="{{= it[item].ID}}" customerID="{{= it[item].CustomerID}}">修改回访</span>
+                {{ } else { }}
+                <span class="layui-btn layui-btn-normal layui-btn-mini  callBackbtn" data-id="{{= it[item].ID}}">添加回访</span>
+                {{ } }}
+
+            </td>
+        </tr>
+        {{ } }}
+    </script>
+    <!--主页选择开发人员-->
+    <script class="user-tmp" type="text/x-dot-template">
+        {{for(var item in it){ }}
+        <tr>
+            <td>{{= it[item].Account }}</td>
+            <td>{{= it[item].Name }}</td>
+            <td>{{= it[item].DeptName }}</td>
+            <td>{{= it[item].Gender == 1?"男":"女" }}</td>
+            <td><span class="layui-btn layui-btn-primary layui-btn-mini present-user" id="addback-present-user" value="{{= it[item].ID }}">选择此用户</span></td>
+        </tr>
+        {{ } }}
+    </script>
+    <script class="dept-tmp" type="text/x-dot-template">
+        {{ if(it.length == 0){it.push({ID:"",Name:"请选择"});} }}
+        {{ for(var item in it){ }}
+        <option value="{{= it[item].ID }}">{{= it[item].Name }}</option>
+        {{ } }}
+    </script>
+    <!--咨询情况-->
+    <script class="callbk-zxqk-temp" type="text/html">
+        {{for(var item in it){ }}
+        <tr>
+            <td>{{= it[item].CustomerName == null ? "暂无": it[item].CustomerName}}</td>
+            <td>{{= it[item].CreateTime == null ? "暂无":  it[item].CreateTime}}</td>
+            <td>{{= it[item].CreateUserName == null ? "暂无": it[item].CreateUserName}}</td>
+            <td>{{= it[item].Symptoms == null ? "暂无":it[item].Symptoms}}</td>
+            <td>{{= it[item].Content == null ? "暂无": it[item].Content}}</td>
+        </tr>
+        {{ } }}
+    </script>
+    <!--回访情况-->
+    <script class="callbk-hfqk-temp" type="text/html">
+        {{for(var item in it){ }}
+        <tr>
+            <td>{{= it[item].TaskTime == null ? "暂无": it[item].TaskTime}}</td>
+            <td>{{= it[item].CategoryName == null ? "暂无":  it[item].CategoryName}}</td>
+            <td>{{= it[item].Content == null ? "暂无": it[item].Content}}</td>
+            <td>
+                {{ if (it[item].Status !=0){ }}
+                <i class="layui-icon " style="color: green;">&#x1005;</i>
+                {{ } else { }}
+                <i class="layui-icon " style="color: red;">&#x1007;</i>
+                {{ } }}
+            </td>
+            <td>{{= it[item].UserName == null ? "暂无":it[item].UserName}}</td>
+            <td>{{= it[item].CreateTime == null ? "暂无": it[item].CreateTime}}</td>
+            <td>{{= it[item].Tool == null ? "暂无": it[item].Tool}}</td>
+            <td>{{= it[item].Content == null ? "暂无": it[item].Content}}</td>
+            <td>{{= it[item].TaskCreateUser == null ? "暂无": it[item].TaskCreateUser}}</td>
+            <td>{{= it[item].TaskTime == null ? "暂无": it[item].TaskTime}}</td>
+        </tr>
+        {{ } }}
+    </script>
+    <!--未成交情况-->
+    <script class="callbk-wcjqk-temp" type="text/html">
+        {{for(var item in it){ }}
+        <tr>
+            <td>{{= it[item].CreateUserName == null ? "暂无": it[item].CreateUserName}}</td>
+            <td>{{= it[item].Content == null ? "暂无":  it[item].Content}}</td>
+            <td>{{= it[item].CreateTime == null ? "暂无": it[item].CreateTime}}</td>
+            <td>{{= it[item].CategoryName == null ? "暂无":it[item].CategoryName}}</td>
+        </tr>
+        {{ } }}
+    </script>
+</div>
+
+<script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+<script src="~/lay_component/js/hcommon.js"></script>
+<script src="~/Scripts/FlyDog.Common.js"></script>
+<script src="~/doT-master/doT-master/doT.min.js"></script>
+<script src="~/lay_component/plugins/layui/layui.js"></script>
+<script src="~/lay_component/sampleJs/CallBackDesk.js"></script>
+</body>
+</html>

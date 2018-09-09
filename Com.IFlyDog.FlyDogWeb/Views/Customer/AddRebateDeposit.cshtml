@@ -1,0 +1,135 @@
+﻿
+<div class="site-text site-block depositRebateOrder hide">
+    <form class="layui-form" action="">
+        <style>
+            .layui-form-label {
+                width: auto;
+            }
+        </style>
+        <div class="layui-form-item">
+            <label class="layui-form-label">退款金额:</label>
+            <div class="layui-input-block">
+                <input name="Amount" type="number" placeholder="请输入退款金额" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">退积分数量:</label>
+            <div class="layui-input-block">
+                <input name="Point" type="number" placeholder="请输入退积分数量" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-form-text" id="Coupons">
+            <label class="layui-form-label">退券额度:</label>
+            <div class="layui-input-block">
+                <table class="site-table table-hover">
+                    <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>类型</th>
+                        <th>金额</th>
+                        <th>剩余金额</th>
+                        <th>退款金额</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text" id="Deposits">
+            <label class="layui-form-label">退预收款:</label>
+            <div class="layui-input-block">
+                <table class="site-table table-hover">
+                    <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>类型</th>
+                        <th>金额</th>
+                        <th>剩余金额</th>
+                        <th>退款金额</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">备注描述:</label>
+            <div class="layui-input-block">
+                <textarea name="Remark" placeholder="请输入备注描述" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-block">
+                <blockquote class="layui-elem-quote">
+                    <p>退积分总量:<span name="allAmount">0</span></p>
+                    <p>退款总额:<span name="allNum">0</span></p>
+                </blockquote>
+            </div>
+        </div>
+        <div class="clearfix m-20">
+            <span class="layui-btn fr add-submit">立即提交</span>
+            <span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+        </div>
+    </form>
+
+
+    <script class="deposits-tmp" type="text/x-dot-template">
+        <label class="layui-form-label">退预收款:</label>
+        <div class="layui-input-block">
+            <table class="site-table table-hover">
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>类型</th>
+                        <th>金额</th>
+                        <th>剩余金额</th>
+                        <th>退款金额</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ for(var item in it){ }}
+                    <tr data-id="{{= it[item].DepositID }}">
+                        <td>{{= it[item].DepositID }}</td>
+                        <td>{{= it[item].DepositChargeName }}</td>
+                        <td>{{= it[item].Amount }}</td>
+                        <td>{{= it[item].Rest }}</td>
+                        <td><input name="depositsNum" type="number" class="layui-input" min="0" value="0"  /></td>
+                    </tr>
+                    {{ } }}
+                </tbody>
+            </table>
+        </div>
+    </script>
+
+    <script class="coupons-tmp" type="text/x-dot-template">
+        <label class="layui-form-label">退券额度:</label>
+        <div class="layui-input-block">
+            <table class="site-table table-hover">
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>类型</th>
+                        <th>金额</th>
+                        <th>剩余金额</th>
+                        <th>退款金额</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ for(var item in it){ }}
+                    <tr data-id="{{= it[item].CouponID }}"">
+                        <td>{{= it[item].CouponID }}</td>
+                        <td>{{= it[item].CouponCategoryName }}</td>
+                        <td>{{= it[item].Amount }}</td>
+                        <td>{{= it[item].Rest }}</td>
+                        <td><input name="couponsNum" type="number" class="layui-input" min="0" value="0" /></td>
+                    </tr>
+                    {{ } }}
+                </tbody>
+            </table>
+        </div>
+    </script>
+</div>

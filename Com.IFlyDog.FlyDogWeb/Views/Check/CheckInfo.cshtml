@@ -1,0 +1,310 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>仓库盘点</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="admin-main">
+        <blockquote class="layui-elem-quote">
+            <a href="javascript:;" class="layui-btn layui-btn-small btn-add">
+                <i class="layui-icon"></i> 添加
+            </a>
+        </blockquote>
+        <fieldset class="layui-elem-field">
+            <legend>库存盘点</legend>
+            <div class="layui-field-box">
+                <div class="layui-form clearfix">
+                    <div class="fl">
+                        <label class="layui-form-label">仓库</label>
+                        <div class="layui-input-inline ">
+                           @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.WarehouseOfUser, "smartWarehouse", "smartWarehouse")
+                         </div>
+                    </div>
+                    <div class="fl">
+
+                        <label class="layui-form-label">盘点日期</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="beginDate" lay-verify="date" placeholder="开始日" autocomplete="off" class="layui-input" onclick="layui.laydate({ elem: this, min: '1900-01-01 00:00:00' })">
+                        </div>
+                        <div class="layui-input-inline">
+                            <input type="text" name="endDate" lay-verify="date" placeholder="截止日" autocomplete="off" class="layui-input" onclick="layui.laydate({ elem: this, min: '1900-01-01 00:00:00' })">
+                        </div>
+                    </div>
+                    <div class="fl">
+                        <label class="layui-form-label">盘点单号</label><div class="layui-input-inline">
+                            <input class="layui-input" name="pdNo" placeholder="请输入单号" />
+                        </div>
+                    </div>
+                    <button class="layui-btn fr search">查询</button>
+                </div>
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <th>状态</th>
+                            <th>盘点单号</th>
+                            <th>盘点日期</th>
+                            <th>仓库</th>
+                            <th>操作用户</th>
+                            <th>备注</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="check-table"></tbody>
+                </table>
+                <!--分页容器-->
+                <div id="pageDiv"></div>
+            </div>
+        </fieldset>
+        <!-- 详细弹窗 -->
+        <div class="data-detail-pop layui-form hide">
+            <form>
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                    <legend>盘点信息</legend>
+                </fieldset>
+                <div class="layui-form-item" style="padding-left:100px;">
+                    <label class="layui-form-label">仓库</label>
+                    <div class="layui-input-inline">
+                        @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.WarehouseOfUser, "popSmartWarehouse", "popSmartWarehouse")
+                     </div>
+                </div>
+                <div class="layui-form-item" style="padding-left:100px;">
+                    <label class="layui-form-label">日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="date" lay-verify="date" placeholder="盘点日期" autocomplete="off" class="layui-input" onclick="layui.laydate({ elem: this, min: '1900-01-01 00:00:00' })">
+                    </div>
+                </div>
+                <div class="layui-form-item" style="padding-left:100px;">
+                    <label class="layui-form-label">备注</label>
+                    <div class="layui-input-inline ">
+                        <textarea type="text" class="layui-textarea remark" name="remark" lay-verify="title" autocomplete="off" placeholder="请输入备注信息"></textarea>
+
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text" style="padding-left:140px;">
+                    <div class="layui-input-inline">
+                        <table class="site-table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>物品/药品</th>
+                                    <th>规格</th>
+                                    <th>单位</th>
+                                    <th>数量</th>
+                                    <th>价格</th>
+                                    <th>金额</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="check-detail"></tbody>
+                        </table>
+
+                    </div>
+                    <div>
+                        <a href="javascript:void(0);" style="margin-top:11px;" class="layui-btn layui-btn-small show-detail-btn">
+                            <i class="layui-icon"></i>
+                            添加详细
+                        </a>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="layui-form-item" style="margin-top:20px;">
+                        <span class="layui-btn layui-btn-normal dept_commit">确认提交</span>
+                        <span class="layui-btn layui-btn-danger dept_close">取消关闭</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- 详细弹窗 End -->
+        <!-- 药品弹窗 -->
+        <div class="drugs-pop hide layui-field-box">
+            <form>
+                <fieldset class="layui-elem-field">
+                    <legend>选择药物品</legend>
+
+                    <div class="layui-form-item layui-form" style="margin-left: 20px">
+                        <div class="m-bt-10 fl clearfix">
+                            <label class="layui-form-label" style="width:45px;">拼音码</label>
+                            <div class="layui-input-inline " style="width:110px;">
+                                <input type="text" id="smartProductPinYin" name="smartProductPinYin" style="width:110px;" lay-verify="title" autocomplete="off" placeholder="请输入拼音码" class="layui-input ">
+                            </div>
+
+
+                        </div>
+
+                        <div class="m-bt-10 clearfix fl">
+                            <label class="layui-form-label" style="width:45px;">名称</label>
+                            <div class="layui-input-inline " style="width:110px;">
+                                <input type="text" id="smartProductName" style="width:110px;" name="smartProductName" lay-verify="title" autocomplete="off" placeholder="请输入名称" class="layui-input ">
+                            </div>
+                        </div>
+                        <div class="m-bt-10 clearfix fl">
+                            <label class="layui-form-label" style="width:45px;">分类</label>
+                            <div class="layui-input-inline " style="width:130px;">
+                                @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.ProductCategory, "smartProductDetaiName", "smartProductDetaiName")
+                              </div>
+                        </div>
+                        <div class="m-bt-10 fl clearfix">
+                            <label class="layui-form-label" style="width:45px;">状态</label>
+                            <div class="layui-input-inline " style="width:110px;">
+                                <select class="psStatus" selected="selected" id="psStatus" name="">
+                                    <option value="0" selected="selected">盘盈</option>
+                                    <option value="1">盘亏</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <span class="layui-btn m-bt-10 o-hidden fl" id="subtmValue" >查询</span>
+                    </div>
+                    <div class="layui-field-box">
+                        <div style="max-height:248px;overflow:auto;">
+                            <table class="site-table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>拼音码</th>
+                                        <th>名称</th>
+                                        <th>规格</th>
+                                        <th>类别</th>
+                                        <th>单位</th>
+                                        <th>数量</th>
+                                        <th>进价</th>
+                                        <th>金额</th>
+                                        @*<th>入库单号</th>*@
+                                    </tr>
+                                </thead>
+                                <tbody class="drugs-table"></tbody>
+                            </table>
+                        </div>
+                        <div class="layui-form-item m-bt-10 text-r">
+                            <span class="layui-btn layui-btn-normal dept_commit">确认提交</span>
+
+                            <span class="layui-btn layui-btn-danger dept_close">取消关闭</span>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <!-- 药品弹窗 End -->
+    </div>
+
+    <div class="dot-tmp">
+        <script id="checkTmp" type="text/x-dot-template">
+            {{ for(var item in it) { }}
+            <tr class="" data-id="{{= it[item].ID }}" deptInfoId="{{= it[item].ID }}">
+
+                <td>
+                    {{ if (it[item].Status =="0"){ }}
+                    进行中
+                    {{ } else { }}
+                    <i class="c-red">已完成</i>
+                    {{ } }}
+                </td>
+                <td>{{= it[item].No }}</td>
+                <td>{{= it[item].CreateDate }}</td>
+                <td data-id="{{= it[item].WarehouseName }}">{{= it[item].WarehouseName }}</td>
+                <td>{{= it[item].CreateUserName }}</td>
+                <td>
+                    {{= it[item].Remark }}
+                </td>
+                <td class="smartPurchaseInfoEditAndDisableTd">
+                    <a class="layui-btn layui-btn-mini btn-edit"><i></i>查看</a>
+                </td>
+            </tr>
+
+            {{ } }}
+
+        </script>
+        <script id="checkDetail" type="text/x-dot-template">
+            {{ for(var item in it) { }}
+            <tr value="{{= it[item].ProductID }}" data-size="{{= it[item].Num }}" style="width:587px;" data-checkProduct="{{=it[item].CheckProductId}}">
+                <td>{{= it[item].ProductName }}</td>
+                <td>{{= it[item].Size }}</td>
+                <td>{{= it[item].KcName }}</td>
+                <td>
+                    <input type="text" id="productCount" data-calc="{calc:'totals',price:'.money',Amount:'#lableZPrice'}" data-verify="{{= it[item].verify }}" class="layui-input" style="width:40px;" value="{{= it[item].Num }}">
+                    <input type="hidden" id="productCountVal" value="{{= it[item].Num }}">
+                </td>
+                <td class="money" value="{{= it[item].Price }}">{{= it[item].Price }}</td>
+                <td>
+                    <label id="lableZPrice">{{= it[item].Amount?it[item].Amount:it[item].Num * it[item].Price }}</label>
+                </td>
+                <td style="width:80px;">
+                    <select name="productStatus">
+                        <option value="0" {{= it[item].Status == 0?"selected":"" }}>盘盈</option>
+                        <option value="1" {{= it[item].Status == 1?"selected":"" }}>盘亏</option>
+                    </select>
+                </td>
+                <td hidden id="smartWarehouseRemarkTdhidden">{{= it[item].StockId }}</td>
+                <td hidden id="smartProductBatchRemarkTdhidden">{{= it[item].Batch }}</td>
+                <td hidden id="smartProductExpirationRemarkTdhidden">{{= it[item].Expiration }}</td>
+                <td hidden id="smartCheckProduct"></td>
+                <td>
+                    <a href="javascript:" class="layui-btn layui-btn-danger layui-btn-mini trDelete">删除</a>
+                </td>
+            </tr>
+
+            {{ } }}
+
+        </script>
+        <script id="drugs" type="text/x-dot-template">
+            {{ for(var item in it) { }}
+            <tr class="" deptInfoId="{{= it[item].ID }}" productStockId="{{=it[item].StockId}}">
+                <td>
+                    <div class="layui-input-inline">
+                        <input name="cheId" id="cheId" type="checkbox" lay-skin="switch" value="{{= it[item].ID?it[item].ID:it[item].ProductID }}"
+                                productStockId="{{=it[item].StockId}}"
+                                productNameVal="{{= it[item].Name?it[item].Name:it[item].WPName }}"
+                                productSizeVal="{{=it[item].Size}}"
+                                productKcNameVal="{{=it[item].KcName?it[item].KcName:it[item].UnitName}}"
+                                productPriceVal="{{=it[item].Price}}"
+                                productAmountVal="{{=it[item].Amount}}"
+                                productCountVal="{{=it[item].Num}}"
+                                productBatchVal="{{=it[item].Batch}}"
+                                productExpirationVal="{{=it[item].Expiration}}"
+                                productStatus="{{=it[item].Status}}"
+                               productID="{{=it[item].ProductID}}"
+                                />
+                    </div>
+                </td>
+
+                <td>{{= it[item].PinYin }}</td>
+                <td>{{= it[item].Name?it[item].Name:it[item].WPName }}</td>
+                <td>
+                    {{= it[item].Size }}
+                </td>
+                <td>
+                    {{= it[item].CategoryName?it[item].CategoryName:it[item].ProductCategoryName }}
+                </td>
+
+                <td>
+                    {{= it[item].KcName?it[item].KcName:it[item].UnitName }}
+                </td>
+                <td>
+                    {{= it[item].Num?it[item].Num:"" }}
+                </td>
+                <td>{{= it[item].Price }}</td>
+                <td>{{= it[item].Amount?it[item].Amount:"" }}</td>
+                @*<td>{{= it[item].No }}</td>*@
+            </tr>
+            {{ } }}
+        </script>
+    </div>
+
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/lay_component/js/hcommon.js"></script>
+    <script src="~/Scripts/FlyDog.Common.js"></script>
+    <script src="~/doT-master/doT-master/doT.min.js"></script>
+    <script src="~/lay_component/plugins/layui/layui.js"></script>
+    <script src="~/lay_component/sampleJs/CheckInfo.js"></script>
+</body>
+</html>

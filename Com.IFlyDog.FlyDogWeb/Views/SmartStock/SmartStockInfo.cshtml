@@ -1,0 +1,121 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>库存查询</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/layer.css" rel="stylesheet" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/lay_component/css/table.css" rel="stylesheet" />
+ 
+
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/lay_component/js/hcommon.js"></script>
+    <script src="~/doT-master/doT-master/doT.min.js"></script>
+    <script src="~/lay_component/plugins/layui/lay/dest/layui.all.js"></script>
+    <script src="~/lay_component/plugins/layui/lay/lib/jquery.js"></script>
+    <script src="~/lay_component/plugins/layui/lay/modules/layer.js"></script>
+
+    <!--页面用添加数据js-->
+    <script src="~/lay_component/sampleJs/SmartStock.js"></script>
+
+    <style>
+        #smartStockDetaiName {
+           
+            height: 38px;
+            border: 1px solid #e6e6e6;
+            border-radius: 2px;
+            background-color: #fff;
+            line-height: 38px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="admin-main layui-form" id="smartStockHtml">
+
+        <fieldset class="layui-elem-field">
+            <legend>库存查询</legend>
+            <div class="layui-field-box">
+
+            </div>
+            <script id="smartStock_template" type="text/html">
+                <input type="hidden" id="pageCountValue" lay-verify="title" autocomplete="off" class="layui-input " value="">
+                <div class="layui-form-item">
+
+                    <div class="layui-input-block">
+
+                        <div class="fl">
+                            <label class="layui-form-label">仓库</label>
+                            <div class="layui-input-inline">
+                            @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.Warehouse, "smartStockDetaiName", "smartStockDetaiName")
+                            </div>
+                        </div>
+
+                        <div class="fl">
+                            <label class="layui-form-label">拼音码</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="title" lay-verify="title" id="pinYinValue" autocomplete="off" placeholder="请输入拼音码" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="fl">
+                            <label class="layui-form-label">名称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="title" lay-verify="title" id="nameValue" autocomplete="off" placeholder="请输入名称" class="layui-input">
+                            </div>
+                        </div>
+                        <button class="layui-btn  fr" id="subtmValue" onclick="aa()">查询</button>
+                    </div>
+                </div>
+
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            @*<th>供应商编号</th>*@
+                            <th>仓库</th>
+                            <th>名称</th>
+                            <th>规格</th>
+                            <th>拼音码</th>
+                            <th>类别</th>
+                            <th>单位</th>
+                            <th>数量</th>
+                            <th>金额</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {{ for(var prop in it) { }}
+                        <tr class="" deptInfoId="{{= it[prop].ID }}">
+                            @*<td>{{= i++ }}</td>*@
+                            <td>{{= it[prop].WarehouseName }}</td>
+                            <td>{{= it[prop].WPName }}</td>
+                            <td>{{= it[prop].Size }}</td>
+                            <td>{{= it[prop].PinYin }}</td>
+                            <td>{{= it[prop].ProductCategoryName }}</td>
+                            <td>{{= it[prop].UnitName }}</td>
+                            <td>{{= it[prop].Num }}</td>
+                            <td>{{= it[prop].Amount }}</td>
+                        </tr>
+
+                        {{ } }}
+                    </tbody>
+
+                </table>
+            </script>
+
+        </fieldset>
+    </div>
+    <script src="~/lay_component/plugins/layui/layui.js"></script>
+</body>
+
+</html>

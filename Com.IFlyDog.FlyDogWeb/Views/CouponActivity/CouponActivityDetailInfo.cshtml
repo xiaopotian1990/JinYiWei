@@ -1,0 +1,107 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>店铺管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+    <style>
+        .couponActivity-a {
+            color: indianred;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-main">
+        <blockquote class="layui-elem-quote">
+            <a href="javascript:;" class="layui-btn layui-btn-small btn-add">
+                <i class="layui-icon"></i> 添加劵
+            </a>
+            <a href="javascript:;" class="layui-btn layui-btn-small btn-rmv-all">
+                <i class="layui-icon"></i> 清空
+            </a>
+            <a href="/CouponActivity/CouponActivityInfo" class="layui-btn layui-btn-small">
+                <i class="layui-icon"></i> 返回
+            </a>
+        </blockquote>
+        <fieldset class="layui-elem-field">
+            <legend>添加劵</legend>
+            <div class="layui-field-box">
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <th>代码</th>
+                            <th>状态</th>
+                            <th>激活时间</th>
+                            <th>激活客户</th>
+                            <th>激活医院</th>
+                            <th>激活用户</th>
+                            <th>激活券编号</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="couponActivity-table"></tbody>
+                </table>
+                <div id="pageDiv"></div>
+            </div>
+        </fieldset>
+        <div class="page-pop layui-form">
+            <div class="couponActivity-info-pop hide">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>导入代码</legend>
+                </fieldset>
+                <form>
+                    <div class="layui-input-block m-20">
+                        <label class="layui-form-label">开始区间</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="CodeBegin" placeholder="请输入开始区间" />
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-20">
+                        <label class="layui-form-label">结束区间</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="CodeEnd" placeholder="请输入结束区间" />
+                        </div>
+                    </div>
+                </form>
+                <div class="m-20 clearfix">
+                    <span class="layui-btn couponActivity btn-submit fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+                </div>
+            </div>
+
+        </div>
+        <div class="dot-tmp">
+            <!-- 店铺表格 -->
+            <script class="couponActivity-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                <tr data-id="{{= it[item].ID }}">
+                    <td>{{= it[item].Code }}</td>
+                    <td>{{= it[item].CouponID == "" ? "未激活" : "已激活" }}</td>
+                    <td>{{= it[item].CreateTime }}</td>
+                    <td>{{= it[item].CustomerName }}</td>
+                    <td>{{= it[item].HospitalName }}</td>
+                    <td>{{= it[item].CreateUserName }}</td>
+                    <td>{{= it[item].SerialNumber }}</td>
+                    <td>
+                        <span class="layui-btn layui-btn-small btn-remove" data-id="{{= it[item].ID }}">删除</span>
+                    </td>
+                </tr>
+                {{ } }}
+            </script>
+        </div>
+    </div>
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/lay_component/js/hcommon.js"></script>
+    <script src="~/Scripts/FlyDog.Common.js"></script>
+    <script src="~/doT-master/doT-master/doT.min.js"></script>
+    <script src="~/lay_component/plugins/layui/layui.js"></script>
+    <script src="~/lay_component/sampleJs/CouponActivityDetail.js"></script>
+</body>
+</html>

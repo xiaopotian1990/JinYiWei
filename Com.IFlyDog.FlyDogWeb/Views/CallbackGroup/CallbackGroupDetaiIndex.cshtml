@@ -1,0 +1,139 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all"/>
+
+    <link href="~/lay_component/css/layer.css" rel="stylesheet"/>
+    <link href="~/lay_component/css/global.css" rel="stylesheet"/>
+    <link href="~/lay_component/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="~/lay_component/css/table.css" rel="stylesheet"/>
+ 
+    <script src="~/lay_component/js/hcommon.js"></script>
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/doT-master/doT-master/doT.min.js"></script>
+
+    <script src="~/lay_component/plugins/layui/lay/dest/layui.all.js"></script>
+    <script src="~/lay_component/plugins/layui/lay/lib/jquery.js"></script>
+    <script src="~/lay_component/plugins/layui/lay/modules/layer.js"></script>
+</head>
+
+<body>
+<div class="admin-main" id="callbackGroupDetaiHtml">
+
+    <form class="layui-form" style="margin-left: 150px; margin-top: 10px;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">回访类型</label>
+            <div class="layui-input-inline ">
+                @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.CallbackCategory, "callbackGroupDetaiName", "callbackGroupDetaiName")
+                
+             </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">天数</label>
+            <div class="layui-input-inline ">
+                <input type="text" id="callbackGroupDetaiAddDays" lay-verify="title" autocomplete="off" placeholder="请输入名称" class="layui-input ">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">描述</label>
+            <div class="layui-input-inline">
+                <textarea id="callbackGroupDetaiAddRemark" placeholder="请输入描述内容" class="layui-textarea"></textarea>
+            </div>
+        </div>
+    </form>
+    <div class="layui-form-item pull-right" style="bottom: 10px; position: absolute; right: 10px;">
+        <button class="layui-btn layui-btn-normal dept_commit">确认提交</button>
+        <button class="layui-btn layui-btn-danger dept_close">取消关闭</button>
+    </div>
+</div>
+
+<script>
+    var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+
+    //取消关闭
+
+    layui.config({
+        base: '../plugins/layui/modules/'
+    });
+
+    layui.use(['layer', 'form'],
+        function() {
+            var $ = layui.jquery,
+                layform = layui.form();
+            layform.render();
+            //关闭当前页面
+            $(document)
+                .on("click",
+                    ".dept_close",
+                    function() {
+                        parent.layer.close(index);
+                    });
+
+
+            $(".dept_commit")
+                .on("click",
+                    function() {
+
+                        var callbackGroupDetaitypeID = $(".callbackGroupDetaiName option:selected").val();
+
+                        var callbackGroupDetaitypeName = $(".callbackGroupDetaiName option:selected").text();
+
+                        var callbackGroupDetaiday = $("#callbackGroupDetaiAddDays").val();
+
+
+                        var callbackGroupDetairemark = $("#callbackGroupDetaiAddRemark").val();
+
+
+                        var reg = /^[0-9]*$/;
+                        if (!reg.test(callbackGroupDetaiday) || callbackGroupDetaiday == null) {
+                            layer.msg('天数只可为整数哦!抱歉哦!', { icon: 5, style: "color:red" });
+                            return false;
+                        }
+                        if (callbackGroupDetaitypeName === "" ||
+                            callbackGroupDetaiday === "" ||
+                            callbackGroupDetairemark === "") {
+                            layer.msg('本页面不可存在空值哦!抱歉哦!', { icon: 5, style: "color:red" });
+                            return false;
+                        } else if (callbackGroupDetairemark.length > 20) {
+                            layer.msg('说明不可超过20哦!', { icon: 5, style: "color:red" });
+                            return false;
+                        } else {
+                            var html = "   <tr value=" +
+                                callbackGroupDetaitypeID +
+                                ">" +
+                                "<td>" +
+                                callbackGroupDetaitypeName +
+                                "</td>" +
+                                "<td>" +
+                                callbackGroupDetaiday +
+                                "</td>" +
+                                "<td>" +
+                                callbackGroupDetairemark +
+                                "</td>" +
+                                "<td>" +
+                                "<a href='javascript:' class='layui-btn layui-btn-danger layui-btn-mini trDelete'>删除</a>" +
+                                "</td>" +
+                                "</tr>";
+
+                            parent.$('#callbackGroupDetailTD').append(html);
+                            parent.layer.close(index);
+                            parent.layer.tips('添加一条信息哦!', '#callbackGroupDetailTD', { time: 4000 });
+                        }
+                    });
+
+
+        });
+</script>
+</body>
+
+</html>

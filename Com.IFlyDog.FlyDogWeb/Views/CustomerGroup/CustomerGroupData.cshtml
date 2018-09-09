@@ -1,0 +1,1027 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>客户组</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+    <style>
+        .select-btns{display:none;position:absolute;top:60px;right:15px;padding-top:15px;width:150px;color:#555;}
+        .select-btns li{padding:8px 14px;border-left:1px solid #eee;border-right:1px solid #eee;cursor:pointer;background:#FFF;}
+        .select-btns li:hover{background:#f6f6f6;}
+        .select-btns li:first-child{border-top:1px solid #eee;}
+        .select-btns li:last-child{border-bottom:1px solid #eee;}
+        .pad-9{padding:9px;}
+        .executeCondition-pop .layui-form-label{width:130px;}
+    </style>
+</head>
+<body>
+    <div class="admin-main">
+        <blockquote class="layui-elem-quote">
+            <a href="javascript:;" class="layui-btn layui-btn-small btn-add">
+                <i class="layui-icon"></i> 添加
+            </a>
+            <span class="layui-btn layui-btn-small add-search fr">添加查询</span>
+            <span class="layui-btn layui-btn-small btn-merge fr">合并</span>
+            <span class="layui-btn layui-btn-small add-callBack fr">批量设置回访</span>
+            <span class="layui-btn layui-btn-small add-msg fr">批量发送短信</span>
+            <span class="layui-btn layui-btn-small rmv-all fr">清空</span>
+            <ul class="select-btns">
+                <li data-condition="basic">基本条件查询</li>
+                <li data-condition="account">账户条件查询</li>
+                <li data-condition="door">上门条件查询</li>
+                <li data-condition="order">订单条件查询</li>
+                <li data-condition="consult">咨询条件查询</li>
+                <li data-condition="execute">执行条件查询</li>
+                <li data-condition="member">会员条件查询</li>
+                <li data-condition="failture">未成交条件查询</li>
+                <li data-condition="tag">标签条件查询</li>
+                <li data-condition="callback">回访条件查询</li>
+            </ul>
+        </blockquote>
+        <fieldset class="layui-elem-field">
+            <legend>客户组</legend>
+            <div class="layui-field-box">
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <th>客户编号</th>
+                            <td>客户姓名</td>
+                            <td>性别</td>
+                            <td>渠道</td>
+                            <td>主咨询项目</td>
+                            <td>会员类型</td>
+                            <td>分享家类型</td>
+                            <td>开发人员</td>
+                            <td>咨询人员</td>
+                        </tr>
+                    </thead>
+                    <tbody class="customerGroup-table"></tbody>
+                </table>
+                <div id="pageDiv"></div>
+            </div>
+        </fieldset>
+        <div class="page-pops">
+            <!-- 添加/编辑弹窗 -->
+            <div class="customerGroup-pop hide">
+                <!-- 会员类型/ -->
+                <!-- 分享家/ -->
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                    <legend>客户组</legend>
+                </fieldset>
+                <form class="layui-form customerGroup-form">
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">客户列表</label>
+                        <div class="layui-input-inline">
+                            <textarea class="layui-textarea" name="UserListAdd" placeholder="请输入备注"></textarea>
+                        </div>
+                    </div>
+                </form>
+                <div class="m-20 clearfix">
+                    <span class="layui-btn customerGroup submit-btn fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>                  
+                </div>
+            </div>
+            <!-- End  添加/编辑弹窗 -->
+            <!-- 批量添加短信 -->
+            <div class="msg-pop hide">
+                <!-- 会员类型/ -->
+                <!-- 分享家/ -->
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                    <legend>批量发送短信</legend>
+                </fieldset>
+                <form class="layui-form customerGroup-form">
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">短信内容</label>
+                        <div class="layui-input-inline">
+                            <textarea class="layui-textarea" name="Content" placeholder="请输入短信内容"></textarea>
+                        </div>
+                    </div>
+                </form>
+                <div class="m-20 clearfix">
+                    <span class="layui-btn msg submit-btn fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+                </div>
+            </div>
+            <!-- End 批量添加短信 -->
+            <!-- 批量添加回访 -->
+            <div class="callBack-pop hide">
+                <!-- 会员类型/ -->
+                <!-- 分享家/ -->
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                    <legend>批量设置回访</legend>
+                </fieldset>
+                <form class="layui-form customerGroup-form">
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">回访类型</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.CallbackCategory, "CallbackCategoryID", "CallbackCategoryID", "CallbackCategoryID")
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">回访日期</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="CallbackTime" placeholder="请选择日期" onclick="layui.laydate({ elem: this })"/>
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">提醒内容</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="Info" placeholder="请输入提醒内容" />
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">回访人员</label>
+                        <div class="layui-input-inline">
+                            <input type="hidden" name="CallbackUserID" />
+                            <input type="text" class="layui-input" name="CallbackUserName" placeholder="请选择回访人员" />
+                        </div>
+                    </div>
+                </form>
+                <div class="m-20 clearfix">
+                    <span class="layui-btn callBack submit-btn fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+                </div>
+            </div>
+            <!-- End 批量添加回访 -->
+            <!-- 条件查询 -->
+            <div class="basicCondition-pop hide search-pop" data-condition="Basic">
+                <form class="layui-form">
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">姓名</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="Name" placeholder="请输入姓名" />
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">手机</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="Phone" placeholder="请输入手机" />
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">性别</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            <select name="Gender">
+                                <option value="1">男</option>
+                                <option value="2">女</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">医院</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.ALLHospital, "HospitalID", "HospitalID", "HospitalID")
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">分享家类型</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.ShareCategory, "ShareMemberCategoryID", "ShareMemberCategoryID", "ShareMemberCategoryID")
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">渠道</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.Channel, "ChannelID", "ChannelID", "ChannelID")
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">咨询项目</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.Symptom, "ChargeID", "ChargeID", "ChargeID")
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">会员</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.MemberCategory, "MemberCategoryID", "MemberCategoryID", "MemberCategoryID")
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">开发人员</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="DeveloperUserID" placeholder="请输入开发人员" />
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">咨询人员</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="ConsultantUserID" placeholder="请输入咨询人员" />
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">上门状态</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            <select name="DoorStatus" >
+                                <option value="1">已上门</option>
+                                <option value="0">未上门</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">成交状态</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            <select name="ClinchStatus" >
+                                <option value="1">已成交</option>
+                                <option value="0">未成交</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">微信状态</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            <select name="WeChatStatus" >
+                                <option value="1">已绑定</option>
+                                <option value="0">未绑定</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">登记时间</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="RegisterBeginTime" placeholder="请输入登记开始时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                        <span class="pad-9">至</span>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="RegisterEndTime" placeholder="请输入登记结束时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">初诊时间</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="FirstVisitBeginTime" placeholder="请输入初诊开始时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                        <span class="pad-9">至</span>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="FirstVisitEndTime" placeholder="请输入初诊结束时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">最后光临</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="LastVisitBeginTime" placeholder="请输入最后光临开始时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                        <span class="pad-9">至</span>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="LastVisitEndTime" placeholder="请输入最后光临结束时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                    </div>
+                </form>
+                <div class="text-c m-20">
+                    <span class="layui-btn search-condition">查询</span>
+                    <span class="layui-btn btn-reset">重置</span>
+                </div>
+            </div>
+
+            <div class="accountCondition-pop hide search-pop" data-condition="Account">
+                <form class="layui-form">
+
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">医院</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.ALLHospital, "HospitalID", "HospitalID", "HospitalID")
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">余额</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            <select name="BalanceConditionType">
+                                <option value=">=">>=</option>
+                                <option value=">">></option>
+                                <option value="=">=</option>
+                                <option value="<="><=</option>
+                                <option value="<"><</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="BalanceMoney" placeholder="请输入金额" />
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">券额</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            <select name="CouponConditionType">
+                                <option value=">=">>=</option>
+                                <option value=">">></option>
+                                <option value="=">=</option>
+                                <option value="<="><=</option>
+                                <option value="<"><</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="CouponMoney" placeholder="请输入金额" />
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">积分</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            <select name="PointConditionType">
+                                <option value=">=">>=</option>
+                                <option value=">">></option>
+                                <option value="=">=</option>
+                                <option value="<="><=</option>
+                                <option value="<"><</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="PointCount" placeholder="请输入积分" />
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">净手总额</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            <select name="CleanConditionType">
+                                <option value=">=">>=</option>
+                                <option value=">">></option>
+                                <option value="=">=</option>
+                                <option value="<="><=</option>
+                                <option value="<"><</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="CleanMoney" placeholder="请输入金额" />
+                        </div>
+                    </div>
+
+                </form>
+                <div class="text-c m-20">
+                    <span class="layui-btn search-condition">查询</span>
+                    <span class="layui-btn btn-reset">重置</span>
+                </div>
+            </div>
+
+            <div class="doorCondition-pop hide search-pop" data-condition="Door">
+                <form class="layui-form">
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">医院</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.ALLHospital, "HospitalID", "HospitalID", "HospitalID")
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">上门次数</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            <select name="DoorConditionType">
+                                <option value=">=">>=</option>
+                                <option value=">">></option>
+                                <option value="=">=</option>
+                                <option value="<="><=</option>
+                                <option value="<"><</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="DoorNumber" placeholder="请输入次数" />
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">初次上门</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="FirstDoorBeginTime" placeholder="请输入开始时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                        <span class="pad-9">至</span>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="FirstDoorEndTime" placeholder="请输入结束时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">最后上门</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="LastDoorBeginTime" placeholder="请输入开始时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                        <span class="pad-9">至</span>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="LastDoorEndTime" placeholder="请输入结束时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                    </div>
+                </form>
+                <div class="text-c m-20">
+                    <span class="layui-btn search-condition">查询</span>
+                    <span class="layui-btn btn-reset">重置</span>
+                </div>
+            </div>
+
+            <div class="orderCondition-pop hide search-pop" data-condition="Order">
+                <form class="layui-form">
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">医院</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.ALLHospital, "HospitalID", "HospitalID", "HospitalID")
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">支付时间</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="PaymentBeginTime" placeholder="请输入开始时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                        <span class="pad-9">至</span>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="PaymentEndTime" placeholder="请输入结束时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                    </div>
+
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">使用范围限制</label>
+                        <div class="layui-input-inline">
+                            <div class="layui-input-block" style="margin-left:0;">
+                                <input type="radio" name="useScope" lay-filter="useScope" value="1" title="指定项目" checked />
+                                <input type="hidden" name="ChargeID" />
+                                <input type="text" class="layui-input" name="Charge" />
+                            </div>
+                            <div class="layui-input-block" style="margin-left:0;">
+                                <input type="radio" name="useScope" lay-filter="useScope" value="2" title="指定项目分类" />
+                                <input type="hidden" name="ChargeCategoryID" />
+                                <input type="text" class="layui-input" name="ChargeCategory" disabled />
+                            </div>
+                            <div class="layui-input-block" style="margin-left:0;width:163px;">
+                                <input type="radio" name="useScope" lay-filter="useScope" value="3" title="指定报表分类" />
+                                @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.Item, "ItemCategoryID", "ItemCategoryID", "ItemCategoryID")
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">消费金额</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            <select name="ConsumptionConditionType">
+                                <option value=">=">>=</option>
+                                <option value=">">></option>
+                                <option value="=">=</option>
+                                <option value="<="><=</option>
+                                <option value="<"><</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="ConsumptionMoney" placeholder="请输入金额" />
+                        </div>
+                    </div>
+                </form>
+                <div class="text-c m-20">
+                    <span class="layui-btn search-condition">查询</span>
+                    <span class="layui-btn btn-reset">重置</span>
+                </div>
+            </div>
+
+            <div class="consultCondition-pop hide search-pop" data-condition="Consult">
+                <form class="layui-form">
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">医院</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.ALLHospital, "HospitalID", "HospitalID", "HospitalID")
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">咨询项目</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.Symptom, "ConsultChargeID", "ConsultChargeID", "ConsultChargeID")
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">咨询日期</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="ConsultBeginTime" placeholder="请输入开始时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                        <span class="pad-9">至</span>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="ConsultEndTime" placeholder="请输入结束时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">咨询次数</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            <select name="ConsultNumberConditionType">
+                                <option value=">=">>=</option>
+                                <option value=">">></option>
+                                <option value="=">=</option>
+                                <option value="<="><=</option>
+                                <option value="<"><</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="ConsultNumberConditionNum" placeholder="请输入次数" />
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">咨询方式</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.Tool, "ConsultType", "ConsultType", "ConsultType")
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">初次咨询</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="FirstConsultBeginTime" placeholder="请输入开始时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                        <span class="pad-9">至</span>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="FirstConsultEndTime" placeholder="请输入结束时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">最后咨询</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="LastConsultBeginTime" placeholder="请输入开始时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                        <span class="pad-9">至</span>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="LastConsultEndTime" placeholder="请输入结束时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">咨询内容</label>
+                        <div class="layui-input-inline">
+                            <textarea class="layui-textarea" name="ConsultContent" placeholder="请输入咨询内容" ></textarea>
+                        </div>
+                    </div>
+                </form>
+                <div class="text-c m-20">
+                    <span class="layui-btn search-condition">查询</span>
+                    <span class="layui-btn btn-reset">重置</span>
+                </div>
+            </div>
+
+            <div class="executeCondition-pop hide search-pop" data-condition="Execute">
+                <form class="layui-form">
+
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">医院</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.ALLHospital, "HospitalID", "HospitalID", "HospitalID")
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">最后执行时间</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="LastExecuteBeginTime" placeholder="请输入开始时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                        <span class="pad-9">至</span>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="LastExecuteEndTime" placeholder="请输入结束时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                    </div>
+
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">使用范围限制</label>
+                        <div class="layui-input-inline">
+                            <div class="layui-input-block" style="margin-left:0;">
+                                <input type="radio" name="useScope" lay-filter="useScope" value="1" title="指定项目" checked />
+                                <input type="hidden" name="ChargeID" />
+                                <input type="text" class="layui-input" name="Charge" />
+                            </div>
+                            <div class="layui-input-block" style="margin-left:0;">
+                                <input type="radio" name="useScope" lay-filter="useScope" value="2" title="指定项目分类" />
+                                <input type="hidden" name="ChargeCategoryID" />
+                                <input type="text" class="layui-input" name="ChargeCategory" disabled />
+                            </div>
+                            <div class="layui-input-block" style="margin-left:0;width:163px;">
+                                <input type="radio" name="useScope" lay-filter="useScope" value="3" title="指定报表分类" />
+                                @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.Item, "ItemCategoryID", "ItemCategoryID", "ItemCategoryID")
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">执行人</label>
+                        <div class="layui-input-inline">
+                            <input type="hidden" name="ExecuteUserID" />
+                            <input type="text" class="layui-input" name="ExecuteUserName" placeholder="请输入执行人"/>
+                        </div>
+                    </div>
+                </form>
+                <div class="text-c m-20">
+                    <span class="layui-btn search-condition">查询</span>
+                    <span class="layui-btn btn-reset">重置</span>
+                </div>
+            </div>
+
+            <div class="memberCondition-pop hide search-pop" data-condition="Member">
+                <form class="layui-form">
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">医院</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.ALLHospital, "HospitalID", "HospitalID", "HospitalID")
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">会员类型</label>
+                        <div class="layui-input-inline">
+                            @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.MemberCategory, "MemberCategoryID", "MemberCategoryID", "MemberCategoryID")
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">加入时间</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="JoinBeginTime" placeholder="请输入开始时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                        <span class="pad-9">至</span>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="JoinEndTime" placeholder="请输入结束时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                    </div>
+                </form>
+                <div class="text-c m-20">
+                    <span class="layui-btn search-condition">查询</span>
+                    <span class="layui-btn btn-reset">重置</span>
+                </div>
+            </div>
+
+            <div class="failtureCondition-pop hide search-pop" data-condition="Failture">
+                <form class="layui-form">
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">医院</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.ALLHospital, "HospitalID", "HospitalID", "HospitalID")
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">未成交类型</label>
+                        <div class="layui-input-inline">
+                            @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.FailtureCategory, "FailtureCategoryID", "FailtureCategoryID", "FailtureCategoryID")
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">提交时间</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="SubmitBeginTime" placeholder="请输入开始时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                        <span class="pad-9">至</span>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="SubmitEndTime" placeholder="请输入结束时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                    </div>
+                </form>
+                <div class="text-c m-20">
+                    <span class="layui-btn search-condition">查询</span>
+                    <span class="layui-btn btn-reset">重置</span>
+                </div>
+            </div>
+
+            <div class="tagCondition-pop hide search-pop" data-condition="Tag">
+                <form class="layui-form">
+                    <div class="m-bt-10">
+                        <label class="layui-form-label">医院</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.ALLHospital, "HospitalID", "HospitalID", "HospitalID")
+                        </div>
+                    </div>
+                    <div class="m-bt-10">
+                        <label class="layui-form-label">标签</label>
+                        <div class="layui-input-inline " style="width:500px;">
+
+                            <table class="site-table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>名称</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tags-table tableField" name="TagInfoAdd"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="m-20 clearfix" style="padding-right:49px;">
+                        <span class="layui-btn layui-btn-small add-tag fr">添加</span>
+                    </div>
+                </form>
+                <div class="text-c m-20">
+                    <span class="layui-btn search-condition">查询</span>
+                    <span class="layui-btn btn-reset">重置</span>
+                </div>
+            </div>
+
+            <div class="callbackCondition-pop hide search-pop" data-condition="Callback">
+                <form class="layui-form">
+
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">医院</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.ALLHospital, "HospitalID", "HospitalID", "HospitalID")
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">回访类型</label>
+                        <div class="layui-input-inline">
+                            @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.CallbackCategory, "CallbackCategoryID", "CallbackCategoryID", "CallbackCategoryID")
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">回访方式</label>
+                        <div class="layui-input-inline" style="width:163px;">
+                            @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.Tool, "CallbackType", "CallbackType", "CallbackType")
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">提醒日期</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="TaskBeginTime" placeholder="请输入开始时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                        <span class="pad-9">至</span>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="TaskEndTime" placeholder="请输入结束时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">回访日期</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="CallbackBeginTime" placeholder="请输入开始时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                        <span class="pad-9">至</span>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="CallbackEndTime" placeholder="请输入结束时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">最后回访</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="LastCallbackBeginTime" placeholder="请输入开始时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                        <span class="pad-9">至</span>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="LastCallbackEndTime" placeholder="请输入结束时间" onclick="layui.laydate({ elem: this })" />
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">提醒内容</label>
+                        <div class="layui-input-inline">
+                            <textarea type="text" class="layui-textarea" name="TaskContent" placeholder="请输入提醒内容"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">回访内容</label>
+                        <div class="layui-input-inline">
+                            <textarea type="text" class="layui-textarea" name="CallbackContent" placeholder="请输入回访内容" ></textarea>
+                        </div>
+                    </div>
+
+                </form>
+                <div class="text-c m-20">
+                    <span class="layui-btn search-condition">查询</span>
+                    <span class="layui-btn btn-reset">重置</span>
+                </div>
+            </div>
+            <!-- End 条件查询 -->
+
+            <!-- 查询结果 -->
+            <div class="screen-pop hide">
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                    <legend>条件查找结果</legend>
+                </fieldset>
+                <form class="layui-form">
+                    <div class="layui-input-block m-bt-10 screen-form">
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">保存结果</label>
+                        <div class="layui-input-inline">
+                            <div class="layui-input-block" style="margin-left:0;">
+                                <input type="radio" name="SaveResult" value="1" title="覆盖现有客户组" checked />
+                                <select name="FilterID" class="filters">
+                                    <option value="-1">请选择</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-block" style="margin-left:0;">
+                                <input type="radio" name="SaveResult" value="2" title="保存到新客户组" />
+                                <input type="text" class="layui-input" name="FilterName" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="m-20 clearfix">
+                    <span class="layui-btn screen submit-btn fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+                </div>
+            </div>
+            <!-- 项目类型弹窗 -->
+            <div class="chargeCategory-pop hide">
+                <form class="m-20">
+                    <table class="site-table table-hover m-20">
+                        <thead>
+                            <tr>
+                                <th width="50%">名称</th>
+                                <th width="50%">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody class="chargeCategory-table"></tbody>
+                    </table>
+                </form>
+                <div class="m-20 clearfix">
+                    <span class="layui-btn chargeCategory submit-btn fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+                </div>
+            </div>
+            <!-- 项目类型弹窗 End -->
+            <!-- 项目弹窗 -->
+            <div class="charge-pop hide">
+                <div class="layui-form m-10 clearfix">
+                    <form class="m-20">
+                        <div class="fl" style="margin-left:-35px;">
+                            <label class="layui-form-label" style="width:70px;">拼音码</label>
+                            <div class="layui-input-inline">
+                                <input class="layui-input" name="smartProductPinYin" placeholder="请输入拼音码">
+                            </div>
+                        </div>
+                        <div class="fl">
+                            <label class="layui-form-label" style="width:70px;">名称</label>
+                            <div class="layui-input-inline">
+                                <input class="layui-input" name="smartProductNmae" placeholder="请输入名称">
+                            </div>
+                        </div>
+                        <span class="layui-btn search-btn fr">查询</span>
+                    </form>
+                </div>
+                <div class="m-20">
+                    <table class="site-table table-hover">
+                        <thead>
+                            <tr>
+                                <td>选择</td>
+                                <th>项目名称</th>
+                                <th>拼音码</th>
+                                <th>类型</th>
+                                <th>规格</th>
+                            </tr>
+                        </thead>
+                        <tbody class="charge-table"></tbody>
+                    </table>
+                </div>
+                <div class="m-20 clearfix">
+                    <span class="layui-btn charge submit-btn fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+                </div>
+            </div>
+            <!-- 项目弹窗 End -->
+            <!-- 选择标签弹窗 -->
+            <div class="tag-pop hide">
+                <form>
+                    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                        <legend>选择标签</legend>
+                    </fieldset>
+                    <div class="m-20">
+                        <table class="site-table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>选择</th>
+                                    <th>名称</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tag-table"></tbody>
+                        </table>
+                    </div>
+                    <div class="m-20 clearfix">
+                        <span class="layui-btn tag submit-btn fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+                    </div>
+                </form>
+            </div>
+            <!-- End 选择标签弹窗 -->
+
+            <!-- 合并弹窗 -->
+            <div class="merge-pop hide">
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                    <legend>合并客户组</legend>
+                </fieldset>
+                <form class="layui-form">
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">客户组1</label>
+                        <div class="layui-input-inline">
+                            <select name="CustomerFilterIDOne" class="filters">
+                                <option value="-1">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">客户组2</label>
+                        <div class="layui-input-inline">
+                            <select name="CustomerFilterIDTwo" class="filters">
+                                <option value="-1">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">合并类型2</label>
+                        <div class="layui-input-inline">
+                            <select name="MergeType">
+                                <option value="1">同时在客户组1和客户组2</option>
+                                <option value="2">在客户组1或客户组2</option>
+                                <option value="3">在客户组1但不在客户组2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-input-block m-bt-10">
+                        <label class="layui-form-label">保存结果</label>
+                        <div class="layui-input-inline">
+                            <div class="layui-input-block" style="margin-left:0;">
+                                <input type="radio" name="SaveResult" value="1" title="覆盖现有客户组" checked />
+                                <select name="FilterID" class="filters">
+                                    <option value="-1">请选择</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-block" style="margin-left:0;">
+                                <input type="radio" name="SaveResult" value="2" title="保存到新客户组" />
+                                <input type="text" class="layui-input" name="FilterName" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="m-20 clearfix">
+                    <span class="layui-btn merge submit-btn fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="dot-tmp">
+            <!-- 表格 -->
+            <script class="customerGroup-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                <tr data-id="{{= it[item].ID }}">
+                    <td>{{= it[item].ID }}</td>
+                    <td>{{= it[item].Name }}</td>
+                    <td>{{= it[item].Gender == 1 ? "男" : "女" }}</td>
+                    <td>{{= it[item].Channel }}</td>
+                    <td>{{= it[item].ConsultCharge }}</td>
+                    <td>{{= it[item].MemberCategoryName }}</td>
+                    <td>{{= it[item].ShareMemberCategoryName }}</td>
+                    <td>{{= it[item].ExploitName }}</td>
+                    <td>{{= it[item].ManagerName }}</td>
+                </tr>
+                {{ } }}
+            </script>
+            <!-- 查询结果表格 -->
+            <script class="screen-form-tmp" type="text/x-dot-template">
+                <label class="layui-form-label">查询结果</label>
+                <div class="layui-input-block" style="padding:9px 0;min-height:0;">
+                    共找到<span class="c-d92">{{= it && it.length }}</span>人
+                </div>
+                <div class="layui-input-block relative o-hidden" style="margin-right:50px;">
+                    <div style="margin-top:33px;max-height:200px;overflow:auto;">
+                        <table class="site-table table-hover" style="margin:0;">
+                            <thead class="absolute" style="top:0;left:0;width:100%;">
+                                <tr style="display:block;">
+                                    <th style="display:block;">客户编号</th>
+                                </tr>
+                            </thead>
+                            <tbody class="filtrateCustormInfoAdd-table">
+                                {{ for(item in it){ }}
+                                <tr data-id="{{= it[item].ID }}">
+                                    <td>{{= it[item].ID }}</td>
+                                </tr>
+                                {{ } }}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </script>
+            <!-- 查询结果下拉框 -->
+            <script class="filters-tmp" type="text/x-dot-template">
+                <option value="-1">请选择</option>
+                {{ for(item in it){ }}
+                <option value="{{= it[item].ID }}">{{= it[item].Name }}</option>
+                {{ } }}
+            </script>
+            <!-- 收费项目类型表格 -->
+            <script class="chargeCategory-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                <tr chargeCategoryId="{{= it[item].ID}}">
+                    <td><input type="checkbox" value="{{= it[item].ID }}" title="{{= it[item].Name }}" /></td>
+                    <td>{{= it[item].Name }}</td>
+                </tr>
+                {{ } }}
+            </script>
+            <!-- 收费项目表格 -->
+            <script class="charge-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                <tr chargeId="{{= it[item].ID }}">
+                    <td><input type="checkbox" value="{{= it[item].ID }}" title="{{= it[item].Name }}" /></td>
+                    <td>{{= it[item].Name }}</td>
+                    <td>{{= it[item].PinYin }}</td>
+                    <td>{{= it[item].CategoryName }}</td>
+                    <td>{{= it[item].Size }}</td>
+                </tr>
+                {{ } }}
+            </script>
+            <!-- 标签查询表格 -->
+            <script class="tags-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                <tr data-tagid="{{= it[item].TagID }}" data-field="TagID">
+                    <td>{{= it[item].TagName }}</td>
+                    <td><span class="layui-btn layui-btn-mini remove-btn" data-id="{{= it[item].TagID }}">删除</span></td>
+                </tr>
+                {{ } }}
+            </script>
+            <!-- 标签弹窗 -->
+            <script class="tag-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                <tr tagID="{{= it[item].ID }}">
+                    <td><input type="checkbox" value="{{= it[item].ID }}" title="{{= it[item].Content }}" /></td>
+                    <td>{{= it[item].Content }}</td>
+                </tr>
+                {{ } }}
+            </script>
+        </div>
+    </div>
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/lay_component/plugins/layui/layui.js"></script>
+    <script src="~/lay_component/js/hcommon.js"></script>
+    <script src="~/Scripts/FlyDog.Common.js"></script>
+    <script src="~/doT-master/doT-master/doT.min.js"></script>
+    <script src="~/lay_component/sampleJs/SmartUser.js"></script>
+    <script src="~/lay_component/sampleJs/CustomerGroupData.js"></script>
+</body>
+</html>

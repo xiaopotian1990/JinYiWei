@@ -1,0 +1,150 @@
+﻿@using Com.IFlyDog.CommonDTO
+@using Com.IFlyDog.FlyDogWeb.Helper
+<style>
+    .site-title{margin:-6px 0 20px;}
+    .site-title fieldset legend{margin-left:-10px;}
+</style>
+<div class="site-text site-block">
+    <div class="site-title">
+    <fieldset><legend>顾客信息</legend></fieldset>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">顾客姓名:</label>
+        <div class="layui-input-block">
+            <input type="text" name="editCustomerName" placeholder="请输入顾客姓名" class="layui-input">
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">顾客性别:</label>
+        <div class="layui-input-block">
+            <select name="editCustomercGender" lay-verify="required">
+                <option value="-1">请选择</option>
+                <option value="1">男</option>
+                <option value="2">女</option>
+            </select>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">选择省区:</label>
+        <div class="layui-input-block">
+            @Html.SelectCategory(SelectType.Province, "editCustomerProvince", "editCustomerProvince", "editCustomerProvince")
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">选择市区:</label>
+        <div class="layui-input-block ">
+            <select name="editCustomerCity" id="editCustomerCity" class="editCustomerCity">
+                <option>请选择</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">顾客地址:</label>
+        <div class="layui-input-block">
+            <input type="text" name="editCustomerAddress" placeholder="请输入顾客地址" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">顾客生日:</label>
+        <div class="layui-input-block">
+            <input type="text" name="editCustomerBirthday" placeholder="请输入顾客生日"class="layui-input" onclick="layui.laydate({ elem: this, festival: true })">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">内容描述:</label>
+        <div class="layui-input-block">
+            <textarea name="editCustomerRemark" placeholder="请输入内容描述" class="layui-textarea"></textarea>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">顾客微信:</label>
+        <div class="layui-input-block">
+            <input type="text" name="editCustomerWeChat" placeholder="请输入顾客微信" class="layui-input">
+        </div>
+    </div>
+    <div class="site-title">
+        <fieldset><legend class="cuzdy">顾客自定义信息</legend></fieldset>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">顾客QQ:</label>
+        <div class="layui-input-block">
+            <input type="text" name="editCustomerQQ" placeholder="请输入顾客QQ" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label Custom1Name"></label>
+        <div class="layui-input-block">
+            <input type="text" name="editCustomerCustom1" placeholder="请输入" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label Custom2Name"></label>
+        <div class="layui-input-block">
+            <input type="text" name="editCustomerCustom2" placeholder="请输入" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label Custom3Name"></label>
+        <div class="layui-input-block">
+            <input type="text" name="editCustomerCustom3" placeholder="请输入" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label Custom4Name"></label>
+        <div class="layui-input-block">
+            <input type="text" name="editCustomerCustom4" placeholder="请输入" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">自定义5:</label>
+        <div class="layui-input-block">
+            <input type="text" name="editCustomerCustom5" placeholder="请输入" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label Custom6Name"></label>
+        <div class="layui-input-block">
+            <input type="text" name="editCustomerCustom6" placeholder="请输入" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label Custom7Name"></label>
+        <div class="layui-input-block">
+            <input type="text" name="editCustomerCustom7" placeholder="请输入" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label Custom8Name"></label>
+        <div class="layui-input-block">
+            <input type="text" name="editCustomerCustom8" placeholder="请输入" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label Custom9Name"></label>
+        <div class="layui-input-block">
+            <input type="text" name="editCustomerCustom9" placeholder="请输入" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label Custom10Name"></label>
+        <div class="layui-input-block">
+            <input type="text" name="editCustomerCustom10" placeholder="请输入" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <span class="layui-btn edit-cutomer-btn">立即提交</span>
+        </div>
+    </div>
+
+</div>
+<script src="~/lay_component/sampleJs/customer_operation/EditCustomerInfo.js"></script>

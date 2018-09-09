@@ -1,0 +1,146 @@
+﻿@using Com.IFlyDog.CommonDTO
+@using Com.IFlyDog.FlyDogWeb.Helper
+<div class="treat hide">
+    <div class="layui-field-box ">
+        <style>
+            .timePluginBegin, .timePluginEnd {
+                position: relative;
+                float: left;
+                width: 127px;
+                height: 40px;
+            }
+
+            .timer {
+                width: 127px;
+            }
+
+                .timer .hour, .timer .minute {
+                    width: 54px;
+                }
+
+                .timer .colon {
+                    margin-left: 54px;
+                }
+
+            .pad-9 {
+                float: left;
+                display: inline-block;
+                padding: 9px;
+            }
+        </style>
+        <div class="site-text site-block">
+            <form class="layui-form treat-form"></form>
+        </div>
+        <div class="clearfix m-20">
+            <span class="layui-btn Treat add-submit fr">立即提交</span>
+            <span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+        </div>
+    </div>
+    <!-- 项目弹窗 -->
+    <div class="page-pop">
+        <div class="charge-pop-subset hide">
+            <div class="layui-form m-10 clearfix">
+                <form class="m-20">
+                    <div class="fl" style="margin-left:-35px;">
+                        <label class="layui-form-label" style="width:70px;">拼音码</label>
+                        <div class="layui-input-inline">
+                            <input class="layui-input" name="smartProductPinYin" placeholder="请输入拼音码">
+                        </div>
+                    </div>
+                    <div class="fl">
+                        <label class="layui-form-label" style="width:70px;">名称</label>
+                        <div class="layui-input-inline">
+                            <input class="layui-input" name="smartProductNmae" placeholder="请输入名称">
+                        </div>
+                    </div>
+                    <span class="layui-btn search-btn fr">查询</span>
+                </form>
+            </div>
+            <div class="m-20">
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <td>选择</td>
+                            <th>项目名称</th>
+                            <th>拼音码</th>
+                            <th>类型</th>
+                            <th>规格</th>
+                        </tr>
+                    </thead>
+                    <tbody class="charge-table"></tbody>
+                </table>
+            </div>
+            <div class="m-20 clearfix">
+                <span class="layui-btn chargeSubset fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+            </div>
+        </div>
+    </div>
+    <!-- 项目弹窗 End -->
+    <div class="dot-tmp hide">
+        <script class="treat-tmp" type="text/x-dot-template">
+            <div class="layui-form-item">
+                <label class="layui-form-label">预约医院</label>
+                <div class="layui-input-block">
+                    {{ if(!it.HospitalName){ }}
+                    @Html.SelectCategoryByHospital(SelectType.Hospital, "treatHospital", "treatHospital")
+                    {{ }else{ }}
+                    <input type="hidden" name="treatHospital" class="treatHospital" value="{{= it.HospitalID }}" />
+                    <span class="pad-9">{{= it.HospitalName }}</span>
+                    {{ } }}
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">预约日期</label>
+                <div class="layui-input-block">
+                    <input class="layui-input" name="AppointmentDate" value="{{= it.AppointmentDate }}" placeholder="请输入预约日期" onclick="layui.laydate({elem: this, festival: true})">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">预约时间</label>
+                <div class="timePluginBegin">
+                    <input type="hidden" value="{{= it.AppointmentStartTime || "08:30" }}" name="AppointmentStartTime" />
+                </div>
+                <label class="pad-9">至</label>
+                <div class="timePluginEnd">
+                    <input type="hidden" value="{{= it.AppointmentEndTime || "08:30" }}" name="AppointmentEndTime" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">预约医生</label>
+                <div class="layui-input-block">
+                    <input type="hidden" name="UserID" class="layui-input" value="{{= it.UserID }}" />
+                    <input type="text" name="UserName" class="layui-input" value="{{= it.UserName }}" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">预约项目</label>
+                <div class="layui-input-block">
+                    <input type="hidden" name="ChargeID" class="layui-input" value="{{= it.ChargeID }}" />
+                    <input type="text" name="ChargeName" class="layui-input" value="{{= it.ChargeName }}" />
+                </div>
+                <div style="margin-top:10px;">
+                    <label class="layui-form-label"></label>
+                    <span class="layui-btn layui-btn-small add-btn buy">添加已购项目</span>
+                    <span class="layui-btn layui-btn-small add-btn all">添加所有项目</span>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">描述</label>
+                <div class="layui-input-block">
+                    <textarea name="Remark" placeholder="请输入描述备注" class="layui-textarea">{{= it.Remark }}</textarea>
+                </div>
+            </div>
+        </script>
+        <script class="charge-tmp" type="text/x-dot-template">
+            {{ for(var item in it){ }}
+            <tr chargeId="{{= it[item].ID }}">
+                <td><input type="checkbox" value="{{= it[item].ID }}" title="{{= it[item].Name }}" /></td>
+                <td>{{= it[item].Name }}</td>
+                <td>{{= it[item].PinYin }}</td>
+                <td>{{= it[item].CategoryName }}</td>
+                <td>{{= it[item].Size }}</td>
+            </tr>
+            {{ } }}
+        </script>
+    </div>
+</div>

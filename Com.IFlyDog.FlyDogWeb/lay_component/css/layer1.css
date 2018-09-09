@@ -1,0 +1,63 @@
+﻿@charset "UTF-8";
+/**
+ * 
+ * @authors Your Name (iqianduan@126.com)
+ * @date    2016-05-17 16:29:16
+ * @version $Id$
+ */
+.abc .layui-layer-title{display:none;}
+
+.abc.layui-layer {width: 610px !important;height: 250px;background-color: #F5F5F5;font:14px '微软雅黑';} 
+.abc .layui-layer-content{padding:85px 0 0 0 !important;letter-spacing:3px;font:16px '微软雅黑';text-align: center;}
+.abc .layui-layer-btn a{width: 130px;height: 30px;border-radius: 8px !important;text-align: center;background: #F78C00 !important;border:0 !important;color:#fff !important;margin-top: 51px !important;}
+.abc .layui-layer-btn .layui-layer-btn0{float:left;margin-left: 74px;}
+.abc .layui-layer-btn .layui-layer-btn1{margin-right: 74px;}
+.abc .layui-layer-hui{width: 100px !important;height: 40px !important ;padding:0;}
+
+
+/* 待办 */
+.details{width: 1138px !important;height: 503px !important;background: #F5F5F5;color:#666666;} 
+.details .layui-layer-title{display:none;}
+.details .layui-layer-content{height: 89% !important;padding:5% 22px 0 64px !important;}
+.bounced .del{height: 35px;}
+.bounced .del a{width: 35px;height: 35px;background: url(../images/todoMatter/8.png)no-repeat;display:block;float:right;}
+.bounced .top{height: 38px;border-bottom: 1px solid #CCCCCC;}
+.bounced .top span{float:left;padding-right: 24px;}
+/* .bounced .content{padding-right: 90px;} */
+.bounced .content_wrap .main{padding-top: 30px;}
+.bounced .content_top span{margin-right: 6px;}
+.bounced .content_wrap{padding-right: 86px;box-sizing: border-box;}
+.bounced .content_center span{margin-right: 67px;}
+.bounced p{height: 35px;}
+.main ul{height: 39px;}
+.main ul li{float:left;margin-right: 32px;}
+/* .main ul li:nth-of-type(1),.main ul li:nth-of-type(3),.main ul li:nth-of-type(5){width: 30px;height: 25px;-webkit-border-radius:59px;-moz-border-radius:59px;border-radius:59px;position:relative;color:#fff;padding-top: 5px;text-align: center;} */
+.main ul .small_round{width: 30px;height: 25px;-webkit-border-radius:59px;-moz-border-radius:59px;border-radius:59px;position:relative;color:#fff;padding-top: 5px;text-align: center;background-color:#01528B;}
+/* .main ul li:nth-of-type(2),.main ul li:nth-of-type(4),.main ul li:nth-of-type(6){width: 180px;height: 16px;border-bottom: 1px solid #CCCCCC;} */
+.main .content_line{width: 177px;height: 16px;border-bottom: 1px solid #CCCCCC;}
+/* .main ul li:nth-of-type(2){border-bottom: 1px solid #01538D;} */
+/* .main ul li:nth-of-type(1){background-color: #01538D;} */
+/* .main ul li:nth-of-type(3),.main ul li:nth-of-type(5){background-color: #CCCCCC;} */
+/* .main ul li:nth-of-type(6),.main ul li:nth-of-type(7),.main ul li:nth-of-type(8){margin-top: ;} */
+.main .directory span{margin:25px 23% 0 0;}
+.main .directory span:nth-of-type(4){margin:0;}
+.main button{width: 150px;height: 34px;border-radius: 8px;color:#fff;float:right;background:#F78C00;position:relative;margin-right: 30px;position:absolute;bottom:15%;right:10%;}
+.main .btn_del span{width: 18px;height: 19px;background: url(../images/todoMatter/12.png) 0 0 no-repeat;}
+.main button span{width: 18px;height: 19px;background: url(../images/todoMatter/9.png)no-repeat;position:absolute;top:5px;left:18px;margin-right: 5px;}
+.main button a{display:block;margin-left: 7px;}
+.main .content_hide,.main .btn_del{position:relative;display:none;}
+.main #accessorys{width:auto;height:auto;position:absolute;top:70%;}
+.main #accessorys span{width:52px;height: 52px;line-height:52px;background: url(../images/question/pic.png) 0 0 no-repeat;display:block;white-space:nowrap;float:left;text-align: center;color:#fff;margin-right: 5px;}
+.image_add{width:auto !important; position:absolute !important;top:80% !important;left:6% !important;}
+/* .main .content_hide a{width:52px;height: 52px;line-height:52px;background: url(../images/todoMatter/11.png) 0 0 no-repeat;background-size:52px 52px;display:block;white-space:nowrap;float:left;text-align: center;color:#fff;} */
+ /* .main .content_hide .image-list{width: 100px;height: 100px;background: url(../images/todoMatter/11.png) 0 0 no-repeat;display:block;position:absolute;top:0;left:124px;} 
+ } */
+.details .layui-layer-setwin{width: 35px;height: 35px;background: url(../images/todoMatter/8.png)no-repeat;/* border-radius:59px; */margin:30px 30px 0 0;position:absolute;top:30px;right:30px;display:block;float:right;}
+ /* .details .layui-layer-setwin .layui-layer-ico{width: 35px;height: 35px;background:#F98B00;border-radius:59px;margin:30px 30px 0 0;position:relative;}
+ .layui-layer-setwin a{width: 16px;height: 16px;margin-left: 10px;font-size: 12px;position:absolute;} */
+ /*.layui-layer-setwin a{width: 35px !important;height: 35px !important;margin:0;font-size: 12px !important;}*/
+ .top .userId,.top .userName{float:right !important;}
+ /* 我发起的 */
+ .bounced .bounced_bomb{padding-right: 65px !important;}
+ .bounced .bounced_top span{margin-right: 6px !important;}
+/*  .main .upload{position:relative !important;top:116% !important;} */

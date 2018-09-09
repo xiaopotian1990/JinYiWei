@@ -1,0 +1,104 @@
+﻿@using Com.IFlyDog.CommonDTO
+@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>接诊工作台</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+</head>
+
+<body>
+<div class="admin-main">
+    <!--tab导航-->
+<fieldset class="layui-elem-field">
+<legend>接诊工作台</legend>
+<div class="layui-field-box">
+    <table class="site-table table-hover">
+        <thead>
+        <tr>
+            <th>编号</th>
+            <th>姓名</th>
+            <th>开发人</th>
+            <th>咨询人</th>
+            <th>接诊人</th>
+            <th>会员类别</th>
+            <th>新老客</th>
+            <th>上门时间</th>
+            <th>主咨询项目</th>
+            <th>成交状态</th>
+            <th>会员图标</th>
+            <th>分享家图标</th>
+            <th>成交项目</th>
+            <th>成交金额</th>
+            <th>单项目图标</th>
+        
+        </tr>
+        </thead>
+        <tbody class="tbody-Reception-inshow"></tbody>
+    </table>
+    <div class="reception-info"></div>
+</div>
+</fieldset>
+</div>
+<!--引擎-->
+<div class="doT-data-template">
+<!--今日上门列表-->
+    <script class="fd-reception-inshow-temp" type="text/html">
+        {{for(var item in it) { }}
+        <tr>
+            <td>{{= it[item].CustomerID == null ? "暂无": it[item].CustomerID}}</td>
+            <td>{{= it[item].CustomerName == null ? "暂无": it[item].CustomerName}}</td>
+            <td>{{= it[item].ExploitName == null ? "暂无": it[item].ExploitName}}</td>
+            <td>{{= it[item].ManagerName == null ? "暂无": it[item].ManagerName}}</td>
+            <td>{{= it[item].AssignUserName == null ? "暂无": it[item].AssignUserName}}</td>
+            <td>
+                {{ if (it[item].VisitType ==1){ }}
+                初诊
+                {{ } }}
+                {{ if (it[item].VisitType ==2){ }}
+                复诊
+                {{ } }}
+                {{ if (it[item].VisitType ==3){ }}
+                复查
+                {{ } }}
+                {{ if (it[item].VisitType ==4){ }}
+                再消费
+                {{ } }}
+
+            </td>
+            <td>
+                {{ if (it[item].CustomerType ==1){ }}
+                新客
+                {{ } }}
+                {{ if (it[item].CustomerType ==2){ }}
+                老客
+                {{ } }}
+            </td>
+            <td>{{= it[item].CreateTime  == null ? "暂无": it[item].CreateTime}}</td>
+            <td>{{= it[item].SymptomName  == null ? "暂无": it[item].SymptomName}}</td>
+            <td>{{= it[item].DealType  == null ? "暂无": it[item].DealType}}</td>
+            <td><img src="{{= it[item].MemberIcon  == null ? '暂无': it[item].MemberIcon}}"/></td>
+            <td><img src="{{= it[item].ShareIcon  == null ? '': it[item].ShareIcon}}" /></td>
+            <td>{{= it[item].ChargeName == null ? "暂无": it[item].ChargeName}}</td>
+            <td>{{= it[item].FinalPrice == null ? "暂无": it[item].FinalPrice}}</td>
+            <td><img src="{{= it[item].ClubIconList  == null ? '暂无': it[item].ClubIconList}}" /></td>
+</tr>
+{{ } }}
+</script>
+
+
+</div>
+<script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+<script src="~/lay_component/js/hcommon.js"></script>
+<script src="~/Scripts/FlyDog.Common.js"></script>
+<script src="~/doT-master/doT-master/doT.min.js"></script>
+<script src="~/lay_component/plugins/layui/layui.js"></script>
+<script src="~/lay_component/sampleJs/Reception.js"></script>
+</body>
+</html>

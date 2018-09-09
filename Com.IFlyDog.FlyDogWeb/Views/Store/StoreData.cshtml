@@ -1,0 +1,242 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>店铺管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+    <style>
+        .store-a {
+            color: indianred;
+            text-decoration: underline;
+        }
+        .col-6{float:left;box-sizing:border-box;-moz-box-sizing:border-box; /* Firefox */-webkit-box-sizing:border-box; /* Safari */width:50%;padding:10px;}
+    </style>
+</head>
+<body>
+    <div class="admin-main">
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend>店家档案</legend>
+            <div class="layui-tab layui-tab-card">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">基础信息</li>
+                    <li>客户列表</li>
+                    <li>佣金记录</li>
+                    <li>销售回款记录</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div class="basic clearfix">
+
+                        </div>
+                    </div>
+                    <div class="layui-tab-item">
+                        <blockquote class="layui-elem-quote">
+                            累计推荐客户数量：<span class="manager-count"></span>
+                        </blockquote>
+                        <table class="site-table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>客户编号</th>
+                                    <th>客户姓名</th>
+                                    <th>性别</th>
+                                    <th>登记时间</th>
+                                    <th>咨询项目</th>
+                                    <th>上门状态</th>
+                                    <th>成交状态</th>
+                                </tr>
+                            </thead>
+                            <tbody class="manager-table"></tbody>
+                        </table>
+
+                    </div>
+                    <div class="layui-tab-item">
+                        <blockquote class="layui-elem-quote">
+                            累计佣金金额：<span class="commission-count"></span>
+                        </blockquote>
+                        <table class="site-table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>提交医院</th>
+                                    <th>提交时间</th>
+                                    <th>提交用户</th>
+                                    <th>消费客户</th>
+                                    <th>金额</th>
+                                    <th>备注</th>
+                                </tr>
+                            </thead>
+                            <tbody class="commission-table"></tbody>
+                        </table>
+                    </div>
+                    <div class="layui-tab-item">
+                        <blockquote class="layui-elem-quote">
+                            累计回款金额：<span class="saleback-count"></span>
+                        </blockquote>
+                        <table class="site-table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>提交医院</th>
+                                    <th>提交时间</th>
+                                    <th>提交用户</th>
+                                    <th>回款日期</th>
+                                    <th>回款金额</th>
+                                    <th>备注</th>
+                                </tr>
+                            </thead>
+                            <tbody class="saleback-table"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <div class="dot-tmp">
+            <!-- 客户列表 -->
+            <script class="manager-tmp" type="text/x-dot-template">
+                {{ var managerCount = 0;}}
+                {{ for(var item in it){ }}
+                <tr data-id="{{= it[item].ID }}">
+                    <td>{{= it[item].ID }}</td>
+                    <td>{{= it[item].Name }}</td>
+                    <td>{{= it[item].Gender == 1 ? "男" : "女" }}</td>
+                    <td>{{= it[item].CreateTime }}</td>
+                    <td>{{= it[item].SymptomName }}</td>
+                    <td>{{= SUtils.isNullOrEmpty(it[item].FirstConsultTime) ? "未上门" : "已上门" }}</td>
+                    <td>{{= SUtils.isNullOrEmpty(it[item].FirstDealTime) ? "未成交" : "已成交" }}</td>
+                    {{ managerCount++; }}
+                </tr>
+                {{ } }}
+                {{ $(".manager-count").text(managerCount); }}
+            </script>
+            <!-- 佣金记录 -->
+            <script class="commission-tmp" type="text/x-dot-template">
+                {{ var commissionCount = 0; }}
+                {{ for(var item in it){ }}
+                <tr data-id="{{= it[item].ID }}">
+                    <td>{{= it[item].HospitalName }}</td>
+                    <td>{{= it[item].CreateTime }}</td>
+                    <td>{{= it[item].CreateUserName }}</td>
+                    <td>{{= it[item].CustomerName }}</td>
+                    <td>{{= it[item].Amount }}</td>
+                    <td>{{= it[item].Remark }}</td>
+                    {{ commissionCount += parseInt(it[item].Amount?it[item].Amount:0); }}
+                </tr>
+                {{ } }}
+                {{ $("span.commission-count").text(commissionCount); }}
+            </script>
+            <!-- 回款记录 -->
+            <script class="saleback-tmp" type="text/x-dot-template">
+                {{ var salebackCount = 0; }}
+                {{ for(var item in it){ }}
+                <tr data-id="{{= it[item].ID }}">
+                    <td>{{= it[item].HospitalName }}</td>
+                    <td>{{= it[item].CreateTime }}</td>
+                    <td>{{= it[item].CreateUserName }}</td>
+                    <td>{{= it[item].CreateDate }}</td>
+                    <td>{{= it[item].Amount }}</td>
+                    <td>{{= it[item].Remark }}</td>
+                    {{ salebackCount += parseInt(it[item].Amount?it[item].Amount:0); }}
+                </tr>
+                {{ } }}
+                {{ $(".saleback-count").text(salebackCount); }}
+            </script>
+            <!-- 基础信息模版 -->
+            <script class="basic-tmp" type="text/x-dot-template">
+                <div class="col-6">
+                    <p>基本信息</p>
+                    <table class="site-table table-hover ">
+                        <tr>
+                            <td>编号</td>
+                            <td>{{= it.ID }}</td>
+                        </tr>
+                        <tr>
+                            <td>名称</td>
+                            <td>{{= it.Name }}</td>
+                        </tr>
+                        <tr>
+                            <td>联系人</td>
+                            <td>{{= it.Linkman }}</td>
+                        </tr>
+                        <tr>
+                            <td>手机号</td>
+                            <td>{{= it.Mobile }}</td>
+                        </tr>
+                        <tr>
+                            <td>地址</td>
+                            <td>{{= it.Address }}</td>
+                        </tr>
+                        <tr>
+                            <td>账号名</td>
+                            <td>{{= it.OwnerName }}</td>
+                        </tr>
+                        <tr>
+                            <td>开户行</td>
+                            <td>{{= it.Bank }}</td>
+                        </tr>
+                        <tr>
+                            <td>银行卡号</td>
+                            <td>{{= it.CardNo }}</td>
+                        </tr>
+                        <tr>
+                            <td>备注</td>
+                            <td>{{= it.Remark }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-6">
+                    <p>统计信息</p>
+                    <table class="site-table table-hover ">
+                        <tr>
+                            <td>客户数量</td>
+                            <td>{{= it.CustormerNum }}</td>
+                        </tr>
+                        <tr>
+                            <td>佣金总额</td>
+                            <td>{{= it.CommissionNum }}</td>
+                        </tr>
+                        <tr>
+                            <td>回款总额</td>
+                            <td>{{= it.SaleBackNum }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-6">
+                    <p>负责人信息</p>
+                    {{ it = it.StoreManagerDateil; if(!SUtils.isNullOrEmpty(it)){ }}
+                    <table class="site-table table-hover ">
+                        <tr>
+                            <td>负责人</td>
+                            <td>{{= SUtils.isFalseSetEmpty(it.Name) }}</td>
+                        </tr>
+                        <tr>
+                            <td>性别</td>
+                            <td>{{= it.Gender == 1 ? "男" : (it.Gender == 2 ? "女" : "") }}</td>
+                        </tr>
+                        <tr>
+                            <td>手机号</td>
+                            <td>{{= SUtils.isFalseSetEmpty(it.Phone) }}</td>
+                        </tr>
+                    </table>
+                    {{ }else{ }}
+                    <blockquote class="layui-elem-quote">
+                        暂无负责人信息
+                    </blockquote>
+                    {{ } }}
+                    
+                </div>
+            </script>
+        </div>
+    </div>
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/lay_component/js/hcommon.js"></script>
+    <script src="~/Scripts/FlyDog.Common.js"></script>
+    <script src="~/doT-master/doT-master/doT.min.js"></script>
+    <script src="~/lay_component/plugins/layui/layui.js"></script>
+    <script src="~/lay_component/sampleJs/StoreData.js"></script>
+</body>
+</html>

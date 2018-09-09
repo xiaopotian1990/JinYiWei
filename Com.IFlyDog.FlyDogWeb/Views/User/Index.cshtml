@@ -1,0 +1,424 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet"/>
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all"/>
+    <link href="~/lay_component/css/global.css" rel="stylesheet"/>
+    <style>
+        em {
+            color: #779289;
+            font-size: 12px;
+            font-style: normal;
+        }
+
+        .layui-btn.layui-btn { margin-left: 0px; }
+
+    </style>
+</head>
+<body>
+<div class="admin-main">
+<blockquote class="layui-elem-quote">
+    <a href="javascript:;" class="layui-btn layui-btn-small btn-user-add">
+        <i class="layui-icon"></i> 添加用户信息
+    </a>
+</blockquote>
+<!--页面加载-->
+<fieldset class="layui-elem-field">
+    <legend>用户管理</legend>
+    <div class="layui-field-box">
+        <div class="layui-form clearfix">
+            <div class="fl">
+                <label class="layui-form-label">医院</label>
+                <div class="layui-input-inline ">
+                    @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.Hospital, "Hospital", "Hospital")
+                </div>
+            </div>
+            <div class="fl">
+                <label class="layui-form-label">部门</label>
+                <div class="layui-input-inline smartUserAddDeptName">
+                </div>
+            </div>
+            <div class="fl">
+                <label class="layui-form-label">角色</label>
+                <div class="layui-input-inline smartRoleAddName">
+
+                </div>
+            </div>
+            <div class="fl">
+                <label class="layui-form-label">姓名:</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" name="searchUserName" placeholder="请输入用户姓名"/>
+                </div>
+            </div>
+
+            <a class="layui-btn fr " id="rolesearch">查询</a>
+        </div>
+        <div class="layui-field-box">
+            <div style="max-height: 300px; overflow: auto;">
+                <table class="site-table table-hover">
+                    <thead>
+                    <tr>
+
+                        <th>账号</th>
+                        <th>姓名</th>
+                        <th>角色</th>
+                        <th>手机</th>
+                        <th>状态</th>
+                        <th>电话</th>
+                        <th>性别</th>
+                        <th>部门</th>
+                        <th>医院</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody class="role-table">
+
+                    </tbody>
+                </table>
+
+            </div>
+            <!--分页容器-->
+            <div id="pageDiv" class="fr"></div>
+        </div>
+    </div>
+</fieldset>
+<!--添加用户-->
+<div class="data-userAdd-pop layui-form hide">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>用户信息</legend>
+    </fieldset>
+    <form style="margin-left: 25%" class="layui-form">
+        <div class="layui-form-item userInfo">
+            <label class="layui-form-label">编号</label>
+            <div class="layui-input-inline ">
+                <input type="text" name="userInfoID" disabled="disabled" autocomplete="off" class="layui-input ">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">帐号</label>
+            <div class="layui-input-inline ">
+                <input type="text" name="userInfoAccount" autocomplete="off" placeholder="请输入帐号" class="layui-input ">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">姓名</label>
+            <div class="layui-input-inline ">
+                <input type="text" name="userInfoName" autocomplete="off" placeholder="请输入用户名称" class="layui-input ">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-inline">
+                <div class="layui-inline" name="userInfosex">
+                    <input id="man" type="radio" name="userInfosex" value="1" title="男" checked="checked">
+                    <input id="woman" type="radio" name="userInfosex" value="2" title="女">
+
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">手机</label>
+            <div class="layui-input-inline ">
+                <input type="text" name="userInfoPhone" autocomplete="off" placeholder="请输入用户手机" class="layui-input ">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">电话</label>
+            <div class="layui-input-inline ">
+                <input type="text" name="userInfoMobile" autocomplete="off" placeholder="请输入用户座机" class="layui-input ">
+            </div>
+        </div>
+        @*            <div class="layui-form-item layui-form-text">*@
+        @*                <label class="layui-form-label">描述</label>*@
+        @*                <div class="layui-input-inline">*@
+        @*                    <textarea id="userInfoRemark" placeholder="请输入描述内容" class="layui-textarea"></textarea>*@
+        @*                </div>*@
+        @*            </div>*@
+        <div class="layui-form-item">
+            <label class="layui-form-label">医院</label>
+            <div class="layui-input-inline " name="userHospital">
+                @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.Hospital, "Hospital", "Hospital")
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">部门</label>
+            <div class="layui-input-inline smartUserAddDeptName">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">角色</label>
+            <div class="layui-input-inline smartRoleAddName">
+
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">已选角色</label>
+            <div class="layui-input-block ">
+                <div class="site-demo-button" id="showuserRole_div">
+
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="layui-form-item fr">
+        <a class="layui-btn layui-btn-normal" id="submit_User" lay-filter="formDemo">确认提交</a>
+        <a class="layui-btn layui-btn-danger information_close">取消关闭</a>
+    </div>
+</div>
+
+<!--访问权限-->
+<div class="layui-form hide data-access-authority">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>操作权限</legend>
+    </fieldset>
+    <form>
+        <!--医院-->
+        <div class="layui-form-item m-10">
+            <a class="layui-btn layui-btn-primary addAccesshospitalsdetail"><i class="layui-icon">&#xe608;</i>医院:</a>
+            <div class="layui-input-block ">
+                <div class="site-demo-button addAccesshospitals_div">
+
+                </div>
+            </div>
+        </div>
+        <!--部门-->
+        <div class="layui-form-item m-10">
+            <a class="layui-btn layui-btn-primary addAccessDeptdetail"><i class="layui-icon">&#xe608;</i>部门:</a>
+            <div class="layui-input-block ">
+                <div class="site-demo-button addAccessDept_div">
+
+                </div>
+            </div>
+        </div>
+        <!--用户-->
+        <div class="layui-form-item m-10">
+            <a class="layui-btn layui-btn-primary addAccessusersdetail"><i class="layui-icon">&#xe608;</i>用户:</a>
+            <div class="layui-input-block ">
+                <div class="site-demo-button addAccessusers_div">
+
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item relative fr">
+            <a class="layui-btn layui-btn-normal" id="submit_inforMation" lay-filter="formDemo">确认提交</a>
+            <a class="layui-btn layui-btn-danger information_close">取消关闭</a>
+        </div>
+    </form>
+   
+</div>
+
+<!--权限详细-->
+<div class="layui-form hide access-authority-detail">
+        
+        <!--医院-->
+        <div class="layui-field-box accessHospitals_div">
+            <div>
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <th>操作</th>
+                            <th>医院</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-access-hospitals">
+ 
+                    </tbody>
+                </table>
+                <div class="layui-form-item relative fr">
+                    <a class="layui-btn layui-btn-small commit_Check">确认选中</a>
+                </div>
+            </div>
+        </div>
+    <!---部门-->
+    <div class="layui-field-box accessdept_div">
+        <div>
+            <table class="site-table table-hover">
+                <thead>
+                    <tr>
+                        <th>操作</th>
+                        <th>所属医院</th>
+                    </tr>
+                </thead>
+                <tbody class="tbody-access-dept">
+                    <tr></tr>
+                </tbody>
+            </table>
+            <div class="layui-form-item relative fr">
+                <a class="layui-btn layui-btn-small commit_Check">确认选中</a>
+            </div>
+        </div>
+    </div>
+        <!--用户-->
+        <div class="layui-field-box accessUser_div">
+            <div>
+                <div class="fl">
+                    <label class="layui-form-label">医院</label>
+                    <div class="layui-input-inline ">
+                        @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.Hospital, "Hospital", "Hospital")
+                    </div>
+                </div>
+
+                <div class="fl">
+                    <label class="layui-form-label fl">姓名:</label>
+                    <div class="layui-input-inline">
+                        <input class="layui-input" name="searchUserName" placeholder="请输入用户姓名" />
+                    </div>
+                </div>
+                <a class="layui-btn fr " id="accUsersrbut">查询</a>
+
+                <table class="site-table table-hover">
+                    <thead>
+                    <tr>
+                        <th>操作</th>
+                        <th>用户名称</th>
+                        <th>所属医院</th>
+                    </tr>
+                    </thead>
+                    <tbody class="tbody-access-user"></tbody>
+                </table>
+                <div class="layui-form-item relative fr">
+                    <a class="layui-btn layui-btn-small commit_Check">确认选中</a>
+                </div>
+            </div>
+            <div id="pageDiv" class="fr"></div>
+        </div>
+</div>
+</div>
+<!--模版-->
+<div class="doT-data-template">
+    <!--页面加载-->
+    <script id="roleAddtemplate" type="text/html">
+
+        {{ for(var item in it) { }}
+        <tr >
+
+            <td>{{= it[item].Account }}</td>
+            <td>{{= it[item].Name }}</td>
+            {{ if (it[item].Roles.length > 1){ }}
+                <td rolesID="{{= it[item].Roles[0].RoleID}}">{{= it[item].Roles[0].RoleName}},•••</td>
+            {{ } else if(it[item].Roles.length == 1){ }}
+                <td rolesID="{{= it[item].Roles[0].RoleID}}">{{= it[item].Roles[0].RoleName}}</td>
+            {{ } else { }}
+                <td rolesID=""></td>
+            {{ } }}
+
+            <td>{{= it[item].Phone }}</td>
+            <td>
+                {{ if (it[item].Status !=0){ }}
+                <i class="layui-icon" style="color: green;"></i>
+                {{ } else { }}
+                <i class="layui-icon" style="color: red;">ဇ</i>
+                {{ } }}
+            </td>
+            <td>{{= it[item].Mobile }}</td>
+            <td>
+                {{ if (it[item].Gender ==1){ }}
+                男
+                {{ } else { }}
+                女
+                {{ } }}
+            </td>
+            <td>{{= it[item].DeptName }}</td>
+            <td>{{= it[item].HospitalName}}</td>
+            <td >
+                <a class="layui-btn layui-btn-mini editInfoBut" editThisId="{{= it[item].ID }}"><i></i>编辑</a>
+                {{ if (it[item].Status ==0){ }}
+                <a hospitaldataId="{{= it[item].HospitalID}}" stopID="{{= it[item].ID }}" status="1" class="layui-btn layui-btn-normal layui-btn-mini editStopBut">启用</a>
+                {{ } else { }}
+                <a hospitaldataId="{{= it[item].HospitalID}}" stopID="{{= it[item].ID }}" status="0" class="layui-btn layui-btn-danger layui-btn-mini editStopBut" id="">停用</a>
+                {{ } }}
+                <a href="javascript:;"getlimitsPermissionDetail="{{= it[item].ID }}" class="layui-btn layui-btn-warm layui-btn-mini limitsBut">客户权限</a>
+                <a href="javascript:;" visitItemId="{{= it[item].ID }}" class="layui-btn layui-btn-warm layui-btn-mini visitBut">回访权限</a>
+                <a href="javascript:;" hospitaldataId="{{= it[item].HospitalID}}" passwordRe="{{= it[item].ID }}" class="layui-btn layui-btn-danger layui-btn-mini passwordResetBtn">密码重置</a>
+            </td>
+        </tr>
+        {{ } }}
+    </script>
+
+    <!--操作权限-->
+    <!--医院-->
+    <script id="accessHospitalstemplate" type="text/html">
+        {{for(var item in it) {}}
+        <tr>
+            <td><input type="checkbox" hospitalId="{{= it[item].Hospitals[0].HospitalID }}" name="ckhospital" /></td>
+            <td>{{= it[item].Hospitals[1].HospitalName }}</td>
+        </tr>
+        {{ } }}
+    </script>
+    <!--部门-->
+    <script id="accessDepttemplate" type="text/html">
+        {{ for(var item in it) {}}
+        <tr>
+            <td><input type="checkbox" deptId="{{= it[item].Deptsp[0].DeptID }}" name="ckdept"/></td>
+            <td>{{= it[item].Deptsp[1].DeptName }}</td>
+        </tr>
+        {{ } }}
+    </script>
+    <!--用户-->
+    <script type="text/html" id="accessUsersstemplate">
+        {{for(var item in it)}}
+        <tr>
+            <td><input type="checkbox" hospitalId="{{= it[item].Users[0].UserID }}" name="ckhospital"/></td>
+            <td>{{= it[item].Users[1].UserName }}</td>
+        </tr>
+        {{ } }}
+    </script>
+
+    <!--编辑-->
+    <script id="roleEdittemplate" type="text/html">
+
+        {{ for(var item in it) { }}
+        <tr class="" deptInfoId="{{= it[item].ID }}">
+
+            <td>{{= it[item].Account }}</td>
+            <td>{{= it[item].Name }}</td>
+            <td rolesID="{{= it[item].Roles[0].RoleID}}">{{= it[item].Roles[0].RoleName}}</td>
+            <td>{{= it[item].Phone }}</td>
+            <td>
+                {{ if (it[item].Status !=0){ }}
+                <i class="layui-icon" style="color: green;"></i>
+                {{ } else { }}
+                <i class="layui-icon" style="color: red;">ဇ</i>
+                {{ } }}
+            </td>
+            <td>{{= it[item].Mobile }}</td>
+            <td>
+                {{ if (it[item].Gender ==1){ }}
+                男
+                {{ } else { }}
+                女
+                {{ } }}
+            </td>
+            <td>{{= it[item].DeptName }}</td>
+            <td>{{= it[item].HospitalName}}</td>
+            <td>
+                <a class="layui-btn layui-btn-mini editInfoBut" id=""><i></i>编辑</a>
+                {{ if (it[item].Status ==0){ }}
+                <a hospitaldataId="{{= it[item].HospitalID}}" stopID="{{= it[item].ID }}" status="1" class="layui-btn layui-btn-normal layui-btn-mini editStopBut">启用</a>
+                {{ } else { }}
+                <a hospitaldataId="{{= it[item].HospitalID}}" stopID="{{= it[item].ID }}" status="0" class="layui-btn layui-btn-danger layui-btn-mini editStopBut" id="">停用</a>
+                {{ } }}
+                <a href="javascript:;" class="layui-btn layui-btn-warm layui-btn-mini limitsBut">访问权限</a>
+            </td>
+        </tr>
+        {{ } }}
+    </script>
+</div>
+
+<script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+<script src="~/lay_component/js/hcommon.js"></script>
+<script src="~/Scripts/FlyDog.Common.js"></script>
+<script src="~/doT-master/doT-master/doT.min.js"></script>
+<script src="~/lay_component/plugins/layui/layui.js"></script>
+<script src="~/lay_component/sampleJs/user.js"></script>
+</body>
+</html>

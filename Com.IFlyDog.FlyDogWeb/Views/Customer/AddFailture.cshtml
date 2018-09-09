@@ -1,0 +1,68 @@
+﻿@using Com.IFlyDog.CommonDTO
+@using Com.IFlyDog.FlyDogWeb.Helper
+<div class="layui-field-box ">
+    <input type="hidden" thisId="" name="IDComm"/>
+    <div class="site-text site-block">
+        <div class="layui-form-item">
+            <label class="layui-form-label">未成交类型:</label>
+            <div class="layui-input-block">
+                @Html.SelectCategoryByHospital(SelectType.FailtureCategory, "AddFailtureCategory", "AddFailtureCategory", "AddFailtureCategory")
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">未成交原因:</label>
+            <div class="layui-input-block">
+                <textarea name="FailtureRemark" placeholder="请输入描述内容不可超过300字" maxlength="300" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <span class="layui-btn add-fail">立即提交</span>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+$(function() {
+    var custid = $("input[name='hicutomerId']").attr("hicutomerId");
+    $(".add-fail").click(function () {
+        if (!verify()) { return false; };
+        var paraObj = {};
+        paraObj.data = {
+            ID: $("input[name=IDComm]").val() === "" ? 0: $("input[name=IDComm]").val(),
+            CustomerID: custid,
+            CategoryID: $(".AddFailtureCategory").val(),
+            Content: $("[name='FailtureRemark']").val()
+        };
+        var url = "/Failture/" + $(this).parents(".layui-layer").data("url");
+        var result = ajaxProcess(url, paraObj);
+        if (result) {
+            if (result.ResultType === 0) {
+                layer.msg(result.Message, { icon: 1, time: 1000 });
+                closeLayer(this);
+                getFailture();
+
+            } else {
+                layer.msg(result.Message, { icon: 5 });
+            }
+        };
+        return false;
+    });
+});
+    var verify = function () {
+        var fatype = $(".AddFailtureCategory").val();
+        var stoRemark = $("[name='FailtureRemark']").val();
+
+        if (fatype === null || fatype === "-1") {
+            layer.msg("请选择未成交类型！", { icon: 5 });
+            return false;
+        }
+        if (stoRemark === null || stoRemark === "") {
+            layer.msg("请输入未成交原因！", { icon: 5 });
+            return false;
+        }
+
+
+    return true;
+};
+</script>

@@ -1,0 +1,391 @@
+﻿@using Com.IFlyDog.CommonDTO
+@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>客户管理</title>
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+<link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+<link href="~/lay_component/css/global.css" rel="stylesheet" />
+<style>
+    .layui-form-label {padding: 9px 1px;text-align: left;width: auto;}
+    .layui-form-item .layui-input-inline {width: 135px;}
+    .layui-input-block {margin-left: 62px;}
+    span { margin-left: 10px; }
+    .addCustomerTab{color:#3598dc !important;text-decoration:underline;}
+</style>
+</head>
+<body>
+<div class="admin-main">
+
+<fieldset class="layui-elem-field layui-field-title site-title">
+<legend>客户管理</legend>
+<!--数据显示-->
+ 
+<!--无加载-->
+<div class="layui-form">
+    <input type="hidden" id="pageCountValue" lay-verify="title" autocomplete="off" class="layui-input " value="">
+    <div class="layui-form-item">
+        <div class="fl">
+            <label class="layui-form-label">顾客编号:</label>
+            <div class="layui-input-inline ">
+                <input type="text" name="customerID" placeholder="顾客编号" class="layui-input ">
+            </div>
+        </div>
+        <div class="fl">
+            <label class="layui-form-label">顾客姓名:</label>
+            <div class="layui-input-inline ">
+                <input type="text" name="customerName" placeholder="顾客姓名" class="layui-input ">
+            </div>
+        </div>
+        <div class="fl">
+            <label class="layui-form-label">顾客手机:</label>
+            <div class="layui-input-inline ">
+                <input type="text" name="customerMobile" placeholder="顾客手机" class="layui-input ">
+            </div>
+        </div>
+
+        <div class="fl">
+            <label class="layui-form-label">顾客性别:</label>
+            <div class="layui-input-inline ">
+                <select class="customerGender" selected="selected" name="customerGender">
+                    <option value="999" selected="selected">请选择</option>
+                    <option value="1">男</option>
+                    <option value="2">女</option>
+
+                </select>
+            </div>
+        </div>
+        <div class="fl">
+            <label class="layui-form-label">来源渠道:</label>
+            <div class="layui-input-inline ">
+                @Html.SelectCategoryByHospital(SelectType.Channel, "customerChannel", "customerChannel")
+            </div>
+        </div>
+        <div class="fl">
+            <label class="layui-form-label">推荐店家:</label>
+            <div class="layui-input-inline ">
+                @Html.SelectCategoryByHospital(SelectType.StoreCategory, "customerStoreCategory", "customerStoreCategory")
+            </div>
+        </div>
+        <div class="fl">
+            <label class="layui-form-label">主要咨询(项目):</label>
+            <div class="layui-input-inline ">
+                @Html.SelectCategoryByHospital(SelectType.ChargeCategory, "customerCategory", "customerCategory")
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="layui-form">
+    <div class="layui-form-item">
+
+        <div class="fl">
+            <label class="layui-form-label">会员类型:</label>
+            <div class="layui-input-inline ">
+                @Html.SelectCategoryByHospital(SelectType.MemberCategory, "customerMemberCategory", "customerMemberCategory")
+            </div>
+        </div>
+
+        <div class="fl">
+            <label class="layui-form-label">上门状态:</label>
+            <div class="layui-input-inline ">
+                <select class="customerComeType" selected="selected" name="customerComeType">
+                    <option value="999" selected="selected">请选择</option>
+                    <option value="1">已上门</option>
+                    <option value="0">未上门</option>
+                </select>
+            </div>
+        </div>
+        <div class="fl">
+            <label class="layui-form-label">成交状态:</label>
+            <div class="layui-input-inline ">
+                <select class="customerDealType" selected="selected" name="customerDealType">
+                    <option value="999" selected="selected">请选择</option>
+                    <option value="1">已成交</option>
+                    <option value="0">未成交</option>
+                </select>
+            </div>
+        </div>
+        <div class="fl">
+            <label class="layui-form-label">微信状态:</label>
+            <div class="layui-input-inline ">
+                <select class="customerWechatStatus" selected="selected" name="customerWechatStatus">
+                    <option value="999" selected="selected">请选择</option>
+                    <option value="1">绑定</option>
+                    <option value="0">未绑定</option>
+                </select>
+            </div>
+        </div>
+        <div class="fl">
+            <label class="layui-form-label">到诊医院:</label>
+            <div class="layui-input-inline ">
+                @Html.SelectCategoryByHospital(SelectType.Hospital, "customerDZHospital", "customerDZHospital")
+            </div>
+        </div>
+        <div class="fl">
+            <label class="layui-form-label">选择标签:</label>
+            <div class="layui-input-inline ">
+                @Html.SelectCategoryByHospital(SelectType.TagCategory, "customerTagCategory", "customerTagCategory")
+
+            </div>
+        </div>
+        <div class="fl">
+            <label class="layui-form-label">分享等级(类型):</label>
+            <div class="layui-input-inline ">
+                @Html.SelectCategoryByHospital(SelectType.ShareCategory, "customerShareCategory", "customerShareCategory")
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="layui-form">
+    <div class="layui-form-item">
+
+        <div class="fl">
+            <label class="layui-form-label">开发人员:</label>
+            <div class="layui-input-inline ">
+                <input type="text" name="ExploitUserName" placeholder="点击请选择" class="layui-input layui-disabled ">
+                <input type="hidden" name="hideExploitUserID" exploituserid="" />
+            </div>
+        </div>
+        <div class="fl">
+            <label class="layui-form-label">咨询人员:</label>
+            <div class="layui-input-inline ">
+                <input type="text" name="ManagerUserName" placeholder="点击请选择" class="layui-input layui-disabled ">
+                <input type="hidden" name="hideManagerUserID" managerUserid="" />
+            </div>
+        </div>
+        <div class="fl">
+            <label class="layui-form-label">初诊日期:</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" name="customerFirstVisitTimeStart" placeholder="初诊开始日" onclick="layui.laydate({ elem: this, festival: true })">
+            </div>
+            <div class="layui-input-inline">
+                <input class="layui-input" name="customerFirstVisitTimeEnd" placeholder="初诊截止日" onclick="layui.laydate({ elem: this, festival: true })">
+            </div>
+        </div>
+
+        <div class="fl">
+            <label class="layui-form-label">最后光临:</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" name="customerLastVisitTimeStart" placeholder="最后光临开始日" onclick="layui.laydate({ elem: this, festival: true })">
+            </div>
+            <div class="layui-input-inline">
+                <input class="layui-input" name="customerLastVisitTimeEnd" placeholder="最后光临截止日" onclick="layui.laydate({ elem: this, festival: true })">
+            </div>
+        </div>
+        <div class="fl">
+            <label class="layui-form-label">最后咨询:</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" placeholder="最后咨询开始日" name="customerLastConsultTimeStart" onclick="layui.laydate({ elem: this, festival: true })">
+            </div>
+            <div class="layui-input-inline">
+                <input class="layui-input" placeholder="最后咨询截止日" name="customerLastConsultTimeEnd" onclick="layui.laydate({ elem: this, festival: true })">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="layui-form">
+    <div class="layui-form-item">
+        <div class="fl">
+            <label class="layui-form-label">登记日期:</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" name="customerCreateTimeStart" placeholder="登记开始日" onclick="layui.laydate({ elem: this, festival: true })">
+            </div>
+            <div class="layui-input-inline">
+                <input class="layui-input" name="customerCreateTimeEnd" placeholder="登记截止日" onclick="layui.laydate({ elem: this, festival: true })">
+            </div>
+        </div>
+
+        <div class="fl">
+            <label class="layui-form-label">预约日期:</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" name="customerAppointmentStart" placeholder="预约日期开始日" onclick="layui.laydate({ elem: this, festival: true })">
+            </div>
+            <div class="layui-input-inline">
+                <input class="layui-input" name="customerAppointmentEnd" placeholder="预约日期截止日" onclick="layui.laydate({ elem: this, festival: true })">
+            </div>
+        </div>
+        <div class="fl">
+            <label class="layui-form-label">净收总额:</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" type="number" name="customerCashStart" placeholder="大于100">
+            </div>
+            <div class="layui-input-inline">
+                <input class="layui-input" type="number" name="customerCashEnd" placeholder="小于99999999">
+            </div>
+        </div>
+        <span class="layui-btn layui-btn-primary fr customer-reset-btn">重置</span>
+        <span class="layui-btn fr customer-search-btn">查询</span>
+    </div>
+
+</div>
+
+<div class="layui-field-box" style="max-width:100%;overflow:auto;">
+    <!--数据table表格-->
+ <table class="site-table table-hover customer-table-show"style="width:150%">
+        <thead>
+            <tr>
+                <th>顾客编号</th>
+                <th>顾客姓名</th>
+                <th>顾客性别</th>
+                <th>顾客年龄</th>
+                <th>会员等级</th>
+                <th>来源渠道</th>
+                <th>咨询项目</th>
+                <th>开发人员</th>
+                <th>咨询人员</th>
+                <th>上门状态</th>
+                <th>成交状态</th>
+                <th>初诊日期</th>
+                <th>初诊医院</th>
+                <th>最后光临</th>
+                <th>预约日期</th>
+                <th>登记时间</th>
+                <th>登记医院</th>
+                <th>登记人员</th>
+                <th>推荐店家</th>
+                <th>预约日期</th>
+                <th>预约医院</th>
+                <th>推荐人编号</th>
+                <th>推荐人姓名</th>
+            </tr>
+        </thead>
+        <tbody class="td-customer-info"></tbody>
+    </table>
+    <!--分页容器-->
+ 
+</div>
+<div class="fr" id="pageDiv"></div> 
+</fieldset>
+</div>
+<!--顾客识别中的-选择用户弹窗-->
+<div class="layui-form hide data-addcustomer-remindUser-pop">
+    <form>
+        <div class="layui-field-box">
+            <!--无加载-->
+            <div class="layui-form-item">
+                <div class="fl">
+                    <label class="layui-form-label">选择部门:</label>
+                    <div class="layui-input-inline" style="width: 115px">
+                        @Html.SelectCategoryByHospital(SelectType.Dept, "smartaddcuDept", "smartaddcuDept")
+                    </div>
+                </div>
+
+                <div class="fl">
+                    <label class="layui-form-label">用户姓名:</label>
+                    <div class="layui-input-inline" style="width: 115px">
+                        <input type="text" id="addcuuserNmae" name="addcuuserNmae" placeholder="请输入用户姓名" class="layui-input ">
+                    </div>
+                </div>
+                <span class="layui-btn fr search-user">查询</span>
+            </div>
+
+            <!--数据table-->
+            <table class="site-table table-hover">
+                <thead>
+                <tr>
+                    <th>账号</th>
+                    <th>姓名</th>
+                    <th>部门</th>
+                    <th>性别</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody class="user-table"></tbody>
+            </table>
+            <div class="user-info"></div>
+            <!--分页容器-->
+            <div id="pageDiv"></div>
+        </div>
+    </form>
+</div>
+<div class="doT-temple">
+    <!--顾客信息-->
+    <script class="customer-data-tmp" type="text/x-dot-template">
+        {{for(var item in it){ }}
+        <tr>
+            <td>{{= it[item].CustomerID }}</td>
+            <td><a  class="pointer addCustomerTab">{{= it[item].CustomerName}}</a></td>
+            <td>
+                {{if(it[item].Gender ==1){}}
+                男
+                {{ } else {}}
+                女
+                {{ } }}
+            </td>
+            <td>{{= it[item].Age}}</td>
+            <td><img src="{{= it[item].MemberCategoryImage == null ? "暂无": it[item].MemberCategoryImage}}" style="width:20px;height:20px;"/></td>
+            <td>{{= it[item].Channel == null ? "暂无": it[item].Channel}}</td>
+            <td>{{= it[item].Symptom == null ? "暂无": it[item].Symptom}}</td>
+            <td>{{= it[item].ExploitUserName == null ? "暂无": it[item].ExploitUserName}}</td>
+            <td>{{= it[item].ManagerUserName == null ? "暂无": it[item].ManagerUserName}}</td>
+            <td>
+                {{if(it[item].ComeType ==1){}}
+                已上门
+                {{ } else {}}
+                未上门
+                {{ } }}
+            </td>
+            <td>
+                {{if(it[item].DealType ==1){}}
+                已成交
+                {{ } else {}}
+                未成交
+                {{ } }}
+            </td>
+            <td>{{= it[item].FirstVistiTime == null ? "暂无": it[item].FirstVistiTime.slice(0,10)}}</td>
+            <td>{{= it[item].FirstVisitHospital == null ? "暂无": it[item].FirstVisitHospital}}</td>
+            <td>{{= it[item].LastVisitTime == null ? "暂无": it[item].LastVisitTime.slice(0,10)}}</td>
+            <td>{{= it[item].AppointmentDate == null ? "暂无": it[item].AppointmentDate}}</td>
+            <td>{{= it[item].CreateTime == null ? "暂无": it[item].CreateTime.slice(0,10)}}</td>
+            <td>{{= it[item].CreateHospital == null ? "暂无": it[item].CreateHospital}}</td>
+            <td>{{= it[item].CreateUserName == null ? "暂无": it[item].CreateUserName}}</td>
+            <td>{{= it[item].Store == null ? "暂无": it[item].Store}}</td>
+            <td>{{= it[item].AppointmentDate == null ? "暂无": it[item].AppointmentDate}}</td>
+            <td>{{= it[item].AppointmentHospital == null ? "暂无": it[item].AppointmentHospital}}</td>
+            <td>{{= it[item].PromoterID == null ? "暂无": it[item].PromoterID}}</td>
+            <td>{{= it[item].PromoterName == null ? "暂无": it[item].PromoterName}}</td>
+        </tr>
+        {{ } }}
+    </script>
+    <!--选择开发人员-->
+    <script class="user-tmp" type="text/x-dot-template">
+        {{for(var item in it){ }}
+        <tr>
+            <td>{{= it[item].Account }}</td>
+            <td>{{= it[item].Name }}</td>
+            <td>{{= it[item].DeptName}}</td>
+            <td>{{if(it[item].Gender ==1){}}
+                男
+               {{ } else {}}
+                女
+               {{ } }}
+            </td>
+            <td><span class="layui-btn layui-btn-primary layui-btn-mini present-user" value="{{= it[item].ID }}">选择此用户</span></td>
+        </tr>
+        {{ } }}
+    </script>
+    <script class="dept-tmp" type="text/x-dot-template">
+        {{ if(it.length == 0){it.push({ID:"",Name:"请选择"});} }}
+        {{ for(var item in it){ }}
+        <option value="{{= it[item].ID }}">{{= it[item].Name }}</option>
+        {{ } }}
+    </script>
+
+</div>
+<script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+<script src="~/lay_component/js/hcommon.js"></script>
+<script src="~/Scripts/FlyDog.Common.js"></script>
+<script src="~/doT-master/doT-master/doT.min.js"></script>
+<script src="~/lay_component/plugins/layui/layui.js"></script>
+<script src="~/lay_component/sampleJs/Customer.js"></script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>选择药物品</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+
+    <link href="~/lay_component/css/layer.css" rel="stylesheet" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/lay_component/css/table.css" rel="stylesheet" />
+ 
+    <script src="~/lay_component/js/hcommon.js"></script>
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/doT-master/doT-master/doT.min.js"></script>
+
+    <script src="~/lay_component/plugins/layui/lay/dest/layui.all.js"></script>
+    <script src="~/lay_component/plugins/layui/lay/lib/jquery.js"></script>
+    <script src="~/lay_component/plugins/layui/lay/modules/layer.js"></script>
+
+    <script src="~/lay_component/sampleJs/smartReturnDetail.js"></script>
+
+</head>
+
+<body>
+    <div class="admin-main" id="selProducthtml">
+        <fieldset class="layui-elem-field">
+            <legend>选择药物品</legend>
+
+            <div class="layui-form-item layui-form" style="margin-left: 20px">
+                <div>
+                    <label class="layui-form-label" style="width:42px;">拼音码</label>
+                    <div class="layui-input-inline " style="width:110px;">
+                        <input type="text" id="smartProductPinYin" name="smartProductPinYin" lay-verify="title" autocomplete="off" placeholder="请输入拼音码" class="layui-input ">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="layui-form-label" style="width:30px;">名称</label>
+                    <div class="layui-input-inline " style="width:110px;">
+                        <input type="text" id="smartProductPinYin" style="width:110px;" name="smartProductName" lay-verify="title" autocomplete="off" placeholder="请输入名称" class="layui-input ">
+                    </div>
+                </div>
+                <div>
+                    <label class="layui-form-label" style="width:30px;">分类</label>
+                    <div class="layui-input-inline " style="width:110px;">
+                        @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.ProductCategory, "smartProductDetaiName", "smartProductDetaiName")
+                     </div>
+                </div>
+
+                <button class="layui-btn fr" id="subtmValue" onclick="btnSerache()" style="margin-right:15px;">查询</button>
+            </div>
+            <div class="layui-field-box">
+
+            </div>
+            <script id="smartProduct_template" type="text/html">
+                <div style="max-height:306px;overflow:auto;">
+                    <table class="site-table table-hover">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>拼音码</th>
+                                <th>名称</th>
+                                <th>规格</th>
+                                <th>类别</th>
+                                <th>单位</th>
+                                <th>数量</th>
+                                <th>进价</th>
+                                <th>金额</th>
+                                @*<th>入库单号</th>*@
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {{ for(var prop in it) { }}
+                            <tr class="" deptInfoId="{{= it[prop].StockId }}">
+                                <td>
+                                    <input name="cheId" id="cheId" type="checkbox" value="{{= it[prop].ProductID }}"
+                                           productStockId="{{=it[prop].StockId}}" @*库存id*@
+                                           productNameVal="{{= it[prop].ProductName }}" @*名称*@
+                                           productSizeVal="{{=it[prop].Size}}" @*规格*@
+                                           productKcNameVal="{{=it[prop].UnitName}}" @*库存单位*@
+                                           productPriceVal="{{=it[prop].Price}}" @*进价*@
+                                           productAmountVal="{{=it[prop].Amount}}" @*总价*@
+                                           productCountVal="{{=it[prop].Num}}" @*数量*@
+                                           @*productNoVal="{{=it[prop].No}}"*@
+                                            />
+
+                                </td>
+                                @*<td>{{= i++ }}</td>*@
+                                <td>{{= it[prop].PinYin }}</td>
+                                <td>{{= it[prop].ProductName }}</td>
+                                <td>
+                                    {{= it[prop].Size }}
+                                </td>
+                                <td>
+                                    {{= it[prop].ProductCategoryName }}
+                                </td>
+
+                                <td>
+                                    {{= it[prop].UnitName }}
+                                </td>
+                                <td>
+                                    {{= it[prop].Num }}
+                                </td>
+                                <td>{{= it[prop].Price }}</td>
+                                <td>{{= it[prop].Amount }}</td>
+                                @*<td>{{= it[prop].No }}</td>*@
+                            </tr>
+                            {{ } }}
+                        </tbody>
+                    </table>
+                </div>
+            </script>
+            <div class="layui-form-item pull-right" style="bottom: 10px; position: absolute; right: 10px;">
+                <button class="layui-btn layui-btn-normal dept_commit">确认提交</button>
+               
+                <button class="layui-btn layui-btn-danger dept_close">取消关闭</button>
+            </div>
+        </fieldset>
+
+    </div>
+
+    <script>
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+
+        //取消关闭
+
+        layui.use(['layer', 'form'],
+            function () {
+                var $ = layui.jquery;
+                    window.form = layui.form();
+                    form.render();
+                //关闭当前页面
+                $(document)
+                    .on("click",
+                        ".dept_close",
+                        function () {
+                            parent.layer.close(index);
+                        });
+
+
+                $(".dept_commit")
+                    .on("click",
+                        function () {
+
+                            //点击确定得到选择checkbox中 的id和
+                            var showEditDialog = $(this);
+                            var checkIdValue = ""; //药物品id
+                            var productNameVal = "";//药品名称
+                            var productSizeVal = "";//规格
+                            var productKcNameVal = "";//库存单位
+                            var productPriceVal = "";//价格(进价)
+                            var productAmount = "";//总价
+                            var productCount = "";//数量
+                            //var productNo = "";//入库单号
+                            var StockId = "";
+                            var html = "";
+
+                            $('input[name="cheId"]:checked').each(function () {
+                                StockId = $(this).attr("productStockId"), checkIdValue = $(this).val(); //id
+                                if (parent.$('#smartReturnDetailTD').find("tr[value=" + StockId + "]").length == 0) {
+                                    if (parent.window.productStockId === undefined) {
+                                        parent.window.productStockId = [];
+                                    }
+                                    parent.window.productStockId.push(StockId);
+                                    productNameVal = $(this).attr("productNameVal"); //名称
+                                    productSizeVal = $(this).attr("productSizeVal"); //规格
+                                    productKcNameVal = $(this).attr("productKcNameVal");//库存单位
+                                    productPriceVal = $(this).attr("productPriceVal");//进价
+                                    productAmount = $(this).attr("productAmountVal");//总价
+                                    productCount = $(this).attr("productCountVal");//数量
+                                    //productNo = $(this).attr("productNoVal");//库存单号
+                                    //开始拼接字符串，最后追加到父页面上
+                                    html += "   <tr value=" +
+                                       checkIdValue +
+                                       " data-size=" + productCount + " style='width:587px;'>" +
+                                       "<td>" +
+                                       productNameVal +
+                                       "</td>" +
+                                       "<td>" +
+                                       productSizeVal +
+                                       "</td>" +
+                                       "<td>" +
+                                       productKcNameVal +
+                                       "</td>" +
+                                       "<td><input type='text' id='productCount' class='layui-input' value='" + productCount + "' style='width:40px;'/> <input type='hidden' id='productCountVal' value='" + productCount + "'/>" +
+                                       "</td>" +
+                                        "<td>" +
+                                       productPriceVal +
+                                       "</td>" +
+                                        "<td><label id='lableZPrice' value='" + productAmount + "'></label></td>" +
+                                       //  "<td>" +
+                                       //productNo +
+                                       //"</td>" +
+                                         // "<td><input type='text' name='date' id='date' lay-verify='date' placeholder='进货日期' style='width:60px;' autocomplete='off' class='layui-input' onclick='layui.laydate({ elem: this, min: '1900-01-01 00:00:00' })'></td>" +
+
+                                       "<td hidden='hidden' id='smartWarehouseRemarkTdhidden'>" +
+                                       StockId +
+                                       "</td>" +
+                                       "<td>" +
+                                       "<a href='javascript:' class='layui-btn layui-btn-danger layui-btn-mini trDelete'>删除</a>" +
+                                       "</td>" +
+                                       "</tr>";
+                                }
+                            });
+
+                            parent.$('#smartReturnDetailTD').append(html);
+                            parent.layer.close(index);
+                            //parent.layer.tips('添加一条信息哦!', '#callbackGroupDetailTD', { time: 4000 });
+                        });
+            });
+
+    </script>
+</body>
+
+</html>

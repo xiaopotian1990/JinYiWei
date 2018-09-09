@@ -1,0 +1,649 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>科室领用</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/layer.css" rel="stylesheet" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/lay_component/css/table.css" rel="stylesheet" />
+ 
+
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/lay_component/js/hcommon.js"></script>
+    <script src="~/Scripts/FlyDog.Common.js"></script>
+    <script src="~/doT-master/doT-master/doT.min.js"></script>
+    <script src="~/lay_component/plugins/layui/lay/dest/layui.all.js"></script>
+    <script src="~/lay_component/plugins/layui/lay/lib/jquery.js"></script>
+    <script src="~/lay_component/plugins/layui/lay/modules/layer.js"></script>
+
+    <!--页面用添加数据js-->
+    <script src="~/lay_component/sampleJs/use.js"></script>
+</head>
+
+
+<body>
+    <div class="admin-main" id="smartUseHtml">
+        <blockquote class="layui-elem-quote">
+            <a href="javascript:;" class="layui-btn layui-btn-small" id="add">
+                <i class="layui-icon">&#xe608;</i> 添加
+            </a>
+        </blockquote>
+
+        <fieldset class="layui-elem-field">
+            <legend>科室领用</legend>
+            <div class="layui-field-box layui-form">
+
+            </div>
+            <script id="smartUse_template" type="text/html">
+                <input type="hidden" id="pageCountValue" lay-verify="title" autocomplete="off" class="layui-input " value="">
+                <div class="layui-form-item">
+                    <div class="fl">
+                        <label class="layui-form-label">仓库</label>
+                        <div class="layui-input-inline " style="width:108px;">
+                       @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.WarehouseOfUser, "smartWarehouse", "smartWarehouse")
+                         </div>
+                    </div>
+
+
+                    <div class="fl">
+                        <label class="layui-form-label">领用部门</label>
+                        <div class="layui-input-inline " style="width:108px;">
+                            @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.Dept, "smartWarehouseDetaiName", "smartWarehouseDetaiName")
+                         </div>
+                    </div>
+                    <div class="fl">
+                        <label class="layui-form-label">领用日期</label>
+                        <div class="layui-input-inline">
+                            <input class="layui-input" placeholder="开始日" id="beginDate">
+                        </div>
+                        <div class="layui-input-inline">
+                            <input class="layui-input" placeholder="截止日" id="endDate">
+                        </div>
+                    </div>
+
+                    @*<p style="float:left;margin-left:-150px;">
+            <label class="layui-form-label">退货单号</label>
+            <div class="layui-input-inline ">
+                <input type="text" id="smartUserName" name="smartUserName" lay-verify="title" autocomplete="off" placeholder="请输入名称" class="layui-input ">
+            </div>
+        </p> 先注释*@
+
+                    <button class="layui-btn fr" id="subtmValue" onclick="aa()">查询</button>
+
+                </div>
+
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <th>状态</th>
+                            <th>领用单号</th>
+                            <th>领用日期</th>
+                            <th>领用部门</th>
+                            <th>领用人</th>
+                            <th>仓库</th>
+                            <th>操作用户</th>
+                            <th>备注</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {{ for(var prop in it) { }}
+                        <tr class="" deptInfoId="{{= it[prop].ID }}">
+
+                            {{ if (it[prop].Status =="1"){ }}
+                            <td>已领用</td>
+                            {{ } else { }}
+                            <td>未领用</td>
+                            {{ } }}
+
+                            <td>{{= it[prop].No }}</td>
+                            <td>{{= it[prop].CreateDate }}</td>
+                            <td>{{= it[prop].DeptName }}</td>
+                            <td class="tab-use-name">{{= it[prop].UseName }}</td>
+                            <td>{{= it[prop].WarehouseName }}</td>
+                            <td>{{= it[prop].CreateName }}</td>
+                            <td>
+                                {{= it[prop].Remark }}
+                            </td>
+                            <td class="smartPurchaseInfoEditAndDisableTd">
+                                <a class="layui-btn layui-btn-mini smartUseEdit" id="smartUseEdit" smartUseiEditId="{{= it[prop].ID }}"><i></i>编辑</a>
+                                <a href="/Use/SmartUsePrint?UseID={{= it[prop].ID }}" target="_blank" class="layui-btn layui-btn-mini btn-print" data-id="{{= it[prop].ID }}">打印</a>
+                                @*<a class="layui-btn layui-btn-mini smartUseDel" id="smartUseDel" smartReturnDelId="{{= it[prop].ID }}"><i></i>删除</a>*@
+                            </td>
+                        </tr>
+
+                        {{ } }}
+                    </tbody>
+
+                </table>
+                <!--分页容器-->
+                <div id="pageDiv"></div>
+            </script>
+
+        </fieldset>
+    </div>
+    <script src="~/lay_component/plugins/layui/layui.js"></script>
+
+
+    <!--添加领用信息-->
+
+    <div id="smartUseAddInfo_div" class="layui-form"></div>
+
+    <script id="smartUseAddInfo_template" type="text/x-dot-template">
+
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>领用出库信息</legend>
+        </fieldset>
+        <div class="layui-form-item" style="margin-left: 120px">
+            <label class="layui-form-label">仓库</label>
+            <div class="layui-input-inline ">
+           @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.WarehouseOfUser, "smartAddWarehouse", "smartAddWarehouse")
+             </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-left: 120px">
+            <label class="layui-form-label">领用部门</label>
+            <div class="layui-input-inline ">
+            @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.Dept, "smartDeptAddName", "smartDeptAddName")
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-left: 120px">
+            <label class="layui-form-label">日期</label>
+            <div class="layui-input-inline">
+                @*<input class="layui-input" placeholder="进货日期" id="smartPurchaseDate">*@
+                <input type="text" name="date" id="dateName" lay-verify="date" placeholder="领用日期" autocomplete="off" class="layui-input" onclick="layui.laydate({ elem: this, min: '1900-01-01 00:00:00' })">
+            </div>
+        </div>
+        <div class="layui-form-item" style="margin-left: 120px">
+            <label class="layui-form-label">领用人</label>
+            <div class="layui-input-inline">
+                @*@Html.SelectSmartUserState("smartAddUser", "smartAddUser", Request.QueryString["CategoryID"])*@
+                @*这里也需要换成选择用户插件*@   
+                <input type="hidden" name="useUserId" id="smartAddUser" />
+                <input type="text" name="smartAddUser" class="layui-input add-user" placeholder="添加领用人" />
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-left: 120px">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-inline ">
+                <textarea type="text" id="remarkValue" lay-verify="title" autocomplete="off" placeholder="请输入备注信息" class="layui-textarea "></textarea>
+
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-form-text" style="margin-left: 200px">
+            <div class="layui-input-inline">
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>规格</th>
+                            <th>单位</th>
+                            <th>数量</th>
+                            <th>进价</th>
+                            <th>金额</th>
+
+                            @*<th>入库单号</th>*@
+                            @*<th>有效日期</th>*@
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="smartUseDetailTD"></tbody>
+                </table>
+
+            </div>
+            <div><a href="javascript:;" style="margin-top:11px;" class="layui-btn layui-btn-small" id="smartUseDetailADDBut"><i class="layui-icon"></i>添加详细</a></div>
+
+        </div>
+
+        <div class="layui-form-item " style="margin-left: 219px;margin-top: 40px">
+            @*<button class="layui-btn layui-btn-normal smartReturn_temporaryStorageCommit">暂存</button>*@
+            <button class="layui-btn layui-btn-normal smartUse_commit">领用</button>
+            <button class="layui-btn layui-btn-danger dept_close">取消关闭</button>
+        </div>
+    </script>
+
+    <!--修改领用信息-->
+
+    <script id="smartUseEditInfo_template" type="text/x-dot-template">
+
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>领用出库信息</legend>
+        </fieldset>
+        <div class="layui-form-item" style="margin-left: 120px">
+            <label class="layui-form-label">仓库</label>
+            <input type="hidden" value="{{=it.ID}}" id="smartReturnID" />
+            <div class="layui-input-inline ">
+           @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.WarehouseOfUser, "smartEditWarehouse", "smartEditWarehouse")
+             </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-left: 120px">
+            <label class="layui-form-label">领用部门</label>
+            <div class="layui-input-inline ">
+                @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.Dept, "smartDeptEditName", "smartDeptEditName")
+             </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-left: 120px">
+            <label class="layui-form-label">日期</label>
+            <div class="layui-input-inline">
+                @*<input class="layui-input" placeholder="进货日期" id="smartPurchaseEditDate" value="{{=it.CreateTime}}">*@
+                <input type="text" name="date" id="dateEditsName" lay-verify="date" placeholder="退货日期" autocomplete="off" class="layui-input" value="{{=it.CreateDate}}" onclick="layui.laydate({ elem: this, min: '1900-01-01 00:00:00' })">
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-left: 120px">
+            <label class="layui-form-label">领用人</label>
+            <div class="layui-input-inline">
+                @*@Html.SelectSmartUserState("smartEditUser", "smartEditUser", Request.QueryString["CategoryID"])*@
+                @*//这里也要换成选择用户插件*@
+                <input type="hidden" name="useUserId" id="smartAddUser" value="{{= it.UseUserID}}" />
+                <input type="text" name="smartEditUser" class="layui-input" placeholder="添加领用人" value="{{= it.UseName}}" />
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-left: 120px">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-inline ">
+                <textarea type="text" id="remarkEditValue" lay-verify="title" autocomplete="off" placeholder="请输入备注信息" class="layui-textarea ">{{=it.Remark}}</textarea>
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-form-text" style="margin-left: 200px">
+            <div class="layui-input-inline">
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+
+                            <th>名称</th>
+                            <th>规格</th>
+                            <th>单位</th>
+                            <th>数量</th>
+                            <th>进价</th>
+                            <th>金额</th>
+
+                            @*<th>入库单号</th>*@
+                            @*<th>有效日期</th>*@
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="smartUseDetailTD"></tbody>
+                </table>
+
+            </div>
+            @*先注释，修改进货信息不能修改详细药物品
+                <div><a href="javascript:;" style="margin-top:11px;" class="layui-btn layui-btn-small" id="smartPurchaseDetailADDBut"><i class="layui-icon"></i>添加详细</a></div>*@
+
+        </div>
+        <div class="layui-form-item " style="margin-left: 219px;margin-top: 40px">
+            @*<button class="layui-btn layui-btn-normal smartReturnEdit_commit">确认提交</button>*@
+            <button class="layui-btn layui-btn-danger dept_close">取消关闭</button>
+
+        </div>
+    </script>
+
+    <div id="smartUseEditsInfo_div" class="layui-form"></div>
+
+
+</body>
+
+</html>
+
+<script src="~/lay_component/sampleJs/SmartUser.js"></script>
+<script type="text/javascript">
+    var dataPlugin = function () {
+
+        var start = {
+            min: '1900-01-01 00:00:00'
+          , max: '2099-06-16 23:59:59'
+          , istoday: false
+          , choose: function (datas) {
+              end.min = datas; //开始日选好后，重置结束日的最小日期
+              end.start = datas //将结束日的初始值设定为开始日
+          }
+        };
+
+        var end = {
+            min: '1900-01-01 00:00:00'
+          , max: '2099-06-16 23:59:59'
+          , istoday: false
+          , choose: function (datas) {
+              start.max = datas; //结束日选好后，重置开始日的最大日期
+          }
+        };
+
+
+        $("#beginDate").click(function () {
+            start.elem = this;
+            laydate(start);
+        });
+
+        $("#endDate").click(function () {
+            end.elem = this
+            laydate(end);
+        });
+
+    }
+    layui.use(['laydate'], function () {
+        var laydate = layui.laydate;
+        dataPlugin();
+    });
+
+    //添加科室领用信息
+    $("#smartUseHtml")
+    .ready(function () {
+        $(".layui-btn.layui-btn-small")
+            .on("click",
+                function () {
+                    //模版输出
+                    var innerText = doT.template($("#smartUseAddInfo_template").text());
+
+                    var contentData = $("#smartUseAddInfo_div").html(innerText());
+                    layer.open({
+                        type: 1,
+                        title: "领用出库信息",
+
+                        skin: 'layerbackground_color',
+                        area: ["35%;min-width:680px;max-width:800px", "65%;min-height:500px;max-height:600px"], //宽高
+                        shade: [0.8, '#B3B3B3', false],
+                        closeBtn: 1,
+                        Boolean: false,
+                        shadeClose: false, //点击遮罩关闭
+                        content: contentData,
+                        success: function (layero, index) {
+
+                            form.render();
+                            //添加药物品详细信息按钮
+                            $("#smartUseDetailADDBut")
+                                .on("click",
+                                    function () {
+                                        var smartWarehouseId = $("#smartAddWarehouse").val();
+                                        if (smartWarehouseId == "" || smartWarehouseId == null || smartWarehouseId=="-1") {
+                                            layer.msg('请先选择仓库!', { icon: 5 });
+                                            return false; //在打开药物品详情的时候必须先选择一个仓库
+                                        }
+
+                                        layer.open({
+                                            type: 2,
+                                            title: "选择药物品",
+                                            closeBtn: 1, //不显示关闭按钮
+                                            shade: [0],
+                                            area: ["45%;min-width:680px;max-width:800px", "65%;min-height:500px;max-height:600px"],
+                                            anim: 2,
+                                            content: ['UseIndex', 'no'] //iframe的url，no代表不显示滚动条
+                                        });
+                                    });
+                            //删除TR按钮
+                            $(document)
+                                .on("click",
+                                    ".trDelete",
+                                    function () {
+                                        $('li.selected').nextAll('li');
+                                        $(this).parent().parent().remove();
+                                        productStockId = Common.Utils.Array.remove(productStockId, $(this).parents("tr").attr("value"));
+                                    });
+
+                            //取消并关闭按钮
+                            $(".layui-btn.layui-btn-danger.dept_close")
+                                .on("click",
+                                    function () {
+                                        $("#smartUseAddInfo_div").html("");
+                                        layer.close(index);
+                                    });
+                            //查看详细
+                            $(document)
+                                .on("click",
+                                    "#smartUseDetailTd",
+                                    function () {
+
+                                        var text = $("#smartUseDetailRemarkTdhidden").text();
+
+                                        layer.tips(text,
+                                            '#smartUseDetailRemarkTd',
+                                            {
+                                                tips: [1, '#333333'],
+                                                time: 3000
+                                            });
+                                    });
+
+                            //进货确认提交
+                            $(".smartUse_commit")
+                                .on("click",
+                                    function () {
+                                        //确认提交按钮
+                                        var datalist = [];
+
+                                        var tr = $("#smartUseDetailTD tr");
+
+                                        if (tr.length < 1) {
+                                            layer.msg("请添加药物品！", { icon: 5 });
+                                            return false;
+                                        }
+
+                                        for (var i = 0; i < tr.length; i++) {
+
+                                            var obj = { ProductID: "", Num: "", Price: "", Amount: "", Batch: "", Expiration: "", JHNo: "",StockId:"" };
+                                            obj.ProductID = tr.eq(i).attr("value"); //药物品id
+                                            //obj.CategoryID = tr.eq(0).attr("value");
+                                            obj.Num = $(tr.eq(i).find("td").eq(3)).children().val(); //数量
+                                            obj.Price = tr.eq(i).find("td").eq(4).text(); //价格
+                                            obj.Amount = obj.Num * obj.Price; //总价
+                                            obj.JHNo = tr.eq(i).find("td").eq(6).text();//进货单号
+                                            obj.StockId = tr.eq(i).find("td").eq(6).text();//库存id
+                                            datalist.push(obj);
+                                        };
+
+                                        //获取值
+                                        var WarehouseID = $("#smartAddWarehouse").val();
+                                        var DeptID = $("#smartDeptAddName").val();
+                                        var CreateDate = $("#dateName").val();
+                                        var UseUserID = $("#smartAddUser").val();
+                                        var Remark = $("#remarkValue").val();
+
+                                        var realData = {};
+                                        realData.WarehouseID = WarehouseID;
+                                        realData.DeptID = DeptID;
+                                        realData.CreateDate = CreateDate;
+                                        realData.UseUserID = UseUserID;
+                                        realData.Status = "1";//已领用
+                                        realData.Remark = Remark;
+
+                                        realData.UseDetailAdd = datalist;
+
+                                        var paraObj = {};
+                                        paraObj.data = realData;
+
+                                        var url = "/Use/UseAdd";///
+
+                                        var data = ajaxProcess(url, paraObj);
+                                        if (data) {
+                                            if (parseInt(data.ResultType) === 0) { //请求成功返回
+                                                $("#smartUseAddInfo_div").html("");
+                                                var message = data.Message;
+                                                //关闭窗口
+                                                layer.close(index);
+                                                //提示消息
+                                                layer.msg(message, { icon: 6 });
+                                                //刷新主页面数据.
+                                                setTimeout(function () {
+                                                    location.reload();
+                                                },
+                                                    500);
+
+                                            } else {
+                                                //请求成功返回,但是后台出现错误
+                                                layer.msg(data.Message, { icon: 5 });
+                                            }
+                                        }
+                                        return false;
+
+                                    });
+
+                            //暂存提交  暂存和进货这两个后期可以合并成一个,现在先放两个
+                            $(".smartReturn_temporaryStorageCommit")
+                              .on("click",
+                                  function () {
+                                  });
+                            //关闭后回调
+                        },
+                        cancel: function (index) {
+                            $("#smartUseAddInfo_div").html("");
+                            layer.close(index);
+                        }
+                    });
+                });
+    });
+
+    //修改退货信息
+    $("#smartUseHtml")
+        .ready(function () {
+            $(document).on("click",".layui-btn.layui-btn-mini.smartUseEdit",function () {
+                        var showEditDialog = $(this);
+                        var deptInfoId = $(showEditDialog).attr("smartUseiEditId");
+                        var url = "/Use/UseGetByID";
+
+                        var dto = new Object();
+                        dto.ID = deptInfoId;
+
+                        var paraObj = new Object();
+                        paraObj.data = dto;
+
+                        var data = ajaxProcess(url, paraObj);
+                        data.Data.UseName = $(this).parents("tr").find(".tab-use-name").text()
+                        var ResultType = data.ResultType;
+
+                        if (parseInt(ResultType) === 0) {
+
+                            var innerText = doT.template($("#smartUseEditInfo_template").text());
+
+                            var contentData = $("#smartUseEditsInfo_div").html(innerText(data.Data));
+
+                            layer.open({
+                                type: 1,
+                                title: "领用出库信息",
+                                skin: 'layerbackground_color',
+                                area: ["35%;min-width:680px;max-width:800px", "65%;min-height:500px;max-height:600px"], //宽高
+                                shade: [0.8, '#B3B3B3', false],
+                                closeBtn: 1,
+                                Boolean: false,
+                                shadeClose: false, //点击遮罩关闭
+                                content: contentData,
+                                success: function (layero, index1) {
+
+                                    layero.find("input,select,textarea").prop("disabled", true);
+
+                                    console.log(data.Data.WarehouseID);
+
+                                    $(".smartEditWarehouse").find("[value=" + data.Data.WarehouseID + "]").attr("selected", true);
+                                    $(".smartDeptEditName").find("[value=" + data.Data.DeptID + "]").attr("selected", true);
+                                    $(".smartEditUser").find("[value=" + data.Data.UseUserID + "]").attr("selected", true);
+
+                                    form.render();
+
+                                    var html = "";
+
+                                    for (var i = 0; i < data.Data.UseDetail.length; i++) {
+                                        html += "   <tr value=" +
+                                        data.Data.UseDetail[i].ProductID +
+                                        " style='width:587px;'>" +
+                                        "<td>" +
+                                        data.Data.UseDetail[i].ProductName +
+                                        "</td>" +
+                                        "<td>" +
+                                         data.Data.UseDetail[i].Size +
+                                        "</td>" +
+                                        "<td>" +
+                                         data.Data.UseDetail[i].KcName +
+                                        "</td>" +
+                                         "<td>" + data.Data.UseDetail[i].Num + "</td>" +
+                                         "</td>" +
+                                         "<td>" + data.Data.UseDetail[i].Price + "</td>" +
+                                         "<td>" + data.Data.UseDetail[i].Amount + "</td>" +//总金额
+                                          //"<td><input type='text' id='batch' value='" + data.Data.SmartReturnDetail[i].Amount + "'  style='width:40px;'/></td>" +
+                                           //"<td><input type='text' name='date' id='date' lay-verify='date' value='" + data.Data.SmartReturnDetail[i].Expiration + "' placeholder='退货日期' style='width:60px;' autocomplete='off' class='layui-input' onclick='layui.laydate({ elem: this, min: '1900-01-01 00:00:00' })'></td>" +
+
+                                        "<td hidden='hidden' id='smartWarehouseRemarkTdhidden'>" +
+                                        data.Data.UseDetail[i].ID +
+                                        "</td>" +
+                                        "<td>" +
+                                        "<a href='javascript:' class='layui-btn layui-btn-danger layui-btn-mini trDelete'>删除</a>" +
+                                        "</td>" +
+                                        "</tr>";
+                                    }
+                                    $('#smartUseDetailTD').append(html);
+
+
+                                    //取消并关闭按钮
+                                    $(".layui-btn.layui-btn-danger.dept_close")
+
+                                        .on("click",
+                                            function () {
+                                                $("#smartUseEditsInfo_div").html("");
+                                                layer.close(index1);
+                                            });
+         
+                                    //确认提交
+                                    $(".layui-btn.layui-btn-normal.smartReturnEdit_commit")
+                                        .on("click",
+                                            function () {
+                                            });
+                                }, cancel: function (index1) {
+                                    $("#smartUseEditsInfo_div").html("");
+                                    layer.close(index1);
+                                }
+                            });
+                        }
+
+                    });
+        });
+
+    //删除数据
+    $("#smartUseHtml")
+        .ready(function () {
+            $($(".layui-btn-mini.smartReturnDel"))
+                .on("click",
+                    function () {
+
+                    });
+
+        });
+
+    //为改变数量文本框注册事件，验证数据合法性，以及数量是否超过库存数据
+    $("#smartUseHtml") //这js还有问题，无法触发
+        .ready(function () {
+            $($("#productCount"))
+                .on("focus",
+                    function () {
+
+                        var productInputCount = $("#productCountVal").val();//得到库存数量
+                        var productChangeCount = $("#productCount").val();//得到输入的数量
+
+                        if (! /^d+$/.test(productChangeCount)) //正则验证只能输入正整数
+                        {
+                            layer.msg('数量只能为正整数!', { icon: 1 });
+                            return false;
+                        } else {//是正整数了开始验证是否超过库存数量
+                            if (productChangeCount > productInputCount) {//如果输入的数量超过了库存数量，则不能修改
+                                layer.msg('不能超过库存数量!', { icon: 1 });
+                                return false;
+                            }
+                        }
+                    });
+
+        });
+</script>

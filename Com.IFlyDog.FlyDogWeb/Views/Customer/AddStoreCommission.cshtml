@@ -1,0 +1,65 @@
+﻿<div class="layui-field-box ">
+    <div class="site-text site-block">
+        <div class="layui-form-item">
+            <label class="layui-form-label">佣金金额:</label>
+            <div class="layui-input-block">
+                <input type="number" name="StoAmount" min="1" placeholder="请输入佣金金额" class="layui-input">
+            </div>
+        </div> 
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">描述内容:</label>
+            <div class="layui-input-block">
+                <textarea name="StoRemark" placeholder="请输入描述内容" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <span class="layui-btn add-StoCommis-submit">立即提交</span>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+$(function() {
+    var custid = $("input[name='hicutomerId']").attr("hicutomerId");
+    $(".add-StoCommis-submit").click(function() {
+        if (!verify()) { return false; };
+        var paraObj = {};
+        paraObj.data = {
+            CustomerID: custid,
+            Amount: $("input[name='StoAmount']").val(),
+            Remark: $("[name='StoRemark']").val()
+        };
+        var url = "/CustomerProfile/" + $(this).parents(".layui-layer").data("url");
+        var result = ajaxProcess(url, paraObj);
+        if (result) {
+            if (result.ResultType === 0) {
+                layer.msg("添加成功!", { icon: 1, time: 1000 });
+                closeLayer(this);
+                getCommission();
+
+            } else {
+                layer.msg(result.Message, { icon: 5 });
+            }
+        }; 
+        return false;
+    });
+});
+var verify = function () {
+        var stoAmount = $("input[name='StoAmount']").val();
+        var stoRemark = $("[name='StoRemark']").val();
+
+        if (stoAmount === null || stoAmount === "-1") {
+            layer.msg("佣金不可为空且不可小于1！", { icon: 5 });
+            return false;
+        }
+        if (stoRemark === null || stoRemark === "") {
+            layer.msg("请输入描述内容！", { icon: 5 });
+            return false;
+        }
+       
+
+    return true;
+}; 
+</script>
+ 

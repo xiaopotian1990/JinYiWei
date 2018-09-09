@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Com.IFlyDog.FlyDogTokenAPI</name>
+    </assembly>
+    <members>
+        <member name="T:Com.IFlyDog.FlyDogTokenAPI.WebApiConfig">
+            <summary>
+            WebApiConfig
+            </summary>
+        </member>
+        <member name="M:Com.IFlyDog.FlyDogTokenAPI.WebApiConfig.Register(System.Web.Http.HttpConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="config"></param>
+        </member>
+        <member name="T:Com.IFlyDog.FlyDogTokenAPI.Filters.FlyDogSignFilterAttribute">
+            <summary>
+            </summary>
+        </member>
+        <member name="F:Com.IFlyDog.FlyDogTokenAPI.Filters.FlyDogSignFilterAttribute.helper">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Com.IFlyDog.FlyDogTokenAPI.Filters.FlyDogSignFilterAttribute.GeSignKey(System.String)">
+            <summary>
+            </summary>
+            <param name="appid"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Com.IFlyDog.FlyDogTokenAPI.Filters.FlyDogTokenFilterAttribute">
+            <summary>
+                /
+            </summary>
+        </member>
+        <member name="M:Com.IFlyDog.FlyDogTokenAPI.Filters.FlyDogTokenFilterAttribute.IsExist(System.String)">
+            <summary>
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Com.IFlyDog.FlyDogTokenAPI.WebApiApplication">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Com.IFlyDog.FlyDogTokenAPI.WebApiApplication.Application_Start">
+            <summary>
+            /
+            </summary>
+        </member>
+    </members>
+</doc>

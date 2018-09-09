@@ -1,0 +1,521 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F707F110-1D34-4414-931B-1C0F72A61B6E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Com.IFlyDog.APIDTO</RootNamespace>
+    <AssemblyName>Com.IFlyDog.APIDTO</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\XML\Com.IFlyDog.APIDTO.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AllocateDetail\AllocateDetailAdd.cs" />
+    <Compile Include="AllocateDetail\AllocateDetailDelete.cs" />
+    <Compile Include="Allocate\AllocateAdd.cs" />
+    <Compile Include="Allocate\AllocateDelete.cs" />
+    <Compile Include="Allocate\AllocateInfo.cs" />
+    <Compile Include="Allocate\AllocateSelect.cs" />
+    <Compile Include="Allocate\AllocateUpdate.cs" />
+    <Compile Include="Appointment\Appointment.cs" />
+    <Compile Include="Appointment\AppointmentDelete.cs" />
+    <Compile Include="Appointment\AppointmentDetail.cs" />
+    <Compile Include="Appointment\AppointmentUpdate.cs" />
+    <Compile Include="AuditApply\AuditApplyDelete.cs" />
+    <Compile Include="AuditApply\AuditApplyInfo.cs" />
+    <Compile Include="AuditApply\AuditApplySelect.cs" />
+    <Compile Include="AuditApply\OwnerShipOrderAudit.cs" />
+    <Compile Include="AuditRule\AuditRuleAdd.cs" />
+    <Compile Include="AuditRule\AuditRuleDelete.cs" />
+    <Compile Include="AuditRule\AuditRuleDetailInfo.cs" />
+    <Compile Include="AuditRule\AuditRuleInfo.cs" />
+    <Compile Include="AuditRule\AuditRuleStopOrUse.cs" />
+    <Compile Include="AuditRule\AuditRuleUpdate.cs" />
+    <Compile Include="AuditWorkbench\AuditInfo.cs" />
+    <Compile Include="AuditWorkbench\AuditOperationAdd.cs" />
+    <Compile Include="AuditWorkbench\AuditOrderInfo.cs" />
+    <Compile Include="AuditWorkbench\AuditRecordInfo.cs" />
+    <Compile Include="AuditWorkbench\AuditRecordSelect.cs" />
+    <Compile Include="AuditWorkbench\AuditUserInfo.cs" />
+    <Compile Include="AuditWorkbench\AuditUserSelect.cs" />
+    <Compile Include="AuditWorkbench\AuditWorkbenchInfo.cs" />
+    <Compile Include="AuditWorkbench\AuditWorkbenchSelect.cs" />
+    <Compile Include="BackOrder\BackOrderAdd.cs" />
+    <Compile Include="BackOrder\BackOrderDetail.cs" />
+    <Compile Include="Bed\Bed.cs" />
+    <Compile Include="Bed\BedAdd.cs" />
+    <Compile Include="Bed\BedStop.cs" />
+    <Compile Include="Bill\Bill.cs" />
+    <Compile Include="Bill\BillAdd.cs" />
+    <Compile Include="Bill\BillDelete.cs" />
+    <Compile Include="Bill\CanBillCharges.cs" />
+    <Compile Include="CallbackCategory\SmartCallbackCategory.cs" />
+    <Compile Include="CallbackCategory\SmartCallbackCategoryAdd.cs" />
+    <Compile Include="CallbackCategory\SmartCallbackCategoryStopOrUse.cs" />
+    <Compile Include="CallbackCategory\SmartCallbackCategoryUpdate.cs" />
+    <Compile Include="CallbackGroup\SmartCallbackGroup.cs" />
+    <Compile Include="CallbackGroup\SmartCallbackGroupAdd.cs" />
+    <Compile Include="CallbackGroup\SmartCallbackGroupStopOrUse.cs" />
+    <Compile Include="CallbackGroup\SmartCallbackGroupUpdate.cs" />
+    <Compile Include="Callback\Callback.cs" />
+    <Compile Include="Callback\CallbackAdd.cs" />
+    <Compile Include="Callback\CallbackDelete.cs" />
+    <Compile Include="Callback\CallbackDetail.cs" />
+    <Compile Include="Callback\CallbackPlanAdd.cs" />
+    <Compile Include="Callback\CallbackRemindAdd.cs" />
+    <Compile Include="Callback\CallbackRemindUpdate.cs" />
+    <Compile Include="Callback\CallbackSet.cs" />
+    <Compile Include="Callback\CallbackUpdate.cs" />
+    <Compile Include="CardCategory\CardCategory.cs" />
+    <Compile Include="CaseTemplate\CaseTemplateAdd.cs" />
+    <Compile Include="CaseTemplate\CaseTemplateInfo.cs" />
+    <Compile Include="CaseTemplate\CaseTemplateSelect.cs" />
+    <Compile Include="CaseTemplate\CaseTemplateUpdate.cs" />
+    <Compile Include="Cashier\BackCashierAdd.cs" />
+    <Compile Include="Cashier\CanCashier.cs" />
+    <Compile Include="Cashier\CardCashier.cs" />
+    <Compile Include="Cashier\Cashier.cs" />
+    <Compile Include="Cashier\CashierDetail.cs" />
+    <Compile Include="Cashier\CashierUpdateInfo.cs" />
+    <Compile Include="Cashier\DebtCashierAdd.cs" />
+    <Compile Include="Cashier\DepositCashier.cs" />
+    <Compile Include="Cashier\DepositRebateCashierAdd.cs" />
+    <Compile Include="Cashier\OrderCashierAdd.cs" />
+    <Compile Include="Complain\ComplainInfo.cs" />
+    <Compile Include="Complain\ComplainSelect.cs" />
+    <Compile Include="Complain\ComplainUpdate.cs" />
+    <Compile Include="Coupon\SendCoupon.cs" />
+    <Compile Include="CustomerGroup\CustomerGroupSelect.cs" />
+    <Compile Include="CustomerMedicalRecord\CustomerMedicalRecordAdd.cs" />
+    <Compile Include="CustomerMedicalRecord\CustomerMedicalRecordDelete.cs" />
+    <Compile Include="CustomerMedicalRecord\CustomerMedicalRecordInfo.cs" />
+    <Compile Include="CustomerMedicalRecord\CustomerMedicalRecordSelect.cs" />
+    <Compile Include="CustomerMedicalRecord\CustomerMedicalRecordUpdate.cs" />
+    <Compile Include="CustomerProfile\ProfileCharges.cs" />
+    <Compile Include="CustomerProfile\ProfileMoney.cs" />
+    <Compile Include="CustomerProfile\ProfileOperation.cs" />
+    <Compile Include="CustomerProfile\ProfileOrders.cs" />
+    <Compile Include="CustomerProfile\ProfileOwinerShip.cs" />
+    <Compile Include="CustomerProfile\ProfilePromoteInfo.cs" />
+    <Compile Include="DepositOrder\DepositChargeUse.cs" />
+    <Compile Include="DepositRebateOrder\CanRebate.cs" />
+    <Compile Include="Deposit\CashierDeposits.cs" />
+    <Compile Include="Cashier\NoPaidOrders.cs" />
+    <Compile Include="ChannelGroup\ChannelGroupAdd.cs" />
+    <Compile Include="ChannelGroup\ChannelGroupCheck.cs" />
+    <Compile Include="ChannelGroup\ChannelGroupDelete.cs" />
+    <Compile Include="ChannelGroup\ChannelGroupInfo.cs" />
+    <Compile Include="ChannelGroup\ChannelGroupUpdate.cs" />
+    <Compile Include="Channel\Channel.cs" />
+    <Compile Include="Channel\ChannelAdd.cs" />
+    <Compile Include="Channel\ChannelStopOrUse.cs" />
+    <Compile Include="Channel\ChannelUpdate.cs" />
+    <Compile Include="ChargeCategory\ChargeCategoryAdd.cs" />
+    <Compile Include="ChargeCategory\ChargeCategoryDelete.cs" />
+    <Compile Include="ChargeCategory\ChargeCategoryInfo.cs" />
+    <Compile Include="ChargeCategory\ChargeCategoryUpdate.cs" />
+    <Compile Include="ChargeDiscount\ChargeDiscount.cs" />
+    <Compile Include="ChargeDiscount\ChargeDiscountAdd.cs" />
+    <Compile Include="ChargeDiscount\ChargeDiscountInfo.cs" />
+    <Compile Include="ChargeDiscount\ChargeDiscountSelect.cs" />
+    <Compile Include="ChargeDiscount\ChargeDiscountUpdate.cs" />
+    <Compile Include="ChargeSet\ChargeSetAdd.cs" />
+    <Compile Include="ChargeSet\ChargeSetInfo.cs" />
+    <Compile Include="ChargeSet\ChargeSetSelect.cs" />
+    <Compile Include="ChargeSet\ChargeSetUpdate.cs" />
+    <Compile Include="Charge\ChargeAdd.cs" />
+    <Compile Include="Charge\ChargeCheckItem.cs" />
+    <Compile Include="Charge\ChargeInfo.cs" />
+    <Compile Include="Charge\ChargeSelect.cs" />
+    <Compile Include="Charge\ChargeTemp.cs" />
+    <Compile Include="Charge\ChargeUpdate.cs" />
+    <Compile Include="CheckDetail\CheckDetailAdd.cs" />
+    <Compile Include="Check\CheckAdd.cs" />
+    <Compile Include="Check\CheckInfo.cs" />
+    <Compile Include="Check\CheckSelect.cs" />
+    <Compile Include="Check\CheckUpdate.cs" />
+    <Compile Include="Club\ClubAdd.cs" />
+    <Compile Include="Club\ClubDelete.cs" />
+    <Compile Include="Club\ClubInfo.cs" />
+    <Compile Include="ComplainCategory\SmartComplainCategory.cs" />
+    <Compile Include="ComplainCategory\SmartComplainCategoryAdd.cs" />
+    <Compile Include="ComplainCategory\SmartComplainCategoryStopOrUse.cs" />
+    <Compile Include="ComplainCategory\SmartComplainCategoryUpdate.cs" />
+    <Compile Include="Consult\ConsultDetail.cs" />
+    <Compile Include="Consult\Consult.cs" />
+    <Compile Include="Consult\ConsultAdd.cs" />
+    <Compile Include="Consult\ConsultDelete.cs" />
+    <Compile Include="CouponActivityDetail\CouponActivityDetailAdd.cs" />
+    <Compile Include="CouponActivityDetail\CouponActivityDetailDelete.cs" />
+    <Compile Include="CouponActivityDetail\CouponActivityDetailInfo.cs" />
+    <Compile Include="CouponActivityDetail\CouponActivityDetailSelect.cs" />
+    <Compile Include="CouponActivity\CouponActivityAdd.cs" />
+    <Compile Include="CouponActivity\CouponActivityDelete.cs" />
+    <Compile Include="CouponActivity\CouponActivityInfo.cs" />
+    <Compile Include="CouponActivity\CouponActivitySelect.cs" />
+    <Compile Include="CouponActivity\CouponActivityUpdate.cs" />
+    <Compile Include="CouponCategory\CouponCategoryAdd.cs" />
+    <Compile Include="CouponCategory\CouponCategoryDelete.cs" />
+    <Compile Include="CouponCategory\CouponCategoryInfo.cs" />
+    <Compile Include="CouponCategory\CouponCategoryUpdate.cs" />
+    <Compile Include="CustomerGroup\AccountConditionSelect.cs" />
+    <Compile Include="CustomerGroup\AddConditionSelectResult.cs" />
+    <Compile Include="CustomerGroup\BasicConditionSelect.cs" />
+    <Compile Include="CustomerGroup\CallbackConditionSelect.cs" />
+    <Compile Include="CustomerGroup\ConsultConditionSelect.cs" />
+    <Compile Include="CustomerGroup\CustomerFilterAdd.cs" />
+    <Compile Include="CustomerGroup\CustomerFilterDetailAdd.cs" />
+    <Compile Include="CustomerGroup\CustomerFilterDetailInfo.cs" />
+    <Compile Include="CustomerGroup\CustomerFilterFiltrateAdd.cs" />
+    <Compile Include="CustomerGroup\CustomerFilterInfo.cs" />
+    <Compile Include="CustomerGroup\CustomerGroupAdd.cs" />
+    <Compile Include="CustomerGroup\CustomerGroupBatchCallbackAdd.cs" />
+    <Compile Include="CustomerGroup\CustomerGroupDelete.cs" />
+    <Compile Include="CustomerGroup\CustomerGroupDetailAdd.cs" />
+    <Compile Include="CustomerGroup\CustomerGroupDetailDeleteAll.cs" />
+    <Compile Include="CustomerGroup\CustomerGroupDetailInfo.cs" />
+    <Compile Include="CustomerGroup\CustomerGroupDetailSelect.cs" />
+    <Compile Include="CustomerGroup\CustomerGroupInfo.cs" />
+    <Compile Include="CustomerGroup\CustomerGroupUpdate.cs" />
+    <Compile Include="CustomerGroup\DoorConditionSelect.cs" />
+    <Compile Include="CustomerGroup\ExecuteConditionSelect.cs" />
+    <Compile Include="CustomerGroup\FailtureConditionSelect.cs" />
+    <Compile Include="CustomerGroup\MemberConditionSelect.cs" />
+    <Compile Include="CustomerGroup\MergeCustomerFilter.cs" />
+    <Compile Include="CustomerGroup\OrderConditionSelect.cs" />
+    <Compile Include="CustomerGroup\TagConditionSelect.cs" />
+    <Compile Include="CustomerProfile\ProfileActiveCoupon.cs" />
+    <Compile Include="CustomerProfile\ProfileAppointment.cs" />
+    <Compile Include="CustomerProfile\ProfileCustomerDetail.cs" />
+    <Compile Include="CustomerProfile\ProfileCustomerStoreCommission.cs" />
+    <Compile Include="CustomerProfile\ProfileCustomerTag.cs" />
+    <Compile Include="CustomerProfile\ProfileCustomerUpdate.cs" />
+    <Compile Include="CustomerProfile\ProfileRelation.cs" />
+    <Compile Include="CustomerProfile\ProfileStoreCommissionAdd.cs" />
+    <Compile Include="CustomerProfile\ProfileTagGroup.cs" />
+    <Compile Include="CustomerProfile\ProfileVisit.cs" />
+    <Compile Include="Customer\CustomerAdd.cs" />
+    <Compile Include="Customer\CustomerCreateToday.cs" />
+    <Compile Include="Customer\CustomerIdentifyInfo.cs" />
+    <Compile Include="Customer\CustomerManager.cs" />
+    <Compile Include="Customer\CustomerSelect.cs" />
+    <Compile Include="DepositCharge\DepositChargeAdd.cs" />
+    <Compile Include="DepositCharge\DepositChargeInfo.cs" />
+    <Compile Include="DepositCharge\DepositChargeUpdate.cs" />
+    <Compile Include="DepositOrder\DepositOrderAdd.cs" />
+    <Compile Include="DepositOrder\DepositOrderDelete.cs" />
+    <Compile Include="DepositOrder\DepositOrderDetial.cs" />
+    <Compile Include="DepositRebateOrder\DepositRebateOrder.cs" />
+    <Compile Include="DepositRebateOrder\DepositRebateOrderAdd.cs" />
+    <Compile Include="DeptDesk\CanOperation.cs" />
+    <Compile Include="DeptDesk\DefaultProductOfCharge.cs" />
+    <Compile Include="DeptDesk\DeptVisitSelect.cs" />
+    <Compile Include="DeptDesk\DeptVisitToday.cs" />
+    <Compile Include="DeptDesk\OperationAdd.cs" />
+    <Compile Include="DeptDesk\OperationDelete.cs" />
+    <Compile Include="DeptDesk\OperationProductAdd.cs" />
+    <Compile Include="DeptDesk\OperationToday.cs" />
+    <Compile Include="DeptSend\DeptSend.cs" />
+    <Compile Include="DeptSend\DeptSendInfo.cs" />
+    <Compile Include="Dept\DeptDelete.cs" />
+    <Compile Include="Dept\DeptTemp.cs" />
+    <Compile Include="Dept\SmartDeptStopOrUse.cs" />
+    <Compile Include="Dept\SmartDeptUpdate.cs" />
+    <Compile Include="Equity\Equity.cs" />
+    <Compile Include="FailtureCategory\FailtureCategory.cs" />
+    <Compile Include="FailtureCategory\FailtureCategoryAdd.cs" />
+    <Compile Include="FailtureCategory\FailtureCategoryStopOrUse.cs" />
+    <Compile Include="FailtureCategory\FailtureCategoryUpdate.cs" />
+    <Compile Include="Failture\Failture.cs" />
+    <Compile Include="Failture\FailtureAdd.cs" />
+    <Compile Include="Failture\FailtureDelete.cs" />
+    <Compile Include="Failture\FailtureDetail.cs" />
+    <Compile Include="FrontDesk\CustomerInfoBefaultTriage.cs" />
+    <Compile Include="FrontDesk\TriageAdd.cs" />
+    <Compile Include="FrontDesk\TriageToday.cs" />
+    <Compile Include="FrontDesk\VisitToday.cs" />
+    <Compile Include="FrontDesk\Wait.cs" />
+    <Compile Include="FrontDesk\WaitAdd.cs" />
+    <Compile Include="HospitalPrint\HospitalPrintInfo.cs" />
+    <Compile Include="HospitalPrint\HospitalPrintUpdate.cs" />
+    <Compile Include="Hospital\HospitalInfo.cs" />
+    <Compile Include="Hospital\HospitalTemp.cs" />
+    <Compile Include="Inpatient\Inpatient.cs" />
+    <Compile Include="Inpatient\InpatientAdd.cs" />
+    <Compile Include="InvoiceDetail\InvoiceDetailAdd.cs" />
+    <Compile Include="Invoice\InvoiceAdd.cs" />
+    <Compile Include="Invoice\InvoiceDelete.cs" />
+    <Compile Include="Invoice\InvoiceInfo.cs" />
+    <Compile Include="Invoice\InvoiceSelect.cs" />
+    <Compile Include="Invoice\InvoiceUpdate.cs" />
+    <Compile Include="ItemGroup\ItemGroupAdd.cs" />
+    <Compile Include="ItemGroup\ItemGroupDelete.cs" />
+    <Compile Include="ItemGroup\ItemGroupInfo.cs" />
+    <Compile Include="ItemGroup\ItemGroupUpdate.cs" />
+    <Compile Include="ItemGroup\ItemInfo.cs" />
+    <Compile Include="Item\SmartItemAdd.cs" />
+    <Compile Include="Item\SmartItemDelete.cs" />
+    <Compile Include="Item\SmartItemInfo.cs" />
+    <Compile Include="Item\SmartItemUpdate.cs" />
+    <Compile Include="KnowledgeCategory\KnowledgeCategory.cs" />
+    <Compile Include="KnowledgeCategory\KnowledgeCategoryAdd.cs" />
+    <Compile Include="KnowledgeCategory\KnowledgeCategoryStopOrUse.cs" />
+    <Compile Include="KnowledgeCategory\KnowledgeCategoryUpdate.cs" />
+    <Compile Include="Knowledge\KnowledgeInfo.cs" />
+    <Compile Include="Knowledge\KnowledgeAdd.cs" />
+    <Compile Include="Knowledge\KnowledgeSelect.cs" />
+    <Compile Include="Knowledge\KnowledgeUpdate.cs" />
+    <Compile Include="Login\Login.cs" />
+    <Compile Include="Login\LoginUserInfo.cs" />
+    <Compile Include="MemberCategory\MemberCategory.cs" />
+    <Compile Include="MemberDesk\MemberDeskCustomer.cs" />
+    <Compile Include="OperationLog\OperationLogSelect.cs" />
+    <Compile Include="OperationLog\OperationLogType.cs" />
+    <Compile Include="OperationLog\SmartOperationLog.cs" />
+    <Compile Include="Option\OptionCustom.cs" />
+    <Compile Include="Option\OptionInfo.cs" />
+    <Compile Include="Option\OptionUpdateAdvanceSettings.cs" />
+    <Compile Include="Option\OptionUpdateAllowArrears.cs" />
+    <Compile Include="Option\OptionUpdateContentTemplate.cs" />
+    <Compile Include="Option\OptionUpdateCustomer.cs" />
+    <Compile Include="Option\OptionUpdateIntegralNum.cs" />
+    <Compile Include="Option\OptionUpdateMakeTime.cs" />
+    <Compile Include="Option\OptionUpdatePrivacyProtection.cs" />
+    <Compile Include="Option\OptionUpdateRegistration.cs" />
+    <Compile Include="Option\OptionUpdateWaitingDiagnosis.cs" />
+    <Compile Include="Order\AppointCharges.cs" />
+    <Compile Include="Order\ChargeSet.cs" />
+    <Compile Include="Order\DebtOrders.cs" />
+    <Compile Include="Order\NoDoneOrders.cs" />
+    <Compile Include="Order\Order.cs" />
+    <Compile Include="Order\OrderAdd.cs" />
+    <Compile Include="OwnerShipOrder\CustomerDeveloperAdd.cs" />
+    <Compile Include="OwnerShipOrder\CustomerUserSelect.cs" />
+    <Compile Include="OwnerShip\BatchConsultantUser.cs" />
+    <Compile Include="OwnerShip\BatchDeveloperUser.cs" />
+    <Compile Include="OwnerShipOrder\CustomerConsultanAdd.cs" />
+    <Compile Include="OwnerShipOrder\CustomerUserInfo.cs" />
+    <Compile Include="OwnerShip\OwnerShipInfo.cs" />
+    <Compile Include="OwnerShip\SingleConsultantUserUpdate.cs" />
+    <Compile Include="OwnerShip\SingleCustormInfo.cs" />
+    <Compile Include="OwnerShip\SingleDeveLoperUserUpdate.cs" />
+    <Compile Include="Photo\BatchImage.cs" />
+    <Compile Include="Photo\BatchPhotoAdd.cs" />
+    <Compile Include="Photo\Photo.cs" />
+    <Compile Include="Photo\PhotoDelete.cs" />
+    <Compile Include="Point\CustomerPointInfo.cs" />
+    <Compile Include="Point\DeductPoint.cs" />
+    <Compile Include="Position\PositionAdd.cs" />
+    <Compile Include="Position\PositionInfo.cs" />
+    <Compile Include="Position\PositionUpdate.cs" />
+    <Compile Include="Promoter\CommissionOut.cs" />
+    <Compile Include="Promoter\CommissionRecordAdd.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Dept\SmartDept.cs" />
+    <Compile Include="Dept\SmartDeptAdd.cs" />
+    <Compile Include="Province\ProvinceCity.cs" />
+    <Compile Include="Reception\ReceptionToday.cs" />
+    <Compile Include="Relation\RelationAdd.cs" />
+    <Compile Include="Relation\RelationDelete.cs" />
+    <Compile Include="Relation\RelationInfo.cs" />
+    <Compile Include="Relation\RelationUpdate.cs" />
+    <Compile Include="Report\ReportAge.cs" />
+    <Compile Include="Report\ReportCashDetail.cs" />
+    <Compile Include="Report\ReportDebtCashier.cs" />
+    <Compile Include="Report\ReportFailture.cs" />
+    <Compile Include="Report\ReportOperation.cs" />
+    <Compile Include="Report\ReportTreat.cs" />
+    <Compile Include="Role\MenuAction.cs" />
+    <Compile Include="Role\Menu.cs" />
+    <Compile Include="Role\Role.cs" />
+    <Compile Include="Role\RoleAdd.cs" />
+    <Compile Include="Role\RoleDelete.cs" />
+    <Compile Include="Role\RoleUpdate.cs" />
+    <Compile Include="SaleBack\SaleBackAdd.cs" />
+    <Compile Include="SaleBack\SaleBackDelete.cs" />
+    <Compile Include="SaleBack\SaleBackInfo.cs" />
+    <Compile Include="SaleBack\SaleBackSelect.cs" />
+    <Compile Include="SaleBack\SaleBackUpdate.cs" />
+    <Compile Include="Settlement\CashierOfUser.cs" />
+    <Compile Include="Settlement\Settlement.cs" />
+    <Compile Include="Settlement\SettlementAdd.cs" />
+    <Compile Include="ShareCategory\ShareCategoryAdd.cs" />
+    <Compile Include="ShareCategory\ShareCategoryDelete.cs" />
+    <Compile Include="ShareCategory\ShareCategoryInfo.cs" />
+    <Compile Include="ShareCategory\ShareCategoryUpdate.cs" />
+    <Compile Include="Shift\ShiftAdd.cs" />
+    <Compile Include="Shift\ShiftDelete.cs" />
+    <Compile Include="Shift\ShiftInfo.cs" />
+    <Compile Include="Shift\ShiftSelect.cs" />
+    <Compile Include="Shift\ShiftUpdate.cs" />
+    <Compile Include="SmartProductCategory\SmartProductCategoryAdd.cs" />
+    <Compile Include="SmartProductCategory\SmartProductCategoryDelete.cs" />
+    <Compile Include="SmartProductCategory\SmartProductCategoryInfo.cs" />
+    <Compile Include="SmartProductCategory\SmartProductCategoryUpdate.cs" />
+    <Compile Include="SmartProduct\SmartProductAdd.cs" />
+    <Compile Include="SmartProduct\SmartProductInfo.cs" />
+    <Compile Include="SmartProduct\SmartProductSelect.cs" />
+    <Compile Include="SmartProduct\SmartProductStopOrUse.cs" />
+    <Compile Include="SmartProduct\SmartProductUpdate.cs" />
+    <Compile Include="SmartPurchaseDetail\SmartPurchaseDetailAdd.cs" />
+    <Compile Include="SmartPurchaseDetail\SmartPurchaseDetailDelete.cs" />
+    <Compile Include="SmartPurchase\SmartPurchaseAdd.cs" />
+    <Compile Include="SmartPurchase\SmartPurchaseDelete.cs" />
+    <Compile Include="SmartPurchase\SmartPurchaseInfo.cs" />
+    <Compile Include="SmartPurchase\SmartPurchaseSelect.cs" />
+    <Compile Include="SmartPurchase\SmartPurchaseUpdate.cs" />
+    <Compile Include="SmartReturnDetail\SmartReturnDetailAdd.cs" />
+    <Compile Include="SmartReturn\SmartReturnAdd.cs" />
+    <Compile Include="SmartReturn\SmartReturnDelete.cs" />
+    <Compile Include="SmartReturn\SmartReturnInfo.cs" />
+    <Compile Include="SmartReturn\SmartReturnSelect.cs" />
+    <Compile Include="SmartReturn\SmartReturnUpdate.cs" />
+    <Compile Include="SmartShiftCategory\SmartShiftCategoryAdd.cs" />
+    <Compile Include="SmartShiftCategory\SmartShiftCategoryDispose.cs" />
+    <Compile Include="SmartShiftCategory\SmartShiftCategoryInfo.cs" />
+    <Compile Include="SmartShiftCategory\SmartShiftCategoryUpdate.cs" />
+    <Compile Include="SmartStock\SmartStockAdd.cs" />
+    <Compile Include="SmartStock\SmartStockInfo.cs" />
+    <Compile Include="SmartStock\SmartStockProductInfo.cs" />
+    <Compile Include="SmartStock\SmartStockSelect.cs" />
+    <Compile Include="SmartStock\SmartStockUpdate.cs" />
+    <Compile Include="SmartSupplier\SmartSupplierAdd.cs" />
+    <Compile Include="SmartSupplier\SmartSupplierDelete.cs" />
+    <Compile Include="SmartSupplier\SmartSupplierInfo.cs" />
+    <Compile Include="SmartSupplier\SmartSupplierSelect.cs" />
+    <Compile Include="SmartSupplier\SmartSupplierUpdate.cs" />
+    <Compile Include="SmartTool\SmartToolAdd.cs" />
+    <Compile Include="SmartTool\SmartToolInfo.cs" />
+    <Compile Include="SmartTool\SmartToolUpdate.cs" />
+    <Compile Include="SmartTool\SmartToolStopOrUse.cs" />
+    <Compile Include="SmartUnit\SmartUnitAdd.cs" />
+    <Compile Include="SmartUnit\SmartUnitDelete.cs" />
+    <Compile Include="SmartUnit\SmartUnitInfo.cs" />
+    <Compile Include="SmartUnit\SmartUnitUpdate.cs" />
+    <Compile Include="SmartUser\CYPBUser.cs" />
+    <Compile Include="SmartUser\FZUser.cs" />
+    <Compile Include="SmartUser\SmartUserInfo.cs" />
+    <Compile Include="SmartUser\SmartUserSelect.cs" />
+    <Compile Include="SmartUser\UserCustomerPermission.cs" />
+    <Compile Include="SmartUser\UserStopOrUse.cs" />
+    <Compile Include="SmartUser\UserTemp.cs" />
+    <Compile Include="SmartWarehouseManager\SmartWarehouseManagerAdd.cs" />
+    <Compile Include="SmartWarehouseManager\SmartWarehouseManagerDelete.cs" />
+    <Compile Include="SmartWarehouseManager\SmartWarehouseManagerInfo.cs" />
+    <Compile Include="SmartWarehouse\SmartWarehouseAdd.cs" />
+    <Compile Include="SmartWarehouse\SmartWarehouseDelete.cs" />
+    <Compile Include="SmartWarehouse\SmartWarehouseInfo.cs" />
+    <Compile Include="SmartWarehouse\SmartWarehouseStopOrUse.cs" />
+    <Compile Include="SmartWarehouse\SmartWarehouseUpdate.cs" />
+    <Compile Include="SSMLog\BatchSSM.cs" />
+    <Compile Include="SSMLog\BatchSubmitResult.cs" />
+    <Compile Include="SSMLog\SSMLogAdd.cs" />
+    <Compile Include="StoreManager\StoreInfoManager.cs" />
+    <Compile Include="StoreManager\StoreManagerAdd.cs" />
+    <Compile Include="StoreManager\StoreManagerDelete.cs" />
+    <Compile Include="StoreManager\StoreUserManager.cs" />
+    <Compile Include="Store\StoreAdd.cs" />
+    <Compile Include="Store\StoreBasicInfo.cs" />
+    <Compile Include="Store\StoreCommissionInfo.cs" />
+    <Compile Include="Store\StoreDelete.cs" />
+    <Compile Include="Store\StoreInfo.cs" />
+    <Compile Include="Store\StoreManagerInfo.cs" />
+    <Compile Include="Store\StoreSaleBackInfo.cs" />
+    <Compile Include="Store\StoreSelect.cs" />
+    <Compile Include="Store\StoreUpdate.cs" />
+    <Compile Include="Surgery\Sugery.cs" />
+    <Compile Include="Surgery\SugeryDone.cs" />
+    <Compile Include="Surgery\SurgeryAdd.cs" />
+    <Compile Include="Surgery\SurgeryDelete.cs" />
+    <Compile Include="Surgery\SurgeryDetail.cs" />
+    <Compile Include="Surgery\SurgeryUpdate.cs" />
+    <Compile Include="Symptom\ItemGetSymptomInfo.cs" />
+    <Compile Include="Symptom\Symptom.cs" />
+    <Compile Include="Symptom\SymptomAdd.cs" />
+    <Compile Include="Symptom\SymptomStopOrUse.cs" />
+    <Compile Include="Symptom\SymptomUpdate.cs" />
+    <Compile Include="TagGroup\TagGroupAdd.cs" />
+    <Compile Include="TagGroup\TagGroupDelete.cs" />
+    <Compile Include="TagGroup\TagGroupInfo.cs" />
+    <Compile Include="TagGroup\TagGroupUpdate.cs" />
+    <Compile Include="Tag\Tag.cs" />
+    <Compile Include="Treat\Treat.cs" />
+    <Compile Include="Treat\TreatAdd.cs" />
+    <Compile Include="Treat\TreatDay.cs" />
+    <Compile Include="Treat\TreatDelete.cs" />
+    <Compile Include="Treat\TreatDetail.cs" />
+    <Compile Include="Treat\TreatUpdate.cs" />
+    <Compile Include="UseDetail\UseDetailAdd.cs" />
+    <Compile Include="SmartUser\UserAdd.cs" />
+    <Compile Include="UserDiscount\UserDiscountAdd.cs" />
+    <Compile Include="UserDiscount\UserDiscountInfo.cs" />
+    <Compile Include="UserDiscount\UserDiscountSelect.cs" />
+    <Compile Include="UserDiscount\UserDiscountUpdate.cs" />
+    <Compile Include="UserTrigger\UserTriggerAdd.cs" />
+    <Compile Include="UserTrigger\UserTriggerDelete.cs" />
+    <Compile Include="UserTrigger\UserTriggerInfo.cs" />
+    <Compile Include="UserTrigger\UserTriggerUpdate.cs" />
+    <Compile Include="Use\UseAdd.cs" />
+    <Compile Include="Use\UseInfo.cs" />
+    <Compile Include="Use\UseSelect.cs" />
+    <Compile Include="Use\UseUpdate.cs" />
+    <Compile Include="WXOption\WXOptionDefaultChannel.cs" />
+    <Compile Include="WXOption\WXOptionInfo.cs" />
+    <Compile Include="WXOption\WXOptionSpecialChannel.cs" />
+    <Compile Include="WXOption\WXOptionUpdateOpenCommission.cs" />
+    <Compile Include="WXOption\WXOptionUpdateNoDiscount.cs" />
+    <Compile Include="WXOption\WXOptionUpdatePromoteLevel.cs" />
+    <Compile Include="WXOption\WXOptionUpdateRecommenDay.cs" />
+    <Compile Include="WXOption\WXOptionUpdateUserSendVolume.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Com.IFlyDog.CommonDTO\Com.IFlyDog.CommonDTO.csproj">
+      <Project>{83090A4D-EA80-4E89-9023-272CE55D2C14}</Project>
+      <Name>Com.IFlyDog.CommonDTO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

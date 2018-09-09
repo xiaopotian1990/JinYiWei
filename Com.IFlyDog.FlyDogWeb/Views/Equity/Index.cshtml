@@ -1,0 +1,995 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>权益设置</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all"/>
+    <link href="~/lay_component/css/layer.css" rel="stylesheet"/>
+    <link href="~/lay_component/css/global.css" rel="stylesheet"/>
+    <link href="~/lay_component/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="~/lay_component/css/table.css" rel="stylesheet"/>
+  
+</head>
+
+<body>
+<div class="admin-main" id="equityhtml">
+    <blockquote class="layui-elem-quote">
+        <a href="javascript:;" class="layui-btn layui-btn-small" id="equitydiscountAdd">
+            <i class="layui-icon">&#xe608;</i> 添加[折扣类]权益信息
+        </a>
+        <a href="javascript:;" class="layui-btn layui-btn-small" id="equitycustomAdd">
+            <i class="layui-icon">&#xe608;</i> 添加[自定义]权益信息
+        </a>
+        <a href="javascript:;" class="layui-btn layui-btn-small" id="equityCarAdd">
+            <i class="layui-icon">&#xe608;</i> 添加[打车]权益信息
+        </a>
+    </blockquote>
+
+    <fieldset class="layui-elem-field">
+        <legend><i class="layui-icon">&#xe644;</i>折扣类权益</legend>
+        <div class="layui-field-box equitydiscount" >
+
+        </div>
+        <script id="equity_template" type="text/html">
+            <table class="site-table table-hover">
+                <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>名称</th>
+                    <th>状态</th>
+                    <th>类型</th>
+                    <th>折扣(%)</th>
+                    <th>描述</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {{ for(var prop in it) { }}
+                {{ if (it[prop].Type==0){ }}
+                <tr class="" deptInfoId="{{= it[prop].ID }}">
+                    <td>{{= d++ }}</td>
+                    <td>{{= it[prop].Name }}</td>
+                    <td>
+                        {{ if (it[prop].Status !=0){ }}
+                        <i class="layui-icon" style="color: green;"></i>
+                        {{ } else { }}
+                        <i class="layui-icon" style="color: red;">ဇ</i>
+                        {{ } }}
+
+                    </td>
+                    @*<td>{{= it[prop].Type==0}}</td>*@
+
+                    {{if (it[prop].Type==0){ }}
+                    <td>折扣类权益</td>
+                    {{ } else { }}
+                    <td></td>
+                    {{ } }}
+
+                    <td>{{= it[prop].Discount.toFixed(2) }}</td>
+                    <td>{{= it[prop].Remark }}</td>
+                    <td class="disableTd">
+                        <a class="layui-btn layui-btn-mini Edit" id="infoiEdit" infoiEditId="{{= it[prop].ID }}"><i></i>编辑</a>
+
+                        {{ if (it[prop].Status ==0){ }}
+                        <a href="javascript:;" stopID="{{= it[prop].ID }}" status="1" class="layui-btn layui-btn-normal layui-btn-mini EditStopBut" id="">启用</a>
+
+                        {{ } else { }}
+
+                        <a href="javascript:;" stopID="{{= it[prop].ID }}" status="0" class="layui-btn layui-btn-danger layui-btn-mini EditStopBut" id="">停用</a>
+
+                        {{ } }}
+                    </td>
+                </tr>
+                {{ } }}
+                {{ } }}
+                </tbody>
+            </table>
+        </script>
+
+    </fieldset>
+
+    <fieldset class="layui-elem-field">
+        <legend><i class="layui-icon">&#xe60a;</i>自定义权益</legend>
+        <div class="layui-field-box equitycustom">
+
+        </div>
+        <script id="equitycustom_template" type="text/html">
+            <table class="site-table table-hover">
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>名称</th>
+                        <th>状态</th>
+                        <th>类型</th>
+                        <th>描述</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {{ for(var prop in it) { }}
+                    {{ if (it[prop].Type==1){ }}
+                    <tr class="" deptInfoId="{{= it[prop].ID }}">
+                        <td>{{= z++ }}</td>
+                        <td>{{= it[prop].Name }}</td>
+                        <td>
+                            {{ if (it[prop].Status !=0){ }}
+                            <i class="layui-icon" style="color: green;"></i>
+                            {{ } else { }}
+                            <i class="layui-icon" style="color: red;">ဇ</i>
+                            {{ } }}
+
+                        </td>
+
+                        {{if (it[prop].Type==0){ }}
+                        <td>折扣类权益</td>
+                        {{ } else { }}
+                        <td>自定义权益</td>
+                        {{ } }}
+
+                        <td>{{= it[prop].Remark }}</td>
+                        <td class="disableTd">
+                            <a class="layui-btn layui-btn-mini Edit" id="infoiEdit" infoiEditId="{{= it[prop].ID }}"><i></i>编辑</a>
+
+                            {{ if (it[prop].Status ==0){ }}
+                            <a href="javascript:;" stopID="{{= it[prop].ID }}" status="1" class="layui-btn layui-btn-normal layui-btn-mini EditStopBut" id="">启用</a>
+
+                            {{ } else { }}
+
+                            <a href="javascript:;" stopID="{{= it[prop].ID }}" status="0" class="layui-btn layui-btn-danger layui-btn-mini EditStopBut" id="">停用</a>
+
+                            {{ } }}
+                        </td>
+                    </tr>
+                    {{ } }}
+                    {{ } }}
+                </tbody>
+            </table>
+        </script>
+
+    </fieldset>
+
+    <fieldset class="layui-elem-field">
+        <legend><i class="layui-icon">&#xe644;</i>打车权益</legend>
+        <div class="layui-field-box carAdd-table">
+
+        </div>
+        <script class="carAdd-tmp" type="text/html">
+            <table class="site-table table-hover">
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>名称</th>
+                        <th>状态</th>
+                        <th>类型</th>
+                        <th>次数</th>
+                        <th>描述</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {{ for(var prop in it) { }}
+                    {{ if (it[prop].Type==2){ }}
+                    <tr class="" deptInfoId="{{= it[prop].ID }}">
+                        <td>{{= d++ }}</td>
+                        <td>{{= it[prop].Name }}</td>
+                        <td>
+                            {{ if (it[prop].Status !=0){ }}
+                            <i class="layui-icon" style="color: green;"></i>
+                            {{ } else { }}
+                            <i class="layui-icon" style="color: red;">ဇ</i>
+                            {{ } }}
+
+                        </td>
+                        @*<td>{{= it[prop].Type==2}}</td>*@
+
+                        {{if (it[prop].Type==2){ }}
+                        <td>打车权益</td>
+                        {{ } else { }}
+                        <td></td>
+                        {{ } }}
+
+                        <td>{{= it[prop].Discount }}</td>
+                        <td>{{= it[prop].Remark }}</td>
+                        <td class="disableTd">
+                            <a class="layui-btn layui-btn-mini car-edit" data-id="{{= it[prop].ID }}"><i></i>编辑</a>
+
+                            {{ if (it[prop].Status ==0){ }}
+                            <a href="javascript:;" stopID="{{= it[prop].ID }}" status="1" class="layui-btn layui-btn-normal layui-btn-mini EditStopBut" id="">启用</a>
+
+                            {{ } else { }}
+
+                            <a href="javascript:;" stopID="{{= it[prop].ID }}" status="0" class="layui-btn layui-btn-danger layui-btn-mini EditStopBut" id="">停用</a>
+
+                            {{ } }}
+                        </td>
+                    </tr>
+                    {{ } }}
+                    {{ } }}
+                </tbody>
+            </table>
+        </script>
+
+    </fieldset>
+</div>
+    <div class="carAdd-pop hide">
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend>打车权益</legend>
+            <form class="layui-form carAdd-form">
+
+            </form>
+        </fieldset>
+    </div>
+
+@*<script src="~/lay_component/plugins/layui/layui.js"></script>*@
+<!--公共JS-->
+<script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/Scripts/FlyDog.Common.js"></script>
+    <script src="~/lay_component/js/hcommon.js"></script>
+<script src="~/doT-master/doT-master/doT.min.js"></script>
+    <script src="/lay_component/plugins/layui/layui.js"></script>
+<script src="~/lay_component/plugins/layui/lay/lib/jquery.js"></script>
+<script src="~/lay_component/plugins/layui/lay/modules/layer.js"></script>
+<!--添加折扣权益信息-->
+<div id="showequitydiscountAddInfo_div"></div>
+<script id="showequitydiscountAddInfo_template" type="text/x-dot-template">
+
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>添加折扣权益信息</legend>
+        </fieldset>
+        <div class="layui-form-item" style="margin-left: 120px">
+            <label class="layui-form-label">名称</label>
+            <div class="layui-input-inline ">
+                <input type="text" id="equitytdiscountinfoAddName" lay-verify="title" autocomplete="off" placeholder="请输入名称" class="layui-input ">
+            </div>
+        </div>
+        <div class="layui-form-item" style="margin-left: 120px">
+            <label class="layui-form-label">折扣(0-100)</label>
+            <div class="layui-input-inline ">
+                <input type="text" id="equitytdiscountinfoAddDiscount" lay-verify="title" autocomplete="off" placeholder="请输入折扣" class="layui-input ">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text" style="margin-left: 120px">
+            <label class="layui-form-label">描述</label>
+            <div class="layui-input-inline">
+                <textarea id="equitytdiscountinfoAddRemark" placeholder="请输入描述内容" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item " style="margin-left: 219px;margin-top: 40px">
+            <button class="layui-btn layui-btn-normal dept_commit">确认提交</button>
+            <button class="layui-btn layui-btn-danger dept_close">取消关闭</button>
+        </div>
+    </script>
+
+<!--添加自定义权益信息-->
+<div id="showequitycustomAddInfo_div"></div>
+<script id="showequitycustomAddInfo_template" type="text/x-dot-template">
+
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>添加自定义权益</legend>
+        </fieldset>
+        <div class="layui-form-item" style="margin-left: 120px">
+            <label class="layui-form-label">名称</label>
+            <div class="layui-input-inline ">
+                <input type="text" id="equitytcustominfoAddName" lay-verify="title" autocomplete="off" placeholder="请输入名称" class="layui-input ">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text" style="margin-left: 120px">
+            <label class="layui-form-label">描述</label>
+            <div class="layui-input-inline">
+                <textarea id="equitytcustominfoAddRemark" placeholder="请输入描述内容" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item " style="margin-left: 219px;margin-top: 40px">
+            <button class="layui-btn layui-btn-normal dept_commit">确认提交</button>
+            <button class="layui-btn layui-btn-danger dept_close">取消关闭</button>
+        </div>
+    </script>
+
+<!--修改折扣权益信息-->
+<script id="showdiscountEditInfo_template" type="text/x-dot-template">
+
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>修改折扣权益信息</legend>
+        </fieldset>
+    
+    {{ if (it.Type==0){ }}
+        <div class="layui-form-item" style="margin-left: 120px" hidden>
+            <label class="layui-form-label">编号</label>
+            <div class="layui-input-inline ">
+                <input type="text" id="infoEditID" lay-verify="title" autocomplete="off" disabled="disabled" value="{{=it.ID}}" class="layui-input ">
+            </div>
+        </div>
+        <div class="layui-form-item" style="margin-left: 120px">
+            <label class="layui-form-label">名称</label>
+            <div class="layui-input-inline ">
+                <input type="text" id="infoEditName" lay-verify="title" autocomplete="off" placeholder="请输入名称" value="{{=it.Name}}" class="layui-input ">
+            </div>
+        </div>
+        <div class="layui-form-item" style="margin-left: 120px">
+            <label class="layui-form-label">折扣(0-100)</label>
+            <div class="layui-input-inline ">
+                <input type="text" id="infoEditDiscount" lay-verify="title" autocomplete="off" placeholder="请输入折扣" value="{{=it.Discount}}" class="layui-input ">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text" style="margin-left: 120px">
+            <label class="layui-form-label">描述</label>
+            <div class="layui-input-inline">
+                <textarea id="infoEditRemark" placeholder="请输入描述内容" class="layui-textarea">{{=it.Remark}}</textarea>
+            </div>
+        </div>
+  
+    {{ } }}
+        <div class="layui-form-item " style="margin-left: 219px;margin-top: 40px">
+            <button class="layui-btn layui-btn-normal dept_commit">确认提交</button>
+            <button class="layui-btn layui-btn-danger dept_close">取消关闭</button>
+        </div>
+    </script>
+<div id="showdiscountEditInfo_div"></div>
+
+<!--修改自定义权益信息-->
+    <script id="showcustomEditInfo_template" type="text/x-dot-template">
+
+        {{ if (it.Type==1){ }}
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>修改自定义权益</legend>
+        </fieldset>
+        <div class="layui-form-item" style="margin-left: 120px" hidden>
+            <label class="layui-form-label">编号</label>
+            <div class="layui-input-inline ">
+                <input type="text" id="infoEditID" lay-verify="title" autocomplete="off" disabled="disabled" value="{{= it.ID}}" class="layui-input ">
+            </div>
+        </div>
+        <div class="layui-form-item" style="margin-left: 120px">
+            <label class="layui-form-label">名称</label>
+            <div class="layui-input-inline ">
+                <input type="text" id="infoEditName" lay-verify="title" autocomplete="off" value="{{= it.Name}}" class="layui-input ">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text" style="margin-left: 120px">
+            <label class="layui-form-label">描述</label>
+            <div class="layui-input-inline">
+                <textarea id="infoEditRemark" placeholder="请输入描述内容" class="layui-textarea">{{= it.Remark}}</textarea>
+            </div>
+        </div>
+        {{ } }}
+        <div class="layui-form-item " style="margin-left: 219px;margin-top: 40px">
+            <button class="layui-btn layui-btn-normal dept_commit">确认提交</button>
+            <button class="layui-btn layui-btn-danger dept_close">取消关闭</button>
+        </div>
+
+    </script>
+    <script id="carAdd-tmp" type="text/x-dot-template">
+
+        {{ if(it.Type==2){ }}
+        <div class="layui-form-item" style="margin-left: 120px" hidden>
+            <label class="layui-form-label">编号</label>
+            <div class="layui-input-inline ">
+                <input type="text" name="aID" lay-verify="title" autocomplete="off" disabled="disabled" value="{{= it.ID }}" class="layui-input ">
+            </div>
+        </div>
+        <div class="layui-form-item" style="margin-left: 120px">
+            <label class="layui-form-label">名称</label>
+            <div class="layui-input-inline ">
+                <input type="text" name="aName" lay-verify="title" autocomplete="off" value="{{= it.Name }}" class="layui-input ">
+            </div>
+        </div>
+        <div class="layui-form-item" style="margin-left: 120px">
+            <label class="layui-form-label">数量</label>
+            <div class="layui-input-inline ">
+                <input type="text" name="aDiscount" lay-verify="title" autocomplete="off" value="{{= it.Discount }}" class="layui-input ">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text" style="margin-left: 120px">
+            <label class="layui-form-label">描述</label>
+            <div class="layui-input-inline">
+                <textarea name="aRemark" placeholder="请输入描述内容" class="layui-textarea">{{= it.Remark }}</textarea>
+            </div>
+        </div>
+        {{ } }}
+        <div class="layui-form-item " style="margin-left: 219px;margin-top: 40px">
+            <span class="layui-btn layui-btn-normal submit-car">确认提交</span>
+            <span class="layui-btn layui-btn-danger cancel-car">取消关闭</span>
+        </div>
+
+    </script>
+
+@*<div id="showcustomEditInfo_div"></div>*@
+
+<script type="text/javascript">
+    layui.use(["form"], function () {
+        window.form = layui.form();
+    });
+    var url = "";
+    var d = 1;
+    var z = 1;
+    //显示
+    $("#equityhtml").ready(function() {
+        var getinfoFunc = function() {
+            var url = "/Equity/EquityIndexGet";
+            var paraObj = new Object();
+            var data = ajaxProcess(url, paraObj);
+
+            //折扣类权益
+            var interTextdiscount = doT.template($("#equity_template").text());
+            $(".equitydiscount").html(interTextdiscount(data.Data));
+
+            //自定义权益
+            var interTextcustom = doT.template($("#equitycustom_template").text());
+            $(".equitycustom").html(interTextcustom(data.Data));
+            //打车权益
+            var interTextcustom = doT.template($(".carAdd-tmp").text());
+            $(".carAdd-table").html(interTextcustom(data.Data));
+        };
+        getinfoFunc();
+        getPageData = getinfoFunc;
+    });
+
+    //添加数据
+    $("#equityhtml").ready(function() {
+        //添加折扣类权益
+        $("#equitydiscountAdd").on("click",
+            function() {
+                var innerText = doT.template($("#showequitydiscountAddInfo_template").text());
+                var contentData = $("#showequitydiscountAddInfo_div").html(innerText());
+
+                //页面层
+                layer.open({
+                    type: 1,
+                    title: "添加折扣类权益",
+                    //skin: 'layui-layer-rim', //加上边框
+                    skin: 'layerbackground_color',
+                    area: ["35%;min-width:680px;max-width:800px", "65%;min-height:500px;max-height:600px"], //宽高
+                    shade: [0.8, '#B3B3B3', false],
+                    closeBtn: 1,
+                    Boolean: false,
+                    shadeClose: false, //点击遮罩关闭
+                    content: contentData,
+                    success: function(layero, index) {
+                        // 提交
+                        $(".layui-btn.layui-btn-normal.dept_commit").on("click",function() {
+
+                                    var addName = $("#equitytdiscountinfoAddName").val();
+                                    var addDiscount = $("#equitytdiscountinfoAddDiscount").val();
+                                    var addRemark = $("#equitytdiscountinfoAddRemark").val();
+
+                                    if (addName === "" || addName.length > 20) {
+                                        layer.msg('名称不可超出20字或不可为空!抱歉!', { icon: 5, style: "color:red" });
+                                        return false;
+                                    }
+                                    var reg = /^[0-9]*$/;
+                                    if (!reg.test(addDiscount) || addDiscount === "") {
+                                        layer.msg('折扣只可为整数!抱歉!', { icon: 5, style: "color:red" });
+                                        return false;
+                                    }
+                                    if (addDiscount > 100) {
+                                        layer.msg('折扣只允许100之内!抱歉!', { icon: 5, style: "color:red" });
+                                        return false;
+                                    }
+                                    if (addRemark.length > 30 || addRemark === "") {
+                                        layer.msg('描述不可超出30字或不可为空!抱歉!', { icon: 5, style: "color:red" });
+                                        return false;
+                                    }
+
+                                    var realData = {};
+                                    realData.Name = addName;
+                                    realData.Remark = addRemark;
+                                    realData.Discount = addDiscount;
+                                    realData.Type = 0;
+
+
+                                    var paraObj = {};
+                                    paraObj.data = realData;
+
+                                    var url = "/Equity/EquityAdd";
+                                    var data = ajaxProcess(url, paraObj);
+                                    if (data) {
+                                        if (parseInt(data.ResultType) === 0) { //请求成功返回
+                                            $("#showequitydiscountAddInfo_div").html("");
+                                            var message = data.Message;
+                                            //关闭窗口
+                                            layer.close(index);
+                                            //提示消息
+                                            layer.msg(message, { icon: 6 });
+                                            //刷新主页面数据.
+                                            setTimeout(function() {
+                                                    location.reload();
+                                                },
+                                                500);
+
+                                        } else {
+                                            //请求成功返回,但是后台出现错误
+                                            layer.msg(data.Message, { icon: 5 });
+                                        }
+                                    }
+                                    return false;
+                                });
+                        //取消并关闭按钮
+                        $(".layui-btn.layui-btn-danger.dept_close")
+                            .on("click",
+                                function() {
+                                    $("#showequitydiscountAddInfo_div").html("");
+                                    layer.close(index);
+                                });
+                        //右上角关闭回调
+                    },
+                    cancel: function(index) {
+                        $("#showequitydiscountAddInfo_div").html("");
+                        layer.close(index);
+                        return false;
+                    }
+                });
+            });
+
+        $("#equityCarAdd").click(function () {
+            var data = { Type: 2, Name: "", Remark: "", Discount: "" };
+            fillData(".carAdd-form", "#carAdd-tmp", data);
+            url = "EquityAdd";
+            openPop("", ".carAdd-pop", "添加打车权益");
+        });
+        $(".carAdd-table").on("click", ".car-edit", function () {
+            var dotEle = [{ container: ".carAdd-form", tmp: "#carAdd-tmp" }];
+            params.setDataParam("ID", $(this).data("id"));
+            ajaxObj.setUrl("/Equity/EquityGetByID").setParaObj(params).setDotEle(dotEle).getData();
+            url = "EquityUpdate";
+            openPop("", ".carAdd-pop", "修改打车权益");
+        });
+        $(".carAdd-pop").on("click", ".submit-car", function () {
+            params.setDataParams({
+                ID:$("[name=aID]").val(),
+                Name: $("[name=aName]").val(),
+                Remark: $("[name=aRemark]").val(),
+                Type: 2,
+                Discount: $("[name=aDiscount]").val()
+            });
+            if (ajaxObj.setUrl("/Equity/" + url).setParaObj(params).setIsUpdateTrue().getData().ResultType == 0) {
+                closeLayer(this);
+            }
+        });
+        $(".carAdd-pop").on("click", ".cancel-car", function () {
+            closeLayer(this);
+        });
+        //添加自定义权益
+        $("#equitycustomAdd").on("click",
+            function() {
+                var innerText = doT.template($("#showequitycustomAddInfo_template").text());
+
+                var contentData = $("#showequitycustomAddInfo_div").html(innerText());
+
+                //页面层
+                layer.open({
+                    type: 1,
+                    title: "添加自定义权益",
+                    //skin: 'layui-layer-rim', //加上边框
+                    skin: 'layerbackground_color',
+                    area: ["35%;min-width:680px;max-width:800px", "65%;min-height:500px;max-height:600px"], //宽高
+                    shade: [0.8, '#B3B3B3', false],
+                    closeBtn: 1,
+                    Boolean: false,
+                    shadeClose: false, //点击遮罩关闭
+                    content: contentData,
+                    success: function(layero, index) {
+                        // 提交
+                        $(".layui-btn.layui-btn-normal.dept_commit")
+                            .on("click",
+                                function() {
+
+                                    var addName = $("#equitytcustominfoAddName").val();
+                                    var addRemark = $("#equitytcustominfoAddRemark").val();
+
+                                    if (addRemark.length > 30 || addRemark === "") {
+                                        layer.msg('描述不可超出30字!抱歉!', { icon: 5, style: "color:red" });
+                                        return false;
+                                    }
+
+                                    var realData = {};
+                                    realData.Name = addName;
+                                    realData.Remark = addRemark;
+                                    realData.Type = 1;
+
+                                    var paraObj = {};
+                                    paraObj.data = realData;
+
+                                    var url = "/Equity/EquityAdd";
+                                    var data = ajaxProcess(url, paraObj);
+                                    if (data) {
+                                        if (parseInt(data.ResultType) === 0) { //请求成功返回
+                                            $("#showequitycustomAddInfo_div").html("");
+                                            var message = data.Message;
+                                            //关闭窗口
+                                            layer.close(index);
+                                            //提示消息
+                                            layer.msg(message, { icon: 6 });
+                                            //刷新主页面数据.
+                                            setTimeout(function() {
+                                                    location.reload();
+                                                },
+                                                500);
+
+                                        } else {
+                                            //请求成功返回,但是后台出现错误
+                                            layer.msg(data.Message, { icon: 5 });
+                                        }
+                                    }
+                                    return false;
+                                });
+                        //取消并关闭按钮
+                        $(".layui-btn.layui-btn-danger.dept_close")
+                            .on("click",
+                                function() {
+                                    $("#showequitycustomAddInfo_div").html("");
+                                    layer.close(index);
+                                });
+                        //右上角关闭回调
+                    },
+                    cancel: function(index) {
+                        $("#showequitycustomAddInfo_div").html("");
+                        layer.close(index);
+                        return false;
+                    }
+                });
+            });
+    });
+
+    //停用数据
+    $("#equityhtml").ready(function() {
+        ///使用停用
+        $($(".layui-btn-mini.EditStopBut"))
+            .on("click",
+                function() {
+
+                    var showEditStop = $(this);
+                    var infoStopStatus = $(showEditStop).attr("status");
+
+                    var showEditStopID = $(this);
+                    var infoStopID = $(showEditStopID).attr("stopID");
+
+                    if (infoStopStatus === "0") {
+
+                        layer.confirm('您确定停用本条数据？',
+                            {
+                                btn: ['确定', '取消'] //按钮
+                            },
+                            function() {
+                                //给dto赋值
+                                var realData = {};
+                                realData.ID = infoStopID;
+                                realData.Status = infoStopStatus;
+
+
+                                //组合传值
+                                var paraObj = {};
+                                paraObj.data = realData;
+
+                                var url = "/Equity/EquityDisable";
+                                var data = ajaxProcess(url, paraObj);
+
+
+                                if (data) {
+                                    if (parseInt(data.ResultType) === 0) { //请求成功返回
+                                        var message = data.Message;
+                                        //关闭窗口
+
+                                        //提示消息
+                                        layer.msg(message, { icon: 6 });
+
+                                        //刷新主页面数据.
+
+                                        setTimeout(function() {
+                                                location.reload();
+                                            },
+                                            500);
+                                    } else {
+                                        //请求成功返回,但是后台出现错误
+                                        layer.msg(data.Message, { icon: 5 });
+                                    }
+                                }
+                                return false;
+
+                            },
+                            function() {
+                                layer.msg('已经取消此操作',
+                                {
+                                    icon: 6
+                                });
+                            });
+                    } else {
+                        layer.confirm('您确定启用本条数据？',
+                            {
+                                btn: ['确定', '取消'] //按钮
+                            },
+                            function() {
+                                //给dto赋值
+                                var realData = {};
+                                realData.ID = infoStopID;
+                                realData.Status = infoStopStatus;
+
+                                //组合传值
+                                var paraObj = {};
+                                paraObj.data = realData;
+
+
+                                var url = "/Equity/EquityDisable";
+                                var data = ajaxProcess(url, paraObj);
+
+                                if (data) {
+                                    if (parseInt(data.ResultType) === 0) { //请求成功返回
+                                        var message = data.Message;
+                                        //提示消息
+                                        layer.msg(message, { icon: 6 });
+                                        //刷新主页面数据.
+                                        //$(".EditStopBut").removeClass()
+                                        //    .addClass("layui-btn layui-btn-normal layui-btn-mini EditStopBut")
+                                        //    .text("启用");
+                                        setTimeout(function() {
+                                                location.reload();
+                                            },
+                                            500);
+                                    } else {
+                                        //请求成功返回,但是后台出现错误
+                                        layer.msg(data.Message, { icon: 5 });
+                                    }
+                                }
+                                return false;
+                            },
+                            function() {
+                                layer.msg('已经取消此操作',
+                                {
+                                    icon: 6
+                                });
+                            });
+                    }
+                });
+
+    });
+
+    //修改折扣权益数据
+    $(document).on("click",
+        ".Edit",
+        function() {
+            //获取ID
+            var showEditDialog = $(this);
+            var infoId = $(showEditDialog).attr("infoiEditId");
+            var apiurl = "/Equity/EquityGetByID";
+
+            //DTO赋值
+            var dto = new Object();
+            dto.ID = infoId;
+            //组装
+            var paraObj = new Object();
+            paraObj.data = dto;
+            //
+            var data = ajaxProcess(apiurl, paraObj);
+
+            //返回类型
+            var resultType = data.ResultType;
+            var dataType = data.Data.Type;
+            if (parseInt(resultType) === 0) {
+
+                var contentData;
+
+                if ($(this).parents(".equitydiscount").length > 0) {
+                    var interTextdiscount = doT.template($("#showdiscountEditInfo_template").text());
+                    contentData = $("#showdiscountEditInfo_div").html(interTextdiscount(data.Data));
+                }
+
+                if ($(this).parents(".equitycustom").length > 0) {
+
+                    var interTextcustom = doT.template($("#showcustomEditInfo_template").text());
+                    contentData = $("#showdiscountEditInfo_div").html(interTextcustom(data.Data));
+                }
+
+
+                //打开浮窗
+                layer.open({
+                    type: 1,
+                    title: "修改折扣权益",
+                    skin: 'layerbackground_color',
+                    area: ["35%;min-width:680px;max-width:800px", "65%;min-height:500px;max-height:600px"], //宽高
+                    shade: [0.8, '#B3B3B3', false],
+                    closeBtn: 1,
+                    Boolean: false,
+                    shadeClose: false, //点击遮罩关闭
+                    content: contentData,
+                    success: function(layero, index) {
+
+                        ////确认提交
+                        $(document).on("click",
+                            ".dept_commit",
+                            function () {
+                              
+                                var id = $("#infoEditID").val();
+                                var editName = $("#infoEditName").val();
+                                var editDiscount = $("#infoEditDiscount").val();
+                                var editRemark = $("#infoEditRemark").val();
+
+                                if (editName === "" || editName.length > 20) {
+                                    layer.msg('名称不可超出20字或不可为空!抱歉!', { icon: 5, style: "color:red" });
+                                    return false;
+                                }
+
+                                if (dataType != "1") {
+                                    var reg = /^(\d+(\.\d{1,2})?)?$/;
+                                    if (!reg.test(editDiscount) || editDiscount === "") {
+                                        layer.msg('折扣输入不正确!抱歉!', { icon: 5, style: "color:red" });
+                                        return false;
+                                    }
+
+                                    if (editDiscount > 100) {
+                                        layer.msg('折扣只允许100之内!抱歉!', { icon: 5, style: "color:red" });
+                                        return false;
+                                    }
+
+                                    if (editRemark.length > 30 || editRemark === "") {
+                                        layer.msg('描述不可超出30字或不可为空!抱歉!', { icon: 5, style: "color:red" });
+                                        return false;
+                                    }
+                                }
+                                
+
+                                //赋值
+                                var dto = {};
+                                dto.ID = id;
+                                dto.Name = editName;
+                                dto.Remark = editRemark;
+                                dto.Discount = editDiscount;
+                                dto.Type = dataType;
+                                                                                             
+                                //组装DTO
+                                var paraObj = new Object();
+                                paraObj.data = dto;
+
+                                var url = "/Equity/EquityUpdate";
+                                var data = ajaxProcess(url, paraObj);
+
+                      
+                             
+                                if (data) {
+                                    if (parseInt(data.ResultType) === 0) { //请求成功返回
+
+                                        $("#showdiscountEditInfo_div").html("");
+                                        $("#showdiscountEditInfo_div").html("");
+                                        var message = data.Message;
+                                        //关闭窗口
+                                        layer.close(index);
+                                        //提示信息
+                                        layer.msg(message, { icon: 6 });
+                                        //刷新主页面数据.
+                                        setTimeout(function() {
+                                                location.reload();
+                                            },
+                                            500);;
+                                    } else {
+                                        //请求成功返回,但是后台出现错误
+                                        layer.msg(data.Message, { icon: 5 });
+                                    }
+                                }
+                                return false;
+                         
+                            });
+                        //取消关闭按钮
+                        $(document)
+                            .on("click",
+                                ".dept_close",
+                                function() {
+                                    $("#showdiscountEditInfo_div").html("");
+                                    layer.close(index);
+                                });
+                    },
+                    cancel: function(index) {
+                        $("#showdiscountEditInfo_div").html("");
+                        layer.close(index);
+                    }
+                });
+            }
+        });
+
+    /*
+            if (parseInt(resultType) === 0 || dataType === 1) {
+                console.log(dataType + "000000000000000000");
+                var innerText = doT.template($("#showcustomEditInfo_template").text());
+                var contentDatacustom = $("#showcustomEditInfo_div").html(innerText(data.Data));
+
+                //打开浮窗
+                layer.open({
+                    type: 1,
+                    title: "修改自定义权益",
+                    skin: 'layerbackground_color',
+                    area: ["35%;min-width:680px;max-width:800px", "65%;min-height:500px;max-height:600px"], //宽高
+                    shade: [0.8, '#B3B3B3', false],
+                    closeBtn: 1,
+                    Boolean: false,
+                    shadeClose: false, //点击遮罩关闭
+                    content: contentDatacustom,
+                    success: function(layero, indexCustom) {
+
+                        ////确认提交
+                        //$(document).on("click",
+                        //    ".dept_commit",
+                        //    function() {
+
+                        //        var addName = $("#equitytdiscountinfoAddName").val();
+                        //        var addDiscount = $("#equitytdiscountinfoAddDiscount").val();
+                        //        var addRemark = $("#equitytdiscountinfoAddRemark").val();
+
+                        //        if (addName === "" || addName.length > 20) {
+                        //            layer.msg('名称不可超出20字或不可为空!抱歉!', { icon: 5, style: "color:red" });
+                        //            return false;
+                        //        }
+                        //        var reg = /^[0-9]*$/;
+                        //        if (!reg.test(addDiscount) || addDiscount === "") {
+                        //            layer.msg('折扣只可为整数!抱歉!', { icon: 5, style: "color:red" });
+                        //            return false;
+                        //        }
+                        //        if (addDiscount > 100) {
+                        //            layer.msg('折扣只允许100之内!抱歉!', { icon: 5, style: "color:red" });
+                        //            return false;
+                        //        }
+                        //        if (addRemark.length > 30 || addRemark === "") {
+                        //            layer.msg('描述不可超出30字或不可为空!抱歉!', { icon: 5, style: "color:red" });
+                        //            return false;
+                        //        }
+
+                        //        var realData = {};
+                        //        realData.Name = addName;
+                        //        realData.Remark = addRemark;
+                        //        realData.Discount = addDiscount;
+                        //        realData.Type = 0;
+
+
+                        //        var paraObj = {};
+                        //        paraObj.data = realData;
+
+                        //        if (data) {
+                        //            if (parseInt(data.ResultType) === 0) { //请求成功返回
+
+                        //                $("#showchannelEditInfo_div").html("");
+                        //                var message = data.Message;
+                        //                //关闭窗口
+                        //                layer.close(index1);
+                        //                //提示信息
+                        //                layer.msg(message, { icon: 6 });
+                        //                //刷新主页面数据.
+                        //                setTimeout(function() {
+                        //                        location.reload();
+                        //                    },
+                        //                    500);;
+                        //            } else {
+                        //                //请求成功返回,但是后台出现错误
+                        //                layer.msg(data.Message, { icon: 5 });
+                        //            }
+                        //        }
+                        //        return false;
+                        //    });
+                        //取消关闭按钮
+                        $(document)
+                            .on("click",
+                                ".dept_close",
+                                function() {
+                                    $("#showcustomEditInfo_div").html("");
+                                    layer.close(indexCustom);
+                                });
+                    },
+                    cancel: function() {
+                        $("#showcustomEditInfo_div").html("");
+                        layer.close(indexCustom);
+                    }
+                });
+
+            } else {
+                return false;
+            }*/
+</script>
+</body>
+
+</html>

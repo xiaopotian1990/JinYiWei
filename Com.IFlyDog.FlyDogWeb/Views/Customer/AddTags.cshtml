@@ -1,0 +1,68 @@
+﻿@using Com.IFlyDog.CommonDTO
+@using Com.IFlyDog.FlyDogWeb.Helper
+ <div class="layui-field-box ">
+    <div class="site-text site-block">
+        <form class="layui-form tags-form">
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">选择标签:</label>
+                <div class="layui-input-block">
+                    @Html.SelectCategoryByHospital(SelectType.TagCategory, "AddTagCategory", "AddTagCategory")
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label"></label>
+                <div class="layui-input-block add-tags">
+
+                </div>
+            </div>
+            <div class="clearfix m-20">
+                <span class="layui-btn Tags add-submit fr">立即提交</span>
+                <span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () { 
+form.on("select(Tags)", function (ele) {
+    if ($(".add-tags").find("[tagsId=" + ele.value + "]").length === 0) {
+        $(".add-tags").append("<span class='layui-btn-small layui-btn m-bt-10' tagsId=" + ele.value + ">" +
+            $(ele.elem).find(":selected").text() + " <i class='layui-icon'>&#xe640;</i></span>");
+    };
+    form.render();
+});
+
+$(".AddTagCategory").attr("lay-filter", "Tags"); 
+$(".add-tags").on("click", "span", function () { $(this).remove(); });
+//标签提交
+$(".add-submit").on("click", function () {
+
+    var tags = [];
+    $(".add-tags").find("span").each(function (i, item) {
+        item = $(item);
+            tags.push(item.attr("tagsId")
+        );
+    }); 
+        var paraObj = {};
+        paraObj.data = {
+            CustomerID: custid,
+            Tags: tags
+        }; 
+        var url = "/CustomerProfile/" + $(this).parents(".layui-layer").data("url");
+        var result = ajaxProcess(url, paraObj);
+        if (result) {
+            if (result.ResultType === 0) {
+                layer.msg("标签添加成功!", { icon: 1, time: 1000 });
+                closeLayer(this); 
+                getCustomerDetail();
+            } else {
+                layer.msg(result.Message, { icon: 5 });
+            }
+        };
+        return false;
+  
+});
+
+});
+</script>

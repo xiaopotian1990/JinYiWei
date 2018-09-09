@@ -1,0 +1,731 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>仓库管理信息</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all"/>
+    <link href="~/lay_component/css/layer.css" rel="stylesheet"/>
+    <link href="~/lay_component/css/global.css" rel="stylesheet"/>
+    <link href="~/lay_component/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="~/lay_component/css/table.css" rel="stylesheet"/>
+   
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/lay_component/js/hcommon.js"></script>
+    <script src="~/doT-master/doT-master/doT.min.js"></script>
+    <script src="~/lay_component/plugins/layui/lay/dest/layui.all.js"></script>
+    <script src="~/lay_component/plugins/layui/lay/lib/jquery.js"></script>
+    <script src="~/lay_component/plugins/layui/lay/modules/layer.js"></script>
+    <script src="~/lay_component/sampleJs/SmartWarehouse.js"></script>
+
+    <style>
+        #smartWarehouseDetaiName, #smartWarehouseType, #smartWarehouseDetaiEditName, #shiftEditState {
+            height: 38px;
+            border: 1px solid #e6e6e6;
+        }
+    </style>
+</head>
+
+<body>
+<div class="admin-main" id="smartWarehousehtml">
+    <blockquote class="layui-elem-quote">
+        <a href="javascript:;" class="layui-btn layui-btn-small" id="add">
+            <i class="layui-icon">&#xe608;</i> 添加仓库信息
+        </a>
+    </blockquote>
+
+    <fieldset class="layui-elem-field">
+        <legend>仓库管理信息</legend>
+        <div class="layui-field-box">
+
+        </div>
+        <script id="smartWarehouse_template" type="text/html">
+            <table class="site-table table-hover">
+                <thead>
+                <tr>
+                    <th>仓库编号</th>
+                    <th>仓库名称</th>
+                    @*<th>管理员</th>*@
+                    <th>所属部门</th>
+                    <th>单位类型</th>
+                    <th>描述</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {{ for(var prop in it) { }}
+                <tr class="" deptInfoId="{{= it[prop].ID }}">
+                    <td>{{= i++ }}</td>
+                    <td>{{= it[prop].Name }}</td>
+                    @*<td>{{= it[prop].ManagerUserName }}</td>*@
+
+                    <td>{{= it[prop].DeptName }}</td>
+                    {{ if (it[prop].UnitType =="1"){ }}
+                    <td>库存单位</td>
+                    {{ } else { }}
+                    <td>使用单位</td>
+                    {{ } }}
+                    @*<td>{{= it[prop].DeptIDValue }}</td>*@
+                    <td>{{= it[prop].Remark }}</td>
+                    <td class="editAndDisableTd">
+                        <a class="layui-btn layui-btn-mini infoiEdit" id="infoiEdit" infoiEditId="{{= it[prop].ID }}"><i></i>编辑</a>
+                        <a class="layui-btn layui-btn-mini DelEdit" id="delEdit" deliEditId="{{= it[prop].ID }}"><i></i>删除</a>
+
+                    </td>
+                </tr>
+
+                {{ } }}
+                </tbody>
+            </table>
+        </script>
+
+    </fieldset>
+</div>
+<script src="~/lay_component/plugins/layui/layui.js"></script>
+
+
+<!--添加仓库管理信息-->
+<div id="showSmartWarehouseAddInfo_div" class="layui-form"></div>
+<script id="showSmartWarehouseAddInfo_template" type="text/x-dot-template">
+
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>添加信息</legend>
+        </fieldset>
+        <div class="layui-form-item" style="margin-left: 100px">
+            <label class="layui-form-label">名称</label>
+            <div class="layui-input-inline ">
+                <input type="text" id="smartWarehouseAddName" lay-verify="title" autocomplete="off" placeholder="请输入名称" class="layui-input ">
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-left: 100px">
+            <label class="layui-form-label">部门</label>
+            <div class="layui-input-inline ">             
+                @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.Dept, "smartWarehouseDetaiName", "smartWarehouseDetaiName")
+            
+             </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-left: 100px">
+            <label class="layui-form-label">单位类型</label>
+            <div class="layui-input-inline ">
+                <select name="smartWarehouseType" id="smartWarehouseType">
+                    @*<option value="">请选择省</option>*@
+                    <option value="1" selected="">库存单位</option>
+                    <option value="2">使用单位</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-form-text" style="margin-left: 100px">
+            <label class="layui-form-label">描述</label>
+            <div class="layui-input-inline">
+                <textarea id="smartWarehouseAddRemark" placeholder="请输入描述内容" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text" style="margin-left: 100px">
+            <label class="layui-form-label" style="margin-top:8px;">管理员</label>
+            <div class="layui-input-inline">
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <th>姓名</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="smartWarehouseManagerDetailTD"></tbody>
+                </table>
+
+            </div>
+            <div><a href="javascript:;" style="margin-top:11px;" class="layui-btn layui-btn-small" id="smartWarehouseManagerDetailADDBut"><i class="layui-icon"></i>添加详细</a></div>
+
+        </div>
+        <div class="layui-form-item text-r">
+            <span class="layui-btn layui-btn-normal dept_commit">确认提交</span>
+            <span class="layui-btn layui-btn-danger dept_close">取消关闭</span>
+        </div>
+    </script>
+
+<!--修改信息-->
+<script id="showSmartWarehouseEditInfo_template" type="text/x-dot-template">
+
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>修改信息</legend>
+        </fieldset>
+        <div class="layui-form-item" style="margin-left: 100px">
+            <label class="layui-form-label">名称</label>
+            <div class="layui-input-inline ">
+                <input type="text" id="smartWarehouseEditName" lay-verify="title" autocomplete="off" value="{{=it.Name}}" placeholder="请输入名称" class="layui-input ">
+                <input type="hidden" id="smartWarehouseEditId" value="{{=it.ID}}" class="layui-input ">
+            </div>
+        </div>
+        <div class="layui-form-item" style="margin-left: 100px">
+            <label class="layui-form-label">部门</label>
+            <div class="layui-input-inline ">
+                @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.Dept, "smartWarehouseDetaiEditName", "smartWarehouseDetaiEditName")
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-left:100px">
+            <label class="layui-form-label">单位类型</label>
+            <div class="layui-input-inline ">
+                <select name="shiftEditState" id="shiftEditState">
+                    {{ if (it.UnitType ==2){ }}
+                    <option value="1">库存单位</option>
+                    <option value="2" selected="">使用单位</option>
+                    {{ } else { }}
+                    <option value="1" selected="">库存单位</option>
+                    <option value="2">使用单位</option>
+                    {{ } }}
+
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-left: 100px">
+            <label class="layui-form-label">描述</label>
+            <div class="layui-input-inline ">
+                <textarea type="text" id="smartWarehouseEditRemark" lay-verify="title" autocomplete="off" placeholder="请输入描述" class="layui-textarea ">{{=it.Remark}}</textarea>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text" style="margin-left: 100px">
+            <label class="layui-form-label" style="margin-top:8px;">管理员</label>
+            <div class="layui-input-inline">
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <th>姓名</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="smartWarehouseManagerDetailTD"></tbody>
+                </table>
+
+            </div>
+            <div><a href="javascript:;" style="margin-top:11px;" class="layui-btn layui-btn-small" id="smartWarehouseManagerDetailADDBut"><i class="layui-icon"></i>添加详细</a></div>
+
+        </div>
+        <div class="layui-form-item text-r">
+            <span class="layui-btn layui-btn-normal dept_commit">确认提交</span>
+            <span class="layui-btn layui-btn-danger dept_close">取消关闭</span>
+        </div>
+    </script>
+<div id="showSmartWarehouseEditInfo_div" class="layui-form"></div>
+
+<script type="text/javascript">
+    //添加回访组
+    $("#smartWarehousehtml")
+        .ready(function() {
+            $(".layui-btn.layui-btn-small")
+                .on("click",
+                    function() {
+                        //模版输出
+                        var innerText = doT.template($("#showSmartWarehouseAddInfo_template").text());
+
+                        var contentData = $("#showSmartWarehouseAddInfo_div").html(innerText());
+                        layer.open({
+                            type: 1,
+                            title: "添加仓库信息",
+
+                            skin: 'layerbackground_color',
+                            area: ["35%;min-width:680px;max-width:800px", "65%;min-height:500px;max-height:600px"], //宽高
+                            shade: [0.8, '#B3B3B3', false],
+                            closeBtn: 1,
+                            shadeClose: false, //点击遮罩关闭
+                            content: contentData,
+                            success: function (layero, index) {
+
+                                form.render();
+
+                                //添加回访组详细信息按钮
+                                $("#smartWarehouseManagerDetailADDBut")
+                                    .on("click",
+                                        function() {
+                                            layer.open({
+                                                type: 2,
+                                                title: "选择用户",
+                                                closeBtn: 1, //不显示关闭按钮
+                                                shade: [0],
+                                                area: ["35%;min-width:680px;max-width:800px", "65%;min-height:500px;max-height:600px"],
+                                                anim: 2,
+                                                content: ['SmartWarehouseDetaiIndex', 'no'] //iframe的url，no代表不显示滚动条
+                                            });
+                                        });
+                                //删除TR按钮
+                                $(document)
+                                    .on("click",
+                                        ".trDelete",
+                                        function() {
+                                            $('li.selected').nextAll('li');
+                                            $(this).parent().parent().remove();
+                                        });
+
+                                //取消并关闭按钮
+                                $(".layui-btn.layui-btn-danger.dept_close")
+                                    .on("click",
+                                        function() {
+                                            $("#showSmartWarehouseAddInfo_div").html("");
+                                            layer.close(index);
+                                        });
+                                //查看详细
+                                $(document)
+                                    .on("click",
+                                        "#smartWarehouseDetaiRemarkTd",
+                                        function() {
+
+                                            var text = $("#smartWarehouseDetaiRemarkTdhidden").text();
+
+                                            layer.tips(text,
+                                                '#smartWarehouseDetaiRemarkTd',
+                                                {
+                                                    tips: [1, '#333333'],
+                                                    time: 3000
+                                                });
+                                        });
+                                //删除TR按钮
+                                $(document)
+                                    .on("click",
+                                        ".trDelete",
+                                        function() {
+                                            $('li.selected').nextAll('li');
+                                            $(this).parent().parent().remove();
+                                        });
+
+                                //确认提交
+                                $(".dept_commit")
+                                    .on("click",
+                                        function() {
+
+
+                                            //确认提交按钮
+                                            var datalist = [];
+
+                                            var tr = $("#smartWarehouseManagerDetailTD tr");
+
+                                            if (tr.length < 1) {
+                                                layer.msg("请添加管理员信息！", { icon: 5 });
+                                                return false;
+                                            }
+
+                                            for (var i = 0; i < tr.length; i++) {
+                                                //这里的js应该有问题
+                                                var obj = { userID: "", userName: "" };
+
+                                                obj.userID = tr.eq(i).attr("value");
+                                                //obj.CategoryID = tr.eq(0).attr("value");
+                                                obj.Name = $(tr.eq(i).find("td").eq(0)).text();
+                                                //obj.Days = tr.find("td").eq(1).html();
+                                                //obj.Remark = tr.find("td").eq(2).html();
+
+                                                datalist.push(obj);
+                                            };
+
+                                            //获取值
+                                            var smartWarehouseAddName = $("#smartWarehouseAddName").val(); //仓库名称
+                                            var smartWarehouseDetaiName = $("#smartWarehouseDetaiName").val();
+//获取选择的部门信息
+                                            var smartWarehouseType = $("#smartWarehouseType").val(); //获取仓库类型值
+                                            var remark = $("#smartWarehouseAddRemark").val();
+
+                                            var realData = {};
+                                            realData.Name = smartWarehouseAddName;
+                                            realData.Remark = remark;
+                                            realData.DeptID = smartWarehouseDetaiName;
+                                            realData.UnitType = smartWarehouseType;
+                                            realData.SmartWarehouseSetDetail = datalist;
+
+                                            var paraObj = {};
+                                            paraObj.data = realData;
+
+                                            var url = "/SmartWarehouse/SmartWarehouseAdd";
+
+                                            var data = ajaxProcess(url, paraObj);
+                                            if (data) {
+                                                if (parseInt(data.ResultType) === 0) { //请求成功返回
+                                                    $("#showSmartWarehouseAddInfo_div").html("");
+                                                    var message = data.Message;
+                                                    //关闭窗口
+                                                    layer.close(index);
+                                                    //提示消息
+                                                    layer.msg(message, { icon: 6 });
+                                                    //刷新主页面数据.
+                                                    setTimeout(function() {
+                                                        location.reload();
+                                                    },1500);
+
+                                                } else {
+                                                    //请求成功返回,但是后台出现错误
+                                                    layer.msg(data.Message, { icon: 5 });
+                                                }
+                                            }
+                                            return false;
+
+                                        });
+                                //关闭后回调
+                            },
+                            cancel: function(index) {
+                                $("#showSmartWarehouseAddInfo_div").html("");
+                                layer.close(index);
+                            }
+                        });
+                    });
+        });
+    //修改
+    $("#smartWarehousehtml")
+        .ready(function() {
+            $(".admin-main").on("click",".infoiEdit",function() {
+
+                        var showEditDialog = $(this);
+                        var dinfoId = $(showEditDialog).attr("infoiEditId");
+                        var url = "/SmartWarehouse/SmartWarehouseGetByID";
+
+                        var dto = new Object();
+                        dto.ID = dinfoId;
+
+                        var paraObj = new Object();
+                        paraObj.data = dto;
+
+                        var data = ajaxProcess(url, paraObj);
+                        var ResultType = data.ResultType;
+
+                        if (parseInt(ResultType) === 0) {
+
+                            var innerText = doT.template($("#showSmartWarehouseEditInfo_template").text());
+
+                            var contentData = $("#showSmartWarehouseEditInfo_div").html(innerText(data.Data));
+
+                            $("#smartWarehouseDetaiEditName").find("[value=" + data.Data.DeptIDValue + "]").prop("selected", true);
+
+                            form.render();
+
+                            layer.open({
+                                type: 1,
+                                title: "修改信息",
+                                skin: 'layerbackground_color',
+                                area: ["35%;min-width:680px;max-width:800px", "65%;min-height:500px;max-height:600px"], //宽高
+                                shade: [0.8, '#B3B3B3', false],
+                                closeBtn: 1,
+                                Boolean: false,
+                                shadeClose: false, //点击遮罩关闭
+                                content: contentData,
+                                success: function(layero, index1) {
+                                    $('#smartWarehouseManagerDetailTD').html = "";
+                                    var html = "";
+                                    for (var i = 0; i < data.Data.SmartWarehouseSetDetail.length; i++) {
+                                        html += "   <tr value=" +
+                                            data.Data.SmartWarehouseSetDetail[i].UserID +
+                                            ">" +
+                                            "<td>" +
+                                            data.Data.SmartWarehouseSetDetail[i].Name +
+                                            "</td>" +
+                                            "<td hidden='hidden' id='smartWarehouseRemarkTdhidden'>" +
+                                            data.Data.SmartWarehouseSetDetail[i].UserID +
+                                            "</td>" +
+                                            "<td>" +
+                                            "<a href='javascript:' class='layui-btn layui-btn-danger layui-btn-mini trDelete'>删除</a>" +
+                                            "</td>" +
+                                            "</tr>";
+                                    }
+                                    $('#smartWarehouseManagerDetailTD').append(html); //将已经查询出来的管理员详细信息追加到展示页中
+
+                                    //添加回访组详细信息按钮
+                                    $("#smartWarehouseManagerDetailADDBut")
+                                        .on("click",
+                                            function() {
+                                                layer.open({
+                                                    type: 2,
+                                                    title: "选择用户",
+                                                    closeBtn: 1, //不显示关闭按钮
+                                                    shade: [0],
+                                                    area: ["35%;min-width:680px;max-width:800px", "65%;min-height:500px;max-height:600px"],
+                                                    anim: 2,
+                                                    content: ['SmartWarehouseDetaiIndex', 'no'] //iframe的url，no代表不显示滚动条
+                                                });
+                                            });
+                                    //删除TR按钮
+                                    $(document)
+                                        .on("click",
+                                            ".trDelete",
+                                            function() {
+                                                $('li.selected').nextAll('li');
+                                                $(this).parent().parent().remove();
+                                            });
+                                    //查看详细
+                                    $(document)
+                                        .on("click",
+                                            "#smartWarehouseManagerDetaiRemarkTd",
+                                            function() {
+
+                                                var text = $("#smartWarehouseManagerDetaiRemarkTdhidden").text();
+
+                                                layer.tips(text,
+                                                    '#smartWarehouseManagerDetaiRemarkTd',
+                                                    {
+                                                        tips: [1, '#333333'],
+                                                        time: 3000
+                                                    });
+
+                                            });
+                                    //确认提交
+                                    $(".layui-btn.layui-btn-normal.dept_commit")
+                                        .on("click",
+                                            function() {
+
+                                                //确认提交按钮
+                                                var datalist = [];
+
+                                                var tr = $("#smartWarehouseManagerDetailTD tr");
+
+                                                if (tr.length < 1) {
+                                                    layer.msg("请添加管理员信息！", { icon: 5 });
+                                                    return false;
+                                                }
+
+                                                for (var i = 0; i < tr.length; i++) {
+                                                    var obj = { userID: "", userName: "" };
+
+                                                    obj.userID = tr.eq(i).attr("value");
+                                                    obj.Name = $(tr.eq(i).find("td").eq(0)).text();
+                                                    datalist.push(obj);
+                                                };
+
+
+                                                //获取值
+                                                var smartWarehouseEditName = $("#smartWarehouseEditName").val(); //仓库名称
+                                                var smartWarehouseDetaiEditName =$("#smartWarehouseDetaiEditName").val(); //获取选择的部门信息
+                                                var shiftEditState = $("#shiftEditState").val(); //获取仓库类型值
+                                                var smartWarehouseEditRemark = $("#smartWarehouseEditRemark").val();
+                                                var smartID = $("#smartWarehouseEditId").val();
+                                                var realData = {};
+                                                realData.ID = smartID;
+                                                realData.Name = smartWarehouseEditName;
+                                                realData.Remark = smartWarehouseEditRemark;
+                                                realData.DeptID = smartWarehouseDetaiEditName;
+                                                realData.UnitType = shiftEditState;
+                                                realData.SmartWarehouseSetDetail = datalist;
+                                                //先注释，等把添加管理员调通在写
+
+                                                var paraObj = new Object();
+                                                paraObj.data = realData;
+                                                var url = "/SmartWarehouse/SmartWarehouseEdit";
+                                                var data = ajaxProcess(url, paraObj);
+
+                                                if (data) {
+                                                    if (parseInt(data.ResultType) === 0) { //请求成功返回
+
+                                                        $("#showSmartWarehouseEditInfo_div").html("");
+                                                        var message = data.Message;
+                                                        //关闭窗口
+                                                        layer.close(index1);
+                                                        //提示信息
+                                                        layer.msg(message, { icon: 6 });
+                                                        //刷新主页面数据.
+                                                        setTimeout(function () {
+                                                            location.reload();
+                                                        }, 1500);
+                                                    } else {
+                                                        //请求成功返回,但是后台出现错误
+                                                        layer.msg(data.Message, { icon: 5 });
+                                                    }
+                                                }
+                                                return false;
+                                            });
+                                    //取消关闭按钮
+                                    $(document)
+                                        .on("click",
+                                            ".dept_close",
+                                            function() {
+                                                $("#showSmartWarehouseEditInfo_div").html("");
+                                                layer.close(index1);
+                                            });
+                                    //右上角关闭回调
+                                },
+                                cancel: function(index1) {
+                                    $("#showSmartWarehouseEditInfo_div").html("");
+
+                                    layer.close(index1);
+                                    return false;
+
+                                }
+                            });
+                        }
+
+                    });
+        });
+
+    //停用数据
+    $("#callbackGrouphtml")
+        .ready(function() {
+            ///使用停用
+            $($(".layui-btn-mini.EditStopBut"))
+                .on("click",
+                    function() {
+
+                        var showEditStop = $(this);
+                        var infoStopStatus = $(showEditStop).attr("status");
+
+                        var showEditStopID = $(this);
+                        var infoStopID = $(showEditStopID).attr("stopID");
+
+                        if (infoStopStatus === "0") {
+
+                            layer.confirm('您确定停用本条数据？',
+                                {
+                                    btn: ['确定', '取消'] //按钮
+                                },
+                                function() {
+                                    //给dto赋值
+                                    var realData = {};
+                                    realData.CallbackGroupID = infoStopID;
+                                    realData.Status = infoStopStatus;
+
+
+                                    //组合传值
+                                    var paraObj = {};
+                                    paraObj.data = realData;
+
+                                    var url = "/CallbackGroup/CallbackGroupDisable";
+                                    var data = ajaxProcess(url, paraObj);
+                                    layer.msg('已成功停用!', { icon: 1 });
+
+                                    setTimeout(function () {
+                                        location.reload();
+                                    }, 1500);
+
+                                    if (data) {
+                                        if (parseInt(data.ResultType) === 0) { //请求成功返回
+                                            var message = data.Message;
+                                            //关闭窗口
+
+                                            //提示消息
+                                            layer.msg(message, { icon: 6 });
+                                            //刷新主页面数据.
+                                            setTimeout(function () {
+                                                location.reload();
+                                            }, 1500);
+                                        } else {
+                                            //请求成功返回,但是后台出现错误
+                                            layer.msg(data.Message, { icon: 5 });
+                                        }
+                                    }
+                                    return false;
+
+                                },
+                                function() {
+                                    layer.msg('已经取消此操作',
+                                    {
+                                        icon: 6
+                                    });
+                                });
+                        } else {
+                            layer.confirm('您确定启用本条数据？',
+                                {
+                                    btn: ['确定', '取消'] //按钮
+                                },
+                                function() {
+                                    //给dto赋值
+                                    var realData = {};
+                                    realData.CallbackGroupID = infoStopID;
+                                    realData.Status = infoStopStatus;
+
+                                    //组合传值
+                                    var paraObj = {};
+                                    paraObj.data = realData;
+
+                                    var url = "/CallbackGroup/CallbackGroupDisable";
+                                    var data = ajaxProcess(url, paraObj);
+
+                                    layer.msg('已成功停用!', { icon: 1 });
+                                    setTimeout(function () {
+                                        location.reload();
+                                    }, 1500);
+                                    if (data) {
+                                        if (parseInt(data.ResultType) === 0) { //请求成功返回
+                                            var message = data.Message;
+                                            //提示消息
+                                            layer.msg(message, { icon: 6 });
+                                            //刷新主页面数据.
+                                            setTimeout(function () {
+                                                location.reload();
+                                            }, 1500);
+                                        } else {
+                                            //请求成功返回,但是后台出现错误
+                                            layer.msg(data.Message, { icon: 5 });
+                                        }
+                                    }
+                                    return false;
+                                },
+                                function() {
+                                    layer.msg('已经取消此操作',
+                                    {
+                                        icon: 6
+                                    });
+                                });
+                        }
+                    });
+        });
+
+    //删除数据
+    $("#smartWarehousehtml")
+        .ready(function () {
+            ///删除
+            $(".admin-main").on("click", "#delEdit", function () {
+                var showEditStopID = $(this);
+                var deliEditId = $(showEditStopID).attr("deliEditId");
+                layer.confirm('您确定删除本条数据？',
+                    {
+                        btn: ['确定', '取消'] //按钮
+                    },
+                    function () {
+                        //给dto赋值
+                        var realData = {};
+                        realData.ID = deliEditId;
+
+
+                        //组合传值
+                        var paraObj = {};
+                        paraObj.data = realData;
+
+                        var url = "/SmartWarehouse/SmartWarehouseDelete";
+                        var data = ajaxProcess(url, paraObj);
+                        layer.msg('已成功删除!', { icon: 1 });
+                       
+                        if (data) {
+                            if (parseInt(data.ResultType) === 0) { //请求成功返回
+                                var message = data.Message;
+                                //提示消息
+                                layer.msg(message, { icon: 6 });
+                                //刷新主页面数据.
+                                setTimeout(function () {
+                                    location.reload();
+                                }, 1500);
+                            } else {
+                                //请求成功返回,但是后台出现错误
+                                layer.msg(data.Message, { icon: 5 });
+                            }
+                        }
+                        return false;
+
+                    },
+                    function () {
+                        layer.msg('已经取消此操作',
+                        {
+                            icon: 6
+                        });
+                    });
+            });
+
+        });
+</script>
+</body>
+
+</html>

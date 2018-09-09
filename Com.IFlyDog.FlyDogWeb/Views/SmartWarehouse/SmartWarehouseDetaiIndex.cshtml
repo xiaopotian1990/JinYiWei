@@ -1,0 +1,171 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>选择用户</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+
+    <link href="~/lay_component/css/layer.css" rel="stylesheet" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/lay_component/css/table.css" rel="stylesheet" />
+ 
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/lay_component/js/hcommon.js"></script>
+    <script src="~/doT-master/doT-master/doT.min.js"></script>
+
+    <script src="~/lay_component/plugins/layui/lay/dest/layui.all.js"></script>
+    <script src="~/lay_component/plugins/layui/lay/lib/jquery.js"></script>
+    <script src="~/lay_component/plugins/layui/lay/modules/layer.js"></script>
+    <script src="~/lay_component/sampleJs/SmartWarehouseDetaiIndex.js"></script>
+    <style>
+        #smartDeptName{
+            height:37px;
+            border:1px solid #e6e6e6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="admin-main" id="selUserhtml">
+        <fieldset class="layui-elem-field">
+            <legend>选择用户</legend>
+
+            <div class="layui-form-item layui-form">
+                <div style="margin-top:15px;">
+                    <label class="layui-form-label" style="width:40px;">部门</label>
+                    <div class="layui-input-inline ">
+                        @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.Dept, "smartDeptName", "smartDeptName")
+                     </div>
+
+                    <label class="layui-form-label" style="width:40px;">名称</label>
+                    <div class="layui-input-inline ">
+                        <input type="text" id="smartUserName" name="smartUserName" lay-verify="title" autocomplete="off" placeholder="请输入名称" class="layui-input ">
+                    </div>
+                </div>
+                <button class="layui-btn fr" id="subtmValue" onclick="btnSerache()" style="margin-right:15px;">查询</button>
+            </div>
+            <div class="layui-field-box" style="height:275px;overflow:auto;">
+
+            </div>
+            <script id="smartUser_template" type="text/html">
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>账号</th>
+                            <th>姓名</th>
+                            <th>性别</th>
+                            <th>部门</th>
+                            @*<th>操作</th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {{ for(var prop in it) { }}
+                        <tr class="" deptInfoId="{{= it[prop].ID }}">
+                            <td><input name="cheId" id="cheId" type="checkbox" value="{{= it[prop].ID }}" userNameVal="{{= it[prop].Name }}" /></td>
+                            @*<td>{{= i++ }}</td>*@
+                            <td>{{= it[prop].Account }}</td>
+                            <td>{{= it[prop].Name }}</td>
+                            <td>
+
+                                {{ if (it[prop].Gender ==2){ }}
+                                女
+
+                                {{ } else { }}
+
+                                男
+
+                                {{ } }}
+                            </td>
+                            <td>{{= it[prop].DeptName }}</td>
+                        </tr>
+                        {{ } }}
+                    </tbody>
+                </table>
+            </script>
+            <div class="layui-form-item text-r">
+                <button class="layui-btn layui-btn-normal dept_commit">确认提交</button>
+                <button class="layui-btn layui-btn-danger dept_close">取消关闭</button>
+            </div>
+        </fieldset>
+
+    </div>
+
+    <script>
+    var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+
+    //取消关闭
+
+    layui.use(['layer', 'form'],
+        function () {
+            var $ = layui.jquery;
+            window.form = layui.form();
+            form.render();
+            //关闭当前页面
+            $(document)
+                .on("click",
+                    ".dept_close",
+                    function () {
+                        parent.layer.close(index);
+                    });
+
+
+            $(".dept_commit")
+                .on("click",
+                    function () {
+                        //点击确定得到选择checkbox中 的id和用户姓名
+                        var showEditDialog = $(this);
+                        var checkIdValue = "";
+                        var checkNameValue ="";
+                        var html = "";
+                        $('input[name="cheId"]:checked').each(function () {
+                            checkIdValue = $(this).val();
+                            checkNameValue = $(this).attr("userNameVal");
+
+                            if (parent.$('#smartWarehouseManagerDetailTD').find("tr[value=" + checkIdValue + "]").length > 0) {
+                                return;
+                            }
+                            html += "   <tr value=" +
+                           checkIdValue +
+                           ">" +
+                           "<td>" +
+                           checkNameValue +
+                           "</td>" +
+
+                           "<td hidden='hidden' id='smartWarehouseRemarkTdhidden'>" +
+                           checkIdValue +
+                           "</td>" +
+                           "<td>" +
+                           "<a href='javascript:' class='layui-btn layui-btn-danger layui-btn-mini trDelete'>删除</a>" +
+                           "</td>" +
+                           "</tr>";
+                        });
+
+
+                        //alert(checkIdValue);
+                        //alert(checkNameValue);
+
+                        //开始拼接字符串，最后追加到父页面上
+                        
+                        parent.$('#smartWarehouseManagerDetailTD').append(html);
+                        form.render();
+                        parent.layer.close(index);
+                        //parent.layer.tips('添加一条信息哦!', '#callbackGroupDetailTD', { time: 4000 });
+                    });
+        });
+
+    </script>
+</body>
+
+</html>

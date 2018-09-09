@@ -1,0 +1,243 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>用户通知方案</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+    <style>
+        .layui-form-label {
+            width: 100px;
+        }
+
+        .layui-input-block {
+            margin-left: 130px;
+        }
+
+            .layui-input-block:not(.m-bt-10) {
+                margin-left: 0;
+            }
+            .AssignDeptInfo,.AssignUserInfo{box-sizing: border-box;position:absolute;left:0;top:60px;display:none;padding:2px 0 42px;border:1px solid #d2d2d2;width:163px;max-height:245px;background:#FFF;overflow:auto;z-index:10;}
+            [name=AssignDeptInfo],[name=AssignUserInfo]{margin:5px 0 20px;}
+            .AssignDeptInfo li,.AssignUserInfo li,.AssignDeptInfo p,.AssignUserInfo p{padding:2px 5px;}
+            .userTrigger-form .layui-form-select{width:163px;}
+            .require .list{max-height:160px;overflow:auto;}
+            .require-sub{width:100%;height:42px;position:absolute;left:0;bottom:0;background:#FFF;}
+    </style>
+</head>
+<body>
+    <div class="admin-main">
+        <blockquote class="layui-elem-quote">
+            <a href="javascript:;" class="layui-btn layui-btn-small btn-add">
+                <i class="layui-icon"></i> 添加
+            </a>
+        </blockquote>
+        <fieldset class="layui-elem-field">
+            <legend>用户通知方案</legend>
+            <div class="layui-field-box">
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <th>名称</th>
+                            <td>类型</td>
+                            <td>客户范围</td>
+                            <td>备注</td>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="userTrigger-table"></tbody>
+                </table>
+            </div>
+        </fieldset>
+        <div class="page-pops">
+            <!-- 添加/编辑弹窗 -->
+            <div class="userTrigger-pop hide">
+                <!-- 会员类型/ -->
+                <!-- 分享家/ -->
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                    <legend>用户通知方案</legend>
+                </fieldset>
+                <form class="layui-form userTrigger-form"></form>
+                <div class="m-20 clearfix">
+                    <span class="layui-btn userTrigger submit-btn fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+                </div>
+            </div>
+            <!-- End  添加/编辑弹窗 -->
+            <!-- 客户组弹窗 -->
+            <div class="customerScope-pop hide">
+                <!-- 会员类型/ -->
+                <!-- 分享家/ -->
+                <form>
+                    <div class="layui-field-box">
+                        <table class="site-table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>选择</th>
+                                    <th>名称</th>
+                                    <td>备注</td>
+                                </tr>
+                            </thead>
+                            <tbody class="customerScope-table"></tbody>
+                        </table>
+                    </div>
+                </form>
+                <div class="m-20 clearfix">
+                    <span class="layui-btn customerScope submit-btn fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+                </div>
+            </div>
+            <!-- End  客户组弹窗 -->
+        </div>
+
+        <div class="dot-tmp">
+            <!-- 用户通知表格 -->
+            <script class="userTrigger-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                <tr data-id="{{= it[item].ID }}">
+                    <td>{{= it[item].Name }}</td>
+                    <td>{{= it[item].Type==1?"到院":"收费" }}</td>
+                    <td>{{= it[item].CustomerScope }}</td>
+                    <td>{{= it[item].Remark }}</td>
+                    <td>
+                        <span class="layui-btn layui-btn-mini btn-edit" data-id="{{= it[item].ID }}">编辑</span>
+                        <span class="layui-btn layui-btn-mini btn-del" data-id="{{= it[item].ID }}">删除</span>
+                    </td>
+                </tr>
+                {{ } }}
+            </script>
+            <!-- 用户通知表单 -->
+            <script class="userTrigger-form-tmp" type="text/x-dot-template">
+                <input type="hidden" name="ID" value="{{= it.ID }}" />
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" name="Name" value="{{= it.Name }}" placeholder="请输入名称" />
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">触发条件只</label>
+                    <div class="layui-input-inline">
+                        <select name="Type">
+                            <option value="1" {{= it.Type == 1 && "selected" }}>到院</option>
+                            <option value="2" {{= it.Type == 2 && "selected" }}>收费</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">客户范围</label>
+                    <div class="layui-input-inline">
+                        <div class="layui-input-inline">
+                            <input type="radio" name="CustomerType" lay-filter="CustomerType" value="0" title="全体" {{= it.CustomerType == 0 && "checked" }} />
+                        </div>
+                        <div class="layui-input-block">
+                            <input type="radio" name="CustomerType" lay-filter="CustomerType" value="1" title="会员类型" {{= it.CustomerType == 1 && "checked" }} />
+                            @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.MemberCategory, "MemberCategoryID", "MemberCategoryID", "MemberCategoryID")
+                        </div>
+                        <div class="layui-input-block">
+                            <input type="radio" name="CustomerType" lay-filter="CustomerType" value="2" title="客户组" {{= it.CustomerType == 2 && "checked" }} />
+                            <input type="hidden" name="CustomerGroupID" value="{{= it.CustomerGroupID }}" />
+                            <input type="text" name="CustomerScope" class="layui-input" value="{{= it.CustomerType == 2 ? it.CustomerScope : "" }}" {{= it.CustomerType != 2 && "disabled" }}/>
+                        </div>
+                        <div class="layui-input-block">
+                            <input type="radio" name="CustomerType" lay-filter="CustomerType" value="3" title="分享家" {{= it.CustomerType == 3 && "checked" }} />
+                            @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.ShareCategory, "ShareCategoryID", "ShareCategoryID", "ShareCategoryID")
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">提醒信息</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" name="Info" value="{{= it.Info }}" placeholder="请输入提醒信息" />
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">提醒人员</label>
+                    <div class="layui-input-inline">
+                        <div class="layui-input-block">
+                            <input type="checkbox" lay-skin="primary" name="AllUsers" title="所有会员" {{= it.AllUsers == 1 && "checked" }} />
+                        </div>
+                        <div class="layui-input-block">
+                            <input type="checkbox" lay-skin="primary" name="ExploitUserStatus" title="会员类型" {{= it.ExploitUserStatus == 1 && "checked" }} />
+                        </div>
+                        <div class="layui-input-block">
+                            <input type="checkbox" lay-skin="primary" name="ManagerUserStatus" title="客户组" {{= it.ManagerUserStatus == 1 && "checked" }} />
+                        </div>
+                        <div class="layui-input-block">
+                            <input type="checkbox" lay-skin="primary" name="AssignUserInfoAdd" lay-filter="AssignUserInfo" title="指定人员" {{= (it.AssignUserInfoAdd && (it.AssignUserInfoAdd.length > 0)) && "checked" }} />
+                            <input type="text" name="AssignUserInfo" class="layui-input" {{= (it.AssignUserInfoAdd && (it.AssignUserInfoAdd.length > 0)) || "disabled" }} />
+                            <div class="AssignUserInfo require">
+                                <p>
+                                    <input type="checkbox" lay-skin="primary" lay-filter="checkAll" class="all-user" title="全选" />
+                                </p>
+                                <ul class="list">
+                                </ul>
+                                <div class="require-sub">
+                                    <span class="layui-btn layui-btn-mini dept btn-sub fr m-10">确认</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-input-block">
+                            <input type="checkbox" lay-skin="primary" name="AssignDeptInfoAdd" lay-filter="AssignDeptInfo" title="指定部门" {{= (it.AssignDeptInfoAdd && (it.AssignDeptInfoAdd.length > 0)) && "checked" }} />
+                            <input type="text" name="AssignDeptInfo" class="layui-input" {{= (it.AssignDeptInfoAdd && (it.AssignDeptInfoAdd.length > 0)) || "disabled" }} />
+                            <div class="AssignDeptInfo require">
+                                <p>
+                                    <input type="checkbox" lay-skin="primary" lay-filter="checkAll" class="all-dept" title="全选" />
+                                </p>
+                                <ul class="list">
+                                </ul>
+                                <div class="require-sub">
+                                    <span class="layui-btn layui-btn-mini dept btn-sub fr m-10">确认</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">备注</label>
+                    <div class="layui-input-inline">
+                        <textarea class="layui-textarea" name="Remark" placeholder="请输入备注">{{= it.Remark }}</textarea>
+                    </div>
+                </div>
+            </script>
+            <!-- 用户 -->
+            <script class="userCheck-tmp" type="text/x-dot-template">
+                {{ for(item in it){ }}
+                <li>
+                    <input type="checkbox" lay-skin="primary" lay-filter="singleCheck" value="{{= it[item].ID }}" title="{{= it[item].Name }}" />
+                </li>
+                {{ } }}
+            </script>
+            <!-- 部门 -->
+            <script class="deptCheck-tmp" type="text/x-dot-template">
+                {{ for(item in it){ }}
+                <li>
+                    <input type="checkbox" lay-skin="primary" lay-filter="singleCheck" value="{{= it[item].ID }}" title="{{= it[item].Name }}" />
+                </li>
+                {{ } }}
+            </script>
+            <!-- 客户组表格（现在还没有写查询方法，先等等） -->
+            <script class="customerScope-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                <tr customerScopeId="{{= it[item].ID}}">
+                    <td><input type="checkbox" value="{{= it[item].ID }}" title="{{= it[item].Name }}" /></td>
+                    <td>{{= it[item].Name }}</td>
+                    <td>{{= it[item].Remark }}</td>
+                </tr>
+                {{ } }}
+            </script>
+
+        </div>
+    </div>
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/lay_component/js/hcommon.js"></script>
+    <script src="~/Scripts/FlyDog.Common.js"></script>
+    <script src="~/doT-master/doT-master/doT.min.js"></script>
+    <script src="~/lay_component/plugins/layui/layui.js"></script>
+    <script src="~/lay_component/sampleJs/userTrigger.js"></script>
+</body>
+</html>

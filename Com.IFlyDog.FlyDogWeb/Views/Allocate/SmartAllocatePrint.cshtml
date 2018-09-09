@@ -1,0 +1,30 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>打印</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="Content">
+    </div>
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/lay_component/js/hcommon.js"></script>
+    <script src="~/Scripts/FlyDog.Common.js"></script>
+    <script>
+        $(function () {
+            ajaxObj.setUrl("/Allocate/SmartAllocatePrintFun").setParaObj({ data: { allocateID: getQueryString("allocateID") } }).setDataCallBack(function (data) {
+                $(".Content").html(data.Data);
+                window.print();
+            }).getData();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>系统设置</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+    <link href="~/Styles/Public/CustomerPlugin.css" rel="stylesheet" />
+    <style>
+        .layui-form-label {
+            width: auto;
+            padding-left: 0;
+        }
+        .submit-btn.hide {display:none;}
+    </style>
+</head>
+<body>
+    <div class="admin-main">
+        <fieldset class="layui-elem-field">
+            <legend>系统设置</legend>
+            <div class="layui-field-box layui-form">
+                <table class="site-table table-hover">
+                    <tbody class="option-table"></tbody>
+                </table>
+            </div>
+        </fieldset>
+        <!-- 项目弹窗 -->
+        <div class="charge-pop hide">
+            <div class="layui-form m-10 clearfix">
+                <form class="m-20">
+                    <div class="fl">
+                        <label class="layui-form-label" style="width:70px;">拼音码</label>
+                        <div class="layui-input-inline">
+                            <input class="layui-input" name="smartProductPinYin" placeholder="请输入拼音码">
+                        </div>
+                    </div>
+                    <div class="fl">
+                        <label class="layui-form-label" style="width:70px;">名称</label>
+                        <div class="layui-input-inline">
+                            <input class="layui-input" name="smartProductNmae" placeholder="请输入名称">
+                        </div>
+                    </div>
+                    <span class="layui-btn search-btn fr">查询</span>
+                </form>
+            </div>
+            <div class="m-20">
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <td>选择</td>
+                            <th>项目名称</th>
+                            <th>拼音码</th>
+                            <th>类型</th>
+                            <th>规格</th>
+                        </tr>
+                    </thead>
+                    <tbody class="charge-table"></tbody>
+                </table>
+            </div>
+            <div class="m-20 clearfix">
+                <span class="layui-btn charge submit-btn fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+            </div>
+        </div>
+        <!-- 项目弹窗 End -->
+        <div class="dot-tmp">
+            <!-- 套餐表格 -->
+            <script class="option-tmp" type="text/x-dot-template">
+                <tr>
+                    <td>客户自定义字段</td>
+                    <td style="width:50%;">
+                        <table class="site-table table-hover">
+                            <tr>
+                                <td>自定义1</td>
+                                <td><input type="text" name="Customer1" data-index="1" class="layui-input" lay-verify="required" value="{{= it.Customer1Value }}" disabled /></td>
+                            </tr>
+                            <tr>
+                                <td>自定义2</td>
+                                <td><input type="text" name="Customer2" data-index="2" class="layui-input" lay-verify="required" value="{{= it.Customer2Value }}" disabled /></td>
+                            </tr>
+                            <tr>
+                                <td>自定义3</td>
+                                <td><input type="text" name="Customer3" data-index="3" class="layui-input" lay-verify="required" value="{{= it.Customer3Value }}" disabled /></td>
+                            </tr>
+                            <tr>
+                                <td>自定义4</td>
+                                <td><input type="text" name="Customer4" data-index="4" class="layui-input" lay-verify="required" value="{{= it.Customer4Value }}" disabled /></td>
+                            </tr>
+                            <tr>
+                                <td>自定义5</td>
+                                <td><input type="text" name="Customer5" data-index="5" class="layui-input" lay-verify="required" value="{{= it.Customer5Value }}" disabled /></td>
+                            </tr>
+                            <tr>
+                                <td>自定义6</td>
+                                <td><input type="text" name="Customer6" data-index="6" class="layui-input" lay-verify="required" value="{{= it.Customer6Value }}" disabled /></td>
+                            </tr>
+                            <tr>
+                                <td>自定义7</td>
+                                <td><input type="text" name="Customer7" data-index="7" class="layui-input" lay-verify="required" value="{{= it.Customer7Value }}" disabled /></td>
+                            </tr>
+                            <tr>
+                                <td>自定义8</td>
+                                <td><input type="text" name="Customer8" data-index="8" class="layui-input" lay-verify="required" value="{{= it.Customer8Value }}" disabled /></td>
+                            </tr>
+                            <tr>
+                                <td>自定义9</td>
+                                <td><input type="text" name="Customer9" data-index="9" class="layui-input" lay-verify="required" value="{{= it.Customer9Value }}" disabled /></td>
+                            </tr>
+                            <tr>
+                                <td>自定义10</td>
+                                <td><input type="text" name="Customer10" data-index="10" class="layui-input" lay-verify="required" value="{{= it.Customer10Value }}" disabled /></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <span class="layui-btn layui-btn-mini btn-edit">修改</span>
+                        <span class="layui-btn layui-btn-mini submit-btn hide" lay-submit data-url="UpdateCustomerFun">保存</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>默认咨询模板</td>
+                    <td>
+                        <div class="layui-input-inline">
+                            <textarea type="text" name="ContentTemplateCode" data-index="11" class="layui-textarea" disabled>{{= it.ContentTemplateCodeValue }}</textarea>
+                        </div>
+                    </td>
+                    <td>
+
+                        <span class="layui-btn layui-btn-mini btn-edit">修改</span>
+                        <span class="layui-btn layui-btn-mini submit-btn hide" lay-submit data-url="UpdateContentTemplateFun">保存</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>预收款成交设置</td>
+                    <td>
+                        <div class="layui-input-inline">
+                            <input type="radio" value="1" name="AdvanceSettingsCode" data-index="17" {{= it.AdvanceSettingsValue == 1 ? "checked" : "" }} title="购买时" class="layui-input" disabled />
+                            <input type="radio" value="0" name="AdvanceSettingsCode" data-index="17" {{= it.AdvanceSettingsValue == 0 ? "checked" : "" }} title="使用时" class="layui-input" disabled />
+                        </div>
+                    </td>
+                    <td>
+                        <span class="layui-btn layui-btn-mini btn-edit">修改</span>
+                        <span class="layui-btn layui-btn-mini submit-btn hide" lay-submit data-url="UpdateAdvanceSettingsFun">保存</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>预约设置</td>
+                    <td>
+                        <div class="layui-input-inline">
+                            <label class="layui-form-label">开始时间：</label>
+                            <div class="layui-input-inline timePluginBegin">
+                                <input type="text" value="{{= it.MakeBeginTimeValue }}" lay-verify="required" name="MakeBeginTimeCode" data-index="13" class="layui-input" disabled />
+                            </div>
+                        </div>
+                        <div class="layui-input-inline">
+                            <label class="layui-form-label">结束时间：</label>
+                            <div class="layui-input-inline timePluginEnd">
+                                <input type="text" value="{{= it.MakeEndTimeValue }}" lay-verify="required" name="MakeEndTimeCode" data-index="14" class="layui-input" disabled />
+                            </div>
+                        </div>
+                        <div class="layui-input-inline">
+                            <label class="layui-form-label">时间间隔：</label>
+                            <div class="layui-input-inline">
+                                <input type="text" value="{{= it.MakeTimeIntervalValue }}" lay-verify="required" name="MakeTimeIntervalCode" data-index="15" class="layui-input" disabled />
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="layui-btn layui-btn-mini btn-edit appointment">修改</span>
+                        <span class="layui-btn layui-btn-mini submit-btn hide" lay-submit data-url="UpdateMakeTimeFun">保存</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>允许欠款</td>
+                    <td>
+                        <div class="layui-input-inline">
+                            <input type="radio" value="1" name="AllowArrearsCode" data-index="18" {{= it.AllowArrearsValue == 1 ? "checked" : "" }} title="是" class="layui-input" disabled />
+                            <input type="radio" value="0" name="AllowArrearsCode" data-index="18" {{= it.AllowArrearsValue == 0 ? "checked" : "" }} title="否" class="layui-input" disabled />
+                        </div>
+                    </td>
+                    <td>
+                        <span class="layui-btn layui-btn-mini btn-edit ">修改</span>
+                        <span class="layui-btn layui-btn-mini submit-btn hide" lay-submit data-url="UpdateAllowArrearsFun">保存</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>积分比例</td>
+                    <td>
+                        <div class="layui-input-inline">
+                            <input type="text" value="{{= it.IntegralNumValue }}" lay-verify="required|number" name="IntegralNumCode" data-index="16" class="layui-input" disabled />
+                        </div>
+                    </td>
+                    <td>
+                        <span class="layui-btn layui-btn-mini btn-edit">修改</span>
+                        <span class="layui-btn layui-btn-mini submit-btn hide" lay-submit data-url="UpdateIntegralNumFun">保存</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>隐私保护</td>
+                    <td>
+                        <div class="layui-input-inline">
+                            <input type="radio" value="1" name="PrivacyProtectionCode" data-index="19" {{= it.PrivacyProtectionValue == 1 ? "checked" : "" }} class="layui-input" title="全部隐藏" disabled />
+                            <input type="radio" value="0" name="PrivacyProtectionCode" data-index="19" {{= it.PrivacyProtectionValue == 0 ? "checked" : "" }} class="layui-input" title="部分隐藏" disabled />
+                        </div>
+                    </td>
+                    <td>
+                        <span class="layui-btn layui-btn-mini btn-edit">修改</span>
+                        <span class="layui-btn layui-btn-mini submit-btn hide" lay-submit data-url="UpdatePrivacyProtectionFun">保存</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>挂号</td>
+                    <td>
+                        <label class="layui-form-label">挂号状态：</label>
+                        <div class="layui-input-inline">
+                            <input type="radio" value="1" name="RegistrationCode" data-index="20" title="开启" class="layui-input" {{= it.RegistrationValue == 1 ? "checked" : "" }} disabled />
+                            <input type="radio" value="0" name="RegistrationCode" data-index="20" title="关闭" class="layui-input" {{= it.RegistrationValue == 0 ? "checked" : "" }} disabled />
+                        </div>
+                        <div class="layui-input-inline">
+                            <input type="hidden" value="{{= it.RegistrationChargeValue }}" lay-verify="required" name="RegistrationChargeCode" data-index="21" disabled />
+                            <input type="text" value="{{= it.RegistrationChargeName }}" lay-verify="required" class="layui-input" name="RegistrationChargeNameCode" data-index="" disabled />
+                        </div>
+                    </td>
+                    <td>
+                        <span class="layui-btn layui-btn-mini btn-edit">修改</span>
+                        <span class="layui-btn layui-btn-mini submit-btn hide" lay-submit data-url="UpdateRegistrationFun">保存</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>候诊</td>
+                    <td>
+                        <label class="layui-form-label">候诊状态：</label>
+                        <div class="layui-input-inline">
+                            <input type="radio" value="1" name="WaitingDiagnosisCode" data-index="22" class="layui-input" title="开启" {{= it.WaitingDiagnosisValue == 1?"checked":"" }} disabled />
+                            <input type="radio" value="0" name="WaitingDiagnosisCode" data-index="22" class="layui-input" title="关闭" {{= it.WaitingDiagnosisValue == 0?"checked":"" }} disabled />
+                        </div>
+                    </td>
+                    <td>
+                        <span class="layui-btn layui-btn-mini btn-edit">修改</span>
+                        <span class="layui-btn layui-btn-mini submit-btn hide" lay-submit data-url="UpdateWaitingDiagnosisFun">保存</span>
+                    </td>
+                </tr>
+            </script>
+            <!-- 收费项目表格 -->
+            <script class="charge-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                <tr chargeId="{{= it[item].ID }}">
+                    <td><input type="checkbox" value="{{= it[item].ID }}" title="{{= it[item].Name }}" /></td>
+                    <td>{{= it[item].Name }}</td>
+                    <td>{{= it[item].PinYin }}</td>
+                    <td>{{= it[item].CategoryName }}</td>
+                    <td>{{= it[item].Size }}</td>
+                </tr>
+                {{ } }}
+            </script>
+        </div>
+    </div>
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/lay_component/js/hcommon.js"></script>
+    <script src="~/Scripts/FlyDog.Common.js"></script>
+    <script src="~/doT-master/doT-master/doT.min.js"></script>
+    <script src="~/lay_component/plugins/layui/layui.js"></script>
+    <script src="~/Scripts/CustomerPlugin.js"></script>
+    <script src="~/lay_component/sampleJs/Option.js"></script>
+</body>
+</html>

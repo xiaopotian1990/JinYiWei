@@ -1,0 +1,236 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>劵分类管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Styles/Public/base-1.0.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+    <style>
+        .layui-form-label {
+            width: 100px;
+        }
+        .layui-input-block{margin-left:100px;}
+        .layui-btn+.layui-btn{margin-left:0;}
+        .layui-btn{margin-right:10px;}
+    </style>
+</head>
+<body>
+    <div class="admin-main">
+        <blockquote class="layui-elem-quote">
+            <a href="javascript:;" class="layui-btn layui-btn-small btn-add">
+                <i class="layui-icon"></i> 添加
+            </a>
+        </blockquote>
+        <fieldset class="layui-elem-field">
+            <legend>劵类型管理</legend>
+            <div class="layui-field-box">
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>状态</th>
+                            <th>备注</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="coupon-table"></tbody>
+                </table>
+                <!--分页容器-->
+                <div id="pageDiv"></div>
+            </div>
+        </fieldset>
+        <!-- 添加/编辑弹窗 -->
+        <div class="coupon-pop hide">
+            <form class="layui-form">
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                    <legend>编辑劵类型</legend>
+                </fieldset>
+                <hidden name="couponId"></hidden>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" name="name" placeholder="请输入名称" />
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10 clearfix">
+                    <label class="layui-form-label">可使用医院</label>
+                    <div class="layui-input-inline" style="width:163px;">
+                        @Html.SelectCategoryByHospital(Com.IFlyDog.CommonDTO.SelectType.Hospital, "Hospital", "Hospital")
+                        
+                    </div>
+                    <div class="layui-input-inline Hospital-selected fr" style="min-height:50px;padding-left:5px;width:calc(100% - 130px);">
+
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">使用范围限制</label>
+                    <div class="layui-input-inline">
+                        <div class="layui-input-inline">
+                            <input type="radio" name="useScope" data-id="1" value="no" title="无限制" checked />
+                        </div>
+                        <div>
+                            <input type="radio" name="useScope" data-id="2" value="chargeCategory" title="指定项目分类" />
+                            <input type="hidden" name="ChargeCategory" />
+                            <span class="ChargeCategory-btn layui-btn layui-btn-primary">
+                                <i class="layui-icon"></i> 选择项目分类
+                            </span>
+                            <div class="chargeCategory-selected m-bt-10"></div>
+                        </div>
+                        <div>
+                            <input type="radio" name="useScope" data-id="3" value="charge" title="指定项目" />
+                            <input type="hidden" name="Charge" />
+                            <span class="Charge-btn layui-btn layui-btn-primary">
+                                <i class="layui-icon"></i> 选择项目
+                            </span>
+                            <div class="charge-selected m-bt-10"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">使用时间限制</label>
+                    <div class="layui-input-inline" style="width:calc(100% - 130px);">
+                        <div class="layui-input-inline">
+                            <input type="radio" name="useDate" data-id="1" lay-filter="useDate" value="no" title="无限制" checked />
+                        </div>
+                        <div class="m-bt-10">
+                            <input type="radio" name="useDate" data-id="2" lay-filter="useDate" value="date" title="指定日期之前" />
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" name="date" placeholder="请输入日期" disabled onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})" />
+                            </div>
+                        </div>
+                        <div class="m-bt-10">
+                            <input type="radio" name="useDate" data-id="3" lay-filter="useDate" value="day-after" title="生效之后N天" />
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" name="day-after" placeholder="请输入天数" disabled />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">状态</label>
+                    <div class="layui-input-inline " style="width:163px;">
+                        <select name="status">
+                            <option value="1">使用</option>
+                            <option value="0">停用</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-input-block m-bt-10">
+                    <label class="layui-form-label">备注</label>
+                    <div class="layui-input-inline ">
+                        <textarea type="text" class="layui-textarea remark" name="remark" lay-verify="title" autocomplete="off" placeholder="请输入备注信息"></textarea>
+                    </div>
+                </div>
+                <div class="m-20 clearfix">
+                    <span class="layui-btn coupon submit-btn fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+                </div>
+            </form>
+        </div>
+        <!-- End  添加/编辑弹窗 -->
+        <!-- 项目类型弹窗 -->
+        <div class="chargeCategory-pop hide">
+            <form class="m-20">
+                <table class="site-table table-hover m-20">
+                    <thead>
+                        <tr>
+                            <th width="50%">名称</th>
+                            <th width="50%">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="chargeCategory-table"></tbody>
+                </table>
+            </form>
+            <div class="m-20 clearfix">
+                <span class="layui-btn chargeCategory submit-btn fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+            </div>
+        </div>
+        <!-- 项目类型弹窗 End -->
+        <!-- 项目弹窗 -->
+        <div class="charge-pop hide">
+            <div class="layui-form m-10 clearfix">
+                <form class="m-20">
+                    <div class="fl" style="margin-left:-35px;">
+                        <label class="layui-form-label" style="width:70px;">拼音码</label>
+                        <div class="layui-input-inline">
+                            <input class="layui-input" name="smartProductPinYin" placeholder="请输入拼音码">
+                        </div>
+                    </div>
+                    <div class="fl">
+                        <label class="layui-form-label" style="width:70px;">名称</label>
+                        <div class="layui-input-inline">
+                            <input class="layui-input" name="smartProductNmae" placeholder="请输入名称">
+                        </div>
+                    </div>
+                    <span class="layui-btn search-btn fr">查询</span>
+                </form>
+            </div>
+            <div class="m-20">
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <td>选择</td>
+                            <th>项目名称</th>
+                            <th>拼音码</th>
+                            <th>类型</th>
+                            <th>规格</th>
+                        </tr>
+                    </thead>
+                    <tbody class="charge-table"></tbody>
+                </table>
+            </div>
+            <div class="m-20 clearfix">
+                <span class="layui-btn charge submit-btn fr">确认</span><span class="layui-btn layui-btn-danger close-layer m-lr-10 fr">取消关闭</span>
+            </div>
+        </div>
+        <!-- 项目弹窗 End -->
+        <div class="dot-tmp">
+            <!-- 劵类型表格 -->
+            <script class="coupon-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                <tr data-id="{{= it[item].ID }}">
+                    <td>{{= it[item].Name }}</td>
+                    <td>{{= it[item].Status == 1?"使用":"停用" }}</td>
+                    <td>{{= it[item].Remark }}</td>
+                    <td>
+                        <span class="layui-btn layui-btn-mini btn-edit" data-id="{{= it[item].ID }}">编辑</span>
+                    </td>
+                </tr>
+                {{ } }}
+            </script>
+            <!-- 收费项目类型表格 -->
+            <script class="chargeCategory-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                <tr chargeCategoryId="{{= it[item].ID}}">
+                    <td><input type="checkbox" value="{{= it[item].ID }}" title="{{= it[item].Name }}" /></td>
+                    <td>{{= it[item].Name }}</td>
+                </tr>
+                {{ } }}
+            </script>
+            <!-- 收费项目表格 -->
+            <script class="charge-tmp" type="text/x-dot-template">
+                {{ for(var item in it){ }}
+                <tr chargeId="{{= it[item].ID }}">
+                    <td><input type="checkbox" value="{{= it[item].ID }}" title="{{= it[item].Name }}" /></td>
+                    <td>{{= it[item].Name }}</td>
+                    <td>{{= it[item].PinYin }}</td>
+                    <td>{{= it[item].CategoryName }}</td>
+                    <td>{{= it[item].Size }}</td>
+                </tr>
+                {{ } }}
+            </script>
+        </div>
+    </div>
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/lay_component/js/hcommon.js"></script>
+    <script src="~/Scripts/FlyDog.Common.js"></script>
+    <script src="~/doT-master/doT-master/doT.min.js"></script>
+    <script src="~/lay_component/plugins/layui/layui.js"></script>
+    <script src="~/lay_component/sampleJs/CouponCategory.js"></script>
+</body>
+</html>

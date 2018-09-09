@@ -1,0 +1,1236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C4D11054-9203-47B3-8E54-41820BE42819}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Com.IFlyDog.FlyDogWeb</RootNamespace>
+    <AssemblyName>Com.IFlyDog.FlyDogWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TypeScriptToolsVersion>2.1</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Com.JinYiWei.Cache, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PackagesDlls\Com.JinYiWei.Common\Com.JinYiWei.Cache.dll</HintPath>
+    </Reference>
+    <Reference Include="Com.JinYiWei.Common">
+      <HintPath>..\PackagesDlls\Com.JinYiWei.Common\Com.JinYiWei.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Com.JinYiWei.Log4Net">
+      <HintPath>..\PackagesDlls\Com.JinYiWei.Common\Com.JinYiWei.Log4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Com.JinYiWei.MongoDB">
+      <HintPath>..\PackagesDlls\Com.JinYiWei.Common\Com.JinYiWei.MongoDB.dll</HintPath>
+    </Reference>
+    <Reference Include="Com.JinYiWei.MVCFrameWork">
+      <HintPath>..\PackagesDlls\Com.JinYiWei.Common\Com.JinYiWei.MVCFrameWork.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\PackagesDlls\Log4Net\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net.Ext.Json">
+      <HintPath>..\PackagesDlls\Log4Net\log4net.Ext.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\PackagesDlls\Unity\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PackagesDlls\Unity\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\PackagesDlls\Unity\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Mvc">
+      <HintPath>..\PackagesDlls\Unity\Microsoft.Practices.Unity.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
+      <HintPath>..\PackagesDlls\Unity\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PackagesDlls\Newtonsoft.Json\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="StackExchange.Redis, Version=1.1.608.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PackagesDlls\Redis\StackExchange.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PackagesDlls\WebAPI\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="doT-master\doT-master\benchmarks\compileBench.js" />
+    <Content Include="doT-master\doT-master\benchmarks\genspeed.html" />
+    <Content Include="doT-master\doT-master\benchmarks\index.html" />
+    <Content Include="doT-master\doT-master\benchmarks\jslitmus.js" />
+    <Content Include="doT-master\doT-master\benchmarks\templatesBench.js" />
+    <Content Include="doT-master\doT-master\benchmarks\templating\doT.js" />
+    <Content Include="doT-master\doT-master\benchmarks\templating\doU.js" />
+    <Content Include="doT-master\doT-master\doT.js" />
+    <Content Include="doT-master\doT-master\doT.min.js" />
+    <Content Include="doT-master\doT-master\doU.js" />
+    <Content Include="doT-master\doT-master\examples\advancedsnippet.txt" />
+    <Content Include="doT-master\doT-master\examples\browsersample.html" />
+    <Content Include="doT-master\doT-master\examples\customdoT.js" />
+    <Content Include="doT-master\doT-master\examples\express\index.js" />
+    <Content Include="doT-master\doT-master\examples\express\lib\app.js" />
+    <Content Include="doT-master\doT-master\examples\express\lib\render\index.js" />
+    <Content Include="doT-master\doT-master\examples\snippet.txt" />
+    <Content Include="doT-master\doT-master\examples\withdoT.js" />
+    <Content Include="doT-master\doT-master\index.js" />
+    <Content Include="doT-master\doT-master\LICENSE-DOT.txt" />
+    <Content Include="doT-master\doT-master\test\conditionals.test.js" />
+    <Content Include="doT-master\doT-master\test\defines.test.js" />
+    <Content Include="doT-master\doT-master\test\dot.test.js" />
+    <Content Include="doT-master\doT-master\test\iteration.test.js" />
+    <Content Include="doT-master\doT-master\test\util.js" />
+    <Content Include="Global.asax" />
+    <Content Include="lay_component\css\begtable.css" />
+    <Content Include="lay_component\css\global.css" />
+    <Content Include="lay_component\css\layer.css" />
+    <Content Include="lay_component\css\layer1.css" />
+    <Content Include="lay_component\css\layout.css" />
+    <Content Include="lay_component\css\login.css" />
+    <Content Include="lay_component\css\loginGoogleapis.css" />
+    <Content Include="lay_component\css\main.css" />
+    <Content Include="lay_component\css\table.css" />
+    <Content Include="lay_component\datas\nav.js" />
+    <Content Include="lay_component\images\0.jpg" />
+    <Content Include="lay_component\images\iwlogo.png" />
+    <Content Include="lay_component\js\ajaxfileupload.js" />
+    <Content Include="lay_component\js\ajaxupload.3.6.js" />
+    <Content Include="lay_component\js\begtable.js" />
+    <Content Include="lay_component\js\chat.js" />
+    <Content Include="lay_component\js\city.js" />
+    <Content Include="lay_component\js\common.js" />
+    <Content Include="lay_component\js\hcommon.js" />
+    <Content Include="lay_component\js\index.js" />
+    <Content Include="lay_component\js\jQloader.js" />
+    <Content Include="lay_component\js\jquery-1.10.2.min.js" />
+    <Content Include="lay_component\js\jquery-2.0.3.min.js" />
+    <Content Include="lay_component\js\layer.js" />
+    <Content Include="lay_component\js\layout.js" />
+    <Content Include="lay_component\js\navbar.js" />
+    <Content Include="lay_component\js\ShopImgHandle.js" />
+    <Content Include="lay_component\js\tab.js" />
+    <Content Include="lay_component\js\validator.js" />
+    <Content Include="lay_component\laytpl\laytpl.js" />
+    <Content Include="lay_component\sampleJs\Complain.js" />
+    <Content Include="lay_component\sampleJs\DeptSend.js" />
+    <Content Include="lay_component\sampleJs\CashinerDesk\AddInvoice.js" />
+    <Content Include="lay_component\sampleJs\CashinerDesk\SettleAccounts.js" />
+    <Content Include="lay_component\sampleJs\OperationAdd.js" />
+    <Content Include="lay_component\plugins\font-awesome\css\font-awesome.css" />
+    <Content Include="lay_component\plugins\font-awesome\css\font-awesome.min.css" />
+    <Content Include="lay_component\plugins\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="lay_component\plugins\layui\css\layui.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\code.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\aero%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\aero.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\aero.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\blue%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\blue.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\blue.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\flat%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\flat.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\flat.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\green%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\green.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\green.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\grey%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\grey.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\grey.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\orange%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\orange.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\orange.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\pink%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\pink.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\pink.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\purple%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\purple.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\purple.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\red%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\red.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\red.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\yellow%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\yellow.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\yellow.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\flat\_all.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\futurico\futurico%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\futurico\futurico.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\futurico\futurico.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\icheck.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\line\aero.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\line\blue.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\line\green.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\line\grey.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\line\line%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\line\line.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\line\line.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\line\orange.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\line\pink.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\line\purple.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\line\red.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\line\yellow.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\line\_all.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\aero%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\aero.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\aero.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\blue%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\blue.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\blue.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\green%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\green.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\green.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\grey%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\grey.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\grey.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\minimal%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\minimal.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\minimal.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\orange%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\orange.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\orange.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\pink%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\pink.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\pink.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\purple%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\purple.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\purple.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\red%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\red.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\red.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\yellow%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\yellow.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\yellow.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\minimal\_all.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\polaris\polaris%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\polaris\polaris.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\polaris\polaris.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\aero%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\aero.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\aero.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\blue%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\blue.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\blue.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\green%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\green.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\green.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\grey%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\grey.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\grey.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\orange%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\orange.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\orange.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\pink%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\pink.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\pink.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\purple%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\purple.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\purple.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\red%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\red.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\red.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\square%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\square.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\square.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\yellow%402x.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\yellow.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\yellow.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\icheck\square\_all.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\laydate\icon.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\laydate\laydate.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\layer\default\icon-ext.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\layer\default\icon.png" />
+    <Content Include="lay_component\plugins\layui\css\modules\layer\default\layer.css" />
+    <Content Include="lay_component\plugins\layui\css\modules\layer\default\loading-0.gif" />
+    <Content Include="lay_component\plugins\layui\css\modules\layer\default\loading-1.gif" />
+    <Content Include="lay_component\plugins\layui\css\modules\layer\default\loading-2.gif" />
+    <Content Include="lay_component\plugins\layui\font\iconfont.svg" />
+    <Content Include="lay_component\plugins\layui\images\face\0.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\1.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\10.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\11.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\12.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\13.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\14.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\15.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\16.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\17.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\18.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\19.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\2.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\20.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\21.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\22.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\23.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\24.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\25.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\26.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\27.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\28.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\29.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\3.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\30.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\31.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\32.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\33.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\34.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\35.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\36.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\37.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\38.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\39.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\4.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\40.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\41.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\42.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\43.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\44.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\45.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\46.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\47.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\48.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\49.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\5.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\50.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\51.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\52.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\53.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\54.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\55.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\56.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\57.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\58.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\59.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\6.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\60.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\61.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\62.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\63.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\64.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\65.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\66.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\67.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\68.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\69.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\7.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\70.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\71.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\8.gif" />
+    <Content Include="lay_component\plugins\layui\images\face\9.gif" />
+    <Content Include="lay_component\plugins\layui\layui.js" />
+    <Content Include="lay_component\plugins\layui\lay\dest\layui.all.js" />
+    <Content Include="lay_component\plugins\layui\lay\dest\layui.mod.js" />
+    <Content Include="lay_component\plugins\layui\lay\lib\jquery.js" />
+    <Content Include="lay_component\plugins\layui\lay\modules\code.js" />
+    <Content Include="lay_component\plugins\layui\lay\modules\element.js" />
+    <Content Include="lay_component\plugins\layui\lay\modules\flow.js" />
+    <Content Include="lay_component\plugins\layui\lay\modules\form.js" />
+    <Content Include="lay_component\plugins\layui\lay\modules\icheck.js" />
+    <Content Include="lay_component\plugins\layui\lay\modules\laydate.js" />
+    <Content Include="lay_component\plugins\layui\lay\modules\layedit.js" />
+    <Content Include="lay_component\plugins\layui\lay\modules\layer.js" />
+    <Content Include="lay_component\plugins\layui\lay\modules\laypage.js" />
+    <Content Include="lay_component\plugins\layui\lay\modules\laytpl.js" />
+    <Content Include="lay_component\plugins\layui\lay\modules\tree.js" />
+    <Content Include="lay_component\plugins\layui\lay\modules\upload.js" />
+    <Content Include="lay_component\plugins\layui\lay\modules\uploadEx.js" />
+    <Content Include="lay_component\plugins\layui\lay\modules\util.js" />
+    <Content Include="lay_component\sampleJs\AccountManage.js" />
+    <Content Include="lay_component\sampleJs\allocate.js" />
+    <Content Include="lay_component\sampleJs\allocateDetail.js" />
+    <Content Include="lay_component\sampleJs\AuditApply.js" />
+    <Content Include="lay_component\sampleJs\AuditOperation.js" />
+    <Content Include="lay_component\sampleJs\AuditRule.js" />
+    <Content Include="lay_component\sampleJs\AuditWork.js" />
+    <Content Include="lay_component\sampleJs\CashinerDesk\RefundMoney.js" />
+    <Content Include="lay_component\sampleJs\CashinerDesk\BackOrder.js" />
+    <Content Include="lay_component\sampleJs\CashinerDesk\DepositRebate.js" />
+    <Content Include="lay_component\sampleJs\CashinerDesk\AddDeposit.js" />
+    <Content Include="lay_component\sampleJs\CashinerDesk\CashierOrder.js" />
+    <Content Include="lay_component\sampleJs\Bed.js" />
+    <Content Include="lay_component\sampleJs\callbackCategory.js" />
+    <Content Include="lay_component\sampleJs\CallBackDesk.js" />
+    <Content Include="lay_component\sampleJs\callbackgroup.js" />
+    <Content Include="lay_component\sampleJs\caseTemplate.js" />
+    <Content Include="lay_component\sampleJs\CashierDesk.js" />
+    <Content Include="lay_component\sampleJs\CashinerDesk\CashierRecord.js" />
+    <Content Include="lay_component\sampleJs\CashinerDesk\RepayDebt.js" />
+    <Content Include="lay_component\sampleJs\CashinerDesk\SettlementRecord.js" />
+    <Content Include="lay_component\sampleJs\channel.js" />
+    <Content Include="lay_component\sampleJs\ChannelGroup.js" />
+    <Content Include="lay_component\sampleJs\Club.js" />
+    <Content Include="lay_component\sampleJs\CouponActivity.js" />
+    <Content Include="lay_component\sampleJs\CouponActivityDetail.js" />
+    <Content Include="lay_component\sampleJs\CustomerGroup.js" />
+    <Content Include="lay_component\sampleJs\CustomerGroupData.js" />
+    <Content Include="lay_component\sampleJs\customer_operation\addconsult.js" />
+    <Content Include="lay_component\sampleJs\customer_operation\AddDeposit.js" />
+    <Content Include="lay_component\sampleJs\customer_operation\AddOrder.js" />
+    <Content Include="lay_component\sampleJs\customer_operation\Appointment.js" />
+    <Content Include="lay_component\sampleJs\customer_operation\DepositRebateOrder.js" />
+    <Content Include="lay_component\sampleJs\customer_operation\OwnerShipOrder.js" />
+    <Content Include="lay_component\sampleJs\customer_operation\BackOrder.js" />
+    <Content Include="lay_component\sampleJs\customer_operation\CallbackPlan.js" />
+    <Content Include="lay_component\sampleJs\customer_operation\CallbackRemind.js" />
+    <Content Include="lay_component\sampleJs\customer_operation\CallBack.js" />
+    <Content Include="lay_component\sampleJs\customer_operation\EditCustomerInfo.js" />
+    <Content Include="lay_component\sampleJs\customer_operation\Surgery.js" />
+    <Content Include="lay_component\sampleJs\customer_operation\Treat.js" />
+    <Content Include="lay_component\sampleJs\DeparDesk.js" />
+    <Content Include="lay_component\sampleJs\Inpatient.js" />
+    <Content Include="lay_component\sampleJs\ItemGroup.js" />
+    <Content Include="lay_component\sampleJs\customer_operation\MedicalRecord.js" />
+    <Content Include="lay_component\sampleJs\LiveDesk.js" />
+    <Content Include="lay_component\sampleJs\MemberDesk.js" />
+    <Content Include="lay_component\sampleJs\WXOption.js" />
+    <Content Include="lay_component\sampleJs\OwnerShip.js" />
+    <Content Include="lay_component\sampleJs\SaleBack.js" />
+    <Content Include="lay_component\sampleJs\SmartItem.js" />
+    <Content Include="lay_component\sampleJs\StoreManager.js" />
+    <Content Include="lay_component\sampleJs\Store.js" />
+    <Content Include="lay_component\sampleJs\Hospital.js" />
+    <Content Include="lay_component\sampleJs\Charge.js" />
+    <Content Include="lay_component\sampleJs\ChargeCategory.js" />
+    <Content Include="lay_component\sampleJs\ChargeDiscount.js" />
+    <Content Include="lay_component\sampleJs\ChargeSetInfo.js" />
+    <Content Include="lay_component\sampleJs\CheckInfo.js" />
+    <Content Include="lay_component\sampleJs\complaincategory.js" />
+    <Content Include="lay_component\sampleJs\CouponCategory.js" />
+    <Content Include="lay_component\sampleJs\Customer.js" />
+    <Content Include="lay_component\sampleJs\CustomerProfile.js" />
+    <Content Include="lay_component\sampleJs\DepositCharge.js" />
+    <Content Include="lay_component\sampleJs\failturecategory.js" />
+    <Content Include="lay_component\sampleJs\FrontDesk.js" />
+    <Content Include="lay_component\sampleJs\getByHospitalIDData.js" />
+    <Content Include="lay_component\sampleJs\HospitalPrint.js" />
+    <Content Include="lay_component\sampleJs\invoice.js" />
+    <Content Include="lay_component\sampleJs\invoiceDetail.js" />
+    <Content Include="lay_component\sampleJs\knowledgecategory.js" />
+    <Content Include="lay_component\sampleJs\dept.js" />
+    <Content Include="lay_component\sampleJs\KnowledgeInfo.js" />
+    <Content Include="lay_component\sampleJs\MarketDesk.js" />
+    <Content Include="lay_component\sampleJs\OnlineDesk.js" />
+    <Content Include="lay_component\sampleJs\operationLog.js" />
+    <Content Include="lay_component\sampleJs\Option.js" />
+    <Content Include="lay_component\sampleJs\position.js" />
+    <Content Include="lay_component\sampleJs\Reception.js" />
+    <Content Include="lay_component\sampleJs\relation.js" />
+    <Content Include="lay_component\sampleJs\role.js" />
+    <Content Include="lay_component\sampleJs\ShareCategory.js" />
+    <Content Include="lay_component\sampleJs\Shift.js" />
+    <Content Include="lay_component\sampleJs\smartcardcategory.js" />
+    <Content Include="lay_component\sampleJs\smartProduct.js" />
+    <Content Include="lay_component\sampleJs\smartProductCategory.js" />
+    <Content Include="lay_component\sampleJs\smartPurchase.js" />
+    <Content Include="lay_component\sampleJs\smartPurchaseDetail.js" />
+    <Content Include="lay_component\sampleJs\smartReturn.js" />
+    <Content Include="lay_component\sampleJs\smartReturnDetail.js" />
+    <Content Include="lay_component\sampleJs\SmartShiftCategory.js" />
+    <Content Include="lay_component\sampleJs\SmartStock.js" />
+    <Content Include="lay_component\sampleJs\smartSupplier.js" />
+    <Content Include="lay_component\sampleJs\smarttag.js" />
+    <Content Include="lay_component\sampleJs\smartUnit.js" />
+    <Content Include="lay_component\sampleJs\SmartUser.js" />
+    <Content Include="lay_component\sampleJs\SmartWarehouse.js" />
+    <Content Include="lay_component\sampleJs\SmartWarehouseDetaiIndex.js" />
+    <Content Include="lay_component\sampleJs\SurgeryDesk.js" />
+    <Content Include="lay_component\sampleJs\StoreData.js" />
+    <Content Include="lay_component\sampleJs\symptomSetting.js" />
+    <Content Include="lay_component\sampleJs\TagGroup.js" />
+    <Content Include="lay_component\sampleJs\tool.js" />
+    <Content Include="lay_component\sampleJs\TreatScheduler.js" />
+    <Content Include="lay_component\sampleJs\use.js" />
+    <Content Include="lay_component\sampleJs\useDetail.js" />
+    <Content Include="lay_component\sampleJs\user.js" />
+    <Content Include="lay_component\sampleJs\userDiscount.js" />
+    <Content Include="lay_component\sampleJs\userTrigger.js" />
+    <Content Include="lay_component\signalr\connection.js" />
+    <Content Include="lay_component\signalr\jquery.signalR-2.0.3.min.js" />
+    <Content Include="lay_component\temp\edit-form.html" />
+    <Content Include="Scripts\CustomerPlugin.js" />
+    <Content Include="Scripts\FlyDog.Common.js" />
+    <Content Include="Styles\Public\base-1.0.css" />
+    <Content Include="Styles\Public\CustomerPlugin.css" />
+    <Content Include="UEditer\dialogs\anchor\anchor.html" />
+    <Content Include="UEditer\dialogs\attachment\attachment.css" />
+    <Content Include="UEditer\dialogs\attachment\attachment.html" />
+    <Content Include="UEditer\dialogs\attachment\attachment.js" />
+    <Content Include="UEditer\dialogs\attachment\fileTypeImages\icon_chm.gif" />
+    <Content Include="UEditer\dialogs\attachment\fileTypeImages\icon_default.png" />
+    <Content Include="UEditer\dialogs\attachment\fileTypeImages\icon_doc.gif" />
+    <Content Include="UEditer\dialogs\attachment\fileTypeImages\icon_exe.gif" />
+    <Content Include="UEditer\dialogs\attachment\fileTypeImages\icon_jpg.gif" />
+    <Content Include="UEditer\dialogs\attachment\fileTypeImages\icon_mp3.gif" />
+    <Content Include="UEditer\dialogs\attachment\fileTypeImages\icon_mv.gif" />
+    <Content Include="UEditer\dialogs\attachment\fileTypeImages\icon_pdf.gif" />
+    <Content Include="UEditer\dialogs\attachment\fileTypeImages\icon_ppt.gif" />
+    <Content Include="UEditer\dialogs\attachment\fileTypeImages\icon_psd.gif" />
+    <Content Include="UEditer\dialogs\attachment\fileTypeImages\icon_rar.gif" />
+    <Content Include="UEditer\dialogs\attachment\fileTypeImages\icon_txt.gif" />
+    <Content Include="UEditer\dialogs\attachment\fileTypeImages\icon_xls.gif" />
+    <Content Include="UEditer\dialogs\attachment\images\alignicon.gif" />
+    <Content Include="UEditer\dialogs\attachment\images\alignicon.png" />
+    <Content Include="UEditer\dialogs\attachment\images\bg.png" />
+    <Content Include="UEditer\dialogs\attachment\images\file-icons.gif" />
+    <Content Include="UEditer\dialogs\attachment\images\file-icons.png" />
+    <Content Include="UEditer\dialogs\attachment\images\icons.gif" />
+    <Content Include="UEditer\dialogs\attachment\images\icons.png" />
+    <Content Include="UEditer\dialogs\attachment\images\image.png" />
+    <Content Include="UEditer\dialogs\attachment\images\progress.png" />
+    <Content Include="UEditer\dialogs\attachment\images\success.gif" />
+    <Content Include="UEditer\dialogs\attachment\images\success.png" />
+    <Content Include="UEditer\dialogs\background\background.css" />
+    <Content Include="UEditer\dialogs\background\background.html" />
+    <Content Include="UEditer\dialogs\background\background.js" />
+    <Content Include="UEditer\dialogs\background\images\bg.png" />
+    <Content Include="UEditer\dialogs\background\images\success.png" />
+    <Content Include="UEditer\dialogs\charts\chart.config.js" />
+    <Content Include="UEditer\dialogs\charts\charts.css" />
+    <Content Include="UEditer\dialogs\charts\charts.html" />
+    <Content Include="UEditer\dialogs\charts\charts.js" />
+    <Content Include="UEditer\dialogs\charts\images\charts0.png" />
+    <Content Include="UEditer\dialogs\charts\images\charts1.png" />
+    <Content Include="UEditer\dialogs\charts\images\charts2.png" />
+    <Content Include="UEditer\dialogs\charts\images\charts3.png" />
+    <Content Include="UEditer\dialogs\charts\images\charts4.png" />
+    <Content Include="UEditer\dialogs\charts\images\charts5.png" />
+    <Content Include="UEditer\dialogs\emotion\emotion.css" />
+    <Content Include="UEditer\dialogs\emotion\emotion.html" />
+    <Content Include="UEditer\dialogs\emotion\emotion.js" />
+    <Content Include="UEditer\dialogs\emotion\images\0.gif" />
+    <Content Include="UEditer\dialogs\emotion\images\bface.gif" />
+    <Content Include="UEditer\dialogs\emotion\images\cface.gif" />
+    <Content Include="UEditer\dialogs\emotion\images\fface.gif" />
+    <Content Include="UEditer\dialogs\emotion\images\jxface2.gif" />
+    <Content Include="UEditer\dialogs\emotion\images\neweditor-tab-bg.png" />
+    <Content Include="UEditer\dialogs\emotion\images\tface.gif" />
+    <Content Include="UEditer\dialogs\emotion\images\wface.gif" />
+    <Content Include="UEditer\dialogs\emotion\images\yface.gif" />
+    <Content Include="UEditer\dialogs\gmap\gmap.html" />
+    <Content Include="UEditer\dialogs\help\help.css" />
+    <Content Include="UEditer\dialogs\help\help.html" />
+    <Content Include="UEditer\dialogs\help\help.js" />
+    <Content Include="UEditer\dialogs\image\image.css" />
+    <Content Include="UEditer\dialogs\image\image.html" />
+    <Content Include="UEditer\dialogs\image\image.js" />
+    <Content Include="UEditer\dialogs\image\images\alignicon.jpg" />
+    <Content Include="UEditer\dialogs\image\images\bg.png" />
+    <Content Include="UEditer\dialogs\image\images\icons.gif" />
+    <Content Include="UEditer\dialogs\image\images\icons.png" />
+    <Content Include="UEditer\dialogs\image\images\image.png" />
+    <Content Include="UEditer\dialogs\image\images\progress.png" />
+    <Content Include="UEditer\dialogs\image\images\success.gif" />
+    <Content Include="UEditer\dialogs\image\images\success.png" />
+    <Content Include="UEditer\dialogs\insertframe\insertframe.html" />
+    <Content Include="UEditer\dialogs\internal.js" />
+    <Content Include="UEditer\dialogs\link\link.html" />
+    <Content Include="UEditer\dialogs\map\map.html" />
+    <Content Include="UEditer\dialogs\map\show.html" />
+    <Content Include="UEditer\dialogs\music\music.css" />
+    <Content Include="UEditer\dialogs\music\music.html" />
+    <Content Include="UEditer\dialogs\music\music.js" />
+    <Content Include="UEditer\dialogs\preview\preview.html" />
+    <Content Include="UEditer\dialogs\scrawl\images\addimg.png" />
+    <Content Include="UEditer\dialogs\scrawl\images\brush.png" />
+    <Content Include="UEditer\dialogs\scrawl\images\delimg.png" />
+    <Content Include="UEditer\dialogs\scrawl\images\delimgH.png" />
+    <Content Include="UEditer\dialogs\scrawl\images\empty.png" />
+    <Content Include="UEditer\dialogs\scrawl\images\emptyH.png" />
+    <Content Include="UEditer\dialogs\scrawl\images\eraser.png" />
+    <Content Include="UEditer\dialogs\scrawl\images\redo.png" />
+    <Content Include="UEditer\dialogs\scrawl\images\redoH.png" />
+    <Content Include="UEditer\dialogs\scrawl\images\scale.png" />
+    <Content Include="UEditer\dialogs\scrawl\images\scaleH.png" />
+    <Content Include="UEditer\dialogs\scrawl\images\size.png" />
+    <Content Include="UEditer\dialogs\scrawl\images\undo.png" />
+    <Content Include="UEditer\dialogs\scrawl\images\undoH.png" />
+    <Content Include="UEditer\dialogs\scrawl\scrawl.css" />
+    <Content Include="UEditer\dialogs\scrawl\scrawl.html" />
+    <Content Include="UEditer\dialogs\scrawl\scrawl.js" />
+    <Content Include="UEditer\dialogs\searchreplace\searchreplace.html" />
+    <Content Include="UEditer\dialogs\searchreplace\searchreplace.js" />
+    <Content Include="UEditer\dialogs\snapscreen\snapscreen.html" />
+    <Content Include="UEditer\dialogs\spechars\spechars.html" />
+    <Content Include="UEditer\dialogs\spechars\spechars.js" />
+    <Content Include="UEditer\dialogs\table\dragicon.png" />
+    <Content Include="UEditer\dialogs\table\edittable.css" />
+    <Content Include="UEditer\dialogs\table\edittable.html" />
+    <Content Include="UEditer\dialogs\table\edittable.js" />
+    <Content Include="UEditer\dialogs\table\edittd.html" />
+    <Content Include="UEditer\dialogs\table\edittip.html" />
+    <Content Include="UEditer\dialogs\template\config.js" />
+    <Content Include="UEditer\dialogs\template\images\bg.gif" />
+    <Content Include="UEditer\dialogs\template\images\pre0.png" />
+    <Content Include="UEditer\dialogs\template\images\pre1.png" />
+    <Content Include="UEditer\dialogs\template\images\pre2.png" />
+    <Content Include="UEditer\dialogs\template\images\pre3.png" />
+    <Content Include="UEditer\dialogs\template\images\pre4.png" />
+    <Content Include="UEditer\dialogs\template\template.css" />
+    <Content Include="UEditer\dialogs\template\template.html" />
+    <Content Include="UEditer\dialogs\template\template.js" />
+    <Content Include="UEditer\dialogs\video\images\bg.png" />
+    <Content Include="UEditer\dialogs\video\images\center_focus.jpg" />
+    <Content Include="UEditer\dialogs\video\images\file-icons.gif" />
+    <Content Include="UEditer\dialogs\video\images\file-icons.png" />
+    <Content Include="UEditer\dialogs\video\images\icons.gif" />
+    <Content Include="UEditer\dialogs\video\images\icons.png" />
+    <Content Include="UEditer\dialogs\video\images\image.png" />
+    <Content Include="UEditer\dialogs\video\images\left_focus.jpg" />
+    <Content Include="UEditer\dialogs\video\images\none_focus.jpg" />
+    <Content Include="UEditer\dialogs\video\images\progress.png" />
+    <Content Include="UEditer\dialogs\video\images\right_focus.jpg" />
+    <Content Include="UEditer\dialogs\video\images\success.gif" />
+    <Content Include="UEditer\dialogs\video\images\success.png" />
+    <Content Include="UEditer\dialogs\video\video.css" />
+    <Content Include="UEditer\dialogs\video\video.html" />
+    <Content Include="UEditer\dialogs\video\video.js" />
+    <Content Include="UEditer\dialogs\webapp\webapp.html" />
+    <Content Include="UEditer\dialogs\wordimage\fClipboard_ueditor.swf" />
+    <Content Include="UEditer\dialogs\wordimage\imageUploader.swf" />
+    <Content Include="UEditer\dialogs\wordimage\tangram.js" />
+    <Content Include="UEditer\dialogs\wordimage\wordimage.html" />
+    <Content Include="UEditer\dialogs\wordimage\wordimage.js" />
+    <Content Include="UEditer\index.html" />
+    <Content Include="UEditer\lang\en\en.js" />
+    <Content Include="UEditer\lang\en\images\addimage.png" />
+    <Content Include="UEditer\lang\en\images\alldeletebtnhoverskin.png" />
+    <Content Include="UEditer\lang\en\images\alldeletebtnupskin.png" />
+    <Content Include="UEditer\lang\en\images\background.png" />
+    <Content Include="UEditer\lang\en\images\button.png" />
+    <Content Include="UEditer\lang\en\images\copy.png" />
+    <Content Include="UEditer\lang\en\images\deletedisable.png" />
+    <Content Include="UEditer\lang\en\images\deleteenable.png" />
+    <Content Include="UEditer\lang\en\images\listbackground.png" />
+    <Content Include="UEditer\lang\en\images\localimage.png" />
+    <Content Include="UEditer\lang\en\images\music.png" />
+    <Content Include="UEditer\lang\en\images\rotateleftdisable.png" />
+    <Content Include="UEditer\lang\en\images\rotateleftenable.png" />
+    <Content Include="UEditer\lang\en\images\rotaterightdisable.png" />
+    <Content Include="UEditer\lang\en\images\rotaterightenable.png" />
+    <Content Include="UEditer\lang\en\images\upload.png" />
+    <Content Include="UEditer\lang\zh-cn\images\copy.png" />
+    <Content Include="UEditer\lang\zh-cn\images\localimage.png" />
+    <Content Include="UEditer\lang\zh-cn\images\music.png" />
+    <Content Include="UEditer\lang\zh-cn\images\upload.png" />
+    <Content Include="UEditer\lang\zh-cn\zh-cn.js" />
+    <Content Include="UEditer\net\net.sln" />
+    <Content Include="UEditer\themes\default\css\ueditor.css" />
+    <Content Include="UEditer\themes\default\css\ueditor.min.css" />
+    <Content Include="UEditer\themes\default\dialogbase.css" />
+    <Content Include="UEditer\themes\default\images\anchor.gif" />
+    <Content Include="UEditer\themes\default\images\arrow.png" />
+    <Content Include="UEditer\themes\default\images\arrow_down.png" />
+    <Content Include="UEditer\themes\default\images\arrow_up.png" />
+    <Content Include="UEditer\themes\default\images\button-bg.gif" />
+    <Content Include="UEditer\themes\default\images\cancelbutton.gif" />
+    <Content Include="UEditer\themes\default\images\charts.png" />
+    <Content Include="UEditer\themes\default\images\cursor_h.gif" />
+    <Content Include="UEditer\themes\default\images\cursor_h.png" />
+    <Content Include="UEditer\themes\default\images\cursor_v.gif" />
+    <Content Include="UEditer\themes\default\images\cursor_v.png" />
+    <Content Include="UEditer\themes\default\images\dialog-title-bg.png" />
+    <Content Include="UEditer\themes\default\images\filescan.png" />
+    <Content Include="UEditer\themes\default\images\highlighted.gif" />
+    <Content Include="UEditer\themes\default\images\icons-all.gif" />
+    <Content Include="UEditer\themes\default\images\icons.gif" />
+    <Content Include="UEditer\themes\default\images\icons.png" />
+    <Content Include="UEditer\themes\default\images\loaderror.png" />
+    <Content Include="UEditer\themes\default\images\loading.gif" />
+    <Content Include="UEditer\themes\default\images\lock.gif" />
+    <Content Include="UEditer\themes\default\images\neweditor-tab-bg.png" />
+    <Content Include="UEditer\themes\default\images\pagebreak.gif" />
+    <Content Include="UEditer\themes\default\images\scale.png" />
+    <Content Include="UEditer\themes\default\images\sortable.png" />
+    <Content Include="UEditer\themes\default\images\spacer.gif" />
+    <Content Include="UEditer\themes\default\images\sparator_v.png" />
+    <Content Include="UEditer\themes\default\images\table-cell-align.png" />
+    <Content Include="UEditer\themes\default\images\tangram-colorpicker.png" />
+    <Content Include="UEditer\themes\default\images\toolbar_bg.png" />
+    <Content Include="UEditer\themes\default\images\unhighlighted.gif" />
+    <Content Include="UEditer\themes\default\images\upload.png" />
+    <Content Include="UEditer\themes\default\images\videologo.gif" />
+    <Content Include="UEditer\themes\default\images\word.gif" />
+    <Content Include="UEditer\themes\default\images\wordpaste.png" />
+    <Content Include="UEditer\themes\iframe.css" />
+    <Content Include="UEditer\third-party\codemirror\codemirror.css" />
+    <Content Include="UEditer\third-party\codemirror\codemirror.js" />
+    <Content Include="UEditer\third-party\highcharts\adapters\mootools-adapter.js" />
+    <Content Include="UEditer\third-party\highcharts\adapters\mootools-adapter.src.js" />
+    <Content Include="UEditer\third-party\highcharts\adapters\prototype-adapter.js" />
+    <Content Include="UEditer\third-party\highcharts\adapters\prototype-adapter.src.js" />
+    <Content Include="UEditer\third-party\highcharts\adapters\standalone-framework.js" />
+    <Content Include="UEditer\third-party\highcharts\adapters\standalone-framework.src.js" />
+    <Content Include="UEditer\third-party\highcharts\highcharts-more.js" />
+    <Content Include="UEditer\third-party\highcharts\highcharts-more.src.js" />
+    <Content Include="UEditer\third-party\highcharts\highcharts.js" />
+    <Content Include="UEditer\third-party\highcharts\highcharts.src.js" />
+    <Content Include="UEditer\third-party\highcharts\modules\annotations.js" />
+    <Content Include="UEditer\third-party\highcharts\modules\annotations.src.js" />
+    <Content Include="UEditer\third-party\highcharts\modules\canvas-tools.js" />
+    <Content Include="UEditer\third-party\highcharts\modules\canvas-tools.src.js" />
+    <Content Include="UEditer\third-party\highcharts\modules\data.js" />
+    <Content Include="UEditer\third-party\highcharts\modules\data.src.js" />
+    <Content Include="UEditer\third-party\highcharts\modules\drilldown.js" />
+    <Content Include="UEditer\third-party\highcharts\modules\drilldown.src.js" />
+    <Content Include="UEditer\third-party\highcharts\modules\exporting.js" />
+    <Content Include="UEditer\third-party\highcharts\modules\exporting.src.js" />
+    <Content Include="UEditer\third-party\highcharts\modules\funnel.js" />
+    <Content Include="UEditer\third-party\highcharts\modules\funnel.src.js" />
+    <Content Include="UEditer\third-party\highcharts\modules\heatmap.js" />
+    <Content Include="UEditer\third-party\highcharts\modules\heatmap.src.js" />
+    <Content Include="UEditer\third-party\highcharts\modules\map.js" />
+    <Content Include="UEditer\third-party\highcharts\modules\map.src.js" />
+    <Content Include="UEditer\third-party\highcharts\modules\no-data-to-display.js" />
+    <Content Include="UEditer\third-party\highcharts\modules\no-data-to-display.src.js" />
+    <Content Include="UEditer\third-party\highcharts\themes\dark-blue.js" />
+    <Content Include="UEditer\third-party\highcharts\themes\dark-green.js" />
+    <Content Include="UEditer\third-party\highcharts\themes\gray.js" />
+    <Content Include="UEditer\third-party\highcharts\themes\grid.js" />
+    <Content Include="UEditer\third-party\highcharts\themes\skies.js" />
+    <Content Include="UEditer\third-party\jquery-1.10.2.js" />
+    <Content Include="UEditer\third-party\jquery-1.10.2.min.js" />
+    <Content Include="UEditer\third-party\snapscreen\UEditorSnapscreen.exe" />
+    <Content Include="UEditer\third-party\SyntaxHighlighter\shCore.js" />
+    <Content Include="UEditer\third-party\SyntaxHighlighter\shCoreDefault.css" />
+    <Content Include="UEditer\third-party\video-js\font\vjs.svg" />
+    <Content Include="UEditer\third-party\video-js\video-js.css" />
+    <Content Include="UEditer\third-party\video-js\video-js.min.css" />
+    <Content Include="UEditer\third-party\video-js\video-js.swf" />
+    <Content Include="UEditer\third-party\video-js\video.dev.js" />
+    <Content Include="UEditer\third-party\video-js\video.js" />
+    <Content Include="UEditer\third-party\webuploader\Uploader.swf" />
+    <Content Include="UEditer\third-party\webuploader\webuploader.css" />
+    <Content Include="UEditer\third-party\webuploader\webuploader.custom.js" />
+    <Content Include="UEditer\third-party\webuploader\webuploader.custom.min.js" />
+    <Content Include="UEditer\third-party\webuploader\webuploader.flashonly.js" />
+    <Content Include="UEditer\third-party\webuploader\webuploader.flashonly.min.js" />
+    <Content Include="UEditer\third-party\webuploader\webuploader.html5only.js" />
+    <Content Include="UEditer\third-party\webuploader\webuploader.html5only.min.js" />
+    <Content Include="UEditer\third-party\webuploader\webuploader.js" />
+    <Content Include="UEditer\third-party\webuploader\webuploader.min.js" />
+    <Content Include="UEditer\third-party\webuploader\webuploader.withoutimage.js" />
+    <Content Include="UEditer\third-party\webuploader\webuploader.withoutimage.min.js" />
+    <Content Include="UEditer\third-party\xss.min.js" />
+    <Content Include="UEditer\third-party\zeroclipboard\ZeroClipboard.js" />
+    <Content Include="UEditer\third-party\zeroclipboard\ZeroClipboard.min.js" />
+    <Content Include="UEditer\third-party\zeroclipboard\ZeroClipboard.swf" />
+    <Content Include="UEditer\ueditor.all.js" />
+    <Content Include="UEditer\ueditor.all.min.js" />
+    <Content Include="UEditer\ueditor.config.js" />
+    <Content Include="UEditer\ueditor.parse.js" />
+    <Content Include="UEditer\ueditor.parse.min.js" />
+    <Content Include="Views\ComplainCategory\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Main.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountManageController.cs" />
+    <Compile Include="Controllers\AllocateController.cs" />
+    <Compile Include="Controllers\AppointmentController.cs" />
+    <Compile Include="Controllers\AuditApplyController.cs" />
+    <Compile Include="Controllers\AuditRuleController.cs" />
+    <Compile Include="Controllers\AuditWorkbenchController.cs" />
+    <Compile Include="Controllers\BedController.cs" />
+    <Compile Include="Controllers\CallbackCategoryController.cs" />
+    <Compile Include="Controllers\CallbackDeskController.cs" />
+    <Compile Include="Controllers\CallbackGroupController.cs" />
+    <Compile Include="Controllers\CaseTemplateController.cs" />
+    <Compile Include="Controllers\CashierDeskController.cs" />
+    <Compile Include="Controllers\ChannelController.cs" />
+    <Compile Include="Controllers\ChannelGroupController.cs" />
+    <Compile Include="Controllers\ChargeCategoryController.cs" />
+    <Compile Include="Controllers\ChargeController.cs" />
+    <Compile Include="Controllers\ChargeDiscountController.cs" />
+    <Compile Include="Controllers\ChargeSetController.cs" />
+    <Compile Include="Controllers\CheckController.cs" />
+    <Compile Include="Controllers\ClubController.cs" />
+    <Compile Include="Controllers\ComplainCategoryController.cs" />
+    <Compile Include="Controllers\ComplainController.cs" />
+    <Compile Include="Controllers\ConsultAppointmentController.cs" />
+    <Compile Include="Controllers\ConsultController.cs" />
+    <Compile Include="Controllers\ContentController.cs" />
+    <Compile Include="Controllers\CouponActivityController.cs" />
+    <Compile Include="Controllers\CouponCategoryController.cs" />
+    <Compile Include="Controllers\CouponController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\CustomerGroupController.cs" />
+    <Compile Include="Controllers\CustomerMedicalRecordController.cs" />
+    <Compile Include="Controllers\CustomerProfileController.cs" />
+    <Compile Include="Controllers\DeparDeskController.cs" />
+    <Compile Include="Controllers\DepositChargeController.cs" />
+    <Compile Include="Controllers\DepositController.cs" />
+    <Compile Include="Controllers\DeptController.cs" />
+    <Compile Include="Controllers\DeptSendController.cs" />
+    <Compile Include="Controllers\DeptVisitController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\FailtureCategoryController.cs" />
+    <Compile Include="Controllers\FailtureController.cs" />
+    <Compile Include="Controllers\FrontDeskController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HospitalController.cs" />
+    <Compile Include="Controllers\HospitalPrintController.cs" />
+    <Compile Include="Controllers\InpatientController.cs" />
+    <Compile Include="Controllers\InvoiceController.cs" />
+    <Compile Include="Controllers\ItemGroupController.cs" />
+    <Compile Include="Controllers\KnowledgeCategoryController.cs" />
+    <Compile Include="Controllers\KnowledgeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MarketDeskController.cs" />
+    <Compile Include="Controllers\MemberDeskController.cs" />
+    <Compile Include="Controllers\OnlineDeskController.cs" />
+    <Compile Include="Controllers\OperationLogController.cs" />
+    <Compile Include="Controllers\OptionController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\OwnerShipController.cs" />
+    <Compile Include="Controllers\OwnerShipOrderController.cs" />
+    <Compile Include="Controllers\PhotoController.cs" />
+    <Compile Include="Controllers\PictureController.cs" />
+    <Compile Include="Controllers\PointController.cs" />
+    <Compile Include="Controllers\PositionController.cs" />
+    <Compile Include="Controllers\PromoterCommissionController.cs" />
+    <Compile Include="Controllers\ReceptionController.cs" />
+    <Compile Include="Controllers\RelationController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\SaleBackController.cs" />
+    <Compile Include="Controllers\ShareCategoryController.cs" />
+    <Compile Include="Controllers\ShiftController.cs" />
+    <Compile Include="Controllers\SmartCardCategoryController.cs" />
+    <Compile Include="Controllers\EquityController.cs" />
+    <Compile Include="Controllers\SmartItemController.cs" />
+    <Compile Include="Controllers\SmartLiveDeskController.cs" />
+    <Compile Include="Controllers\SmartMemberCategoryController.cs" />
+    <Compile Include="Controllers\SmartProductCategoryController.cs" />
+    <Compile Include="Controllers\SmartProductController.cs" />
+    <Compile Include="Controllers\SmartPurchaseController.cs" />
+    <Compile Include="Controllers\SmartReturnController.cs" />
+    <Compile Include="Controllers\SmartShiftCategoryController.cs" />
+    <Compile Include="Controllers\SmartStockController.cs" />
+    <Compile Include="Controllers\SmartSupplierController.cs" />
+    <Compile Include="Controllers\SmartTagController.cs" />
+    <Compile Include="Controllers\SmartToolController.cs" />
+    <Compile Include="Controllers\SmartUnitController.cs" />
+    <Compile Include="Controllers\SmartUserController.cs" />
+    <Compile Include="Controllers\SmartWarehouseController.cs" />
+    <Compile Include="Controllers\SMSDeskController.cs" />
+    <Compile Include="Controllers\StoreController.cs" />
+    <Compile Include="Controllers\StoreManagerController.cs" />
+    <Compile Include="Controllers\SurgeryController.cs" />
+    <Compile Include="Controllers\SurgeryDeskController.cs" />
+    <Compile Include="Controllers\SymptomSettingController.cs" />
+    <Compile Include="Controllers\TagGroupController.cs" />
+    <Compile Include="Controllers\TreatController.cs" />
+    <Compile Include="Controllers\TreatSchedulerController.cs" />
+    <Compile Include="Controllers\TriageController.cs" />
+    <Compile Include="Controllers\TriageDeskController.cs" />
+    <Compile Include="Controllers\UseController.cs" />
+    <Compile Include="Controllers\UserCenterController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UserDiscountController.cs" />
+    <Compile Include="Controllers\UserTriggerController.cs" />
+    <Compile Include="Controllers\VisitController.cs" />
+    <Compile Include="Controllers\WXOptionController.cs" />
+    <Compile Include="Filter\CommonAuthorizeAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\CookieHelper.cs" />
+    <Compile Include="Helper\IDHelper.cs" />
+    <Compile Include="Helper\PagerHelper.cs" />
+    <Compile Include="Helper\PagerInfo.cs" />
+    <Compile Include="Helper\SelectHelper.cs" />
+    <Compile Include="Helper\SessionHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Helper\WebAPIHelper.cs" />
+    <Compile Include="UEditer\net\App_Code\Config.cs" />
+    <Compile Include="UEditer\net\App_Code\ConfigHandler.cs" />
+    <Compile Include="UEditer\net\App_Code\CrawlerHandler.cs" />
+    <Compile Include="UEditer\net\App_Code\Handler.cs" />
+    <Compile Include="UEditer\net\App_Code\ListFileHandler.cs" />
+    <Compile Include="UEditer\net\App_Code\NotSupportedHandler.cs" />
+    <Compile Include="UEditer\net\App_Code\PathFormater.cs" />
+    <Compile Include="UEditer\net\App_Code\UploadHandler.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config" />
+    <Content Include="Log4Net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Unity.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\OnlineDesk\Index.cshtml" />
+    <Content Include="Views\CallbackDesk\Index.cshtml" />
+    <Content Include="Views\TriageDesk\Index.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\LiveDesk\Index.cshtml" />
+    <Content Include="Views\SMSDesk\Index.cshtml" />
+    <Content Include="Views\MemberDesk\Index.cshtml" />
+    <Content Include="Views\Dept\DeptInfo.cshtml" />
+    <Content Include="Views\ConsultAppointment\Index.cshtml" />
+    <Content Include="Views\FrontDesk\Index.cshtml" />
+    <Content Include="Views\DeptVisit\Index.cshtml" />
+    <Content Include="Views\SymptomSetting\SymptomIndex.cshtml" />
+    <Content Include="Views\Triage\Index.cshtml" />
+    <Content Include="Views\Visit\Index.cshtml" />
+    <Content Include="Views\Channel\Index.cshtml" />
+    <Content Include="Views\FailtureCategory\FailtureCategoryAdd.cshtml" />
+    <Content Include="Views\FailtureCategory\FailtureCategoryEdit.cshtml" />
+    <Content Include="Views\FailtureCategory\Index.cshtml" />
+    <Content Include="Views\CallbackCategory\Index.cshtml" />
+    <Content Include="Views\CallbackGroup\Index.cshtml" />
+    <Content Include="doT-master\doT-master\.eslintrc.yml" />
+    <Content Include="doT-master\doT-master\.gitignore" />
+    <Content Include="doT-master\doT-master\.travis.yml" />
+    <Content Include="doT-master\doT-master\bin\dot-packer" />
+    <Content Include="doT-master\doT-master\bower.json" />
+    <Content Include="doT-master\doT-master\examples\express\package.json" />
+    <Content Include="doT-master\doT-master\examples\express\templates\dashboard.jst" />
+    <Content Include="doT-master\doT-master\examples\express\templates\login.jst" />
+    <Content Include="doT-master\doT-master\examples\views\multidef.def.jst" />
+    <Content Include="doT-master\doT-master\examples\views\one.def" />
+    <Content Include="doT-master\doT-master\examples\views\two.dot.jst" />
+    <Content Include="doT-master\doT-master\package.json" />
+    <Content Include="doT-master\doT-master\README.md" />
+    <Content Include="lay_component\datas\nav.json" />
+    <Content Include="lay_component\datas\nav_content.json" />
+    <Content Include="lay_component\datas\nav_member.json" />
+    <Content Include="lay_component\plugins\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="lay_component\plugins\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="lay_component\plugins\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="lay_component\plugins\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="lay_component\plugins\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="lay_component\plugins\layui\font\iconfont.eot" />
+    <Content Include="lay_component\plugins\layui\font\iconfont.ttf" />
+    <Content Include="lay_component\plugins\layui\font\iconfont.woff" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\SmartShiftCategory\SmartShiftCategoryInfo.cshtml" />
+    <Content Include="Views\SmartUnit\SmartUnitInfo.cshtml" />
+    <Content Include="Views\SmartProductCategory\SmartProductCategoryInfo.cshtml" />
+    <Content Include="Views\SmartTag\Index.cshtml" />
+    <Content Include="Views\SmartTool\Index.cshtml" />
+    <Content Include="Views\SmartCardCategory\Index.cshtml" />
+    <Content Include="Views\CallbackGroup\CallbackGroupDetaiIndex.cshtml" />
+    <Content Include="Views\SmartMemberCategory\Index.cshtml" />
+    <Content Include="Views\SmartMemberCategory\TextIndex.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\IFlyDogWeb.pubxml" />
+    <Content Include="Views\SmartSupplier\SmartSupplierInfo.cshtml" />
+    <Content Include="Views\SmartWarehouse\SmartWarehouseInfo.cshtml" />
+    <Content Include="Views\SmartWarehouse\SmartWarehouseDetaiIndex.cshtml" />
+    <Content Include="Views\SmartStock\SmartStockInfo.cshtml" />
+    <Content Include="Views\SmartProduct\SmartProductInfo.cshtml" />
+    <Content Include="Views\SmartPurchase\SmartPurchaseInfo.cshtml" />
+    <Content Include="Views\SmartPurchase\SmartPurchaseDetailIndex.cshtml" />
+    <Content Include="Views\SmartReturn\SmartReturnInfo.cshtml" />
+    <Content Include="Views\SmartReturn\SmartReturnIndex.cshtml" />
+    <Content Include="Views\Allocate\AllocateInfo.cshtml" />
+    <Content Include="Views\Allocate\AllocateIndex.cshtml" />
+    <Content Include="Views\Equity\Index.cshtml" />
+    <Content Include="Views\Use\UseInfo.cshtml" />
+    <Content Include="Views\Use\UseIndex.cshtml" />
+    <Content Include="Views\Check\CheckInfo.cshtml" />
+    <Content Include="Views\Check\CheckDetailIndex.cshtml" />
+    <Content Include="Views\Invoice\InvoiceInfo.cshtml" />
+    <Content Include="Views\Invoice\InvoiceIndex.cshtml" />
+    <Content Include="Views\SmartPurchase\SmartPurchaseProductWarning.cshtml" />
+    <Content Include="Views\SmartProductCategory\SmartProductCategoryType.cshtml" />
+    <Content Include="Views\ChargeCategory\ChargeCategoryInfo.cshtml" />
+    <Content Include="Views\Charge\ChargeInfo.cshtml" />
+    <Content Include="Views\Charge\ChargeIndex.cshtml" />
+    <Content Include="Views\CouponCategory\CouponCategoryInfo.cshtml" />
+    <Content Include="Views\SmartUser\UserInfo.cshtml" />
+    <Content Include="Views\DepositCharge\DepositChargeInfo.cshtml" />
+    <Content Include="Views\Relation\RelationInfo.cshtml" />
+    <Content Include="Views\Position\PositionInfo.cshtml" />
+    <Content Include="Views\TagGroup\TagGroupInfo.cshtml" />
+    <Content Include="Views\KnowledgeCategory\KnowledgeCategoryInfo.cshtml" />
+    <Content Include="Views\Knowledge\KnowledgeInfo.cshtml" />
+    <Content Include="Views\CaseTemplate\CaseTemplateInfo.cshtml" />
+    <Content Include="Views\ChargeSet\ChargeSetInfo.cshtml" />
+    <Content Include="Views\ChargeSet\ChargeSetIndex.cshtml" />
+    <Content Include="Views\Club\ClubInfo.cshtml" />
+    <Content Include="Views\ChargeDiscount\ChargeDiscountInfo.cshtml" />
+    <Content Include="Views\UserDiscount\UserDiscountInfo.cshtml" />
+    <Content Include="Views\Option\OptionInfo.cshtml" />
+    <Content Include="Views\OperationLog\OperationLogInfo.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\ShareCategory\ShareCategoryInfo.cshtml" />
+    <Content Include="Views\HospitalPrint\HospitalPrintInfo.cshtml" />
+    <Content Include="Views\HospitalPrint\HospitalPrintSet.cshtml" />
+    <Content Include="Views\Shift\ShiftInfo.cshtml" />
+    <Content Include="Views\Reception\Index.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Allocate\SmartAllocatePrint.cshtml" />
+    <Content Include="Views\SmartPurchase\SmartPurchasePrint.cshtml" />
+    <Content Include="Views\SmartReturn\SmartReturnPrint.cshtml" />
+    <Content Include="Views\Use\SmartUsePrint.cshtml" />
+    <Content Include="Views\Hospital\Index.cshtml" />
+    <Content Include="Views\Store\StoreInfo.cshtml" />
+    <Content Include="Views\Store\StoreData.cshtml" />
+    <Content Include="Views\StoreManager\StoreUserManagerInfo.cshtml" />
+    <Content Include="Views\StoreManager\StoreManagerInfo.cshtml" />
+    <Content Include="Views\MarketDesk\Index.cshtml" />
+    <Content Include="Views\Bed\Index.cshtml" />
+    <Content Include="Views\SaleBack\SaleBackInfo.cshtml" />
+    <Content Include="Views\SurgeryDesk\Index.cshtml" />
+    <Content Include="Views\ChannelGroup\ChannelGroupInfo.cshtml" />
+    <Content Include="Views\CouponActivity\CouponActivityInfo.cshtml" />
+    <Content Include="Views\SmartItem\SmartItemInfo.cshtml" />
+    <Content Include="Views\CouponActivity\CouponActivityDetailInfo.cshtml" />
+    <Content Include="Views\AuditRule\AuditRuleInfo.cshtml" />
+    <Content Include="Views\Customer\CustomerProfile.cshtml" />
+    <Content Include="Views\ItemGroup\ItemGroupInfo.cshtml" />
+    <Content Include="Views\AuditRule\AuditRuleDetailInfo.cshtml" />
+    <Content Include="Views\AuditRule\AuditRuleHospitalInfo.cshtml" />
+    <Content Include="Views\Customer\AddConsult.cshtml" />
+    <Content Include="Views\UserTrigger\UserTriggerInfo.cshtml" />
+    <Content Include="Views\Customer\AddOrder.cshtml" />
+    <Content Include="Views\Customer\AddDeposit.cshtml" />
+    <Content Include="Views\Customer\AddRebateDeposit.cshtml" />
+    <Content Include="Views\Customer\AddBackOrder.cshtml" />
+    <Content Include="Views\Customer\EditCustomerInfo.cshtml" />
+    <Content Include="Views\CustomerGroup\CustomerGroupInfo.cshtml" />
+    <Content Include="Views\Appointment\Index.cshtml" />
+    <Content Include="Views\Customer\Appointment.cshtml" />
+    <Content Include="Views\Customer\Treat.cshtml" />
+    <Content Include="Views\Customer\Surgery.cshtml" />
+    <Content Include="Views\TreatScheduler\Index.cshtml" />
+    <Content Include="Views\CashierDesk\Index.cshtml" />
+    <Content Include="Views\Customer\AddRelation.cshtml" />
+    <Content Include="Views\Customer\AddStoreCommission.cshtml" />
+    <Content Include="Views\CustomerGroup\CustomerGroupData.cshtml" />
+    <Content Include="Views\CustomerMedicalRecord\CustomerMedicalRecordInfo.cshtml" />
+    <Content Include="Views\Customer\AddFailture.cshtml" />
+    <Content Include="Views\OwnerShip\OwnerShipInfo.cshtml" />
+    <Content Include="Views\Inpatient\Inpatient.cshtml" />
+    <Content Include="Views\Customer\AddTags.cshtml" />
+    <Content Include="Views\Customer\AddCoupon.cshtml" />
+    <Content Include="Views\CashierDesk\SettlementRecord.cshtml" />
+    <Content Include="Views\CashierDesk\CashierRecord.cshtml" />
+    <Content Include="Views\CashierDesk\RepayDebt.cshtml" />
+    <Content Include="Views\CashierDesk\SettleAccounts.cshtml" />
+    <Content Include="Views\CashierDesk\RefundMoney.cshtml" />
+    <Content Include="Views\Customer\CallBack.cshtml" />
+    <Content Include="Views\Customer\CallbackRemind.cshtml" />
+    <Content Include="Views\Customer\CallbackPlan.cshtml" />
+    <Content Include="Views\WXOption\WXOptionInfo.cshtml" />
+    <Content Include="Views\CashierDesk\BackOrder.cshtml" />
+    <Content Include="Views\CashierDesk\CashierOrder.cshtml" />
+    <Content Include="Views\CashierDesk\DepositRebate.cshtml" />
+    <Content Include="Views\CashierDesk\AddDeposit.cshtml" />
+    <Content Include="Views\CashierDesk\AddInvoice.cshtml" />
+    <Content Include="Views\OwnerShipOrder\OwnerShipOrderInfo.cshtml" />
+    <Content Include="Views\CustomerMedicalRecord\CustomerMedicalRecordTable.cshtml" />
+    <Content Include="Views\AccountManage\Index.cshtml" />
+    <Content Include="Views\AuditApply\AuditApplyInfo.cshtml" />
+    <Content Include="Views\SmartLiveDesk\Index.cshtml" />
+    <Content Include="Views\DeparDesk\Index.cshtml" />
+    <Content Include="Views\AuditWorkbench\AuditWorkbenchInfo.cshtml" />
+    <Content Include="Views\AuditWorkbench\AuditOperationInfo.cshtml" />
+    <Content Include="Views\DeparDesk\OperationAdd.cshtml" />
+    <Content Include="Views\AuditWorkbench\AuditOrderDetail.cshtml" />
+    <Content Include="Views\CashierDesk\CashierTodayPrint.cshtml" />
+    <Content Include="Views\DeptSend\Index.cshtml" />
+    <Content Include="Views\Complain\ComplainIndex.cshtml" />
+    <Content Include="UEditer\net\config.json" />
+    <Content Include="UEditer\net\controller.ashx" />
+    <Content Include="UEditer\net\README.md" />
+    <Content Include="UEditer\net\Web.config" />
+    <Content Include="UEditer\third-party\jquery-1.10.2.min.map" />
+    <Content Include="UEditer\third-party\video-js\font\vjs.eot" />
+    <Content Include="UEditer\third-party\video-js\font\vjs.ttf" />
+    <Content Include="UEditer\third-party\video-js\font\vjs.woff" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Images\Upload\" />
+    <Folder Include="Models\" />
+    <Folder Include="UEditer\net\Bin\" />
+    <Folder Include="Views\Consult\" />
+    <Folder Include="Views\Coupon\" />
+    <Folder Include="Views\CustomerProfile\" />
+    <Folder Include="Views\Deposit\" />
+    <Folder Include="Views\Failture\" />
+    <Folder Include="Views\Order\" />
+    <Folder Include="Views\Photo\" />
+    <Folder Include="Views\Picture\" />
+    <Folder Include="Views\Point\" />
+    <Folder Include="Views\PromoterCommission\" />
+    <Folder Include="Views\Province\" />
+    <Folder Include="Views\Surgery\" />
+    <Folder Include="Views\Treat\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Com.IFlyDog.APIDTO\Com.IFlyDog.APIDTO.csproj">
+      <Project>{F707F110-1D34-4414-931B-1C0F72A61B6E}</Project>
+      <Name>Com.IFlyDog.APIDTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.IFlyDog.CommonDTO\Com.IFlyDog.CommonDTO.csproj">
+      <Project>{83090a4d-ea80-4e89-9023-272ce55d2c14}</Project>
+      <Name>Com.IFlyDog.CommonDTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.IFlyDog.Common\Com.IFlyDog.Common.csproj">
+      <Project>{1caa2cdb-136f-41b6-ba12-6eaff8d7aa06}</Project>
+      <Name>Com.IFlyDog.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.IFlyDog.FlyDogWebDLL\Com.IFlyDog.FlyDogWebBLL.csproj">
+      <Project>{d099dcaf-a71a-44be-ba14-510424351d0c}</Project>
+      <Name>Com.IFlyDog.FlyDogWebBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.IFlyDog.IFlyDogWebDLL\Com.IFlyDog.IFlyDogWebBLL.csproj">
+      <Project>{ab0c866d-9e65-46c1-893d-186226b76335}</Project>
+      <Name>Com.IFlyDog.IFlyDogWebBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.IFlyDog.WebDTO\Com.IFlyDog.WebDTO.csproj">
+      <Project>{bb98a440-e983-4fe4-ac9d-84e4df2ddd82}</Project>
+      <Name>Com.IFlyDog.WebDTO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>5715</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:3803/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

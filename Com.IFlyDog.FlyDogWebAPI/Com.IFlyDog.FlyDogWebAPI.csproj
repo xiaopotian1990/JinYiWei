@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1058B9CF-774B-4230-8ACF-A0E9781C7D2B}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Com.IFlyDog.FlyDogWebAPI</RootNamespace>
+    <AssemblyName>Com.IFlyDog.FlyDogWebAPI</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\XML\Com.IFlyDog.FlyDogWebAPI.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Com.JinYiWei.Cache">
+      <HintPath>..\PackagesDlls\Com.JinYiWei.Common\Com.JinYiWei.Cache.dll</HintPath>
+    </Reference>
+    <Reference Include="Com.JinYiWei.Common">
+      <HintPath>..\PackagesDlls\Com.JinYiWei.Common\Com.JinYiWei.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Com.JinYiWei.Log4Net">
+      <HintPath>..\PackagesDlls\Com.JinYiWei.Common\Com.JinYiWei.Log4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Com.JinYiWei.MongoDB">
+      <HintPath>..\PackagesDlls\Com.JinYiWei.Common\Com.JinYiWei.MongoDB.dll</HintPath>
+    </Reference>
+    <Reference Include="Com.JinYiWei.WebAPI">
+      <HintPath>..\PackagesDlls\Com.JinYiWei.Common\Com.JinYiWei.WebAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper">
+      <HintPath>..\PackagesDlls\Dapper\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\PackagesDlls\Log4Net\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net.Ext.Json">
+      <HintPath>..\PackagesDlls\Log4Net\log4net.Ext.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\PackagesDlls\WebAPI\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\PackagesDlls\WebAPI\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\PackagesDlls\MongoDB\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\PackagesDlls\MongoDB\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Core">
+      <HintPath>..\PackagesDlls\MongoDB\MongoDB.Driver.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PackagesDlls\Newtonsoft.Json\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Common">
+      <HintPath>..\PackagesDlls\Redis\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PackagesDlls\Redis\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PackagesDlls\Redis\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PackagesDlls\Redis\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="StackExchange.Redis, Version=1.1.608.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PackagesDlls\Redis\StackExchange.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Swashbuckle.Core.5.5.3\lib\net40\Swashbuckle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PackagesDlls\WebAPI\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting.resources, Version=5.2.3.0, Culture=zh-Hans, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PackagesDlls\WebAPI\System.Net.Http.Formatting.resources.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PackagesDlls\WebAPI\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Owin, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PackagesDlls\WebAPI\System.Web.Http.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.resources, Version=5.2.3.0, Culture=zh-Hans, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PackagesDlls\WebAPI\System.Web.Http.resources.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PackagesDlls\WebAPI\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\Com.IFlyDog.APIDTO.xml" />
+    <Content Include="App_Data\Com.IFlyDog.CommonDTO.XML" />
+    <Content Include="App_Data\Com.IFlyDog.FlyDogTokenAPI.XML" />
+    <Content Include="App_Data\Com.IFlyDog.FlyDogWebAPI.xml" />
+    <Content Include="App_Data\Com.IFlyDog.WebDTO.XML" />
+    <Content Include="App_Data\Com.JinYiWei.Common.xml" />
+    <Content Include="App_Data\Com.JinYiWei.WebAPI.XML" />
+    <Content Include="Global.asax" />
+    <EmbeddedResource Include="Scripts\swaggerui\swagger_lang.js" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\CachingSwaggerProvider.cs" />
+    <Compile Include="App_Start\SwaggerConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AllocateController.cs" />
+    <Compile Include="Controllers\AppointmentController.cs" />
+    <Compile Include="Controllers\AuditApplyController.cs" />
+    <Compile Include="Controllers\AuditRuleController.cs" />
+    <Compile Include="Controllers\AuditWorkbenchController.cs" />
+    <Compile Include="Controllers\BackOrderController.cs" />
+    <Compile Include="Controllers\BedController.cs" />
+    <Compile Include="Controllers\BillController.cs" />
+    <Compile Include="Controllers\CallbackCategoryController.cs" />
+    <Compile Include="Controllers\CallbackController.cs" />
+    <Compile Include="Controllers\CallbackGroupController.cs" />
+    <Compile Include="Controllers\CardCategoryController.cs" />
+    <Compile Include="Controllers\CaseTemplateController.cs" />
+    <Compile Include="Controllers\CashierController.cs" />
+    <Compile Include="Controllers\ChannelController.cs" />
+    <Compile Include="Controllers\ChannelGroupController.cs" />
+    <Compile Include="Controllers\ChargeCategoryController.cs" />
+    <Compile Include="Controllers\ChargeController.cs" />
+    <Compile Include="Controllers\ChargeDiscountController.cs" />
+    <Compile Include="Controllers\ChargeSetController.cs" />
+    <Compile Include="Controllers\CheckController.cs" />
+    <Compile Include="Controllers\ClubController.cs" />
+    <Compile Include="Controllers\ComplainCategoryController.cs" />
+    <Compile Include="Controllers\ComplainController.cs" />
+    <Compile Include="Controllers\ConsultController.cs" />
+    <Compile Include="Controllers\CouponActivityDetailController.cs" />
+    <Compile Include="Controllers\CouponActivityServiceController.cs" />
+    <Compile Include="Controllers\CouponCategoryController.cs" />
+    <Compile Include="Controllers\CouponController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\CustomerGroupController.cs" />
+    <Compile Include="Controllers\CustomerMedicalRecordController.cs" />
+    <Compile Include="Controllers\CustomerProfileController.cs" />
+    <Compile Include="Controllers\DepositChargeController.cs" />
+    <Compile Include="Controllers\DepositController.cs" />
+    <Compile Include="Controllers\DepositRebateOrderController.cs" />
+    <Compile Include="Controllers\DeptController.cs" />
+    <Compile Include="Controllers\DeptDeskController.cs" />
+    <Compile Include="Controllers\DeptSendController.cs" />
+    <Compile Include="Controllers\EquityController.cs" />
+    <Compile Include="Controllers\FailtureCategoryController.cs" />
+    <Compile Include="Controllers\FailtureController.cs" />
+    <Compile Include="Controllers\FrontDeskController.cs" />
+    <Compile Include="Controllers\HospitalController.cs" />
+    <Compile Include="Controllers\HospitalPrintController.cs" />
+    <Compile Include="Controllers\InpatientController.cs" />
+    <Compile Include="Controllers\InvoiceController.cs" />
+    <Compile Include="Controllers\ItemGroupController.cs" />
+    <Compile Include="Controllers\KnowledgeCategoryController.cs" />
+    <Compile Include="Controllers\KnowledgeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MemberCategoryController.cs" />
+    <Compile Include="Controllers\MemberDeskController.cs" />
+    <Compile Include="Controllers\OperationLogController.cs" />
+    <Compile Include="Controllers\OptionController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\OwnerShipController.cs" />
+    <Compile Include="Controllers\OwnerShipOrderController.cs" />
+    <Compile Include="Controllers\PhotoController.cs" />
+    <Compile Include="Controllers\PointController.cs" />
+    <Compile Include="Controllers\PositionController.cs" />
+    <Compile Include="Controllers\PromoterCommissionController.cs" />
+    <Compile Include="Controllers\ProvinceController.cs" />
+    <Compile Include="Controllers\ReceptionController.cs" />
+    <Compile Include="Controllers\RelationController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\SaleBackController.cs" />
+    <Compile Include="Controllers\SettlementController.cs" />
+    <Compile Include="Controllers\ShareCategoryController.cs" />
+    <Compile Include="Controllers\ShiftController.cs" />
+    <Compile Include="Controllers\SmartItemController.cs" />
+    <Compile Include="Controllers\SmartProductCategoryController.cs" />
+    <Compile Include="Controllers\SmartProductController.cs" />
+    <Compile Include="Controllers\SmartPurchaseController.cs" />
+    <Compile Include="Controllers\SmartReturnController.cs" />
+    <Compile Include="Controllers\SmartShiftCategoryController.cs" />
+    <Compile Include="Controllers\SmartStockController.cs" />
+    <Compile Include="Controllers\SmartSupplierController.cs" />
+    <Compile Include="Controllers\SmartToolController.cs" />
+    <Compile Include="Controllers\SmartUnitController.cs" />
+    <Compile Include="Controllers\SmartUserController.cs" />
+    <Compile Include="Controllers\SmartWarehouseController.cs" />
+    <Compile Include="Controllers\StoreController.cs" />
+    <Compile Include="Controllers\StoreManagerController.cs" />
+    <Compile Include="Controllers\SurgeryController.cs" />
+    <Compile Include="Controllers\SymptomController.cs" />
+    <Compile Include="Controllers\TagController.cs" />
+    <Compile Include="Controllers\TagGroupController.cs" />
+    <Compile Include="Controllers\TreatController.cs" />
+    <Compile Include="Controllers\UseController.cs" />
+    <Compile Include="Controllers\UserDiscountController.cs" />
+    <Compile Include="Controllers\UserTriggerController.cs" />
+    <Compile Include="Controllers\WXOptionController.cs" />
+    <Compile Include="Filters\FlyDogSignFilterAttribute.cs" />
+    <Compile Include="Filters\FlyDogTokenFilterAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Log4Net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Unity.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\IFlyDog.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Com.FlyDog.FlyDogAPIBLL\Com.FlyDog.FlyDogAPIBLL.csproj">
+      <Project>{98d7d5aa-d91a-4c1e-8d9e-0a7ff1e32e4d}</Project>
+      <Name>Com.FlyDog.FlyDogAPIBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.FlyDog.IFlyDogAPIBLL\Com.FlyDog.IFlyDogAPIBLL.csproj">
+      <Project>{939b16b1-f767-4823-9031-1fad07d7b6d2}</Project>
+      <Name>Com.FlyDog.IFlyDogAPIBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.IFlyDog.APIDTO\Com.IFlyDog.APIDTO.csproj">
+      <Project>{f707f110-1d34-4414-931b-1c0f72a61b6e}</Project>
+      <Name>Com.IFlyDog.APIDTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.IFlyDog.CommonDTO\Com.IFlyDog.CommonDTO.csproj">
+      <Project>{83090a4d-ea80-4e89-9023-272ce55d2c14}</Project>
+      <Name>Com.IFlyDog.CommonDTO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>35489</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:35489/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

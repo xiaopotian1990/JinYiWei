@@ -1,0 +1,18 @@
+/*内容页面*/
+
+.page-header {
+    /*height: 80px;*/
+    background: white;
+}
+
+    .page-header img {
+        margin-left: 20px;
+    }
+
+    .page-header button {
+        margin-left: -3px;
+        /*margin-top: 30px;*/
+        background-color: transparent;
+        border: none;
+        outline: none;
+    }

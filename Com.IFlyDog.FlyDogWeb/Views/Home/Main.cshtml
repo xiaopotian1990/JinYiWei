@@ -1,0 +1,33 @@
+﻿@*<script src="~/lay_component/js/jquery-2.0.3.min.js"></script> 
+<script src="~/lay_component/plugins/layui/layui.js"></script>
+<script src="~/lay_component/signalr/jquery.signalR-2.0.3.min.js"></script>
+<script src="http://192.168.11.220:8066/chat/hubs"></script>
+<script src="~/lay_component/js/chat.js"></script> 
+<script>
+    layui.use("layer", function () {
+        var layer = layui.layer; 
+    });
+    chat.client.sendMessage = function (message) {
+        layer.alert(message, { icon: 6 });
+        //弹出消息
+        //layer.open({
+        //    type: 1,
+        //    offset: "rb",
+        //    content: message,
+        //    btn: "关闭消息",
+        //    btnAlign: "c",  //按钮居中
+        //    shade: 0,//不显示遮罩
+        //    zIndex: layer.zIndex,
+        //    success: function(layero){
+        //        layer.setTop(layero); //重点2
+        //    },
+        //    yes: function () { 
+        //        layer.closeAll();
+        //    }
+        //});
+     
+    };
+
+  
+</script>*@
+ 

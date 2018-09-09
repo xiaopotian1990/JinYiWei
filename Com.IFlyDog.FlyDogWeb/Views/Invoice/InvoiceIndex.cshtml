@@ -1,0 +1,226 @@
+﻿@using Com.IFlyDog.FlyDogWeb.Helper
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>选择采购单</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link href="~/lay_component/plugins/layui/css/layui.css" rel="stylesheet" media="all" />
+
+    <link href="~/lay_component/css/layer.css" rel="stylesheet" />
+    <link href="~/lay_component/css/global.css" rel="stylesheet" />
+    <link href="~/lay_component/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/lay_component/css/table.css" rel="stylesheet" />
+ 
+    <script src="~/lay_component/js/hcommon.js"></script>
+    <script src="~/lay_component/js/jquery-2.0.3.min.js"></script>
+    <script src="~/doT-master/doT-master/doT.min.js"></script>
+
+    <script src="~/lay_component/plugins/layui/lay/dest/layui.all.js"></script>
+    <script src="~/lay_component/plugins/layui/lay/lib/jquery.js"></script>
+    <script src="~/lay_component/plugins/layui/lay/modules/layer.js"></script>
+
+    @*构造数据*@
+    <script src="~/lay_component/sampleJs/invoiceDetail.js"></script>
+
+</head>
+
+<body>
+    <div class="admin-main" id="selPurchasehtml">
+        <fieldset class="layui-elem-field">
+            <legend>选择采购单</legend>
+
+            <div class="layui-form-item layui-form" style="margin-left: 20px">
+                <div class="fl">
+                    <div class="layui-form-item fl">
+                        <label class="layui-form-label">进货日期</label>
+
+                        <div class="layui-input-inline">
+                            <input class="layui-input" placeholder="开始日" id="beginDate">
+                        </div>
+                        <label class="layui-form-label"></label>
+                        <div class="layui-input-inline">
+                            <input class="layui-input" placeholder="截止日" id="endDate">
+                        </div>
+                    </div>
+                </div>
+                <p>
+                    <label class="layui-form-label">仓库</label>
+                    <div class="layui-input-inline ">
+                        @Html.SelectCangKuTypeInfoState("smartDRWarehouse", "smartDRWarehouse", Request.QueryString["CategoryID"])
+                    </div>
+                </p>
+
+                <button class="layui-btn" id="subtmValue" onclick="btnSerache()" style="float:left;margin-left:140px;">查询</button>
+            </div>
+            <div class="layui-field-box">
+
+            </div>
+            <script id="smartPurchase_template" type="text/html">
+                <table class="site-table table-hover">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>单号</th>
+                            <th>仓库</th>
+                            <th>供应商</th>
+                            <th>入库日期</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {{ for(var prop in it) { }}
+                        <tr class="" deptInfoId="{{= it[prop].ID }}">
+                            <td>
+                                <input name="cheId" id="cheId" type="checkbox" value="{{= it[prop].ID }}"
+                                       WarehouseName="{{=it[prop].WarehouseName}}" @*仓库名称*@
+                                       SupplierName="{{= it[prop].SupplierName }}" @*供应商名称*@
+                                       CreateDate="{{=it[prop].CreateTime}}" @*入库日期*@ 
+                                       NoValue="{{=it[prop].No}}"
+                                       />
+
+                            </td>
+                            @*<td>{{= i++ }}</td>*@
+                            <td>{{= it[prop].No }}</td>
+                            <td>{{= it[prop].WarehouseName }}</td>
+                            <td>
+                                {{= it[prop].SupplierName }}
+                            </td>
+                            <td>
+                                {{= it[prop].CreateTime }}
+                            </td>
+                        </tr>
+                        {{ } }}
+                    </tbody>
+                </table>
+            </script>
+            <div class="layui-form-item pull-right" style="bottom: 10px; position: absolute; right: 10px;">
+                <button class="layui-btn layui-btn-normal dept_commit">确认提交</button>
+
+                <button class="layui-btn layui-btn-danger dept_close">取消关闭</button>
+            </div>
+        </fieldset>
+
+    </div>
+
+    <script>
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+
+        layui.use(['form', 'laydate'], function () {
+            var laydate = layui.laydate
+            form = layui.form();
+
+            var start = {
+                min: '1900-01-01 00:00:00'
+              , max: '2099-06-16 23:59:59'
+              , istoday: false
+              , choose: function (datas) {
+                  end.min = datas; //开始日选好后，重置结束日的最小日期
+                  end.start = datas //将结束日的初始值设定为开始日
+              }
+            };
+
+            var end = {
+                min: '1900-01-01 00:00:00'
+              , max: '2099-06-16 23:59:59'
+              , istoday: false
+              , choose: function (datas) {
+                  start.max = datas; //结束日选好后，重置开始日的最大日期
+              }
+            };
+
+
+            $("#beginDate").click(function () {
+                start.elem = this;
+                laydate(start);
+            });
+
+            $("#endDate").click(function () {
+                end.elem = this
+                laydate(end);
+            });
+
+        });
+
+        //取消关闭
+
+        layui.use(['layer', 'form'],
+            function () {
+                var $ = layui.jquery,
+                    layform = layui.form();
+                layform.render();
+                //关闭当前页面
+                $(document)
+                    .on("click",
+                        ".dept_close",
+                        function () {
+                            parent.layer.close(index);
+                        });
+
+
+                $(".dept_commit")
+                    .on("click",
+                        function () {
+
+                            //点击确定得到选择checkbox中 的id和
+                            var showEditDialog = $(this);
+                            var checkIdValue = ""; //进货入库id
+                            var WarehouseName = "";//仓库名称
+                            var SupplierName = "";//供应商名称
+                            var CreateDate = "";//入库日期
+                            var NoValue = "";//入库单号
+                            var html = "";
+
+                            $('input[name="cheId"]:checked').each(function () {
+                                checkIdValue = $(this).val(); //进货入库id
+                                if (parent.$('#invoiceDetailTD').find("tr[value=" + checkIdValue + "]").length == 0) {
+                                    if (parent.window.Invoice === undefined) {
+                                        parent.window.Invoice = [];
+                                    }
+                                    parent.window.Invoice.push(checkIdValue);
+                                    WarehouseName = $(this).attr("WarehouseName"); //仓库名称
+                                    SupplierName = $(this).attr("SupplierName"); //供应商名称
+                                    CreateDate = $(this).attr("CreateDate");//入库日期
+                                    NoValue = $(this).attr("NoValue");//入库单号
+                                    // 开始拼接字符串，最后追加到父页面上
+                                    html += "   <tr value=" +
+                                       checkIdValue +
+                                       " style='width:587px;'>" +
+                                       "<td>" +
+                                       NoValue +
+                                       "</td>" +
+                                       "<td>" +
+                                       WarehouseName +
+                                       "</td>" +
+                                       "<td>" +
+                                       SupplierName +
+                                       "</td>" +
+                                        "<td>" +
+                                       CreateDate +
+                                       "</td>" +
+                                       "<td hidden='hidden' id='smartWarehouseRemarkTdhidden'>" +
+                                       checkIdValue +
+                                       "</td>" +
+                                       "<td>" +
+                                       "<a href='javascript:' class='layui-btn layui-btn-danger layui-btn-mini trDelete'>删除</a>" +
+                                       "</td>" +
+                                       "</tr>";
+                                }
+                            });
+
+                            parent.$('#invoiceDetailTD').append(html);
+                            parent.layer.close(index);
+                            //parent.layer.tips('添加一条信息哦!', '#callbackGroupDetailTD', { time: 4000 });
+                        });
+            });
+
+    </script>
+</body>
+
+</html>
